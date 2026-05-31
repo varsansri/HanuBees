@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import PostHogProvider from "@/components/PostHogProvider";
 
 export const metadata: Metadata = {
   title: "Hanubees — Crafted with Purpose",
@@ -25,7 +26,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" style={{ height: "100%" }}>
-      <body style={{ height: "100%", margin: 0 }}>{children}</body>
+      <body style={{ height: "100%", margin: 0 }}>
+        <PostHogProvider>{children}</PostHogProvider>
+      </body>
     </html>
   );
 }
