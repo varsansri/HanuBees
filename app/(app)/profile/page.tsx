@@ -28,6 +28,7 @@ const categoryColor: Record<string, string> = {
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [tab, setTab] = useState<"posts"|"journal">("posts");
   const [loading, setLoading] = useState(true);
@@ -101,15 +102,61 @@ export default function ProfilePage() {
       {/* Header — yellow top */}
       <div className="page-header" style={{
         display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px",
+        position: "relative",
       }}>
         <h2 style={{ fontSize: 20, fontWeight: 700, color: YELLOW, fontFamily: "'Space Grotesk', sans-serif" }}>
           Profile
         </h2>
-        <button onClick={signOut} style={{
-          background: "none", border: "1px solid var(--border)", color: MUTED,
-          fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 13,
-          padding: "7px 16px", borderRadius: 10, cursor: "pointer",
-        }}>Sign out</button>
+
+        {/* Menu button */}
+        <div style={{ position: "relative" }}>
+          <button onClick={() => setMenuOpen(o => !o)} style={{
+            background: "none", border: "none", cursor: "pointer",
+            color: MUTED, display: "flex", alignItems: "center",
+            justifyContent: "center", width: 36, height: 36, borderRadius: 10,
+            transition: "background 0.15s",
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+
+          {menuOpen && (
+            <>
+              {/* Backdrop to close */}
+              <div onClick={() => setMenuOpen(false)} style={{
+                position: "fixed", inset: 0, zIndex: 50,
+              }} />
+              {/* Dropdown */}
+              <div style={{
+                position: "absolute", top: "calc(100% + 8px)", right: 0, zIndex: 51,
+                background: "var(--bg2)", border: "1px solid var(--border)",
+                borderRadius: 14, overflow: "hidden", minWidth: 160,
+                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+              }}>
+                <button onClick={() => { setMenuOpen(false); signOut(); }} style={{
+                  width: "100%", background: "none", border: "none",
+                  padding: "14px 18px", textAlign: "left", cursor: "pointer",
+                  color: GREEN, fontSize: 15, fontWeight: 600,
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  display: "flex", alignItems: "center", gap: 10,
+                  transition: "background 0.1s",
+                }}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                  </svg>
+                  Logout
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       <div style={{ padding: "16px" }}>
