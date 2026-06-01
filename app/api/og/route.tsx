@@ -24,15 +24,18 @@ export async function GET(request: Request) {
       if (post) {
         const p = post.profiles as unknown as { display_name: string; username: string };
         displayName = p?.display_name || "Anonymous";
-        username = p?.username || "";
-        content = post.content || "";
-        tags = post.tags || [];
+        username    = p?.username || "";
+        content     = post.content || "";
+        tags        = post.tags || [];
       }
     } catch {}
   }
 
-  const preview = content.length > 220 ? content.slice(0, 220) + "…" : content;
-  const initial = displayName[0]?.toUpperCase() || "?";
+  const preview = content.length > 240 ? content.slice(0, 240) + "…" : content;
+  const initial  = displayName[0]?.toUpperCase() || "?";
+
+  // Load real bee logo from public folder
+  const logoUrl = new URL("/bee.png", request.url).href;
 
   return new ImageResponse(
     (
@@ -43,76 +46,66 @@ export async function GET(request: Request) {
           background: "#121212",
           display: "flex",
           flexDirection: "column",
-          padding: "48px 56px",
+          padding: "44px 56px",
           fontFamily: "sans-serif",
           position: "relative",
         }}
       >
-        {/* Top yellow accent bar */}
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0,
-          height: 4, background: "#ffbe00", display: "flex",
-        }} />
+        {/* Yellow top bar */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: "#ffbe00", display: "flex" }} />
+        {/* Green bottom bar */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 5, background: "#98aa9d", display: "flex" }} />
 
-        {/* Bottom green accent bar */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0,
-          height: 4, background: "#98aa9d", display: "flex",
-        }} />
-
-        {/* Header: logo + wordmark */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 40 }}>
-          <div style={{
-            width: 42, height: 42, background: "#ffbe00",
-            borderRadius: 12, display: "flex",
-            alignItems: "center", justifyContent: "center",
-            fontSize: 22, fontWeight: 900,
-          }}>🐝</div>
-          <span style={{ color: "#eaeaea", fontSize: 22, fontWeight: 700, letterSpacing: "-0.02em" }}>
+        {/* Top row: wordmark left, logo right */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 44 }}>
+          <span style={{ color: "#eaeaea", fontSize: 26, fontWeight: 900, letterSpacing: "-0.03em" }}>
             Hanubees
           </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoUrl} alt="Hanubees" width={64} height={64} style={{ objectFit: "contain" }} />
         </div>
 
-        {/* Author row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+        {/* Author row — bolder, tighter */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
           <div style={{
-            width: 52, height: 52, borderRadius: "50%",
+            width: 56, height: 56, borderRadius: "50%",
             background: "#242424",
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 22, fontWeight: 700, color: "#eaeaea",
-            border: "2px solid rgba(255,190,0,0.3)",
+            fontSize: 24, fontWeight: 900, color: "#eaeaea",
+            border: "2.5px solid rgba(255,190,0,0.35)",
           }}>
             {initial}
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ color: "#eaeaea", fontSize: 19, fontWeight: 700 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <span style={{ color: "#eaeaea", fontSize: 21, fontWeight: 900, letterSpacing: "-0.02em" }}>
               {displayName}
             </span>
             {username && (
-              <span style={{ color: "#a9a9a7", fontSize: 15, marginTop: 2 }}>
+              <span style={{ color: "#a9a9a7", fontSize: 15, fontWeight: 600 }}>
                 @{username}
               </span>
             )}
           </div>
         </div>
 
-        {/* Content */}
-        <div style={{
-          flex: 1, display: "flex", flexDirection: "column", justifyContent: "center",
-        }}>
+        {/* Content — bold, tight line-height */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <p style={{
-            color: "#eaeaea", fontSize: 26, lineHeight: 1.55,
-            fontWeight: 400, margin: 0,
+            color: "#eaeaea",
+            fontSize: 28,
+            lineHeight: 1.4,
+            fontWeight: 700,
+            margin: 0,
+            letterSpacing: "-0.01em",
           }}>
             {preview}
           </p>
 
-          {/* Tags */}
           {tags.length > 0 && (
-            <div style={{ display: "flex", gap: 10, marginTop: 24, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 12, marginTop: 20, flexWrap: "wrap" }}>
               {tags.slice(0, 4).map(t => (
                 <span key={t} style={{
-                  color: "#98aa9d", fontSize: 17, fontWeight: 600,
+                  color: "#98aa9d", fontSize: 17, fontWeight: 800, letterSpacing: "-0.01em",
                 }}>#{t}</span>
               ))}
             </div>
@@ -122,21 +115,17 @@ export async function GET(request: Request) {
         {/* Footer */}
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          marginTop: 32,
-          paddingTop: 20,
-          borderTop: "1px solid rgba(234,234,234,0.08)",
+          marginTop: 28, paddingTop: 18,
+          borderTop: "1px solid rgba(234,234,234,0.1)",
         }}>
-          <span style={{ color: "#a9a9a7", fontSize: 15 }}>hanubees.com</span>
+          <span style={{ color: "#a9a9a7", fontSize: 15, fontWeight: 700 }}>hanubees.com</span>
           <div style={{ display: "flex", gap: 8 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#ffbe00" }} />
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#98aa9d" }} />
+            <div style={{ width: 9, height: 9, borderRadius: "50%", background: "#ffbe00" }} />
+            <div style={{ width: 9, height: 9, borderRadius: "50%", background: "#98aa9d" }} />
           </div>
         </div>
       </div>
     ),
-    {
-      width: 1200,
-      height: 630,
-    }
+    { width: 1200, height: 630 }
   );
 }
