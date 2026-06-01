@@ -46,7 +46,7 @@ export default function SignupPage() {
             onChange={e => setEmail(e.target.value)} required />
           <input className="input" type="password" placeholder="Password (min 6 chars)" value={password}
             onChange={e => setPassword(e.target.value)} minLength={6} required />
-          {error && <p style={{ color: "var(--red)", fontSize: 13 }}>{error}</p>}
+          {error && <p style={{ color: "#98aa9d", fontSize: 13 }}>{error}</p>}
           <button className="btn-primary" type="submit" disabled={loading} style={{ marginTop: 4 }}>
             {loading ? "Creating account..." : "Create account"}
           </button>
@@ -54,7 +54,7 @@ export default function SignupPage() {
 
         <p style={{ textAlign: "center", marginTop: 24, color: "var(--fg2)", fontSize: 14 }}>
           Already have an account?{" "}
-          <Link href="/login" style={{ color: "var(--fg)", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/login" style={{ color: "#ffbe00", fontWeight: 600, textDecoration: "none" }}>
             Log in
           </Link>
         </p>

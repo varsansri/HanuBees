@@ -31,7 +31,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <img src="/bee.png" alt="Hanubees" style={{ width: 140, height: "auto", margin: "0 auto 8px", display: "block" }} />
-          <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 4 }}>
+          <p style={{ color: "#a9a9a7", fontSize: 14, marginTop: 8, fontWeight: 500, letterSpacing: "0.01em" }}>
             Your health journey, shared.
           </p>
         </div>
@@ -41,7 +41,7 @@ export default function LoginPage() {
             onChange={e => setEmail(e.target.value)} required />
           <input className="input" type="password" placeholder="Password" value={password}
             onChange={e => setPassword(e.target.value)} required />
-          {error && <p style={{ color: "var(--red)", fontSize: 13 }}>{error}</p>}
+          {error && <p style={{ color: "#98aa9d", fontSize: 13 }}>{error}</p>}
           <button className="btn-primary" type="submit" disabled={loading} style={{ marginTop: 4 }}>
             {loading ? "Signing in..." : "Log in"}
           </button>
@@ -49,7 +49,7 @@ export default function LoginPage() {
 
         <p style={{ textAlign: "center", marginTop: 24, color: "var(--fg2)", fontSize: 14 }}>
           Don't have an account?{" "}
-          <Link href="/signup" style={{ color: "var(--fg)", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/signup" style={{ color: "#ffbe00", fontWeight: 600, textDecoration: "none" }}>
             Sign up
           </Link>
         </p>
