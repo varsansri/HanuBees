@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -92,11 +93,27 @@ export default function JournalPage() {
 
       {/* Header — yellow top */}
       <div className="page-header" style={{ padding: "14px 16px" }}>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
-          <h2 style={{ fontSize: 22, fontWeight: 700, color: YELLOW, fontFamily: "'Space Grotesk', sans-serif" }}>
-            Journal
-          </h2>
-          <span style={{ color: MUTED, fontSize: 13 }}>{today}</span>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: YELLOW, fontFamily: "'Space Grotesk', sans-serif" }}>
+              Journal
+            </h2>
+            <span style={{ color: MUTED, fontSize: 13 }}>{today}</span>
+          </div>
+          <Link href="/goals" style={{
+            display: "flex", alignItems: "center", gap: 6,
+            background: "rgba(152,170,157,0.12)",
+            border: "1px solid rgba(152,170,157,0.25)",
+            borderRadius: 10, padding: "7px 14px",
+            color: GREEN, textDecoration: "none",
+            fontSize: 13, fontWeight: 700,
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+            </svg>
+            Goals
+          </Link>
         </div>
       </div>
 
