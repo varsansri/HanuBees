@@ -4,39 +4,55 @@ import Link from "next/link";
 
 export default async function FeedPage() {
   const supabase = await createClient();
-
   const { data: posts } = await supabase
     .from("posts")
-    .select(`*, profiles(username, display_name, avatar_url)`)
+    .select("*, profiles(username, display_name, avatar_url)")
     .order("created_at", { ascending: false })
     .limit(30);
 
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto", padding: "16px 16px 0" }}>
+    <div style={{ maxWidth: 600, margin: "0 auto" }}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-5" style={{ paddingTop: 8 }}>
-        <h1 className="font-brand text-2xl text-amber">Hanubees</h1>
-        <div className="flex gap-2">
-          {["Feed", "Top", "New"].map((tab) => (
-            <button key={tab} className="btn-ghost"
-              style={{ padding: "6px 14px", fontSize: 12 }}>
-              {tab}
+      <div style={{
+        position: "sticky", top: 0, zIndex: 40,
+        background: "rgba(16,16,16,0.92)", backdropFilter: "blur(20px)",
+        borderBottom: "1px solid var(--border)",
+        padding: "14px 16px 0",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+          <h1 style={{ fontSize: 24, fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <span style={{ color: "var(--amber)" }}>H</span>anubees
+          </h1>
+        </div>
+        {/* Feed tabs */}
+        <div style={{ display: "flex" }}>
+          {["For You", "Following", "Health News"].map((t, i) => (
+            <button key={t} className={`tab ${i === 0 ? "tab-active" : ""}`}>
+              {t}
             </button>
           ))}
         </div>
       </div>
 
       {/* Posts */}
-      <div className="flex flex-col gap-3">
+      <div>
         {posts && posts.length > 0 ? (
-          posts.map((post) => <PostCard key={post.id} post={post} />)
+          posts.map((post, i) => (
+            <PostCard key={post.id} post={post} showThread={i < posts.length - 1} />
+          ))
         ) : (
-          <div className="card text-center" style={{ padding: 48 }}>
-            <p style={{ color: "var(--fg2)", marginBottom: 16, fontSize: 15 }}>
-              No posts yet. Be the first to share your health journey.
+          <div style={{ padding: "48px 16px", textAlign: "center" }}>
+            <p style={{ color: "var(--fg2)", fontSize: 16, marginBottom: 6 }}>
+              No posts yet
             </p>
-            <Link href="/post/new" className="btn-primary"
-              style={{ display: "inline-block", width: "auto", padding: "10px 24px" }}>
+            <p style={{ color: "var(--fg3)", fontSize: 14, marginBottom: 24 }}>
+              Be the first to share your health journey
+            </p>
+            <Link href="/post/new" style={{
+              display: "inline-block", background: "var(--fg)", color: "var(--bg)",
+              padding: "12px 28px", borderRadius: 12, fontWeight: 700, fontSize: 15,
+              textDecoration: "none",
+            }}>
               Share your story
             </Link>
           </div>

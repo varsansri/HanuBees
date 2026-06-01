@@ -16,31 +16,35 @@ export default function SignupPage() {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const { error: signupError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { username: username.toLowerCase().replace(/\s+/g, "_") }
-      }
+    setLoading(true); setError("");
+    const { error } = await supabase.auth.signUp({
+      email, password,
+      options: { data: { username: username.toLowerCase().replace(/\s+/g, "_") } },
     });
-    if (signupError) { setError(signupError.message); setLoading(false); return; }
-
+    if (error) { setError(error.message); setLoading(false); return; }
     router.push("/feed");
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4"
-      style={{ background: "var(--bg)" }}>
-      <div className="w-full max-w-sm fade-up">
-        <div className="text-center mb-8">
-          <h1 className="font-brand text-3xl text-amber mb-2">Hanubees</h1>
-          <p style={{ color: "var(--fg2)", fontSize: 15 }}>Join the community</p>
+    <div style={{
+      minHeight: "100vh", display: "flex", flexDirection: "column",
+      alignItems: "center", justifyContent: "center", padding: "24px",
+      background: "var(--bg)",
+    }}>
+      <div style={{ width: "100%", maxWidth: 360 }}>
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
+          <div style={{
+            width: 64, height: 64, borderRadius: 18, background: "var(--bg3)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            margin: "0 auto 16px", fontSize: 28, fontWeight: 900, color: "var(--amber)",
+          }}>H</div>
+          <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em" }}>Hanubees</h1>
+          <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 6 }}>
+            Join the health community
+          </p>
         </div>
 
-        <form onSubmit={handleSignup} className="flex flex-col gap-4">
+        <form onSubmit={handleSignup} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <input className="input" type="text" placeholder="Username" value={username}
             onChange={e => setUsername(e.target.value)} required />
           <input className="input" type="email" placeholder="Email" value={email}
@@ -48,14 +52,16 @@ export default function SignupPage() {
           <input className="input" type="password" placeholder="Password (min 6 chars)" value={password}
             onChange={e => setPassword(e.target.value)} minLength={6} required />
           {error && <p style={{ color: "var(--red)", fontSize: 13 }}>{error}</p>}
-          <button className="btn-primary" type="submit" disabled={loading}>
-            {loading ? "Creating account..." : "Create Account"}
+          <button className="btn-primary" type="submit" disabled={loading} style={{ marginTop: 4 }}>
+            {loading ? "Creating account..." : "Create account"}
           </button>
         </form>
 
-        <p className="text-center mt-6" style={{ color: "var(--fg3)", fontSize: 14 }}>
+        <p style={{ textAlign: "center", marginTop: 24, color: "var(--fg2)", fontSize: 14 }}>
           Already have an account?{" "}
-          <Link href="/login" style={{ color: "var(--amber)" }}>Sign in</Link>
+          <Link href="/login" style={{ color: "var(--fg)", fontWeight: 600, textDecoration: "none" }}>
+            Log in
+          </Link>
         </p>
       </div>
     </div>
