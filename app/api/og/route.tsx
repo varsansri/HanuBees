@@ -34,8 +34,17 @@ export async function GET(request: Request) {
   const preview = content.length > 240 ? content.slice(0, 240) + "…" : content;
   const initial  = displayName[0]?.toUpperCase() || "?";
 
-  // Load real bee logo from public folder
-  const logoUrl = new URL("/bee.png", request.url).href;
+  // Fetch bee logo and encode as base64 data URL (edge runtime can't load public assets directly)
+  let logoSrc = "";
+  try {
+    const logoUrl = new URL("/bee.png", request.url).href;
+    const res = await fetch(logoUrl);
+    const buf = await res.arrayBuffer();
+    const bytes = new Uint8Array(buf);
+    let binary = "";
+    bytes.forEach(b => { binary += String.fromCharCode(b); });
+    logoSrc = `data:image/png;base64,${btoa(binary)}`;
+  } catch {}
 
   return new ImageResponse(
     (
@@ -61,8 +70,10 @@ export async function GET(request: Request) {
           <span style={{ color: "#eaeaea", fontSize: 26, fontWeight: 900, letterSpacing: "-0.03em" }}>
             Hanubees
           </span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoUrl} alt="Hanubees" width={64} height={64} style={{ objectFit: "contain" }} />
+          {logoSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={logoSrc} alt="Hanubees" width={64} height={64} style={{ objectFit: "contain" }} />
+          )}
         </div>
 
         {/* Author row — bolder, tighter */}
