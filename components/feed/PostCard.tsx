@@ -111,7 +111,7 @@ export default function PostCard({ post }: { post: Post }) {
           {post.tags?.length > 0 && (
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
               {post.tags.map(t => (
-                <span key={t} style={{ fontSize: 14, color: YELLOW, fontWeight: 500 }}>#{t}</span>
+                <span key={t} style={{ fontSize: 14, color: GREEN, fontWeight: 500 }}>#{t}</span>
               ))}
             </div>
           )}

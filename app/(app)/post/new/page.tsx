@@ -56,12 +56,11 @@ export default function NewPostPage() {
         </button>
         <span style={{ fontWeight: 700, fontSize: 16, color: "var(--fg)" }}>New post</span>
         <button onClick={submit} disabled={!ready || loading} style={{
-          background: ready ? YELLOW : "var(--bg3)",
-          color: ready ? "#121212" : MUTED,
+          background: "none",
+          color: ready ? GREEN : MUTED,
           border: "none", borderRadius: 20, padding: "8px 22px",
-          fontWeight: 700, fontSize: 14, cursor: ready ? "pointer" : "default",
-          fontFamily: "'Space Grotesk', sans-serif", transition: "all 0.15s",
-          letterSpacing: "0.01em",
+          fontWeight: 700, fontSize: 15, cursor: ready ? "pointer" : "default",
+          fontFamily: "'Space Grotesk', sans-serif", transition: "color 0.15s",
         }}>
           {loading ? "Posting…" : "Post"}
         </button>

@@ -89,8 +89,8 @@ export default async function FeedPage() {
         {["For You", "Following"].map((t, i) => (
           <button key={t} style={{
             flex: 1, padding: "13px 0", background: "none", border: "none",
-            borderBottom: i === 0 ? `2px solid ${YELLOW}` : "2px solid transparent",
-            color: i === 0 ? YELLOW : MUTED,
+            borderBottom: i === 0 ? `2px solid ${GREEN}` : "2px solid transparent",
+            color: i === 0 ? GREEN : MUTED,
             fontSize: 15, fontWeight: 600, cursor: "pointer",
             fontFamily: "'Space Grotesk', sans-serif",
             transition: "all 0.15s",
@@ -105,7 +105,7 @@ export default async function FeedPage() {
         ) : (
           <div style={{ padding: "60px 16px", textAlign: "center" }}>
             <img src="/bee.png" alt="" style={{ width: 80, height: "auto", margin: "0 auto 20px", display: "block", opacity: 0.5 }} />
-            <p style={{ color: "var(--fg2)", fontSize: 16, marginBottom: 8, fontWeight: 600 }}>No posts yet</p>
+            <p style={{ color: GREEN, fontSize: 16, marginBottom: 8, fontWeight: 600 }}>No posts yet</p>
             <p style={{ color: MUTED, fontSize: 14, marginBottom: 28 }}>Be the first to share your health journey</p>
             <Link href="/post/new" style={{
               display: "inline-block", background: YELLOW, color: "#121212",

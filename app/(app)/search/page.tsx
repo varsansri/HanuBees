@@ -95,7 +95,7 @@ export default function SearchPage() {
         {!searched && (
           <>
             <p style={{ fontSize: 12, fontWeight: 700, color: MUTED, marginBottom: 16,
-              letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              letterSpacing: "0.1em", textTransform: "uppercase", color: GREEN }}>
               Popular topics
             </p>
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -109,7 +109,7 @@ export default function SearchPage() {
                   <div style={{ textAlign: "left" }}>
                     <p style={{ fontSize: 15, fontWeight: 600, color: "var(--fg)",
                       fontFamily: "'Space Grotesk', sans-serif" }}>
-                      <span style={{ color: YELLOW }}>#</span>{tag}
+                      <span style={{ color: GREEN }}>#</span>{tag}
                     </p>
                     <p style={{ fontSize: 13, color: MUTED, marginTop: 2,
                       fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -179,7 +179,7 @@ export default function SearchPage() {
                     {post.tags?.length > 0 && (
                       <div style={{ display: "flex", gap: 8, paddingLeft: 44 }}>
                         {post.tags.slice(0, 3).map(tag => (
-                          <span key={tag} style={{ fontSize: 14, color: YELLOW, fontWeight: 500 }}>#{tag}</span>
+                          <span key={tag} style={{ fontSize: 14, color: GREEN, fontWeight: 500 }}>#{tag}</span>
                         ))}
                       </div>
                     )}

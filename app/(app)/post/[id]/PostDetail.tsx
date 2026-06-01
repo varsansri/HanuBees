@@ -159,7 +159,7 @@ export default function PostDetail({ post, comments: initial }: { post: Post; co
             {post.tags?.length > 0 && (
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 14 }}>
                 {post.tags.map(tag => (
-                  <span key={tag} style={{ fontSize: 14, color: YELLOW, fontWeight: 500 }}>#{tag}</span>
+                  <span key={tag} style={{ fontSize: 14, color: GREEN, fontWeight: 500 }}>#{tag}</span>
                 ))}
               </div>
             )}
