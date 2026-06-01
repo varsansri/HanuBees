@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -131,9 +132,11 @@ export default function PostDetail({ post, comments: initial }: { post: Post; co
 
           <div style={{ flex: 1, paddingBottom: 16 }}>
             <div style={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
-              <span style={{ fontWeight: 700, fontSize: 15, color: "var(--fg)" }}>
-                {post.profiles?.display_name}
-              </span>
+              <Link href={`/profile/${post.profiles?.username}`} style={{ textDecoration: "none" }}>
+                <span style={{ fontWeight: 700, fontSize: 15, color: "var(--fg)" }}>
+                  {post.profiles?.display_name}
+                </span>
+              </Link>
               {post.post_type && (
                 <span style={{ fontSize: 11, fontWeight: 600, color: YELLOW,
                   textTransform: "uppercase", marginLeft: 8, letterSpacing: "0.06em" }}>

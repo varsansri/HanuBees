@@ -243,13 +243,13 @@ export default function PostCard({ post }: { post: Post }) {
               }}>
                 {initial}
               </div>
-              <div style={{
+              <Link href={`/profile/${post.profiles?.username}`} style={{
                 position: "absolute", bottom: -2, right: -2,
                 width: 18, height: 18, borderRadius: "50%",
                 background: YELLOW, display: "flex", alignItems: "center",
                 justifyContent: "center", fontSize: 12, fontWeight: 700,
-                color: BG, border: `2px solid ${BG}`, lineHeight: 1, cursor: "pointer",
-              }}>+</div>
+                color: BG, border: `2px solid ${BG}`, lineHeight: 1, textDecoration: "none",
+              }}>+</Link>
             </div>
             <div style={{ width: 2, flex: 1, minHeight: 24, background: BG3, borderRadius: 2, marginTop: 6 }} />
           </div>
@@ -259,9 +259,11 @@ export default function PostCard({ post }: { post: Post }) {
 
             {/* Header */}
             <div style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
-              <span style={{ fontWeight: 700, fontSize: 15, color: "#eaeaea" }}>
-                {post.profiles?.display_name || "Anonymous"}
-              </span>
+              <Link href={`/profile/${post.profiles?.username}`} style={{ textDecoration: "none" }}>
+                <span style={{ fontWeight: 700, fontSize: 15, color: "#eaeaea" }}>
+                  {post.profiles?.display_name || "Anonymous"}
+                </span>
+              </Link>
               <span style={{ color: MUTED, fontSize: 13, marginLeft: 8 }}>
                 {timeAgo(post.created_at)}
               </span>
