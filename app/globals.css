@@ -1,121 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --bg:          #06060f;
-  --fg:          #f5f0e8;
-  --amber:       #f5a623;
-  --amber-light: #ffd166;
-  --amber-dark:  #c17d11;
-  --glass-bg:    rgba(255, 255, 255, 0.07);
-  --glass-border:rgba(255, 255, 255, 0.14);
-  --glass-shadow:0 8px 32px rgba(0, 0, 0, 0.4);
+  --bg:        #0a0a0f;
+  --bg2:       #111118;
+  --bg3:       #1a1a24;
+  --border:    rgba(255,255,255,0.08);
+  --fg:        #f0ede8;
+  --fg2:       rgba(240,237,232,0.6);
+  --fg3:       rgba(240,237,232,0.35);
+  --amber:     #f5a623;
+  --amber2:    #ffd166;
+  --green:     #22c55e;
+  --red:       #ef4444;
+  --radius:    16px;
+  --radius-sm: 10px;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
   background: var(--bg);
   color: var(--fg);
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
+  height: 100%;
 }
 
-/* ── Berthold-style headings ── */
-.font-berthold {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-}
+.font-brand { font-family: 'Montserrat', sans-serif; font-weight: 900; }
 
-/* ── Liquid Glass card ── */
+/* Glass */
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.12);
-  border-radius: 24px;
-  position: relative;
-  overflow: hidden;
-}
-.glass::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
-/* ── Liquid distortion filter ── */
-.liquid-filter {
-  filter: url(#liquid-distort);
+/* Input */
+.input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
 }
+.input:focus { border-color: var(--amber); }
+.input::placeholder { color: var(--fg3); }
 
-/* ── Amber glow ── */
-.glow-amber {
-  text-shadow: 0 0 40px rgba(245, 166, 35, 0.6), 0 0 80px rgba(245, 166, 35, 0.3);
-}
-.btn-amber {
-  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%);
-  color: #06060f;
+/* Buttons */
+.btn-primary {
+  background: var(--amber);
+  color: #0a0a0f;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  border: none;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  padding: 12px 24px;
   border-radius: 100px;
+  border: none;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 24px rgba(245, 166, 35, 0.4);
+  transition: opacity 0.2s, transform 0.15s;
+  width: 100%;
 }
-.btn-amber:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 32px rgba(245, 166, 35, 0.6);
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg2);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-ghost:hover { background: var(--bg3); color: var(--fg); }
+
+/* Card */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
 }
 
-/* ── Scroll snap ── */
-.snap-container {
-  scroll-snap-type: y proximity;
-  overflow-y: scroll;
-  height: 100vh;
-}
-.snap-section {
-  scroll-snap-align: start;
+/* Bottom nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 20px;
+  z-index: 50;
 }
 
-/* ── Fade-in animation ── */
+/* Amber text */
+.text-amber { color: var(--amber); }
+.text-muted { color: var(--fg2); }
+.text-faint { color: var(--fg3); }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); width: 100%; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+
+/* Fade up */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(32px); }
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.fade-up { animation: fadeUp 0.8s ease forwards; }
-.fade-up-d1 { animation: fadeUp 0.8s 0.15s ease both; }
-.fade-up-d2 { animation: fadeUp 0.8s 0.30s ease both; }
-.fade-up-d3 { animation: fadeUp 0.8s 0.45s ease both; }
-
-/* ── Bee hex grid ── */
-@keyframes hexFloat {
-  0%,100% { transform: translateY(0px) rotate(0deg); }
-  50%      { transform: translateY(-12px) rotate(2deg); }
-}
-.hex-float { animation: hexFloat 6s ease-in-out infinite; }
-
-/* ── Marquee ── */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.marquee-inner { animation: marquee 18s linear infinite; }
-
-/* ── Gradient text ── */
-.text-gradient {
-  background: linear-gradient(90deg, var(--amber-light) 0%, var(--amber) 50%, #ff6b35 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.fade-up { animation: fadeUp 0.5s ease forwards; }

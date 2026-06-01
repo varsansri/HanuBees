@@ -1,34 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import PostHogProvider from "@/components/PostHogProvider";
 
 export const metadata: Metadata = {
-  title: "Hanubees — Crafted with Purpose",
-  description: "Hanubees.com — where creativity meets precision.",
+  title: "Hanubees — Health & Wellness Community",
+  description: "Journal your health journey. Share your experience. Find people who understand.",
   metadataBase: new URL("https://hanubees.com"),
   openGraph: {
     title: "Hanubees",
-    description: "Hanubees.com — where creativity meets precision.",
+    description: "Journal your health journey. Share your experience. Find people who understand.",
     url: "https://hanubees.com",
     siteName: "Hanubees",
-    locale: "en_US",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Hanubees",
-    description: "Hanubees.com — where creativity meets precision.",
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" style={{ height: "100%" }}>
-      <body style={{ height: "100%", margin: 0 }}>
-        <PostHogProvider>{children}</PostHogProvider>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }
