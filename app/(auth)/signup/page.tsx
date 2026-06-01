@@ -19,17 +19,14 @@ export default function SignupPage() {
     setLoading(true);
     setError("");
 
-    const { data, error: signupError } = await supabase.auth.signUp({ email, password });
+    const { error: signupError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { username: username.toLowerCase().replace(/\s+/g, "_") }
+      }
+    });
     if (signupError) { setError(signupError.message); setLoading(false); return; }
-
-    if (data.user) {
-      const { error: profileError } = await supabase.from("profiles").insert({
-        id: data.user.id,
-        username: username.toLowerCase().replace(/\s+/g, "_"),
-        display_name: username,
-      });
-      if (profileError) { setError(profileError.message); setLoading(false); return; }
-    }
 
     router.push("/feed");
   };
