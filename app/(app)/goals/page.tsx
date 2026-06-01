@@ -406,6 +406,9 @@ export default function GoalsPage() {
       <div style={{ padding: "16px" }}>
 
         {/* ── Insight Strip ── */}
+        <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>
+          Insights
+        </p>
         <div style={{ display: "flex", gap: 10, overflowX: "auto", paddingBottom: 4, marginBottom: 20, scrollbarWidth: "none" }}>
           {[
             { label: "Day Streak",   value: streak,      icon: <Icon.Streak />,   color: YELLOW },
