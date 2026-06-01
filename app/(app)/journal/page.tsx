@@ -21,6 +21,7 @@ export default function JournalPage() {
   const [loading, setLoading] = useState(false);
   const [identifying, setIdentifying] = useState(false);
   const [identified, setIdentified] = useState<{ name: string; category: string } | null>(null);
+  const [error, setError] = useState("");
   const supabase = createClient();
 
   useEffect(() => { loadEntries(); }, []);
@@ -61,7 +62,7 @@ export default function JournalPage() {
     if (!user) return;
 
     const [amount, ...unitParts] = dose.split(" ");
-    await supabase.from("journal_entries").insert({
+    const { error: insertError } = await supabase.from("journal_entries").insert({
       user_id: user.id,
       name: identified.name,
       category: identified.category,
@@ -72,7 +73,13 @@ export default function JournalPage() {
       dose_time: new Date().toISOString(),
     });
 
-    setInput(""); setDose(""); setNotes(""); setIdentified(null);
+    if (insertError) {
+      setError(insertError.message);
+      setLoading(false);
+      return;
+    }
+
+    setInput(""); setDose(""); setNotes(""); setIdentified(null); setError("");
     await loadEntries();
     setLoading(false);
   };
@@ -121,7 +128,8 @@ export default function JournalPage() {
               value={dose} onChange={e => setDose(e.target.value)} style={{ marginBottom: 10 }} />
             <textarea className="input" placeholder="How do you feel? Any notes..."
               value={notes} onChange={e => setNotes(e.target.value)}
-              rows={2} style={{ resize: "none", marginBottom: 12 }} />
+              rows={2} style={{ resize: "none", marginBottom: 10 }} />
+            {error && <p style={{ color: "var(--red)", fontSize: 13, marginBottom: 8 }}>{error}</p>}
             <button className="btn-primary" onClick={logEntry}
               disabled={!dose || loading}>
               {loading ? "Logging..." : "Log Entry"}
