@@ -14,7 +14,7 @@ type Period = "week" | "month" | "all";
 interface JournalEntry { id: string; name: string; category: string; dose_amount: string; dose_unit: string; dose_time: string; }
 
 export default function InsightsSection({ entries }: { entries: JournalEntry[] }) {
-  const [period, setPeriod]   = useState<Period>("week");
+  const [period, setPeriod]   = useState<Period>("month");
   const [report, setReport]   = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState("");
@@ -82,7 +82,7 @@ export default function InsightsSection({ entries }: { entries: JournalEntry[] }
   }, [entries, period]);
 
   const generate = async () => {
-    if (loading || stats.supplements.length === 0) return;
+    if (loading) return;
     setLoading(true); setError(""); setReport("");
     try {
       const res = await fetch("/api/insights", {
@@ -96,8 +96,12 @@ export default function InsightsSection({ entries }: { entries: JournalEntry[] }
   };
 
   useEffect(() => {
-    if (entries.length >= 5) generate();
-  }, [period, entries.length]);
+    if (entries.length >= 5) {
+      setReport("");
+      setError("");
+      generate();
+    }
+  }, [period, entries.length, stats]);
 
   if (entries.length < 5) return (
     <div style={{ background: BG2, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 20, padding: "44px 24px", textAlign: "center" }}>
@@ -143,16 +147,7 @@ export default function InsightsSection({ entries }: { entries: JournalEntry[] }
         borderRadius: 16, padding: "16px",
         overflowX: "auto",
       }}>
-        {loading && !report ? (
-          <div style={{ padding: "40px 0", textAlign: "center" }}>
-            <p style={{ fontFamily: "monospace", fontSize: 12, color: GREEN, letterSpacing: 2 }}>
-              Analyzing journal data…
-            </p>
-            <p style={{ fontFamily: "monospace", fontSize: 11, color: MUTED, marginTop: 8, letterSpacing: 1 }}>
-              ▁▂▃▄▅▆▇█▇▆▅▄▃▂▁
-            </p>
-          </div>
-        ) : error ? (
+        {error ? (
           <div style={{ textAlign: "center", padding: "32px 0" }}>
             <p style={{ fontFamily: "monospace", fontSize: 12, color: MUTED }}>{error}</p>
             <button onClick={generate} style={{
@@ -161,7 +156,7 @@ export default function InsightsSection({ entries }: { entries: JournalEntry[] }
               cursor: "pointer", fontFamily: "monospace",
             }}>retry</button>
           </div>
-        ) : report ? (
+        ) : report && !loading ? (
           <pre style={{
             fontFamily: "'Courier New', Courier, monospace",
             fontSize: 11,
@@ -173,7 +168,16 @@ export default function InsightsSection({ entries }: { entries: JournalEntry[] }
           }}>
             {report}
           </pre>
-        ) : null}
+        ) : (
+          <div style={{ padding: "40px 0", textAlign: "center" }}>
+            <p style={{ fontFamily: "monospace", fontSize: 12, color: GREEN, letterSpacing: 2 }}>
+              Analyzing journal data…
+            </p>
+            <p style={{ fontFamily: "monospace", fontSize: 11, color: MUTED, marginTop: 10, letterSpacing: 1 }}>
+              ▁▂▃▄▅▆▇█▇▆▅▄▃▂▁
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
