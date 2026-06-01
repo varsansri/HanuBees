@@ -38,7 +38,20 @@ export default function PostCard({ post }: { post: Post }) {
   const [valueUp, setValueUp] = useState(post.value_up);
   const [valueDown, setValueDown] = useState(post.value_down);
   const [voted, setVoted] = useState<"up"|"down"|null>(null);
+  const [shared, setShared] = useState(false);
   const supabase = createClient();
+
+  const share = async () => {
+    const url = `${window.location.origin}/post/${post.id}`;
+    const text = post.content.slice(0, 100);
+    if (navigator.share) {
+      await navigator.share({ title: "Hanubees", text, url }).catch(() => {});
+    } else {
+      await navigator.clipboard.writeText(url).catch(() => {});
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    }
+  };
 
   const like = async () => {
     const n = !liked; setLiked(n); setLikes(l => n ? l+1 : l-1);
@@ -169,13 +182,19 @@ export default function PostCard({ post }: { post: Post }) {
             </button>
 
             {/* Share */}
-            <button style={{
+            <button onClick={share} style={{
               background: "none", border: "none", cursor: "pointer",
-              color: MUTED, display: "flex", alignItems: "center", marginLeft: "auto", padding: 0,
+              color: shared ? GREEN : MUTED,
+              display: "flex", alignItems: "center", gap: 5,
+              marginLeft: "auto", padding: 0, transition: "color 0.2s",
             }}>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
+              {shared ? (
+                <span style={{ fontSize: 12, fontWeight: 600 }}>Copied</span>
+              ) : (
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+              )}
             </button>
           </div>
         </div>
