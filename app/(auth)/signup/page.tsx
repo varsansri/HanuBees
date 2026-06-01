@@ -14,7 +14,7 @@ export default function SignupPage() {
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [otp, setOtp]           = useState(["","","","","",""]);
+  const [otp, setOtp]           = useState(["","","","","","","",""]);
   const [error, setError]       = useState("");
   const [loading, setLoading]   = useState(false);
   const [resending, setResending] = useState(false);
@@ -40,8 +40,8 @@ export default function SignupPage() {
     const next = [...otp];
     next[i] = val.slice(-1);
     setOtp(next);
-    if (val && i < 5) inputRefs.current[i+1]?.focus();
-    if (next.every(d => d) ) verifyOtp(next.join(""));
+    if (val && i < 7) inputRefs.current[i+1]?.focus();
+    if (next.every(d => d)) verifyOtp(next.join(""));
   };
 
   const handleOtpKey = (i: number, e: React.KeyboardEvent) => {
@@ -57,7 +57,7 @@ export default function SignupPage() {
     });
     if (error) {
       setError("Invalid code. Try again.");
-      setOtp(["","","","","",""]);
+      setOtp(["","","","","","","",""]);
       inputRefs.current[0]?.focus();
       setLoading(false);
       return;
@@ -69,7 +69,7 @@ export default function SignupPage() {
     setResending(true); setError("");
     await supabase.auth.resend({ type: "signup", email });
     setResending(false);
-    setOtp(["","","","","",""]);
+    setOtp(["","","","","","","",""]);
     setTimeout(() => inputRefs.current[0]?.focus(), 100);
   };
 
@@ -94,7 +94,7 @@ export default function SignupPage() {
           </div>
 
           {/* OTP boxes */}
-          <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 24 }}>
+          <div style={{ display: "flex", gap: 7, justifyContent: "center", marginBottom: 24 }}>
             {otp.map((digit, i) => (
               <input
                 key={i}
@@ -104,7 +104,7 @@ export default function SignupPage() {
                 onChange={e => handleOtpChange(i, e.target.value)}
                 onKeyDown={e => handleOtpKey(i, e)}
                 style={{
-                  width: 46, height: 56, textAlign: "center",
+                  width: 38, height: 52, textAlign: "center",
                   fontSize: 22, fontWeight: 700,
                   background: "#1a1a1a",
                   border: `2px solid ${digit ? GREEN : "rgba(234,234,234,0.1)"}`,
