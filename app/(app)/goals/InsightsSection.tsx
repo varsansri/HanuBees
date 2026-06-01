@@ -90,8 +90,10 @@ export default function InsightsSection({ entries }: { entries: JournalEntry[] }
         body: JSON.stringify({ ...stats, period }),
       });
       const data = await res.json();
-      setReport(data.report || "");
-    } catch { setError("Could not generate. Try again."); }
+      if (data.error) { setError(data.error); }
+      else if (data.report) { setReport(data.report); }
+      else { setError("Empty response. Try again."); }
+    } catch (e: any) { setError(e?.message ?? "Network error. Try again."); }
     setLoading(false);
   };
 

@@ -54,14 +54,16 @@ RULES:
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 1200, temperature: 0.8 },
+          generationConfig: { maxOutputTokens: 2048, temperature: 0.8 },
         }),
       }
     );
     const data = await res.json();
+    if (!res.ok) return NextResponse.json({ error: `Gemini error: ${data?.error?.message ?? res.status}` }, { status: 500 });
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+    if (!text) return NextResponse.json({ error: "Empty response from AI" }, { status: 500 });
     return NextResponse.json({ report: text });
-  } catch {
-    return NextResponse.json({ report: "Could not generate report. Try again." });
+  } catch (e: any) {
+    return NextResponse.json({ error: e?.message ?? "Network error" }, { status: 500 });
   }
 }
