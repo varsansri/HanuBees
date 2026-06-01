@@ -30,8 +30,8 @@ export default async function FeedPage() {
         {/* Left */}
         <div />
 
-        {/* Center logo */}
-        <img src="/logo.png" alt="Hanubees" style={{ height: 40, width: "auto", borderRadius: 10 }} />
+        {/* Center logo — bee only, no bg */}
+        <img src="/bee.png" alt="Hanubees" style={{ height: 48, width: "auto" }} />
 
         {/* Right — search */}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
