@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const profiles = post.profiles as unknown as { username: string; display_name: string };
   const title = `${profiles?.display_name || "Someone"} on Hanubees`;
   const description = (post.content as string).slice(0, 160);
-  const ogImage = `/api/og?id=${id}`;
+  const ogImage = `https://hanubees.com/api/og?id=${id}`;
 
   return {
     title,
