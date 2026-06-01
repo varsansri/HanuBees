@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import InsightsSection from "./InsightsSection";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -311,9 +312,6 @@ export default function GoalsPage() {
   const [calorieGoal, setCalorieGoal]         = useState(2000);
   const [goals, setGoals]                     = useState<Goal[]>([]);
   const [goalLogs, setGoalLogs]               = useState<GoalLog[]>([]);
-  const [streak, setStreak]                   = useState(0);
-  const [weekCount, setWeekCount]             = useState(0);
-  const [topSupplement, setTopSupplement]     = useState("");
   const [logTarget, setLogTarget]             = useState<Goal | null>(null);
   const [showCalSheet, setShowCalSheet]       = useState(false);
   const [showCreateGoal, setShowCreateGoal]   = useState(false);
@@ -329,9 +327,8 @@ export default function GoalsPage() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push("/login"); return; }
 
-    const today     = new Date(); today.setHours(0,0,0,0);
-    const todayISO  = today.toISOString();
-    const weekAgo   = new Date(Date.now() - 7 * 86400000).toISOString();
+    const today    = new Date(); today.setHours(0,0,0,0);
+    const todayISO = today.toISOString();
 
     const [
       { data: allEntries },
@@ -346,25 +343,6 @@ export default function GoalsPage() {
       supabase.from("goals").select("*").eq("user_id", user.id).order("created_at"),
       supabase.from("goal_logs").select("*").eq("user_id", user.id).gte("logged_at", todayISO),
     ]);
-
-    // Streak
-    const days = new Set((allEntries || []).map(e => e.dose_time.slice(0, 10)));
-    let s = 0;
-    const d = new Date();
-    while (days.has(d.toISOString().slice(0, 10))) { s++; d.setDate(d.getDate() - 1); }
-    setStreak(s);
-
-    // Week count
-    const week = (allEntries || []).filter(e => e.dose_time >= weekAgo);
-    setWeekCount(week.length);
-
-    // Top supplement
-    const counts: Record<string, number> = {};
-    (allEntries || []).filter(e => e.category === "supplement").forEach(e => {
-      counts[e.name] = (counts[e.name] || 0) + 1;
-    });
-    const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-    setTopSupplement(top ? top[0] : "—");
 
     setJournalEntries(allEntries || []);
     setTodayEntries(todayJ || []);
@@ -405,42 +383,12 @@ export default function GoalsPage() {
 
       <div style={{ padding: "16px" }}>
 
-        {/* ── Insight Strip ── */}
-        <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>
-          Insights
-        </p>
-        <div style={{ display: "flex", gap: 10, overflowX: "auto", paddingBottom: 4, marginBottom: 20, scrollbarWidth: "none" }}>
-          {[
-            { label: "Day Streak",   value: streak,      icon: <Icon.Streak />,   color: YELLOW },
-            { label: "This Week",    value: weekCount,   icon: <Icon.Pill />,     color: GREEN  },
-            { label: "Goals Today",  value: `${goalsOnTrack}/${goals.length}`, icon: <Icon.Check />, color: GREEN },
-          ].map(item => (
-            <div key={item.label} style={{
-              flexShrink: 0, background: BG2,
-              border: "1px solid rgba(234,234,234,0.08)",
-              borderRadius: 16, padding: "14px 18px", minWidth: 110,
-            }}>
-              <span style={{ color: item.color }}>{item.icon}</span>
-              <p style={{ fontSize: 24, fontWeight: 800, color: FG, margin: "8px 0 4px", fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "-0.02em" }}>
-                {item.value}
-              </p>
-              <p style={{ fontSize: 11, color: MUTED, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
-                {item.label}
-              </p>
-            </div>
-          ))}
-          {topSupplement !== "—" && (
-            <div style={{ flexShrink: 0, background: BG2, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 16, padding: "14px 18px", minWidth: 130 }}>
-              <span style={{ color: YELLOW }}><Icon.Pill /></span>
-              <p style={{ fontSize: 15, fontWeight: 800, color: FG, margin: "8px 0 4px", fontFamily: "'Space Grotesk', sans-serif" }}>{topSupplement}</p>
-              <p style={{ fontSize: 11, color: MUTED, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>Top Supplement</p>
-            </div>
-          )}
-        </div>
+        {/* ── Insights ── */}
+        <InsightsSection entries={journalEntries} />
 
         {/* Section label */}
         <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>
-          Default Trackers
+          Trackers
         </p>
 
         {/* ── Supplement Tracker Card ── */}
@@ -474,15 +422,6 @@ export default function GoalsPage() {
             </div>
           )}
 
-          {weekCount > 0 && (
-            <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid rgba(234,234,234,0.06)" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                <span style={{ fontSize: 12, color: MUTED }}>Weekly activity</span>
-                <span style={{ fontSize: 12, color: FG, fontWeight: 600 }}>{weekCount} logs</span>
-              </div>
-              <ProgressBar value={weekCount} max={21} />
-            </div>
-          )}
         </div>
 
         {/* ── Calories Tracker Card ── */}
