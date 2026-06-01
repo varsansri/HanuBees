@@ -33,13 +33,8 @@ export default function SignupPage() {
     }}>
       <div style={{ width: "100%", maxWidth: 360 }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <div style={{
-            width: 64, height: 64, borderRadius: 18, background: "var(--bg3)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            margin: "0 auto 16px", fontSize: 28, fontWeight: 900, color: "var(--amber)",
-          }}>H</div>
-          <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em" }}>Hanubees</h1>
-          <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 6 }}>
+          <img src="/logo.svg" alt="Hanubees" style={{ width: 100, height: 100, margin: "0 auto 8px", display: "block" }} />
+          <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 4 }}>
             Join the health community
           </p>
         </div>

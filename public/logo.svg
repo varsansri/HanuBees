@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="#121212" rx="80"/>
+
+  <!-- Hexagon mark -->
+  <polygon points="200,60 248,87 248,143 200,170 152,143 152,87"
+    fill="none" stroke="#FFBE00" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- Inner hex cell -->
+  <polygon points="200,86 224,100 224,128 200,142 176,128 176,100"
+    fill="#FFBE00" opacity="0.15"/>
+
+  <!-- Bee body dot -->
+  <circle cx="200" cy="114" r="14" fill="#FFBE00"/>
+
+  <!-- Bee stripes -->
+  <rect x="190" y="108" width="20" height="4" rx="2" fill="#121212"/>
+  <rect x="190" y="116" width="20" height="4" rx="2" fill="#121212"/>
+
+  <!-- Wings -->
+  <ellipse cx="178" cy="104" rx="12" ry="7" fill="rgba(255,190,0,0.35)" transform="rotate(-25 178 104)"/>
+  <ellipse cx="222" cy="104" rx="12" ry="7" fill="rgba(255,190,0,0.35)" transform="rotate(25 222 104)"/>
+
+  <!-- Wordmark -->
+  <text x="200" y="240"
+    font-family="'Space Grotesk', 'Arial Black', sans-serif"
+    font-weight="700"
+    font-size="52"
+    fill="#FFBE00"
+    text-anchor="middle"
+    letter-spacing="-1">
+    Hanubees
+  </text>
+
+  <!-- Tagline -->
+  <text x="200" y="278"
+    font-family="'Space Grotesk', Arial, sans-serif"
+    font-weight="400"
+    font-size="16"
+    fill="#A9A9A7"
+    text-anchor="middle"
+    letter-spacing="3">
+    HEALTH · JOURNAL · COMMUNITY
+  </text>
+</svg>
