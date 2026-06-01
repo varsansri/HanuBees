@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -81,6 +82,8 @@ export default function JournalPage() {
       dose_time: new Date().toISOString(),
     });
     if (insertError) { setError(insertError.message); setLoading(false); return; }
+    posthog.capture("journal_entry_logged", { category: identified.category });
+    (window as any).umami?.track("journal_entry_logged", { category: identified.category });
     setInput(""); setDose(""); setNotes(""); setIdentified(null); setError("");
     await loadEntries();
     setLoading(false);

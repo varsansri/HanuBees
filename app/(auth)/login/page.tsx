@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -22,6 +23,8 @@ export default function LoginPage() {
     setLoading(true); setError("");
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) { setError(error.message); setLoading(false); return; }
+    posthog.capture("user_logged_in");
+    (window as any).umami?.track("login");
     router.push("/feed");
   };
 

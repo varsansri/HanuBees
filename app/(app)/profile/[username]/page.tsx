@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -81,11 +82,15 @@ export default function UserProfilePage() {
         .eq("following_id", profile.id);
       setIsFollowing(false);
       setFollowerCount(c => c - 1);
+      posthog.capture("user_unfollowed", { target_username: username });
+      (window as any).umami?.track("unfollow");
     } else {
       await supabase.from("follows")
         .insert({ follower_id: user.id, following_id: profile.id });
       setIsFollowing(true);
       setFollowerCount(c => c + 1);
+      posthog.capture("user_followed", { target_username: username });
+      (window as any).umami?.track("follow");
     }
     setFollowLoading(false);
   };

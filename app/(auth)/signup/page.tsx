@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -62,6 +63,8 @@ export default function SignupPage() {
       setLoading(false);
       return;
     }
+    posthog.capture("user_signed_up");
+    (window as any).umami?.track("signup");
     router.push("/feed");
   };
 

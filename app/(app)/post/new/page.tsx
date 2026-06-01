@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import posthog from "posthog-js";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -76,6 +77,8 @@ export default function NewPostPage() {
       value_up: 0, value_down: 0, likes: 0, views: 0,
     });
     if (postError) { setError(postError.message); setLoading(false); return; }
+    posthog.capture("post_created", { post_type: type, has_image: !!imageUrl, tags_count: tagArray.length });
+    (window as any).umami?.track("post_created", { post_type: type });
     router.push("/feed");
   };
 

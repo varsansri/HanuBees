@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -83,6 +84,8 @@ function ShareSheet({ post, onClose }: { post: Post; onClose: () => void }) {
     await navigator.clipboard.writeText(url).catch(() => {});
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    posthog.capture("post_shared", { post_id: post.id, method: "copy" });
+    (window as any).umami?.track("post_shared", { method: "copy" });
   };
 
   const nativeShare = async () => {
@@ -91,6 +94,8 @@ function ShareSheet({ post, onClose }: { post: Post; onClose: () => void }) {
       text: post.content.slice(0, 120),
       url,
     }).catch(() => {});
+    posthog.capture("post_shared", { post_id: post.id, method: "native" });
+    (window as any).umami?.track("post_shared", { method: "native" });
     onClose();
   };
 
@@ -211,6 +216,10 @@ export default function PostCard({ post }: { post: Post }) {
   const like = async () => {
     const n = !liked; setLiked(n); setLikes(l => n ? l+1 : l-1);
     await supabase.from("posts").update({ likes: n ? likes+1 : likes-1 }).eq("id", post.id);
+    if (n) {
+      posthog.capture("post_liked", { post_id: post.id });
+      (window as any).umami?.track("post_liked");
+    }
   };
 
   const vote = async (type: "up"|"down") => {
@@ -219,6 +228,8 @@ export default function PostCard({ post }: { post: Post }) {
     const nd = type==="down" ? valueDown+1 : valueDown;
     setValueUp(nu); setValueDown(nd); setVoted(type);
     await supabase.from("posts").update({ value_up: nu, value_down: nd }).eq("id", post.id);
+    posthog.capture("post_voted", { post_id: post.id, direction: type });
+    (window as any).umami?.track("post_voted", { direction: type });
   };
 
   const score    = valueUp - valueDown;
