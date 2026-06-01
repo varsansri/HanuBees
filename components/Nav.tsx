@@ -32,7 +32,7 @@ export default function Nav() {
             key={link}
             href={`#${link.toLowerCase()}`}
             className="text-sm font-medium tracking-wider text-white/70 hover:text-white transition-colors duration-200"
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             {link}
           </a>

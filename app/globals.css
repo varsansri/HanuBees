@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --bg:      #101010;
+  --bg:      #121212;
   --bg2:     #1a1a1a;
   --bg3:     #242424;
-  --border:  rgba(255,255,255,0.12);
-  --fg:      #ffffff;
-  --fg2:     #999999;
-  --fg3:     #555555;
-  --amber:   #f5a623;
+  --border:  rgba(234,234,234,0.1);
+  --fg:      #eaeaea;
+  --fg2:     #a9a9a7;
+  --fg3:     #555553;
+  --amber:   #ffbe00;
+  --amber2:  #ffd34d;
   --green:   #22c55e;
   --red:     #ef4444;
   --blue:    #3b82f6;
@@ -20,7 +21,7 @@
 html, body {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   height: 100%;
   overflow-x: hidden;
@@ -34,7 +35,7 @@ html, body {
   border-radius: 12px;
   padding: 13px 16px;
   color: var(--fg);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 15px;
   outline: none;
   transition: border-color 0.2s;
@@ -46,7 +47,7 @@ html, body {
 .btn-primary {
   background: var(--fg);
   color: var(--bg);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 15px;
   padding: 13px 24px;
@@ -62,7 +63,7 @@ html, body {
 .btn-outline {
   background: transparent;
   color: var(--fg);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   font-size: 14px;
   padding: 9px 20px;
@@ -130,7 +131,7 @@ html, body {
   font-size: 13px;
   padding: 6px 0;
   transition: color 0.15s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 .action-btn:hover { color: var(--fg); }
 
@@ -156,6 +157,6 @@ html, body {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   transition: all 0.15s;
 }
