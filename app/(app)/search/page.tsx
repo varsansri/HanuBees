@@ -94,8 +94,8 @@ export default function SearchPage() {
         {/* Popular tags */}
         {!searched && (
           <>
-            <p style={{ fontSize: 12, fontWeight: 700, color: MUTED, marginBottom: 16,
-              letterSpacing: "0.1em", textTransform: "uppercase", color: GREEN }}>
+            <p style={{ fontSize: 12, fontWeight: 700, color: GREEN, marginBottom: 16,
+              letterSpacing: "0.1em", textTransform: "uppercase" }}>
               Popular topics
             </p>
             <div style={{ display: "flex", flexDirection: "column" }}>
