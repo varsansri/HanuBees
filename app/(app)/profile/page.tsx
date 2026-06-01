@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -249,6 +250,30 @@ export default function ProfilePage() {
         {/* Journal tab */}
         {tab === "journal" && (
           <div>
+            {/* Goals button */}
+            <Link href="/goals" style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              background: "rgba(152,170,157,0.08)",
+              border: "1px solid rgba(152,170,157,0.25)",
+              borderRadius: 14, padding: "14px 16px",
+              textDecoration: "none", marginBottom: 16,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ width: 34, height: 34, borderRadius: 10, background: "rgba(152,170,157,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: GREEN }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                  </svg>
+                </div>
+                <div>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: GREEN, fontFamily: "'Space Grotesk', sans-serif" }}>Goals & Insights</p>
+                  <p style={{ fontSize: 12, color: MUTED, marginTop: 2, fontFamily: "'Space Grotesk', sans-serif" }}>Streaks, calories, custom trackers</p>
+                </div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </Link>
+
             <div style={{
               background: "var(--bg2)", border: "1px solid var(--border)",
               borderRadius: 16, padding: 16, marginBottom: 16,
