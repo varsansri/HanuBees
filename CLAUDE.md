@@ -172,7 +172,11 @@ calorie_logs (id, user_id, food_name, calories, logged_at)
 8. **Smart post images** — natural aspect ratio on load, capped at 1:1 max (portrait → square); text line-clamped (3 lines with image, 6 without)
 9. **Photo upload** — camera icon in new post composer; Supabase Storage `post-images` bucket; 8MB limit
 10. **Umami analytics** — script added to root layout
-11. **Goals & Insights page** — at `/goals`, linked from Journal via "Goals" button
+11. **Goals & Insights page** (`/goals`)
+12. **OTP signup** — 8-digit code sent via email, verify boxes UI, resend option
+13. **Forgot password** — `/forgot-password` + `/reset-password` pages, Gmail SMTP configured
+14. **Public profile pages** — `/profile/[username]`, clickable names in feed/post detail
+15. **Follow system** — Follow/Unfollow button, follower/following counts, `follows` table — at `/goals`, linked from Journal via "Goals" button
     - Insights strip: day streak, week supplement count, goals on track, top supplement
     - Default supplement tracker card (pulls from journal_entries)
     - Default calories tracker card (log food, set daily goal, progress bar)
@@ -255,6 +259,15 @@ GEMINI_API_KEY=<gemini key for journal AI>
 
 ---
 
+## New DB Tables (Session 2 additions)
+```sql
+-- Follow system
+follows (id, follower_id, following_id, created_at) — unique(follower_id, following_id)
+-- RLS: manage own follows (follower_id = auth.uid()), public select
+```
+
+---
+
 ## All Git Commits (chronological)
 ```
 52789c4  fix: use trigger for profile creation, pass username in metadata
@@ -286,6 +299,11 @@ bc2fa79  fix: absolute OG image URL so Threads/X can fetch it
 7a6ebd0  feat: photo upload while posting — image picker, preview, Supabase Storage
 41b4a17  fix: limit image upload to 5MB
 9f4717e  fix: image limit 8MB
+45cea33  feat: public profile pages + follow system
+f9d4698  fix: 8-digit OTP boxes to match Supabase token length
+467f286  feat: OTP signup verification + forgot/reset password flow
+9738569  fix: add Goals & Insights link inside Profile journal tab
+6d806b1  fix: add Insights section label on goals page
 632f938  feat: Goals & Insights page — streak, supplement tracker, calories, custom goals
 ```
 
