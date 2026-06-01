@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import posthog from "posthog-js";
@@ -32,6 +32,9 @@ export default function JournalPage() {
   const [identifying, setIdentifying] = useState(false);
   const [identified, setIdentified] = useState<{ name: string; category: string } | null>(null);
   const [error, setError] = useState("");
+  const [recording, setRecording] = useState(false);
+  const [liveText, setLiveText] = useState("");
+  const recognitionRef = useRef<any>(null);
   const supabase = createClient();
 
   useEffect(() => { loadEntries(); }, []);
@@ -89,6 +92,40 @@ export default function JournalPage() {
     setLoading(false);
   };
 
+  const startMic = () => {
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) { setError("Voice not supported on this browser"); return; }
+    const rec = new SR();
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.lang = "en-US";
+    let finalTranscript = input;
+    rec.onresult = (e: any) => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) { finalTranscript += (finalTranscript ? " " : "") + t.trim(); setInput(finalTranscript); setIdentified(null); }
+        else interim = t;
+      }
+      setLiveText(interim);
+    };
+    rec.onerror = () => { setRecording(false); setLiveText(""); };
+    rec.onend = () => { if (recognitionRef.current) rec.start(); };
+    recognitionRef.current = rec;
+    rec.start();
+    setRecording(true);
+  };
+
+  const stopMic = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.onend = null;
+      recognitionRef.current.stop();
+      recognitionRef.current = null;
+    }
+    setRecording(false);
+    setLiveText("");
+  };
+
   const today = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
 
   return (
@@ -130,15 +167,65 @@ export default function JournalPage() {
           <p style={{ fontSize: 13, color: MUTED, marginBottom: 12, fontWeight: 500 }}>
             Log a medicine, supplement, or drug
           </p>
-          <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+          <div style={{ display: "flex", gap: 8, marginBottom: recording ? 8 : 12 }}>
             <input className="input" placeholder="e.g. vitamin D, metformin, fish oil…"
               value={input} onChange={e => { setInput(e.target.value); setIdentified(null); }}
               style={{ flex: 1 }} />
+            <button onClick={recording ? stopMic : startMic} style={{
+              background: recording ? "rgba(152,170,157,0.15)" : "rgba(255,190,0,0.1)",
+              border: `1px solid ${recording ? GREEN : "rgba(255,190,0,0.3)"}`,
+              borderRadius: 10, padding: "10px 12px", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              flexShrink: 0, position: "relative",
+            }}>
+              {recording ? (
+                <>
+                  <span style={{
+                    position: "absolute", inset: 0, borderRadius: 10,
+                    border: `2px solid ${GREEN}`, animation: "micPulse 1.2s ease-in-out infinite",
+                    opacity: 0.6,
+                  }} />
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill={GREEN} stroke={GREEN} strokeWidth="1.5" strokeLinecap="round">
+                    <rect x="9" y="9" width="6" height="6" rx="1"/>
+                  </svg>
+                </>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={YELLOW} strokeWidth="1.8" strokeLinecap="round">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="23"/>
+                  <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+              )}
+            </button>
             <button onClick={identify} disabled={!input.trim() || identifying}
               className="btn-ghost" style={{ whiteSpace: "nowrap", padding: "10px 14px" }}>
               {identifying ? "…" : "Identify"}
             </button>
           </div>
+
+          {recording && (
+            <div style={{
+              background: "rgba(152,170,157,0.08)", border: `1px solid rgba(152,170,157,0.2)`,
+              borderRadius: 10, padding: "10px 14px", marginBottom: 12,
+              display: "flex", alignItems: "flex-start", gap: 10,
+            }}>
+              <span style={{
+                width: 8, height: 8, borderRadius: "50%", background: GREEN,
+                flexShrink: 0, marginTop: 4, animation: "micPulse 1s ease-in-out infinite",
+                display: "inline-block",
+              }} />
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 11, color: GREEN, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 4 }}>
+                  Recording — tap stop when done
+                </p>
+                <p style={{ fontSize: 14, color: liveText ? "var(--fg)" : MUTED, lineHeight: 1.55, minHeight: 20 }}>
+                  {liveText || (input ? "Listening…" : "Say the supplement, medicine or how you feel…")}
+                </p>
+              </div>
+            </div>
+          )}
+          <style>{`@keyframes micPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.15)} }`}</style>
 
           {identified && (
             <div style={{
