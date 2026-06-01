@@ -7,6 +7,9 @@ import Link from "next/link";
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
 const MUTED  = "#a9a9a7";
+const BG     = "#121212";
+const BG2    = "#1a1a1a";
+const BG3    = "#242424";
 
 interface Post {
   id: string;
@@ -32,26 +35,184 @@ function timeAgo(date: string) {
   return `${Math.floor(h / 24)}d`;
 }
 
+function ShareSheet({ post, onClose }: { post: Post; onClose: () => void }) {
+  const [copied, setCopied] = useState(false);
+  const url = typeof window !== "undefined" ? `${window.location.origin}/post/${post.id}` : "";
+  const initial = post.profiles?.display_name?.[0]?.toUpperCase() || "?";
+
+  const copyLink = async () => {
+    await navigator.clipboard.writeText(url).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const nativeShare = async () => {
+    await navigator.share({
+      title: `${post.profiles?.display_name} on Hanubees`,
+      text: post.content.slice(0, 120),
+      url,
+    }).catch(() => {});
+    onClose();
+  };
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 100,
+        background: "rgba(0,0,0,0.7)", backdropFilter: "blur(6px)",
+        display: "flex", flexDirection: "column", justifyContent: "flex-end",
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: BG2, borderRadius: "24px 24px 0 0",
+          border: "1px solid rgba(234,234,234,0.08)",
+          borderBottom: "none",
+          padding: "12px 16px 40px",
+          animation: "slideUp 0.22s ease",
+        }}
+      >
+        {/* Drag handle */}
+        <div style={{
+          width: 36, height: 4, borderRadius: 2,
+          background: BG3, margin: "0 auto 20px",
+        }} />
+
+        {/* Share card — styled like X/Threads preview */}
+        <div style={{
+          background: BG, border: "1px solid rgba(234,234,234,0.1)",
+          borderRadius: 18, overflow: "hidden", marginBottom: 20,
+        }}>
+          {/* Card header */}
+          <div style={{
+            display: "flex", alignItems: "center", gap: 10,
+            padding: "14px 16px 10px",
+          }}>
+            <div style={{
+              width: 38, height: 38, borderRadius: "50%", background: BG3,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 15, fontWeight: 700, color: "#eaeaea", flexShrink: 0,
+              border: `1.5px solid rgba(255,190,0,0.2)`,
+            }}>
+              {initial}
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, fontSize: 14, color: "#eaeaea",
+                fontFamily: "'Space Grotesk', sans-serif" }}>
+                {post.profiles?.display_name || "Anonymous"}
+              </p>
+              <p style={{ fontSize: 12, color: MUTED, marginTop: 1,
+                fontFamily: "'Space Grotesk', sans-serif" }}>
+                @{post.profiles?.username} · {timeAgo(post.created_at)}
+              </p>
+            </div>
+            <img src="/bee.png" alt="Hanubees"
+              style={{ height: 28, width: "auto", marginLeft: "auto", opacity: 0.85 }} />
+          </div>
+
+          {/* Card content */}
+          <p style={{
+            fontSize: 14, lineHeight: 1.6, color: "#eaeaea",
+            padding: "0 16px 14px", wordBreak: "break-word",
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}>
+            {post.content.length > 200 ? post.content.slice(0, 200) + "…" : post.content}
+          </p>
+
+          {post.tags?.length > 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, padding: "0 16px 14px" }}>
+              {post.tags.slice(0, 4).map(t => (
+                <span key={t} style={{ fontSize: 13, color: GREEN, fontWeight: 500,
+                  fontFamily: "'Space Grotesk', sans-serif" }}>#{t}</span>
+              ))}
+            </div>
+          )}
+
+          {/* Card footer */}
+          <div style={{
+            borderTop: "1px solid rgba(234,234,234,0.06)",
+            padding: "10px 16px",
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+          }}>
+            <span style={{ fontSize: 12, color: MUTED, fontFamily: "'Space Grotesk', sans-serif" }}>
+              hanubees.com
+            </span>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <div style={{
+                width: 6, height: 6, borderRadius: "50%", background: YELLOW,
+              }} />
+              <div style={{
+                width: 6, height: 6, borderRadius: "50%", background: GREEN,
+              }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Action buttons */}
+        <div style={{ display: "flex", gap: 10 }}>
+          <button onClick={copyLink} style={{
+            flex: 1, padding: "13px", borderRadius: 14,
+            background: BG3, border: "1px solid rgba(234,234,234,0.08)",
+            color: copied ? GREEN : "#eaeaea",
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontWeight: 600, fontSize: 14, cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            transition: "color 0.2s",
+          }}>
+            {copied ? (
+              <>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Copied
+              </>
+            ) : (
+              <>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                Copy link
+              </>
+            )}
+          </button>
+
+          {typeof navigator !== "undefined" && "share" in navigator && (
+            <button onClick={nativeShare} style={{
+              flex: 1, padding: "13px", borderRadius: 14,
+              background: YELLOW, border: "none",
+              color: BG,
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontWeight: 700, fontSize: 14, cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              Share
+            </button>
+          )}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes slideUp {
+          from { transform: translateY(100%); }
+          to   { transform: translateY(0); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 export default function PostCard({ post }: { post: Post }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes);
   const [valueUp, setValueUp] = useState(post.value_up);
   const [valueDown, setValueDown] = useState(post.value_down);
   const [voted, setVoted] = useState<"up"|"down"|null>(null);
-  const [shared, setShared] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const supabase = createClient();
-
-  const share = async () => {
-    const url = `${window.location.origin}/post/${post.id}`;
-    const text = post.content.slice(0, 100);
-    if (navigator.share) {
-      await navigator.share({ title: "Hanubees", text, url }).catch(() => {});
-    } else {
-      await navigator.clipboard.writeText(url).catch(() => {});
-      setShared(true);
-      setTimeout(() => setShared(false), 2000);
-    }
-  };
 
   const like = async () => {
     const n = !liked; setLiked(n); setLikes(l => n ? l+1 : l-1);
@@ -70,137 +231,131 @@ export default function PostCard({ post }: { post: Post }) {
   const initial = post.profiles?.display_name?.[0]?.toUpperCase() || "?";
 
   return (
-    <div style={{ padding: "14px 16px 0" }}>
-      <div style={{ display: "flex", gap: 12 }}>
+    <>
+      <div style={{ padding: "14px 16px 0" }}>
+        <div style={{ display: "flex", gap: 12 }}>
 
-        {/* Avatar col */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 42, flexShrink: 0 }}>
-          <div style={{ position: "relative" }}>
-            <div style={{
-              width: 42, height: 42, borderRadius: "50%",
-              background: "var(--bg3)", display: "flex", alignItems: "center",
-              justifyContent: "center", fontSize: 17, fontWeight: 700, color: "var(--fg)",
-            }}>
-              {initial}
-            </div>
-            <div style={{
-              position: "absolute", bottom: -2, right: -2,
-              width: 18, height: 18, borderRadius: "50%",
-              background: YELLOW, display: "flex", alignItems: "center",
-              justifyContent: "center", fontSize: 12, fontWeight: 700,
-              color: "#121212", border: "2px solid var(--bg)", lineHeight: 1,
-              cursor: "pointer",
-            }}>+</div>
-          </div>
-          <div style={{ width: 2, flex: 1, minHeight: 24, background: "var(--bg3)", borderRadius: 2, marginTop: 6 }} />
-        </div>
-
-        {/* Content col */}
-        <div style={{ flex: 1, minWidth: 0, paddingBottom: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 4 }}>
-            <span style={{ fontWeight: 700, fontSize: 15, color: "var(--fg)" }}>
-              {post.profiles?.display_name || "Anonymous"}
-            </span>
-            <span style={{ color: MUTED, fontSize: 13, marginLeft: 8 }}>
-              {timeAgo(post.created_at)}
-            </span>
-            <button style={{
-              marginLeft: "auto", background: "none", border: "none",
-              color: MUTED, cursor: "pointer", fontSize: 20, lineHeight: 1, padding: "0 2px",
-            }}>···</button>
-          </div>
-
-          <Link href={`/post/${post.id}`} style={{ textDecoration: "none" }}>
-            <p style={{ fontSize: 15, lineHeight: 1.6, color: "var(--fg)", marginBottom: post.image_url || post.tags?.length ? 10 : 0, wordBreak: "break-word" }}>
-              {post.content?.length > 320 ? post.content.slice(0, 320) + "…" : post.content}
-            </p>
-            {post.image_url && (
-              <div style={{ borderRadius: 12, overflow: "hidden", marginBottom: 10, border: "1px solid var(--border)" }}>
-                <img src={post.image_url} alt="" style={{ width: "100%", maxHeight: 300, objectFit: "cover", display: "block" }} />
+          {/* Avatar col */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 42, flexShrink: 0 }}>
+            <div style={{ position: "relative" }}>
+              <div style={{
+                width: 42, height: 42, borderRadius: "50%",
+                background: BG3, display: "flex", alignItems: "center",
+                justifyContent: "center", fontSize: 17, fontWeight: 700, color: "#eaeaea",
+              }}>
+                {initial}
               </div>
-            )}
-          </Link>
-
-          {post.tags?.length > 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
-              {post.tags.map(t => (
-                <span key={t} style={{ fontSize: 14, color: GREEN, fontWeight: 500 }}>#{t}</span>
-              ))}
+              <div style={{
+                position: "absolute", bottom: -2, right: -2,
+                width: 18, height: 18, borderRadius: "50%",
+                background: YELLOW, display: "flex", alignItems: "center",
+                justifyContent: "center", fontSize: 12, fontWeight: 700,
+                color: BG, border: `2px solid ${BG}`, lineHeight: 1, cursor: "pointer",
+              }}>+</div>
             </div>
-          )}
+            <div style={{ width: 2, flex: 1, minHeight: 24, background: BG3, borderRadius: 2, marginTop: 6 }} />
+          </div>
 
-          {/* Action row — green palette (bottom half of card) */}
-          <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 10 }}>
+          {/* Content col */}
+          <div style={{ flex: 1, minWidth: 0, paddingBottom: 12 }}>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: 4 }}>
+              <span style={{ fontWeight: 700, fontSize: 15, color: "#eaeaea" }}>
+                {post.profiles?.display_name || "Anonymous"}
+              </span>
+              <span style={{ color: MUTED, fontSize: 13, marginLeft: 8 }}>
+                {timeAgo(post.created_at)}
+              </span>
+              <button style={{
+                marginLeft: "auto", background: "none", border: "none",
+                color: MUTED, cursor: "pointer", fontSize: 20, lineHeight: 1, padding: "0 2px",
+              }}>···</button>
+            </div>
 
-            {/* Like */}
-            <button onClick={like} style={{
-              background: "none", border: "none", cursor: "pointer",
-              display: "flex", alignItems: "center", gap: 6,
-              color: liked ? GREEN : MUTED, padding: 0,
-            }}>
-              <svg width="21" height="21" viewBox="0 0 24 24"
-                fill={liked ? GREEN : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-              {likes > 0 && <span style={{ fontSize: 13, fontWeight: 500 }}>{likes}</span>}
-            </button>
-
-            {/* Comment */}
-            <Link href={`/post/${post.id}`} style={{
-              display: "flex", alignItems: "center", gap: 6,
-              color: MUTED, textDecoration: "none",
-            }}>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
+            <Link href={`/post/${post.id}`} style={{ textDecoration: "none" }}>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: "#eaeaea",
+                marginBottom: post.image_url || post.tags?.length ? 10 : 0, wordBreak: "break-word" }}>
+                {post.content?.length > 320 ? post.content.slice(0, 320) + "…" : post.content}
+              </p>
+              {post.image_url && (
+                <div style={{ borderRadius: 12, overflow: "hidden", marginBottom: 10, border: "1px solid rgba(234,234,234,0.08)" }}>
+                  <img src={post.image_url} alt="" style={{ width: "100%", maxHeight: 300, objectFit: "cover", display: "block" }} />
+                </div>
+              )}
             </Link>
 
-            {/* Value score */}
-            <button onClick={() => vote("up")} style={{
-              background: "none", border: "none", cursor: "pointer",
-              display: "flex", alignItems: "center", gap: 5,
-              color: voted === "up" ? YELLOW : MUTED, padding: 0,
-            }}>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <polyline points="18 15 12 9 6 15"/>
-              </svg>
-              {score !== 0 && (
-                <span style={{ fontSize: 13, fontWeight: 600, color: score > 0 ? YELLOW : MUTED }}>
-                  {Math.abs(score)}
-                </span>
-              )}
-            </button>
+            {post.tags?.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
+                {post.tags.map(t => (
+                  <span key={t} style={{ fontSize: 14, color: GREEN, fontWeight: 500 }}>#{t}</span>
+                ))}
+              </div>
+            )}
 
-            <button onClick={() => vote("down")} style={{
-              background: "none", border: "none", cursor: "pointer",
-              display: "flex", alignItems: "center",
-              color: voted === "down" ? GREEN : MUTED, padding: 0,
-            }}>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </button>
+            {/* Actions */}
+            <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 10 }}>
+              <button onClick={like} style={{
+                background: "none", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", gap: 6,
+                color: liked ? GREEN : MUTED, padding: 0,
+              }}>
+                <svg width="21" height="21" viewBox="0 0 24 24"
+                  fill={liked ? GREEN : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                {likes > 0 && <span style={{ fontSize: 13, fontWeight: 500 }}>{likes}</span>}
+              </button>
 
-            {/* Share */}
-            <button onClick={share} style={{
-              background: "none", border: "none", cursor: "pointer",
-              color: shared ? GREEN : MUTED,
-              display: "flex", alignItems: "center", gap: 5,
-              marginLeft: "auto", padding: 0, transition: "color 0.2s",
-            }}>
-              {shared ? (
-                <span style={{ fontSize: 12, fontWeight: 600 }}>Copied</span>
-              ) : (
+              <Link href={`/post/${post.id}`} style={{
+                display: "flex", alignItems: "center", gap: 6,
+                color: MUTED, textDecoration: "none",
+              }}>
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </Link>
+
+              <button onClick={() => vote("up")} style={{
+                background: "none", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", gap: 5,
+                color: voted === "up" ? YELLOW : MUTED, padding: 0,
+              }}>
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+                {score !== 0 && (
+                  <span style={{ fontSize: 13, fontWeight: 600, color: score > 0 ? YELLOW : MUTED }}>
+                    {Math.abs(score)}
+                  </span>
+                )}
+              </button>
+
+              <button onClick={() => vote("down")} style={{
+                background: "none", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center",
+                color: voted === "down" ? GREEN : MUTED, padding: 0,
+              }}>
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+
+              <button onClick={() => setShareOpen(true)} style={{
+                background: "none", border: "none", cursor: "pointer",
+                color: MUTED, display: "flex", alignItems: "center",
+                marginLeft: "auto", padding: 0,
+              }}>
                 <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
                 </svg>
-              )}
-            </button>
+              </button>
+            </div>
           </div>
         </div>
+
+        <div style={{ height: 1, background: "rgba(234,234,234,0.08)", marginLeft: 54 }} />
       </div>
 
-      <div style={{ height: 1, background: "var(--border)", marginLeft: 54 }} />
-    </div>
+      {shareOpen && <ShareSheet post={post} onClose={() => setShareOpen(false)} />}
+    </>
   );
 }
