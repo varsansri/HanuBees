@@ -1,22 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { streak, totalEntries, period, supplements } = await req.json();
+  const body = await req.json();
+  const { period, periodDays, streak, maxStreak, totalLogs, healthScore,
+    supplements, morning, afternoon, evening, dowCounts, weeklyVol, maxGap } = body;
 
-  const prompt = `You are a health journal analyst. Based on this user's supplement and medicine logging data, write a brief personalized insight.
+  const supLines = supplements.map((s: any) =>
+    `  ${s.name}: ${s.pct}% (${s.days} days logged), trend: ${s.trend}, 14-day sparkline values: [${s.sparkValues.join(",")}], current streak: ${s.supStreak}d, prev period: ${s.prevPct !== null ? s.prevPct + "%" : "n/a"}`
+  ).join("\n");
 
-Data:
-- Logging streak: ${streak} days
-- Total entries (${period}): ${totalEntries}
-- Supplements/medicines: ${supplements.map((s: { name: string; pct: number; trend: string }) => `${s.name} (${s.pct}% consistency, trend: ${s.trend})`).join("; ")}
+  const prompt = `You are generating a health journal insights report. Output ONLY the formatted report — no intro, no explanation, just the report text.
 
-Return ONLY valid JSON, no markdown, no explanation:
-{"narrative":"2-3 sentences specific to their supplements and patterns","watch":["issue 1","issue 2"]}
+USER DATA (${period}, ${periodDays} days):
+Streak: ${streak} days (personal best: ${maxStreak}d)
+Health score: ${healthScore}/100
+Total logs: ${totalLogs}
+Supplements:
+${supLines}
+Time of day — morning: ${morning}, afternoon: ${afternoon}, evening: ${evening} logs
+Day of week (Mon–Sun): ${dowCounts.join(", ")}
+Weekly volume last 8 weeks: ${weeklyVol.join(", ")}
+Longest missed gap: ${maxGap} days
 
-Rules:
-- Mention actual supplement names from their data
-- narrative: 2-3 sentences, personal, data-driven, encouraging but honest
-- watch: only real issues (missed days, declining trend). Max 2 items. Empty array if no issues.`;
+FORMAT RULES (follow exactly):
+- Section headers: uppercase, no decoration (e.g. CONSISTENCY)
+- Dividers: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Consistency bars: use exactly 10 blocks of ▓ (filled) and ░ (empty), then 3 spaces, then %, then trend arrow
+  Example: VITAMIN D      ▓▓▓▓▓▓▓▓▓░   90%  ↑
+- Sparklines: use ▁▂▃▄▅▆▇█ and ░ for zero, exactly 14 chars, based on the spark values provided
+  Example: VITAMIN D      ▁▂▄▆▇█▇▆▅▄▆▇▇█   ↑
+- Watch items start with ·
+- Blank lines between sections
+- Narrative: specific and data-driven, no generic health advice
+- The structure, sections chosen, and emphasis should reflect what is most interesting/notable in this user's actual data
+- Do not include sections that have no data or are not relevant
+- Total: 25–40 lines
+
+Generate the report now:`;
 
   try {
     const res = await fetch(
@@ -26,15 +46,14 @@ Rules:
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 300, temperature: 0.4 },
+          generationConfig: { maxOutputTokens: 800, temperature: 0.7 },
         }),
       }
     );
     const data = await res.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
-    const clean = text.replace(/```json\n?|\n?```/g, "").trim();
-    return NextResponse.json(JSON.parse(clean));
+    return NextResponse.json({ report: text });
   } catch {
-    return NextResponse.json({ narrative: "Keep logging to get personalized insights.", watch: [] });
+    return NextResponse.json({ report: "Could not generate report. Try again." });
   }
 }
