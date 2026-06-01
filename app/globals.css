@@ -10,6 +10,7 @@
   --fg2:     #a9a9a7;
   --fg3:     #3a3a38;
   --yellow:  #ffbe00;
+  --amber:   #ffbe00;
   --green:   #98aa9d;
 }
 
@@ -18,7 +19,7 @@
 html, body {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   height: 100%;
   overflow-x: hidden;
@@ -37,13 +38,13 @@ html, body {
   outline: none;
   transition: border-color 0.2s;
 }
-.input:focus { border-color: rgba(152,170,157,0.5); }
+.input:focus { border-color: rgba(152,170,157,0.45); }
 .input::placeholder { color: var(--fg2); }
 
 /* Buttons */
 .btn-primary {
   background: var(--yellow);
-  color: var(--bg);
+  color: #121212;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -72,15 +73,41 @@ html, body {
 }
 .btn-outline:hover { background: var(--bg2); }
 
-/* Bottom nav */
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--fg2);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.btn-ghost:hover { color: var(--fg); border-color: rgba(234,234,234,0.2); }
+.btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Card */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+/* Font brand */
+.font-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+/* Bottom nav — green bottom accent */
 .bottom-nav {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  background: rgba(18,18,18,0.97);
+  background: rgba(18,18,18,0.98);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(152,170,157,0.15);
-  box-shadow: 0 -1px 0 rgba(152,170,157,0.08), 0 -20px 40px rgba(152,170,157,0.03);
+  border-top: 1px solid rgba(152,170,157,0.18);
+  box-shadow: 0 -1px 0 rgba(152,170,157,0.06), 0 -16px 40px rgba(152,170,157,0.04);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -88,11 +115,20 @@ html, body {
   z-index: 50;
 }
 
-/* Post divider */
-.post-divider {
-  height: 1px;
-  background: var(--border);
+/* Sticky header — yellow top accent */
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(18,18,18,0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,190,0,0.14);
+  box-shadow: 0 1px 0 rgba(255,190,0,0.06);
 }
+
+/* Post divider */
+.post-divider { height: 1px; background: var(--border); }
 
 /* Thread line */
 .thread-line {
@@ -133,14 +169,14 @@ html, body {
 }
 .action-btn:hover { color: var(--green); }
 
-/* Fade animation */
+/* Fade */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.3s ease forwards; }
 
-/* Tab */
+/* Tab — yellow active */
 .tab-active {
   color: var(--yellow) !important;
   border-bottom: 2px solid var(--yellow) !important;
@@ -158,3 +194,9 @@ html, body {
   font-family: 'Space Grotesk', sans-serif;
   transition: all 0.15s;
 }
+
+/* Flex utilities used in journal/profile */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.gap-2 { gap: 8px; }
+.mb-3 { margin-bottom: 12px; }
