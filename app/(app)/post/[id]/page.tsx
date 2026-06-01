@@ -7,14 +7,33 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const supabase = await createClient();
   const { data: post } = await supabase
     .from("posts")
-    .select("content, post_type, profiles(username)")
+    .select("content, post_type, profiles(username, display_name)")
     .eq("id", id)
     .single();
 
   if (!post) return { title: "Post — Hanubees" };
+
+  const profiles = post.profiles as unknown as { username: string; display_name: string };
+  const title = `${profiles?.display_name || "Someone"} on Hanubees`;
+  const description = (post.content as string).slice(0, 160);
+  const ogImage = `/api/og?id=${id}`;
+
   return {
-    title: `${(post.content as string).slice(0, 60)}... — Hanubees`,
-    description: (post.content as string).slice(0, 160),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+      siteName: "Hanubees",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 

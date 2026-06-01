@@ -25,7 +25,10 @@ export async function updateSession(request: NextRequest) {
 
   const isAuthPage = request.nextUrl.pathname.startsWith("/login") ||
     request.nextUrl.pathname.startsWith("/signup");
-  const isPublicPage = request.nextUrl.pathname === "/";
+  const isPublicPage =
+    request.nextUrl.pathname === "/" ||
+    request.nextUrl.pathname.startsWith("/post/") ||
+    request.nextUrl.pathname.startsWith("/api/");
 
   if (!user && !isAuthPage && !isPublicPage) {
     return NextResponse.redirect(new URL("/login", request.url));
