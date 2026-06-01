@@ -20,7 +20,7 @@ export default async function FeedPage() {
         padding: "14px 16px 0",
       }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
-          <img src="/logo.svg" alt="Hanubees" style={{ height: 32, width: "auto" }} />
+          <img src="/logo.png" alt="Hanubees" style={{ height: 36, width: "auto", borderRadius: 8 }} />
         </div>
         {/* Feed tabs */}
         <div style={{ display: "flex" }}>

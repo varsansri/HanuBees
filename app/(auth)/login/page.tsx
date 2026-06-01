@@ -30,7 +30,7 @@ export default function LoginPage() {
       <div style={{ width: "100%", maxWidth: 360 }}>
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <img src="/logo.svg" alt="Hanubees" style={{ width: 100, height: 100, margin: "0 auto 8px", display: "block" }} />
+          <img src="/logo.png" alt="Hanubees" style={{ width: 120, height: 120, margin: "0 auto 8px", display: "block", borderRadius: 24 }} />
           <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 4 }}>
             Your health journey, shared.
           </p>
