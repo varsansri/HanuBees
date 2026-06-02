@@ -17,6 +17,7 @@ interface KnowledgeEntry {
   title: string;
   channel_name: string;
   platform: string;
+  avatar_url: string;
   key_points: string[];
   transcript: string;
   summary: string;
@@ -36,15 +37,25 @@ function timeAgo(date: string) {
 function PlatformIcon({ platform }: { platform: string }) {
   if (platform === "instagram") {
     return (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+        stroke="url(#ig)" style={{ display: "block" }}>
+        <defs>
+          <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#f09433"/>
+            <stop offset="25%" stopColor="#e6683c"/>
+            <stop offset="50%" stopColor="#dc2743"/>
+            <stop offset="75%" stopColor="#cc2366"/>
+            <stop offset="100%" stopColor="#bc1888"/>
+          </linearGradient>
+        </defs>
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
         <circle cx="12" cy="12" r="4"/>
-        <circle cx="17.5" cy="6.5" r="0.5" fill={MUTED}/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="#cc2366" stroke="none"/>
       </svg>
     );
   }
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill={MUTED}>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="#ff4444">
       <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 3 12 3 12 3s-4.2 0-6.8.3c-.6.1-1.9.1-3 1.3C1.3 5.4 1 7.4 1 7.4S.7 9.6.7 11.8v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22.5 12 22.5 12 22.5s4.2 0 6.8-.3c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.6 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z"/>
     </svg>
   );
@@ -129,15 +140,19 @@ export default function KnowledgePage() {
             }}>
               {/* Source line — like a tweet header */}
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-                {/* Avatar placeholder */}
+                {/* Avatar */}
                 <div style={{
                   width: 34, height: 34, borderRadius: "50%",
                   background: BG3,
                   border: "1px solid rgba(234,234,234,0.08)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0,
+                  flexShrink: 0, overflow: "hidden",
                 }}>
-                  <PlatformIcon platform={entry.platform} />
+                  {entry.platform === "youtube" && entry.avatar_url ? (
+                    <img src={entry.avatar_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  ) : (
+                    <PlatformIcon platform={entry.platform} />
+                  )}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ fontSize: 13, fontWeight: 700, color: FG, margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>

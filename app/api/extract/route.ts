@@ -31,6 +31,9 @@ async function fetchYouTube(videoId: string) {
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
   const channelName = html.match(/"ownerChannelName":"([^"]+)"/)?.[1]
     ?? html.match(/"author":"([^"]+)"/)?.[1] ?? "";
+  const avatarUrl = html.match(/channelThumbnailWithLinkRenderer[^}]{0,300}"url":"(https:\/\/yt[^"]+)"/)?.[1]
+    ?? html.match(/"avatar":\{"thumbnails":\[\{"url":"(https:\/\/yt[^"]+)"/)?.[1]
+    ?? "";
 
   let transcript = "";
   try {
@@ -51,7 +54,7 @@ async function fetchYouTube(videoId: string) {
     }
   } catch {}
 
-  return { title, description, channelName, transcript, platform: "youtube" };
+  return { title, description, channelName, avatarUrl, transcript, platform: "youtube" };
 }
 
 // ── Instagram ────────────────────────────────────────────────────────────────
@@ -218,6 +221,7 @@ export async function POST(req: NextRequest) {
       title: meta.title,
       channelName: meta.channelName,
       platform: meta.platform,
+      avatarUrl: meta.avatarUrl ?? "",
       transcript: meta.transcript || meta.description,
       keyPoints,
       summary,

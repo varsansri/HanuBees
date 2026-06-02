@@ -95,6 +95,7 @@ export default function BeeCollectButton() {
       title:        extracted.title,
       channel_name: extracted.channelName,
       platform:     extracted.platform,
+      avatar_url:   extracted.avatarUrl ?? "",
       key_points:   extracted.keyPoints,
       transcript:   extracted.transcript ?? "",
       summary:      extracted.summary ?? "",
