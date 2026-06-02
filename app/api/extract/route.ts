@@ -135,8 +135,8 @@ async function fetchInstagram(url: string) {
   };
 }
 
-// ── Gemini helpers ────────────────────────────────────────────────────────────
-async function gemini(prompt: string, maxTokens = 600): Promise<string> {
+// ── Gemini ────────────────────────────────────────────────────────────────────
+async function geminiCall(prompt: string, maxTokens = 600): Promise<{ text: string; error?: string }> {
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
     {
@@ -149,40 +149,37 @@ async function gemini(prompt: string, maxTokens = 600): Promise<string> {
     }
   );
   const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+  if (!res.ok) return { text: "", error: data?.error?.message ?? `Gemini HTTP ${res.status}` };
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+  return { text };
 }
 
-async function extractKeyPoints(title: string, content: string, channelName: string, platform: string): Promise<string[]> {
-  const source = content.slice(0, 6000) || title;
-  const prompt = `Extract 6-10 key insights from this ${platform} content. Specific and concise. Return ONLY a JSON array of strings, no other text.
+async function generateSummaryAndPoints(title: string, content: string, channelName: string, platform: string) {
+  const source = (content || title).slice(0, 8000);
+
+  const prompt = `You are summarizing a ${platform} video for a knowledge base card.
 
 Creator: ${channelName}
 Title: ${title}
-Content: ${source}
+Transcript/Content: ${source}
 
-Output: ["insight 1", "insight 2", ...]`;
+Return ONLY valid JSON in this exact format, nothing else:
+{
+  "summary": "3-4 sentence plain text summary covering what this is about, the main argument, and the key takeaway",
+  "points": ["concise insight 1", "concise insight 2", "concise insight 3", "concise insight 4", "concise insight 5"]
+}`;
+
+  const { text, error } = await geminiCall(prompt, 800);
+  if (error) console.error("Gemini error:", error);
 
   try {
-    const text = await gemini(prompt, 600);
     const parsed = JSON.parse(text.replace(/```json\n?|\n?```/g, "").trim());
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : [title];
+    return {
+      summary: parsed.summary || "",
+      keyPoints: Array.isArray(parsed.points) ? parsed.points : [],
+    };
   } catch {
-    return [title || "Content saved"];
-  }
-}
-
-async function generateSummary(title: string, content: string, channelName: string, platform: string): Promise<string> {
-  const source = content.slice(0, 8000) || title;
-  const prompt = `Write a concise 3-4 sentence summary of this ${platform} content. Cover the main topic, key argument, and the main takeaway. Plain text only, no bullet points, no headers.
-
-Creator: ${channelName}
-Title: ${title}
-Content: ${source}`;
-
-  try {
-    return await gemini(prompt, 300);
-  } catch {
-    return "";
+    return { summary: "", keyPoints: [] };
   }
 }
 
@@ -211,10 +208,15 @@ export async function POST(req: NextRequest) {
     }
 
     const content = meta.transcript || meta.description;
-    const [keyPoints, summary] = await Promise.all([
-      extractKeyPoints(meta.title, content, meta.channelName, meta.platform),
-      generateSummary(meta.title, content, meta.channelName, meta.platform),
-    ]);
+    if (!content) {
+      return NextResponse.json({ error: "Could not get any content from this link" }, { status: 400 });
+    }
+
+    const { summary, keyPoints } = await generateSummaryAndPoints(meta.title, content, meta.channelName, meta.platform);
+
+    if (!summary) {
+      return NextResponse.json({ error: "AI processing failed — check GEMINI_API_KEY or try again" }, { status: 500 });
+    }
 
     return NextResponse.json({
       url,
@@ -222,10 +224,9 @@ export async function POST(req: NextRequest) {
       channelName: meta.channelName,
       platform: meta.platform,
       avatarUrl: meta.avatarUrl ?? "",
-      transcript: meta.transcript || meta.description,
+      transcript: content,
       keyPoints,
       summary,
-      hasTranscript: !!meta.transcript,
     });
 
   } catch (e: any) {
