@@ -52,7 +52,14 @@ export default function PostDetail({ post, comments: initial }: { post: Post; co
   const supabase = createClient();
   const router = useRouter();
 
+  const requireAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { router.push("/login"); return false; }
+    return true;
+  };
+
   const vote = async (type: "up"|"down") => {
+    if (!await requireAuth()) return;
     if (voted === type) return;
     const nu = type === "up" ? valueUp+1 : valueUp;
     const nd = type === "down" ? valueDown+1 : valueDown;
@@ -60,7 +67,8 @@ export default function PostDetail({ post, comments: initial }: { post: Post; co
     await supabase.from("posts").update({ value_up: nu, value_down: nd }).eq("id", post.id);
   };
 
-  const like = () => {
+  const like = async () => {
+    if (!await requireAuth()) return;
     setLiked(l => !l);
     setLikes(l => liked ? l-1 : l+1);
   };

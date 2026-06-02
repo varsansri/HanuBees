@@ -51,7 +51,7 @@ export default async function FeedPage() {
       </div>
 
       {/* Create post row */}
-      <Link href="/post/new" style={{ textDecoration: "none", display: "block" }}>
+      <Link href={user ? "/post/new" : "/signup"} style={{ textDecoration: "none", display: "block" }}>
         <div style={{
           display: "flex", alignItems: "center", gap: 12,
           padding: "13px 16px", borderBottom: "1px solid var(--border)",
@@ -66,7 +66,7 @@ export default async function FeedPage() {
             {initial}
           </div>
           <span style={{ color: "var(--fg2)", fontSize: 15 }}>
-            What&apos;s your health journey today?
+            {user ? "What's your health journey today?" : "Join to share your health journey"}
           </span>
           <button style={{
             marginLeft: "auto", flexShrink: 0,
@@ -76,7 +76,7 @@ export default async function FeedPage() {
             padding: "7px 16px", cursor: "pointer",
             fontFamily: "'Space Grotesk', sans-serif",
             letterSpacing: "0.01em",
-          }}>Post</button>
+          }}>{user ? "Post" : "Join"}</button>
         </div>
       </Link>
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import posthog from "posthog-js";
+import { useRouter } from "next/navigation";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -212,8 +213,16 @@ export default function PostCard({ post }: { post: Post }) {
   const [voted, setVoted]     = useState<"up"|"down"|null>(null);
   const [shareOpen, setShareOpen] = useState(false);
   const supabase = createClient();
+  const router = useRouter();
+
+  const requireAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { router.push("/login"); return false; }
+    return true;
+  };
 
   const like = async () => {
+    if (!await requireAuth()) return;
     const n = !liked; setLiked(n); setLikes(l => n ? l+1 : l-1);
     await supabase.from("posts").update({ likes: n ? likes+1 : likes-1 }).eq("id", post.id);
     if (n) {
@@ -223,6 +232,7 @@ export default function PostCard({ post }: { post: Post }) {
   };
 
   const vote = async (type: "up"|"down") => {
+    if (!await requireAuth()) return;
     if (voted === type) return;
     const nu = type==="up" ? valueUp+1 : valueUp;
     const nd = type==="down" ? valueDown+1 : valueDown;

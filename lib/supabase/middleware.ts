@@ -29,6 +29,8 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/reset-password");
   const isPublicPage =
     request.nextUrl.pathname === "/" ||
+    request.nextUrl.pathname === "/feed" ||
+    request.nextUrl.pathname === "/search" ||
     request.nextUrl.pathname.startsWith("/post/") ||
     request.nextUrl.pathname.startsWith("/api/") ||
     request.nextUrl.pathname.startsWith("/profile/") ||
