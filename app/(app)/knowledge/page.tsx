@@ -19,6 +19,8 @@ interface KnowledgeEntry {
   channel_name: string;
   platform: string;
   key_points: string[];
+  transcript: string;
+  summary: string;
   created_at: string;
 }
 
@@ -143,9 +145,22 @@ export default function KnowledgePage() {
                     </svg>
                   </button>
 
-                  {/* Expanded key points */}
+                  {/* Expanded content */}
                   {isOpen && (
                     <div style={{ padding: "0 16px 16px", borderTop: "1px solid rgba(234,234,234,0.06)" }}>
+
+                      {/* AI Summary */}
+                      {entry.summary ? (
+                        <>
+                          <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", margin: "12px 0 8px" }}>
+                            Summary
+                          </p>
+                          <p style={{ fontSize: 13, color: FG, lineHeight: 1.7, marginBottom: 14 }}>
+                            {entry.summary}
+                          </p>
+                        </>
+                      ) : null}
+
                       <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", margin: "12px 0 10px" }}>
                         Key Points
                       </p>

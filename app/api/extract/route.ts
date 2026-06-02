@@ -132,7 +132,23 @@ async function fetchInstagram(url: string) {
   };
 }
 
-// ── Gemini key points ────────────────────────────────────────────────────────
+// ── Gemini helpers ────────────────────────────────────────────────────────────
+async function gemini(prompt: string, maxTokens = 600): Promise<string> {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens: maxTokens, temperature: 0.2 },
+      }),
+    }
+  );
+  const data = await res.json();
+  return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+}
+
 async function extractKeyPoints(title: string, content: string, channelName: string, platform: string): Promise<string[]> {
   const source = content.slice(0, 6000) || title;
   const prompt = `Extract 6-10 key insights from this ${platform} content. Specific and concise. Return ONLY a JSON array of strings, no other text.
@@ -144,23 +160,26 @@ Content: ${source}
 Output: ["insight 1", "insight 2", ...]`;
 
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 600, temperature: 0.2 },
-        }),
-      }
-    );
-    const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "[]";
+    const text = await gemini(prompt, 600);
     const parsed = JSON.parse(text.replace(/```json\n?|\n?```/g, "").trim());
     return Array.isArray(parsed) && parsed.length > 0 ? parsed : [title];
   } catch {
     return [title || "Content saved"];
+  }
+}
+
+async function generateSummary(title: string, content: string, channelName: string, platform: string): Promise<string> {
+  const source = content.slice(0, 8000) || title;
+  const prompt = `Write a concise 3-4 sentence summary of this ${platform} content. Cover the main topic, key argument, and the main takeaway. Plain text only, no bullet points, no headers.
+
+Creator: ${channelName}
+Title: ${title}
+Content: ${source}`;
+
+  try {
+    return await gemini(prompt, 300);
+  } catch {
+    return "";
   }
 }
 
@@ -189,14 +208,19 @@ export async function POST(req: NextRequest) {
     }
 
     const content = meta.transcript || meta.description;
-    const keyPoints = await extractKeyPoints(meta.title, content, meta.channelName, meta.platform);
+    const [keyPoints, summary] = await Promise.all([
+      extractKeyPoints(meta.title, content, meta.channelName, meta.platform),
+      generateSummary(meta.title, content, meta.channelName, meta.platform),
+    ]);
 
     return NextResponse.json({
       url,
       title: meta.title,
       channelName: meta.channelName,
       platform: meta.platform,
+      transcript: meta.transcript || meta.description,
       keyPoints,
+      summary,
       hasTranscript: !!meta.transcript,
     });
 

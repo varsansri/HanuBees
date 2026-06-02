@@ -96,6 +96,8 @@ export default function BeeCollectButton() {
       channel_name: extracted.channelName,
       platform:     extracted.platform,
       key_points:   extracted.keyPoints,
+      transcript:   extracted.transcript ?? "",
+      summary:      extracted.summary ?? "",
     });
 
     if (error) {
