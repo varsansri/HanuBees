@@ -6,7 +6,6 @@ const HEADERS = {
   "Accept-Language": "en-US,en;q=0.9",
 };
 
-// ── Platform detection ──────────────────────────────────────────────────────
 function detectPlatform(url: string): "youtube" | "instagram" | "unknown" {
   if (url.includes("youtube.com") || url.includes("youtu.be")) return "youtube";
   if (url.includes("instagram.com") || url.includes("instagr.am")) return "instagram";
@@ -55,49 +54,88 @@ async function fetchYouTube(videoId: string) {
   return { title, description, channelName, transcript, platform: "youtube" };
 }
 
-// ── Instagram ───────────────────────────────────────────────────────────────
+// ── Instagram ────────────────────────────────────────────────────────────────
 async function fetchInstagram(url: string) {
-  // Try the page directly
   const res = await fetch(url, { headers: HEADERS });
   const html = await res.text();
 
   const ogTitle       = html.match(/<meta property="og:title" content="([^"]+)"/)?.[1] ?? "";
   const ogDescription = html.match(/<meta property="og:description" content="([^"]+)"/)?.[1] ?? "";
 
-  // Extract username from URL (e.g. /reel/ /p/ posts don't have user in path, reels might)
+  // Video URL from og:video tags
+  const videoUrl = html.match(/<meta property="og:video:secure_url" content="([^"]+)"/)?.[1]
+    ?? html.match(/<meta property="og:video" content="([^"]+)"/)?.[1] ?? "";
+
+  // Creator name
   const usernameFromUrl = url.match(/instagram\.com\/([^/?]+)\//)?.[1];
   const skipWords = ["p", "reel", "tv", "stories", "explore"];
   const urlUsername = usernameFromUrl && !skipWords.includes(usernameFromUrl) ? usernameFromUrl : "";
+  const titleUsername = ogTitle.match(/^(.+?)\s+(?:on Instagram|•)/i)?.[1] ?? "";
+  const channelName = urlUsername || titleUsername || "Instagram Creator";
 
-  // Try extracting from og:title — format is often "Username on Instagram: ..."
-  const titleUsernameMatch = ogTitle.match(/^(.+?)\s+(?:on Instagram|•)/i);
-  const channelName = urlUsername || titleUsernameMatch?.[1] || "Instagram Creator";
+  const isBlocked = html.includes("Log in to Instagram") || html.includes("login_required");
 
-  // Caption is usually in og:description
-  const caption = ogDescription
-    .replace(/^.+?:\s*"?/, "")  // strip "Username: " prefix
-    .replace(/"$/, "")
-    .trim();
+  let transcript = "";
 
-  // If page was blocked (login wall), html will mention login
-  const isBlocked = html.includes("Log in to Instagram") || html.includes("login_required") || caption.length < 5;
+  // Try to download video and transcribe with Gemini
+  if (videoUrl && !isBlocked) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+
+      const videoRes = await fetch(videoUrl, {
+        headers: { ...HEADERS, "Range": "bytes=0-15728639" }, // max 15MB
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+
+      if (videoRes.ok || videoRes.status === 206) {
+        const buffer = await videoRes.arrayBuffer();
+        const base64 = Buffer.from(buffer).toString("base64");
+        const mimeType = videoRes.headers.get("content-type")?.split(";")[0] || "video/mp4";
+
+        // Send to Gemini for transcription
+        const geminiRes = await fetch(
+          `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [{
+                parts: [
+                  { text: "Transcribe all spoken words in this video exactly as said. Return only the transcription, no intro text." },
+                  { inline_data: { mime_type: mimeType, data: base64 } },
+                ],
+              }],
+              generationConfig: { maxOutputTokens: 2048 },
+            }),
+          }
+        );
+        const geminiData = await geminiRes.json();
+        const transcribed = geminiData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+        if (transcribed) transcript = transcribed;
+      }
+    } catch {}
+  }
+
+  // Fall back to caption text if transcription failed
+  const caption = ogDescription.replace(/^.+?:\s*"?/, "").replace(/"$/, "").trim();
 
   return {
-    title: ogTitle || url,
+    title: ogTitle,
     description: caption,
     channelName,
-    transcript: isBlocked ? "" : caption,
+    transcript: transcript || caption,
     platform: "instagram",
     isBlocked,
+    usedTranscript: !!transcript,
   };
 }
 
-// ── Gemini key points extraction ────────────────────────────────────────────
-async function extractKeyPoints(
-  title: string, content: string, channelName: string, platform: string
-): Promise<string[]> {
+// ── Gemini key points ────────────────────────────────────────────────────────
+async function extractKeyPoints(title: string, content: string, channelName: string, platform: string): Promise<string[]> {
   const source = content.slice(0, 6000) || title;
-  const prompt = `Extract 5-8 key insights from this ${platform} content. Specific and concise. Return ONLY a JSON array of strings, no other text.
+  const prompt = `Extract 6-10 key insights from this ${platform} content. Specific and concise. Return ONLY a JSON array of strings, no other text.
 
 Creator: ${channelName}
 Title: ${title}
@@ -119,27 +157,25 @@ Output: ["insight 1", "insight 2", ...]`;
     );
     const data = await res.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "[]";
-    const clean = text.replace(/```json\n?|\n?```/g, "").trim();
-    const parsed = JSON.parse(clean);
+    const parsed = JSON.parse(text.replace(/```json\n?|\n?```/g, "").trim());
     return Array.isArray(parsed) && parsed.length > 0 ? parsed : [title];
   } catch {
     return [title || "Content saved"];
   }
 }
 
-// ── Main handler ─────────────────────────────────────────────────────────────
+// ── Main ─────────────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   const { url } = await req.json();
   if (!url?.trim()) return NextResponse.json({ error: "No URL provided" }, { status: 400 });
 
   const platform = detectPlatform(url);
-
   if (platform === "unknown") {
     return NextResponse.json({ error: "Paste a YouTube or Instagram link" }, { status: 400 });
   }
 
   try {
-    let meta: { title: string; description: string; channelName: string; transcript: string; platform: string; isBlocked?: boolean };
+    let meta: any;
 
     if (platform === "youtube") {
       const videoId = extractYouTubeId(url);
@@ -147,16 +183,12 @@ export async function POST(req: NextRequest) {
       meta = await fetchYouTube(videoId);
     } else {
       meta = await fetchInstagram(url);
+      if (meta.isBlocked && !meta.transcript) {
+        return NextResponse.json({ error: "This Instagram post requires login. Try a public reel." }, { status: 400 });
+      }
     }
 
     const content = meta.transcript || meta.description;
-
-    if (!content && meta.isBlocked) {
-      return NextResponse.json({
-        error: "Instagram requires login to view this post. Try a public post or reel.",
-      }, { status: 400 });
-    }
-
     const keyPoints = await extractKeyPoints(meta.title, content, meta.channelName, meta.platform);
 
     return NextResponse.json({
