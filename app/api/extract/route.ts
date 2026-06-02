@@ -62,76 +62,27 @@ async function fetchInstagram(url: string) {
   const res = await fetch(url, { headers: HEADERS });
   const html = await res.text();
 
+  const isBlocked = html.includes("Log in to Instagram") || html.includes("login_required") || html.includes("LoginAndSignupPage");
+
   const ogTitle       = html.match(/<meta property="og:title" content="([^"]+)"/)?.[1] ?? "";
   const ogDescription = html.match(/<meta property="og:description" content="([^"]+)"/)?.[1] ?? "";
 
-  // Video URL from og:video tags
-  const videoUrl = html.match(/<meta property="og:video:secure_url" content="([^"]+)"/)?.[1]
-    ?? html.match(/<meta property="og:video" content="([^"]+)"/)?.[1] ?? "";
-
-  // Creator name
   const usernameFromUrl = url.match(/instagram\.com\/([^/?]+)\//)?.[1];
   const skipWords = ["p", "reel", "tv", "stories", "explore"];
   const urlUsername = usernameFromUrl && !skipWords.includes(usernameFromUrl) ? usernameFromUrl : "";
   const titleUsername = ogTitle.match(/^(.+?)\s+(?:on Instagram|•)/i)?.[1] ?? "";
-  const channelName = urlUsername || titleUsername || "Instagram Creator";
+  const channelName = urlUsername || titleUsername || "Instagram";
 
-  const isBlocked = html.includes("Log in to Instagram") || html.includes("login_required");
-
-  let transcript = "";
-
-  // Try to download video and transcribe with Gemini
-  if (videoUrl && !isBlocked) {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 12000);
-
-      const videoRes = await fetch(videoUrl, {
-        headers: { ...HEADERS, "Range": "bytes=0-15728639" }, // max 15MB
-        signal: controller.signal,
-      });
-      clearTimeout(timeout);
-
-      if (videoRes.ok || videoRes.status === 206) {
-        const buffer = await videoRes.arrayBuffer();
-        const base64 = Buffer.from(buffer).toString("base64");
-        const mimeType = videoRes.headers.get("content-type")?.split(";")[0] || "video/mp4";
-
-        // Send to Gemini for transcription
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [{
-                parts: [
-                  { text: "Transcribe all spoken words in this video exactly as said. Return only the transcription, no intro text." },
-                  { inline_data: { mime_type: mimeType, data: base64 } },
-                ],
-              }],
-              generationConfig: { maxOutputTokens: 2048 },
-            }),
-          }
-        );
-        const geminiData = await geminiRes.json();
-        const transcribed = geminiData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
-        if (transcribed) transcript = transcribed;
-      }
-    } catch {}
-  }
-
-  // Fall back to caption text if transcription failed
   const caption = ogDescription.replace(/^.+?:\s*"?/, "").replace(/"$/, "").trim();
 
   return {
-    title: ogTitle,
+    title: ogTitle || `Instagram post by ${channelName}`,
     description: caption,
     channelName,
-    transcript: transcript || caption,
+    transcript: caption,
     platform: "instagram",
     isBlocked,
-    usedTranscript: !!transcript,
+    avatarUrl: "",
   };
 }
 
@@ -207,8 +158,8 @@ export async function POST(req: NextRequest) {
       meta = await fetchYouTube(videoId);
     } else {
       meta = await fetchInstagram(url);
-      if (meta.isBlocked && !meta.transcript) {
-        return NextResponse.json({ error: "This Instagram post requires login. Try a public reel." }, { status: 400 });
+      if (meta.isBlocked || !meta.transcript) {
+        return NextResponse.json({ error: "Instagram blocked this request. Only public posts with captions work — try a different public reel." }, { status: 400 });
       }
     }
 
