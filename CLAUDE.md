@@ -255,6 +255,35 @@ const isPublicPage =
 - Profile page: stats, posts tab, journal tab
 - Bottom navigation (4 tabs)
 
+### Session 3 — 2 June 2026
+- **Knowledge Base** (`/knowledge`) — 5th tab in bottom nav (book icon)
+- **Bee Collect Button** — tap bee to collect any YouTube link from clipboard
+  - Reads clipboard → detects YouTube/Instagram URL → calls `/api/extract`
+  - Shows loading ring on bee, toast with preview on success
+- **`/api/extract`** — full pipeline:
+  - YouTube: scrapes title, channel name, channel avatar URL, captions transcript
+  - Instagram: scrapes og:title + og:description (blocked by login wall on most posts)
+  - AI: single Cerebras call → returns `summary` (3-4 sentences) + `keyPoints` (5 bullets) as JSON
+  - Stores full `transcript`, `summary`, `key_points[]`, `avatar_url` in `knowledge_entries`
+- **Knowledge cards** — Twitter-style link preview cards:
+  - Avatar circle: real YouTube channel photo, Instagram gradient logo for IG
+  - Channel name + platform + timestamp
+  - AI summary as main card text (always visible, no expand)
+  - Key point bullets below summary
+  - "Watch on YouTube" / "View on Instagram" link + delete button
+- **AI provider history** (lots of failures — read before changing):
+  - Gemini: GEMINI_API_KEY had `limit: 0` on all models (Google Cloud project issue, not AI Studio key)
+  - `gemini-1.5-flash` dropped from v1 endpoint, only on v1beta
+  - Groq: failed (user tested, didn't work)
+  - OpenRouter: broken for user
+  - Cloudflare Workers AI: too slow
+  - **Current: Cerebras** — `CEREBRAS_API_KEY` in Vercel, model `gpt-oss-120b`, endpoint `https://api.cerebras.ai/v1/chat/completions`
+- **Supabase `knowledge_entries` table** — new columns added this session:
+  - `transcript TEXT` — full scraped transcript/caption
+  - `summary TEXT` — AI-generated 3-4 sentence summary
+  - `avatar_url TEXT DEFAULT ''` — YouTube channel avatar URL
+- **Instagram status**: fully blocked by Instagram's login wall server-side. og tags not served. Only caption text works for some older public posts. Video transcription removed. Clear error shown to user.
+
 ### Session 2 — 1 June 2026
 - Real pixel bee logo (transparent bg extracted with Pillow)
 - Threads-accurate feed redesign (center logo, create prompt, follow+ badge)
@@ -307,7 +336,8 @@ NEXT_PUBLIC_SUPABASE_URL=<get from Supabase → Settings → API>
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<get from Supabase → Settings → API>
 NEXT_PUBLIC_POSTHOG_KEY=phc_pnLuYMGWkCWHS9SiwWbYDRdT2bnUbCP6SKfD3NAGKYni
 NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
-GEMINI_API_KEY=<get from Google AI Studio>
+GEMINI_API_KEY=<NOT USED — kept in Vercel but broken, limit:0 on all models>
+CEREBRAS_API_KEY=<active — from cloud.cerebras.ai, model: gpt-oss-120b>
 ```
 
 ---
@@ -321,6 +351,16 @@ GEMINI_API_KEY=<get from Google AI Studio>
 
 ## All Git Commits
 ```
+780e903  fix: remove dead Gemini transcription from Instagram, clear blocked error
+7deba5a  fix: use gpt-oss-120b model on Cerebras
+5866fd2  feat: switch to Cerebras llama-3.3-70b for summaries
+9ec1414  feat: YouTube channel avatar on knowledge cards, Instagram logo icon
+005f0c6  redesign: knowledge cards as simple tweet-style previews
+7cb111c  feat: store full transcript + AI summary in knowledge base
+7670d63  fix: all Gemini calls → v1/gemini-1.5-flash (flash-lite has no free tier)
+37f4bfc  feat: Instagram video transcription via Gemini multimodal
+1142e7a  feat: Instagram support in bee collect — YouTube + Instagram both work
+10d8a86  feat: bee collect button + knowledge base
 52789c4  fix: use trigger for profile creation, pass username in metadata
 3f20ef1  feat: post detail page with comments, search page with tag filters
 32af312  feat: add profile page with stats, posts, sign out
