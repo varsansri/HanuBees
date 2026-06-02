@@ -146,7 +146,7 @@ async function geminiCall(prompt: string, maxTokens = 600): Promise<{ text: stri
         "Authorization": `Bearer ${process.env.CEREBRAS_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b",
+        model: "llama3.1-8b",
         messages: [{ role: "user", content: prompt }],
         max_tokens: maxTokens,
         temperature: 0.2,
