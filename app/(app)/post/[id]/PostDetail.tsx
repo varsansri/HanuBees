@@ -53,8 +53,8 @@ export default function PostDetail({ post, comments: initial }: { post: Post; co
   const router = useRouter();
 
   const requireAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push("/login"); return false; }
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) { router.push("/login"); return false; }
     return true;
   };
 

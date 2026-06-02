@@ -25,6 +25,7 @@ export default function LoginPage() {
     if (error) { setError(error.message); setLoading(false); return; }
     posthog.capture("user_logged_in");
     (window as any).umami?.track("login");
+    router.refresh();
     router.push("/feed");
   };
 

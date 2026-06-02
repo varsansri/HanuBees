@@ -65,6 +65,7 @@ export default function SignupPage() {
     }
     posthog.capture("user_signed_up");
     (window as any).umami?.track("signup");
+    router.refresh();
     router.push("/feed");
   };
 
