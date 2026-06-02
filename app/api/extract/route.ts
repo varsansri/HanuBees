@@ -170,16 +170,16 @@ Return ONLY valid JSON in this exact format, nothing else:
 }`;
 
   const { text, error } = await geminiCall(prompt, 800);
-  if (error) console.error("Gemini error:", error);
 
   try {
     const parsed = JSON.parse(text.replace(/```json\n?|\n?```/g, "").trim());
     return {
       summary: parsed.summary || "",
       keyPoints: Array.isArray(parsed.points) ? parsed.points : [],
+      geminiError: error,
     };
   } catch {
-    return { summary: "", keyPoints: [] };
+    return { summary: "", keyPoints: [], geminiError: error || "JSON parse failed. Raw: " + text.slice(0, 200) };
   }
 }
 
@@ -212,10 +212,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Could not get any content from this link" }, { status: 400 });
     }
 
-    const { summary, keyPoints } = await generateSummaryAndPoints(meta.title, content, meta.channelName, meta.platform);
+    const { summary, keyPoints, geminiError } = await generateSummaryAndPoints(meta.title, content, meta.channelName, meta.platform);
 
     if (!summary) {
-      return NextResponse.json({ error: "AI processing failed — check GEMINI_API_KEY or try again" }, { status: 500 });
+      return NextResponse.json({ error: "AI failed: " + (geminiError || "empty response") }, { status: 500 });
     }
 
     return NextResponse.json({
