@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-import Link from "next/link";
 import AppHeader from "@/components/ui/AppHeader";
 
 const YELLOW = "#ffbe00";
@@ -34,11 +33,27 @@ function timeAgo(date: string) {
   return `${Math.floor(h / 24)}d ago`;
 }
 
+function PlatformIcon({ platform }: { platform: string }) {
+  if (platform === "instagram") {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill={MUTED}/>
+      </svg>
+    );
+  }
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill={MUTED}>
+      <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 3 12 3 12 3s-4.2 0-6.8.3c-.6.1-1.9.1-3 1.3C1.3 5.4 1 7.4 1 7.4S.7 9.6.7 11.8v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22.5 12 22.5 12 22.5s4.2 0 6.8-.3c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.6 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z"/>
+    </svg>
+  );
+}
+
 export default function KnowledgePage() {
-  const [entries, setEntries]   = useState<KnowledgeEntry[]>([]);
-  const [loading, setLoading]   = useState(true);
-  const [expanded, setExpanded] = useState<string | null>(null);
-  const [query, setQuery]       = useState("");
+  const [entries, setEntries] = useState<KnowledgeEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery]     = useState("");
   const supabase = createClient();
 
   useEffect(() => { load(); }, []);
@@ -65,6 +80,7 @@ export default function KnowledgePage() {
     const q = query.toLowerCase();
     return e.title?.toLowerCase().includes(q)
       || e.channel_name?.toLowerCase().includes(q)
+      || e.summary?.toLowerCase().includes(q)
       || e.key_points?.some(p => p.toLowerCase().includes(q));
   });
 
@@ -75,15 +91,14 @@ export default function KnowledgePage() {
         right={<span style={{ fontSize: 12, color: MUTED }}>{entries.length} saved</span>}
       />
 
-      {/* Search within knowledge base */}
-      {entries.length > 3 && (
-        <div style={{ padding: "12px 16px", borderBottom: "1px solid rgba(234,234,234,0.07)" }}>
+      {entries.length > 2 && (
+        <div style={{ padding: "10px 16px", borderBottom: "1px solid rgba(234,234,234,0.07)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, background: BG3, borderRadius: 12, padding: "10px 14px" }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input
-              placeholder="Search your knowledge base…"
+              placeholder="Search saved content…"
               value={query} onChange={e => setQuery(e.target.value)}
               style={{ flex: 1, background: "none", border: "none", outline: "none", color: FG, fontSize: 14, fontFamily: "'Space Grotesk', sans-serif" }}
             />
@@ -91,112 +106,99 @@ export default function KnowledgePage() {
         </div>
       )}
 
-      <div style={{ padding: "16px" }}>
+      <div style={{ padding: "14px 16px", display: "flex", flexDirection: "column", gap: 12 }}>
         {loading ? (
           <p style={{ color: MUTED, textAlign: "center", padding: "40px 0" }}>Loading…</p>
         ) : entries.length === 0 ? (
           <div style={{ textAlign: "center", padding: "60px 0" }}>
-            <img src="/bee.png" alt="" style={{ width: 70, opacity: 0.4, margin: "0 auto 20px", display: "block" }} />
-            <p style={{ color: FG, fontWeight: 700, fontSize: 16, marginBottom: 8 }}>Your knowledge base is empty</p>
-            <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-              Copy a YouTube link, then tap the bee on any page to save it here.
+            <img src="/bee.png" alt="" style={{ width: 60, opacity: 0.35, margin: "0 auto 18px", display: "block" }} />
+            <p style={{ color: FG, fontWeight: 700, fontSize: 15, marginBottom: 6 }}>Nothing saved yet</p>
+            <p style={{ color: MUTED, fontSize: 13, lineHeight: 1.6 }}>
+              Copy a YouTube or Instagram link, then tap the bee button to save it here.
             </p>
           </div>
         ) : filtered.length === 0 ? (
           <p style={{ color: MUTED, textAlign: "center", padding: "40px 0" }}>No results for "{query}"</p>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {filtered.map(entry => {
-              const isOpen = expanded === entry.id;
-              return (
-                <div key={entry.id} style={{ background: BG2, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 18, overflow: "hidden" }}>
-                  {/* Card header */}
-                  <button
-                    onClick={() => setExpanded(isOpen ? null : entry.id)}
-                    style={{ width: "100%", background: "none", border: "none", cursor: "pointer", padding: "14px 16px", textAlign: "left", display: "flex", alignItems: "flex-start", gap: 12 }}
-                  >
-                    {/* Platform icon */}
-                    {entry.platform === "instagram" ? (
-                      <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(225,48,108,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                          <circle cx="12" cy="12" r="4"/>
-                          <circle cx="17.5" cy="6.5" r="0.5" fill="#e1306c"/>
-                        </svg>
-                      </div>
-                    ) : (
-                      <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(255,0,0,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444">
-                          <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 3 12 3 12 3s-4.2 0-6.8.3c-.6.1-1.9.1-3 1.3C1.3 5.4 1 7.4 1 7.4S.7 9.6.7 11.8v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22.5 12 22.5 12 22.5s4.2 0 6.8-.3c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.6 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z"/>
-                        </svg>
-                      </div>
-                    )}
-
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ fontSize: 11, color: GREEN, fontWeight: 700, letterSpacing: "0.04em", marginBottom: 3 }}>{entry.channel_name}</p>
-                      <p style={{ fontSize: 14, fontWeight: 600, color: FG, lineHeight: 1.4, wordBreak: "break-word" }}>
-                        {entry.title?.slice(0, 80)}{(entry.title?.length ?? 0) > 80 ? "…" : ""}
-                      </p>
-                      <p style={{ fontSize: 11, color: MUTED, marginTop: 4 }}>{timeAgo(entry.created_at)}</p>
-                    </div>
-
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0, marginTop: 4, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>
-                      <polyline points="6 9 12 15 18 9"/>
-                    </svg>
-                  </button>
-
-                  {/* Expanded content */}
-                  {isOpen && (
-                    <div style={{ padding: "0 16px 16px", borderTop: "1px solid rgba(234,234,234,0.06)" }}>
-
-                      {/* AI Summary */}
-                      {entry.summary ? (
-                        <>
-                          <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", margin: "12px 0 8px" }}>
-                            Summary
-                          </p>
-                          <p style={{ fontSize: 13, color: FG, lineHeight: 1.7, marginBottom: 14 }}>
-                            {entry.summary}
-                          </p>
-                        </>
-                      ) : null}
-
-                      <p style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", margin: "12px 0 10px" }}>
-                        Key Points
-                      </p>
-                      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14 }}>
-                        {(entry.key_points || []).map((point, i) => (
-                          <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                            <span style={{ color: YELLOW, fontSize: 10, marginTop: 4, flexShrink: 0 }}>▸</span>
-                            <p style={{ fontSize: 13, color: FG, lineHeight: 1.6, margin: 0 }}>{point}</p>
-                          </div>
-                        ))}
-                      </div>
-                      <div style={{ display: "flex", gap: 10 }}>
-                        <a href={entry.url} target="_blank" rel="noopener noreferrer" style={{
-                          flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                          background: entry.platform === "instagram" ? "rgba(225,48,108,0.1)" : "rgba(255,0,0,0.1)",
-                          border: "none", borderRadius: 10, padding: "10px",
-                          color: entry.platform === "instagram" ? "#e1306c" : "#ff4444",
-                          fontSize: 13, fontWeight: 700, textDecoration: "none",
-                          fontFamily: "'Space Grotesk', sans-serif",
-                        }}>
-                          {entry.platform === "instagram" ? "View on Instagram" : "Watch on YouTube"}
-                        </a>
-                        <button onClick={() => remove(entry.id)} style={{
-                          background: "none", border: "1px solid rgba(234,234,234,0.1)", borderRadius: 10,
-                          padding: "10px 14px", color: MUTED, cursor: "pointer",
-                          fontFamily: "'Space Grotesk', sans-serif", fontSize: 13,
-                        }}>
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  )}
+          filtered.map(entry => (
+            <div key={entry.id} style={{
+              background: BG2,
+              border: "1px solid rgba(234,234,234,0.08)",
+              borderRadius: 16,
+              padding: "14px 16px",
+            }}>
+              {/* Source line — like a tweet header */}
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                {/* Avatar placeholder */}
+                <div style={{
+                  width: 34, height: 34, borderRadius: "50%",
+                  background: BG3,
+                  border: "1px solid rgba(234,234,234,0.08)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0,
+                }}>
+                  <PlatformIcon platform={entry.platform} />
                 </div>
-              );
-            })}
-          </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: FG, margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {entry.channel_name}
+                  </p>
+                  <p style={{ fontSize: 11, color: MUTED, margin: 0 }}>
+                    {entry.platform === "instagram" ? "Instagram" : "YouTube"} · {timeAgo(entry.created_at)}
+                  </p>
+                </div>
+                <button
+                  onClick={() => remove(entry.id)}
+                  style={{ background: "none", border: "none", cursor: "pointer", padding: 4, color: MUTED, flexShrink: 0 }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+
+              {/* AI summary — the main content of the card */}
+              {entry.summary ? (
+                <p style={{ fontSize: 14, color: FG, lineHeight: 1.65, margin: "0 0 12px" }}>
+                  {entry.summary}
+                </p>
+              ) : (
+                <p style={{ fontSize: 14, color: FG, lineHeight: 1.65, margin: "0 0 12px" }}>
+                  {entry.title}
+                </p>
+              )}
+
+              {/* Key points */}
+              {entry.key_points?.length > 0 && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 12 }}>
+                  {entry.key_points.map((point, i) => (
+                    <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                      <span style={{ color: YELLOW, fontSize: 9, marginTop: 5, flexShrink: 0 }}>▸</span>
+                      <p style={{ fontSize: 12, color: MUTED, lineHeight: 1.55, margin: 0 }}>{point}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Footer link */}
+              <a
+                href={entry.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 5,
+                  fontSize: 12, color: GREEN, fontWeight: 600,
+                  textDecoration: "none", fontFamily: "'Space Grotesk', sans-serif",
+                }}
+              >
+                {entry.platform === "instagram" ? "View on Instagram" : "Watch on YouTube"}
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          ))
         )}
       </div>
     </div>
