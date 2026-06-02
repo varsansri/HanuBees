@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import PostCard from "@/components/feed/PostCard";
 import Link from "next/link";
+import AppHeader from "@/components/ui/AppHeader";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -56,25 +57,7 @@ export default async function FeedPage({
   return (
     <div style={{ maxWidth: 600, margin: "0 auto" }}>
 
-      {/* Header */}
-      <div style={{
-        position: "sticky", top: 0, zIndex: 40,
-        background: "rgba(18,18,18,0.97)", backdropFilter: "blur(24px)",
-        borderBottom: `1px solid rgba(255,190,0,0.18)`,
-        boxShadow: `0 1px 0 rgba(255,190,0,0.08), 0 4px 24px rgba(255,190,0,0.04)`,
-        display: "grid", gridTemplateColumns: "1fr auto 1fr",
-        alignItems: "center", padding: "8px 16px",
-      }}>
-        <div />
-        <img src="/bee.png" alt="Hanubees" style={{ height: 50, width: "auto", filter: "drop-shadow(0 0 10px rgba(255,190,0,0.25))" }} />
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Link href="/search" style={{ color: MUTED, display: "flex", padding: 4 }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-          </Link>
-        </div>
-      </div>
+      <AppHeader />
 
       {/* Create post row */}
       <Link href={user ? "/post/new" : "/signup"} style={{ textDecoration: "none", display: "block" }}>

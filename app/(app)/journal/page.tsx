@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import posthog from "posthog-js";
+import AppHeader from "@/components/ui/AppHeader";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -131,31 +132,17 @@ export default function JournalPage() {
   return (
     <div style={{ maxWidth: 600, margin: "0 auto" }}>
 
-      {/* Header — yellow top */}
-      <div className="page-header" style={{ padding: "14px 16px" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: YELLOW, fontFamily: "'Space Grotesk', sans-serif" }}>
-              Journal
-            </h2>
-            <span style={{ color: MUTED, fontSize: 13 }}>{today}</span>
-          </div>
-          <Link href="/goals" style={{
-            display: "flex", alignItems: "center", gap: 6,
-            background: "rgba(152,170,157,0.12)",
-            border: "1px solid rgba(152,170,157,0.25)",
-            borderRadius: 10, padding: "7px 14px",
-            color: GREEN, textDecoration: "none",
-            fontSize: 13, fontWeight: 700,
-            fontFamily: "'Space Grotesk', sans-serif",
-          }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+      <AppHeader
+        left={<span style={{ fontSize: 13, color: MUTED }}>{today}</span>}
+        right={
+          <Link href="/goals" style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(152,170,157,0.12)", border: "1px solid rgba(152,170,157,0.25)", borderRadius: 10, padding: "6px 12px", color: GREEN, textDecoration: "none", fontSize: 13, fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
             </svg>
             Goals
           </Link>
-        </div>
-      </div>
+        }
+      />
 
       <div style={{ padding: "16px" }}>
 

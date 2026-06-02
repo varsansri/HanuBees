@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import AppHeader from "@/components/ui/AppHeader";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -58,8 +59,10 @@ export default function SearchPage() {
   return (
     <div style={{ maxWidth: 600, margin: "0 auto" }}>
 
-      {/* Sticky search bar — yellow top */}
-      <div className="page-header" style={{ padding: "12px 16px" }}>
+      <AppHeader />
+
+      {/* Sticky search bar */}
+      <div style={{ padding: "12px 16px", background: "rgba(18,18,18,0.97)", backdropFilter: "blur(24px)", position: "sticky", top: 67, zIndex: 39, borderBottom: "1px solid rgba(234,234,234,0.07)" }}>
         <div style={{
           display: "flex", alignItems: "center", gap: 10,
           background: "var(--bg3)", borderRadius: 14, padding: "11px 14px",
