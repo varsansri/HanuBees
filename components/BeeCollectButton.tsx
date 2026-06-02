@@ -45,9 +45,15 @@ export default function BeeCollectButton() {
     }
 
     const urlMatch = text.match(/https?:\/\/[^\s]+/);
-    if (!urlMatch) {
+    const isSupported = urlMatch && (
+      urlMatch[0].includes("youtube.com") ||
+      urlMatch[0].includes("youtu.be") ||
+      urlMatch[0].includes("instagram.com") ||
+      urlMatch[0].includes("instagr.am")
+    );
+    if (!urlMatch || !isSupported) {
       setState("no-url");
-      setMsg("No link found — copy a YouTube link first");
+      setMsg("No YouTube or Instagram link found — copy one first");
       setTimeout(() => setState("idle"), 3000);
       return;
     }

@@ -114,11 +114,21 @@ export default function KnowledgePage() {
                     style={{ width: "100%", background: "none", border: "none", cursor: "pointer", padding: "14px 16px", textAlign: "left", display: "flex", alignItems: "flex-start", gap: 12 }}
                   >
                     {/* Platform icon */}
-                    <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(255,0,0,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444">
-                        <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 3 12 3 12 3s-4.2 0-6.8.3c-.6.1-1.9.1-3 1.3C1.3 5.4 1 7.4 1 7.4S.7 9.6.7 11.8v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22.5 12 22.5 12 22.5s4.2 0 6.8-.3c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.6 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z"/>
-                      </svg>
-                    </div>
+                    {entry.platform === "instagram" ? (
+                      <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(225,48,108,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                          <circle cx="12" cy="12" r="4"/>
+                          <circle cx="17.5" cy="6.5" r="0.5" fill="#e1306c"/>
+                        </svg>
+                      </div>
+                    ) : (
+                      <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(255,0,0,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444">
+                          <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 3 12 3 12 3s-4.2 0-6.8.3c-.6.1-1.9.1-3 1.3C1.3 5.4 1 7.4 1 7.4S.7 9.6.7 11.8v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22.5 12 22.5 12 22.5s4.2 0 6.8-.3c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.6 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z"/>
+                        </svg>
+                      </div>
+                    )}
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <p style={{ fontSize: 11, color: GREEN, fontWeight: 700, letterSpacing: "0.04em", marginBottom: 3 }}>{entry.channel_name}</p>
@@ -150,11 +160,13 @@ export default function KnowledgePage() {
                       <div style={{ display: "flex", gap: 10 }}>
                         <a href={entry.url} target="_blank" rel="noopener noreferrer" style={{
                           flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                          background: "rgba(255,0,0,0.1)", border: "none", borderRadius: 10, padding: "10px",
-                          color: "#ff4444", fontSize: 13, fontWeight: 700, textDecoration: "none",
+                          background: entry.platform === "instagram" ? "rgba(225,48,108,0.1)" : "rgba(255,0,0,0.1)",
+                          border: "none", borderRadius: 10, padding: "10px",
+                          color: entry.platform === "instagram" ? "#e1306c" : "#ff4444",
+                          fontSize: 13, fontWeight: 700, textDecoration: "none",
                           fontFamily: "'Space Grotesk', sans-serif",
                         }}>
-                          Watch on YouTube
+                          {entry.platform === "instagram" ? "View on Instagram" : "Watch on YouTube"}
                         </a>
                         <button onClick={() => remove(entry.id)} style={{
                           background: "none", border: "1px solid rgba(234,234,234,0.1)", borderRadius: 10,
