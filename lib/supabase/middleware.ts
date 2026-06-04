@@ -23,26 +23,24 @@ export async function updateSession(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  const isAuthPage = request.nextUrl.pathname.startsWith("/login") ||
-    request.nextUrl.pathname.startsWith("/signup") ||
-    request.nextUrl.pathname.startsWith("/forgot-password") ||
-    request.nextUrl.pathname.startsWith("/reset-password");
-  const isPublicPage =
-    request.nextUrl.pathname === "/" ||
-    request.nextUrl.pathname === "/feed" ||
-    request.nextUrl.pathname === "/search" ||
-    request.nextUrl.pathname.startsWith("/post/") ||
-    request.nextUrl.pathname.startsWith("/api/") ||
-    request.nextUrl.pathname.startsWith("/profile/") ||
-    request.nextUrl.pathname === "/sitemap.xml" ||
-    request.nextUrl.pathname === "/robots.txt";
+  const path = request.nextUrl.pathname;
 
-  if (!user && !isAuthPage && !isPublicPage) {
+  const isAuthPage = path.startsWith("/login") ||
+    path.startsWith("/signup") ||
+    path.startsWith("/forgot-password") ||
+    path.startsWith("/reset-password");
+
+  // Only the owner-facing app shell is protected. Everything else
+  // (landing, public business pages /[slug], api, og) is public for SEO.
+  const PROTECTED = ["/chat", "/messages", "/dashboard", "/onboarding", "/profile", "/settings"];
+  const isProtected = PROTECTED.some(p => path === p || path.startsWith(p + "/"));
+
+  if (!user && isProtected) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (user && isAuthPage) {
-    return NextResponse.redirect(new URL("/feed", request.url));
+    return NextResponse.redirect(new URL("/chat", request.url));
   }
 
   return supabaseResponse;

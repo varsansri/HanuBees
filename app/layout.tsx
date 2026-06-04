@@ -4,8 +4,8 @@ import PostHogProvider from "@/components/PostHogProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hanubees — Health & Wellness Community",
-  description: "Journal your health journey. Share your experience. Find people who understand.",
+  title: "Hanubees — Your business, answered by AI",
+  description: "Give your business its own AI receptionist. It answers your customers, anytime, from your own info. Free to start.",
   metadataBase: new URL("https://hanubees.com"),
   icons: {
     icon: "/bee.png",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Hanubees",
-    description: "Journal your health journey. Share your experience. Find people who understand.",
+    description: "Give your business its own AI receptionist. It answers your customers, anytime.",
     url: "https://hanubees.com",
     siteName: "Hanubees",
     type: "website",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Hanubees",
-    description: "Journal your health journey. Share your experience. Find people who understand.",
+    description: "Give your business its own AI receptionist. It answers your customers, anytime.",
     images: ["https://hanubees.com/api/og"],
   },
 };

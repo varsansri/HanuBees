@@ -26,7 +26,7 @@ export default function LoginPage() {
     posthog.capture("user_logged_in");
     (window as any).umami?.track("login");
     router.refresh();
-    router.push("/feed");
+    router.push("/chat");
   };
 
   return (

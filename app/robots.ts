@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/post/", "/profile/"],
-        disallow: ["/feed", "/journal", "/goals", "/post/new", "/search", "/login", "/signup", "/forgot-password", "/reset-password"],
+        allow: ["/"],
+        disallow: ["/chat", "/messages", "/dashboard", "/onboarding", "/profile", "/settings", "/login", "/signup", "/forgot-password", "/reset-password"],
       },
     ],
     sitemap: "https://hanubees.com/sitemap.xml",

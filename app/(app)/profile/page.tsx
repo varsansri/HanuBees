@@ -1,442 +1,274 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
+const FG     = "#eaeaea";
 const MUTED  = "#a9a9a7";
+const BG2    = "#1a1a1a";
+const BG3    = "#242424";
 
-interface Profile {
-  username: string; display_name: string; bio: string;
-  avatar_url: string; created_at: string;
-}
-interface Post {
-  id: string; content: string; post_type: string;
-  value_up: number; value_down: number; likes: number; created_at: string;
-}
-interface JournalEntry {
-  id: string; name: string; category: string;
-  dose_amount: string; dose_unit: string; notes: string; dose_time: string;
-}
-
-const categoryColor: Record<string, string> = {
-  supplement: YELLOW, medicine: GREEN, drug: GREEN, other: MUTED,
+type Account = {
+  id: string; name: string; slug: string; bee_name: string; category: string | null; city: string | null;
+  bio: string | null; logo_url: string | null; phone: string | null; email: string | null;
+  website: string | null; instagram: string | null; rating: number; review_count: number; follower_count: number;
 };
+type Entry = { id: string; content: string; tag: string | null; visibility: string };
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [entries, setEntries] = useState<JournalEntry[]>([]);
-  const [tab, setTab] = useState<"posts"|"journal">("posts");
-  const [loading, setLoading] = useState(true);
-  const [input, setInput] = useState("");
-  const [dose, setDose] = useState("");
-  const [notes, setNotes] = useState("");
-  const [identifying, setIdentifying] = useState(false);
-  const [logging, setLogging] = useState(false);
-  const [identified, setIdentified] = useState<{ name: string; category: string }|null>(null);
-  const [logError, setLogError] = useState("");
-  const [recording, setRecording] = useState(false);
-  const [liveText, setLiveText] = useState("");
-  const recognitionRef = useRef<any>(null);
-  const supabase = createClient();
   const router = useRouter();
+  const supabase = createClient();
+  const [acc, setAcc] = useState<Account | null>(null);
+  const [entries, setEntries] = useState<Entry[]>([]);
+  const [tab, setTab] = useState<"public" | "private">("public");
+  const [section, setSection] = useState<"live" | "context">("live");
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(false);
+  const [form, setForm] = useState<Partial<Account>>({});
+  const [adding, setAdding] = useState(false);
+  const [newText, setNewText] = useState("");
+  const [liveType, setLiveType] = useState<"pricing" | "hours" | "services" | "contact" | "policy">("pricing");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => { loadAll(); }, []);
-
-  const loadAll = async () => {
+  const load = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push("/login"); return; }
-    const [{ data: p }, { data: ps }, { data: j }] = await Promise.all([
-      supabase.from("profiles").select("*").eq("id", user.id).single(),
-      supabase.from("posts").select("*").eq("user_id", user.id).order("created_at", { ascending: false }),
-      supabase.from("journal_entries").select("*").eq("user_id", user.id).order("dose_time", { ascending: false }).limit(50),
-    ]);
-    setProfile(p); setPosts(ps || []); setEntries(j || []); setLoading(false);
+    const { data: account } = await supabase.from("accounts").select("*").eq("user_id", user.id).maybeSingle();
+    if (!account) { router.push("/onboarding"); return; }
+    setAcc(account as Account);
+    setForm(account);
+    const { data: es } = await supabase.from("data_entries").select("id, content, tag, visibility").eq("account_id", account.id).order("created_at", { ascending: false });
+    setEntries((es ?? []) as Entry[]);
+    setLoading(false);
   };
+  useEffect(() => { load(); /* eslint-disable-next-line */ }, []);
 
-  const identify = async () => {
-    if (!input.trim()) return;
-    setIdentifying(true);
-    try {
-      const res = await fetch("/api/identify", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input }),
-      });
-      setIdentified(await res.json());
-    } catch { setIdentified({ name: input, category: "supplement" }); }
-    setIdentifying(false);
-  };
-
-  const logEntry = async () => {
-    if (!identified) return;
-    setLogging(true); setLogError("");
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-    const [amount, ...unitParts] = dose.split(" ");
-    const { error } = await supabase.from("journal_entries").insert({
-      user_id: user.id, name: identified.name, category: identified.category,
-      raw_input: input, dose_amount: amount || dose,
-      dose_unit: unitParts.join(" ") || "dose", notes,
-      dose_time: new Date().toISOString(),
-    });
-    if (error) { setLogError(error.message); setLogging(false); return; }
-    setInput(""); setDose(""); setNotes(""); setIdentified(null);
-    const { data } = await supabase.from("journal_entries").select("*")
-      .eq("user_id", user.id).order("dose_time", { ascending: false }).limit(50);
-    setEntries(data || []);
-    setLogging(false);
-  };
-
-  const startMic = () => {
-    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SR) { setLogError("Voice not supported on this browser"); return; }
-    const rec = new SR();
-    rec.continuous = true;
-    rec.interimResults = true;
-    rec.lang = "en-US";
-    let finalTranscript = input;
-    rec.onresult = (e: any) => {
-      let interim = "";
-      for (let i = e.resultIndex; i < e.results.length; i++) {
-        const t = e.results[i][0].transcript;
-        if (e.results[i].isFinal) { finalTranscript += (finalTranscript ? " " : "") + t.trim(); setInput(finalTranscript); setIdentified(null); }
-        else interim = t;
-      }
-      setLiveText(interim);
+  const saveProfile = async () => {
+    if (!acc) return;
+    const patch = {
+      bio: form.bio ?? null, phone: form.phone ?? null, email: form.email ?? null,
+      website: form.website ?? null, instagram: form.instagram ?? null,
+      city: form.city ?? null, category: form.category ?? null, logo_url: form.logo_url ?? null,
     };
-    rec.onerror = () => { setRecording(false); setLiveText(""); };
-    rec.onend = () => { if (recognitionRef.current) rec.start(); };
-    recognitionRef.current = rec;
-    rec.start();
-    setRecording(true);
+    await supabase.from("accounts").update(patch).eq("id", acc.id);
+    setAcc({ ...acc, ...patch } as Account);
+    setEditing(false);
   };
 
-  const stopMic = () => {
-    if (recognitionRef.current) {
-      recognitionRef.current.onend = null;
-      recognitionRef.current.stop();
-      recognitionRef.current = null;
-    }
-    setRecording(false);
-    setLiveText("");
+  const toggleVis = async (e: Entry) => {
+    const v = e.visibility === "public" ? "private" : "public";
+    setEntries((prev) => prev.map((x) => x.id === e.id ? { ...x, visibility: v } : x));
+    await supabase.from("data_entries").update({ visibility: v }).eq("id", e.id);
   };
+  const remove = async (e: Entry) => {
+    setEntries((prev) => prev.filter((x) => x.id !== e.id));
+    await supabase.from("data_entries").delete().eq("id", e.id);
+  };
+  const addEntry = async () => {
+    if (!acc || !newText.trim()) return;
+    const isLive = section === "live";
+    const row = {
+      account_id: acc.id,
+      content: newText.trim(),
+      visibility: "public",
+      source: "manual",
+      tag: isLive ? liveType : "other",
+      is_live_fact: isLive,
+      info_type: isLive ? liveType : null,
+      effective_date: isLive ? new Date().toISOString().split('T')[0] : null,
+    };
+    const { data } = await supabase.from("data_entries").insert(row).select("id, content, tag, visibility").maybeSingle();
+    if (data) setEntries((prev) => [data as Entry, ...prev]);
+    setNewText(""); setAdding(false);
+    fetch("/api/embed", { method: "POST" }).catch(() => {});
+  };
+  const logout = async () => { await supabase.auth.signOut(); router.push("/login"); };
 
-  const signOut = async () => { await supabase.auth.signOut(); router.push("/login"); };
+  if (loading || !acc) return <div style={{ minHeight: "100vh" }} />;
 
-  if (loading) return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "80vh" }}>
-      <p style={{ color: MUTED }}>Loading…</p>
-    </div>
-  );
+  const shown = entries.filter((e) => e.visibility === tab);
 
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto" }}>
-
-      {/* Header — yellow top */}
-      <div className="page-header" style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px",
-        position: "relative",
-      }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: YELLOW, fontFamily: "'Space Grotesk', sans-serif" }}>
-          Profile
-        </h2>
-
-        {/* Menu button */}
-        <div style={{ position: "relative" }}>
-          <button onClick={() => setMenuOpen(o => !o)} style={{
-            background: "none", border: "none", cursor: "pointer",
-            color: MUTED, display: "flex", alignItems: "center",
-            justifyContent: "center", width: 36, height: 36, borderRadius: 10,
-            transition: "background 0.15s",
-          }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-          </button>
-
-          {menuOpen && (
-            <>
-              {/* Backdrop to close */}
-              <div onClick={() => setMenuOpen(false)} style={{
-                position: "fixed", inset: 0, zIndex: 50,
-              }} />
-              {/* Dropdown */}
-              <div style={{
-                position: "absolute", top: "calc(100% + 8px)", right: 0, zIndex: 51,
-                background: "var(--bg2)", border: "1px solid var(--border)",
-                borderRadius: 14, overflow: "hidden", minWidth: 160,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-              }}>
-                <button onClick={() => { setMenuOpen(false); signOut(); }} style={{
-                  width: "100%", background: "none", border: "none",
-                  padding: "14px 18px", textAlign: "left", cursor: "pointer",
-                  color: GREEN, fontSize: 15, fontWeight: 600,
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  display: "flex", alignItems: "center", gap: 10,
-                  transition: "background 0.1s",
-                }}>
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                    <polyline points="16 17 21 12 16 7"/>
-                    <line x1="21" y1="12" x2="9" y2="12"/>
-                  </svg>
-                  Logout
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+    <div style={{ minHeight: "100vh" }}>
+      <div className="page-header" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", padding: "12px 16px" }}>
+        <span />
+        <span style={{ fontWeight: 700, fontSize: 17, color: FG }}>Profile</span>
+        <button onClick={() => setMenuOpen((o) => !o)} aria-label="Menu" style={{ justifySelf: "end", background: "none", border: "none", color: FG, cursor: "pointer", display: "flex" }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+        </button>
       </div>
 
-      <div style={{ padding: "16px" }}>
+      {menuOpen && (
+        <div style={{ position: "fixed", top: 54, right: 12, zIndex: 80, background: BG2, border: "1px solid rgba(234,234,234,0.1)", borderRadius: 12, overflow: "hidden", minWidth: 180 }}>
+          <Link href={`/${acc.slug}`} style={menuItem}>View public page</Link>
+          <button onClick={() => { setEditing(true); setMenuOpen(false); }} style={{ ...menuItem, width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit" }}>Edit profile</button>
+          <button onClick={logout} style={{ ...menuItem, width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", color: GREEN, fontFamily: "inherit" }}>Log out</button>
+        </div>
+      )}
 
-        {/* Profile card */}
-        <div style={{
-          background: "var(--bg2)", border: "1px solid var(--border)",
-          borderRadius: 20, padding: "24px 20px", marginBottom: 16, textAlign: "center",
-        }}>
-          <div style={{
-            width: 68, height: 68, borderRadius: "50%", background: "var(--bg3)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 26, color: YELLOW, fontWeight: 700, margin: "0 auto 12px",
-            border: `2px solid rgba(255,190,0,0.25)`,
-          }}>
-            {profile?.display_name?.[0]?.toUpperCase() || "?"}
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "16px 14px 110px" }}>
+        {/* Identity card */}
+        <div style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 14 }}>
+          <div className="avatar" style={{ width: 64, height: 64, fontSize: 26 }}>
+            {acc.logo_url ? <img src={acc.logo_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : acc.name[0].toUpperCase()}
           </div>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--fg)" }}>
-            {profile?.display_name}
-          </h3>
-          <p style={{ color: MUTED, fontSize: 13, marginTop: 3 }}>@{profile?.username}</p>
-
-          <div style={{ display: "flex", justifyContent: "center", gap: 32, marginTop: 20 }}>
-            {[["Posts", posts.length], ["Journal", entries.length]].map(([label, value]) => (
-              <div key={label as string} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 22, fontWeight: 700, color: YELLOW,
-                  fontFamily: "'Space Grotesk', sans-serif" }}>{value}</div>
-                <div style={{ fontSize: 11, color: MUTED, marginTop: 3,
-                  fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>{label}</div>
-              </div>
-            ))}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <h1 style={{ fontSize: 20, fontWeight: 700, color: FG, margin: 0 }}>{acc.name}</h1>
+            <p style={{ fontSize: 12, color: GREEN, fontWeight: 600, margin: "2px 0 0" }}>@{acc.bee_name}.bee</p>
+            <p style={{ fontSize: 13, color: MUTED, margin: "3px 0 0" }}>{[acc.category, acc.city].filter(Boolean).join(" · ") || "Set your category"}</p>
           </div>
         </div>
 
-        {/* Tabs — yellow active */}
-        <div style={{
-          display: "flex", gap: 8, marginBottom: 16,
-          background: "var(--bg2)", borderRadius: 14, padding: 4,
-          border: "1px solid var(--border)",
-        }}>
-          {(["posts", "journal"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)} style={{
-              flex: 1, padding: "10px", borderRadius: 10, border: "none", cursor: "pointer",
-              background: tab === t ? YELLOW : "transparent",
-              color: tab === t ? "#121212" : MUTED,
-              fontWeight: 700, fontSize: 14, textTransform: "capitalize",
-              fontFamily: "'Space Grotesk', sans-serif",
-              transition: "all 0.2s", letterSpacing: "0.01em",
-            }}>
-              {t === "posts" ? `Posts (${posts.length})` : `Journal (${entries.length})`}
+        {/* Trust row */}
+        <div style={{ display: "flex", gap: 18, marginBottom: 14 }}>
+          <Trust value={acc.rating ? acc.rating.toFixed(1) : "—"} label="Rating" />
+          <Trust value={acc.review_count} label="Reviews" />
+          <Trust value={acc.follower_count} label="Followers" />
+        </div>
+
+        <Link href={`/${acc.slug}`} className="btn-outline" style={{ display: "block", textAlign: "center", textDecoration: "none", marginBottom: 8 }}>
+          Chat with your AI — hanubees.com/{acc.bee_name}.bee
+        </Link>
+
+        {acc.bio && <p style={{ fontSize: 14, color: FG, lineHeight: 1.5, margin: "12px 2px" }}>{acc.bio}</p>}
+
+        {/* What the platform shows */}
+        <div style={{ background: BG2, borderRadius: 14, padding: 14, margin: "12px 0 20px", border: "1px solid rgba(234,234,234,0.06)" }}>
+          <p style={{ fontSize: 12.5, color: MUTED, margin: 0, lineHeight: 1.5 }}>
+            Your agent answers customers using your <b style={{ color: GREEN }}>public</b> info. <b style={{ color: YELLOW }}>Private</b> info is used for context but never shown to customers.
+          </p>
+        </div>
+
+        {/* Business Info vs Content tabs */}
+        <div style={{ display: "flex", marginBottom: 14, borderBottom: "1px solid rgba(234,234,234,0.08)" }}>
+          {(["live", "context"] as const).map((s) => (
+            <button key={s} onClick={() => setSection(s)} className={section === s ? "tab tab-active" : "tab"} style={{ textTransform: "capitalize" }}>
+              {s === "live" ? "Business Info" : "Content"}
             </button>
           ))}
         </div>
 
-        {/* Posts tab */}
-        {tab === "posts" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {posts.length === 0 ? (
-              <div style={{ background: "var(--bg2)", border: "1px solid var(--border)",
-                borderRadius: 16, padding: 40, textAlign: "center" }}>
-                <p style={{ color: MUTED, fontSize: 14 }}>No posts yet.</p>
-              </div>
-            ) : posts.map(post => (
-              <div key={post.id} style={{
-                background: "var(--bg2)", border: "1px solid var(--border)",
-                borderRadius: 14, padding: "14px 16px",
-              }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                  <span style={{
-                    fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em",
-                    color: YELLOW, background: "rgba(255,190,0,0.1)",
-                    padding: "3px 8px", borderRadius: 100,
-                  }}>{post.post_type}</span>
-                  <span style={{ fontSize: 11, color: MUTED, marginLeft: "auto" }}>
-                    {new Date(post.created_at).toLocaleDateString()}
-                  </span>
-                </div>
-                <p style={{ fontSize: 14, color: "var(--fg)", lineHeight: 1.55 }}>
-                  {post.content.length > 120 ? post.content.slice(0, 120) + "…" : post.content}
-                </p>
-                <div style={{ display: "flex", gap: 14, marginTop: 10 }}>
-                  <span style={{ fontSize: 12, color: GREEN }}>▲ {post.value_up - post.value_down}</span>
-                  <span style={{ fontSize: 12, color: MUTED }}>♥ {post.likes}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Journal tab */}
-        {tab === "journal" && (
-          <div>
-            {/* Goals button */}
-            <Link href="/goals" style={{
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              background: "rgba(152,170,157,0.08)",
-              border: "1px solid rgba(152,170,157,0.25)",
-              borderRadius: 14, padding: "14px 16px",
-              textDecoration: "none", marginBottom: 16,
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ width: 34, height: 34, borderRadius: 10, background: "rgba(152,170,157,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: GREEN }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-                  </svg>
-                </div>
-                <div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: GREEN, fontFamily: "'Space Grotesk', sans-serif" }}>Goals & Insights</p>
-                  <p style={{ fontSize: 12, color: MUTED, marginTop: 2, fontFamily: "'Space Grotesk', sans-serif" }}>Streaks, calories, custom trackers</p>
-                </div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={MUTED} strokeWidth="2" strokeLinecap="round">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
-            </Link>
-
-            <div style={{
-              background: "var(--bg2)", border: "1px solid var(--border)",
-              borderRadius: 16, padding: 16, marginBottom: 16,
-            }}>
-              <p style={{ fontSize: 13, color: MUTED, marginBottom: 12, fontWeight: 500 }}>
-                Log medicine, supplement or drug
+        {/* Conditional: LIVE FACTS or RICH CONTEXT */}
+        {section === "live" ? (
+          <>
+            {/* LIVE FACTS UI — structured entry */}
+            <div style={{ marginBottom: 20, background: BG2, border: "1px solid rgba(152,170,157,0.2)", borderRadius: 14, padding: 14 }}>
+              <p style={{ fontSize: 12.5, color: MUTED, margin: 0, lineHeight: 1.5 }}>
+                <b>Business Info</b> — pricing, hours, services, contact, policy. These are always current and used first when customers ask questions.
               </p>
-              <div style={{ display: "flex", gap: 8, marginBottom: recording ? 8 : 12 }}>
-                <input className="input" placeholder="e.g. vitamin D, metformin…"
-                  value={input} onChange={e => { setInput(e.target.value); setIdentified(null); }}
-                  style={{ flex: 1 }} />
-                <button onClick={recording ? stopMic : startMic} style={{
-                  background: recording ? "rgba(152,170,157,0.15)" : "rgba(255,190,0,0.1)",
-                  border: `1px solid ${recording ? GREEN : "rgba(255,190,0,0.3)"}`,
-                  borderRadius: 10, padding: "10px 12px", cursor: "pointer",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0, position: "relative",
-                }}>
-                  {recording ? (
-                    <>
-                      <span style={{
-                        position: "absolute", inset: 0, borderRadius: 10,
-                        border: `2px solid ${GREEN}`, animation: "micPulse 1.2s ease-in-out infinite", opacity: 0.6,
-                      }} />
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill={GREEN} stroke={GREEN} strokeWidth="1.5" strokeLinecap="round">
-                        <rect x="9" y="9" width="6" height="6" rx="1"/>
-                      </svg>
-                    </>
-                  ) : (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={YELLOW} strokeWidth="1.8" strokeLinecap="round">
-                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                      <line x1="12" y1="19" x2="12" y2="23"/>
-                      <line x1="8" y1="23" x2="16" y2="23"/>
-                    </svg>
-                  )}
-                </button>
-                <button onClick={identify} disabled={!input.trim() || identifying}
-                  className="btn-ghost" style={{ whiteSpace: "nowrap", padding: "10px 14px" }}>
-                  {identifying ? "…" : "Identify"}
-                </button>
-              </div>
-
-              {recording && (
-                <div style={{
-                  background: "rgba(152,170,157,0.08)", border: `1px solid rgba(152,170,157,0.2)`,
-                  borderRadius: 10, padding: "10px 14px", marginBottom: 12,
-                  display: "flex", alignItems: "flex-start", gap: 10,
-                }}>
-                  <span style={{
-                    width: 8, height: 8, borderRadius: "50%", background: GREEN,
-                    flexShrink: 0, marginTop: 4, animation: "micPulse 1s ease-in-out infinite", display: "inline-block",
-                  }} />
-                  <div style={{ flex: 1 }}>
-                    <p style={{ fontSize: 11, color: GREEN, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 4 }}>
-                      Recording — tap stop when done
-                    </p>
-                    <p style={{ fontSize: 14, color: liveText ? "var(--fg)" : MUTED, lineHeight: 1.55, minHeight: 20 }}>
-                      {liveText || (input ? "Listening…" : "Say the supplement, medicine or how you feel…")}
-                    </p>
-                  </div>
-                </div>
-              )}
-              <style>{`@keyframes micPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.15)} }`}</style>
-
-              {identified && (
-                <>
-                  <div style={{
-                    background: "var(--bg3)", borderRadius: 10, padding: "10px 14px",
-                    marginBottom: 10, display: "flex", alignItems: "center", gap: 10,
-                    border: `1px solid rgba(152,170,157,0.2)`,
-                  }}>
-                    <div style={{ width: 8, height: 8, borderRadius: "50%",
-                      background: categoryColor[identified.category] || MUTED, flexShrink: 0 }} />
-                    <span style={{ fontSize: 12, fontWeight: 700,
-                      color: categoryColor[identified.category] || MUTED,
-                      textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                      {identified.category}
-                    </span>
-                    <span style={{ fontSize: 14, color: "var(--fg)" }}>{identified.name}</span>
-                  </div>
-                  <input className="input" placeholder="Dose (e.g. 500mg)"
-                    value={dose} onChange={e => setDose(e.target.value)} style={{ marginBottom: 10 }} />
-                  <textarea className="input" placeholder="Notes…"
-                    value={notes} onChange={e => setNotes(e.target.value)}
-                    rows={2} style={{ resize: "none", marginBottom: 10 }} />
-                  {logError && <p style={{ color: GREEN, fontSize: 13, marginBottom: 8 }}>{logError}</p>}
-                  <button className="btn-primary" onClick={logEntry} disabled={!dose || logging}>
-                    {logging ? "Logging…" : "Log Entry"}
-                  </button>
-                </>
-              )}
             </div>
 
-            {entries.length === 0 ? (
-              <div style={{ background: "var(--bg2)", border: "1px solid var(--border)",
-                borderRadius: 16, padding: 40, textAlign: "center" }}>
-                <p style={{ color: MUTED, fontSize: 14 }}>No entries yet.</p>
+            {adding ? (
+              <div style={{ marginBottom: 14 }}>
+                <label style={labelStyle}>Type</label>
+                <select value={liveType} onChange={(e) => setLiveType(e.target.value as any)} style={{ ...inputStyle, marginBottom: 12 }}>
+                  <option value="pricing">Pricing</option>
+                  <option value="hours">Hours</option>
+                  <option value="services">Services</option>
+                  <option value="contact">Contact</option>
+                  <option value="policy">Policy</option>
+                </select>
+                <label style={labelStyle}>Details</label>
+                <textarea value={newText} onChange={(e) => setNewText(e.target.value)} placeholder={`Add ${liveType}…`} autoFocus
+                  style={{ width: "100%", minHeight: 80, background: BG3, color: FG, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none", resize: "vertical" }} />
+                <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+                  <button className="btn-primary" style={{ width: "auto", padding: "9px 18px" }} onClick={() => addEntry()}>Save</button>
+                  <button className="btn-ghost" onClick={() => { setAdding(false); setNewText(""); }}>Cancel</button>
+                </div>
               </div>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {entries.map(entry => (
-                  <div key={entry.id} style={{
-                    background: "var(--bg2)", border: "1px solid var(--border)",
-                    borderRadius: 14, padding: "12px 16px",
-                    display: "flex", alignItems: "center", gap: 12,
-                  }}>
-                    <div style={{ width: 8, height: 8, borderRadius: "50%",
-                      background: categoryColor[entry.category] || MUTED, flexShrink: 0 }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <span style={{ fontWeight: 600, fontSize: 14, color: "var(--fg)" }}>{entry.name}</span>
-                        <span style={{ fontSize: 12, color: MUTED }}>{entry.dose_amount} {entry.dose_unit}</span>
-                      </div>
-                      {entry.notes && <p style={{ fontSize: 12, color: MUTED, marginTop: 3 }}>{entry.notes}</p>}
-                    </div>
-                    <span style={{ fontSize: 11, color: MUTED, flexShrink: 0 }}>
-                      {new Date(entry.dose_time).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <button className="btn-ghost" style={{ marginBottom: 14 }} onClick={() => setAdding(true)}>+ Add business info</button>
             )}
-          </div>
+
+            {/* Display LIVE FACTS by type */}
+            {["pricing", "hours", "services", "contact", "policy"].map((type) => {
+              const items = entries.filter((e) => e.tag === type);
+              return (
+                <div key={type} style={{ marginBottom: 18 }}>
+                  <h3 style={{ fontSize: 13, fontWeight: 700, color: FG, margin: "0 0 10px", textTransform: "capitalize" }}>{type}</h3>
+                  {items.length === 0 ? (
+                    <p style={{ fontSize: 13, color: MUTED, margin: 0 }}>Not set</p>
+                  ) : (
+                    items.map((e) => (
+                      <div key={e.id} style={{ background: BG3, border: "1px solid rgba(234,234,234,0.07)", borderRadius: 10, padding: "10px 12px", marginBottom: 8 }}>
+                        <p style={{ fontSize: 13.5, color: FG, margin: 0, lineHeight: 1.4 }}>{e.content}</p>
+                        <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
+                          <button onClick={() => remove(e)} style={{ ...linkBtn, fontSize: 12 }}>Delete</button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {/* RICH CONTEXT UI */}
+            {adding ? (
+              <div style={{ marginBottom: 14 }}>
+                <textarea value={newText} onChange={(e) => setNewText(e.target.value)} placeholder="Add content (about, portfolio, faq, offers)…" autoFocus
+                  style={{ width: "100%", minHeight: 70, background: BG3, color: FG, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none", resize: "vertical" }} />
+                <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+                  <button className="btn-primary" style={{ width: "auto", padding: "9px 18px" }} onClick={addEntry}>Save</button>
+                  <button className="btn-ghost" onClick={() => { setAdding(false); setNewText(""); }}>Cancel</button>
+                </div>
+              </div>
+            ) : (
+              <button className="btn-ghost" style={{ marginBottom: 14 }} onClick={() => setAdding(true)}>+ Add content</button>
+            )}
+
+            {entries.length === 0 ? (
+              <p style={{ color: MUTED, fontSize: 13.5, textAlign: "center", padding: "20px 0" }}>No content yet.</p>
+            ) : (
+              entries.map((e) => (
+                <div key={e.id} style={{ background: BG2, border: "1px solid rgba(234,234,234,0.07)", borderRadius: 12, padding: "12px 14px", marginBottom: 9 }}>
+                  <p style={{ fontSize: 14, color: FG, margin: 0, lineHeight: 1.45 }}>{e.content}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 9 }}>
+                    {e.tag && <span style={{ fontSize: 11, color: GREEN, background: "rgba(152,170,157,0.12)", padding: "2px 8px", borderRadius: 6 }}>{e.tag}</span>}
+                    <button onClick={() => remove(e)} style={{ ...linkBtn, color: MUTED }}>Delete</button>
+                  </div>
+                </div>
+              ))
+            )}
+          </>
         )}
       </div>
+
+      {/* Edit profile sheet */}
+      {editing && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 90, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "flex-end" }} onClick={() => setEditing(false)}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: "#121212", borderTopLeftRadius: 20, borderTopRightRadius: 20, width: "100%", maxWidth: 720, margin: "0 auto", padding: 20, maxHeight: "85vh", overflowY: "auto", borderTop: "1px solid rgba(255,190,0,0.2)" }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: FG, marginTop: 0 }}>Edit profile</h2>
+            {([["bio", "Bio"], ["city", "City"], ["category", "Category"], ["logo_url", "Logo image URL"], ["phone", "Phone"], ["email", "Email"], ["website", "Website"], ["instagram", "Instagram"]] as const).map(([k, label]) => (
+              <div key={k} style={{ marginBottom: 12 }}>
+                <label style={{ display: "block", fontSize: 12.5, color: MUTED, marginBottom: 6, fontWeight: 600 }}>{label}</label>
+                {k === "bio"
+                  ? <textarea className="input" value={(form[k] as string) ?? ""} onChange={(e) => setForm((f) => ({ ...f, [k]: e.target.value }))} style={{ minHeight: 70, resize: "vertical" }} />
+                  : <input className="input" value={(form[k] as string) ?? ""} onChange={(e) => setForm((f) => ({ ...f, [k]: e.target.value }))} />}
+              </div>
+            ))}
+            <button className="btn-primary" style={{ marginTop: 8 }} onClick={saveProfile}>Save</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const menuItem: React.CSSProperties = { display: "block", padding: "12px 16px", fontSize: 14, color: FG, textDecoration: "none", borderBottom: "1px solid rgba(234,234,234,0.06)" };
+const linkBtn: React.CSSProperties = { background: "none", border: "none", color: GREEN, fontSize: 12.5, cursor: "pointer", padding: 0, fontFamily: "inherit", fontWeight: 600 };
+const inputStyle: React.CSSProperties = { width: "100%", background: BG3, color: FG, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none" };
+const labelStyle: React.CSSProperties = { display: "block", fontSize: 13, color: MUTED, marginBottom: 8, fontWeight: 600 };
+function Trust({ value, label }: { value: string | number; label: string }) {
+  return (
+    <div style={{ textAlign: "center" }}>
+      <p style={{ fontSize: 18, fontWeight: 700, color: FG, margin: 0 }}>{value}</p>
+      <p style={{ fontSize: 12, color: MUTED, margin: "2px 0 0" }}>{label}</p>
     </div>
   );
 }
