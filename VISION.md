@@ -137,11 +137,16 @@ skills are what make the difference.**
 ## 9. Scope / verticals (everything is "just information")
 - **Retail products** — shops list products; buyers find and buy instantly, lower cost; availability
   (available / not available) kept live by the agent.
-- **Services (single-person businesses are the sweet spot)** — plumbers, beauticians, pet care, etc.
-  *"Is there a pet-care person who can come to my home and care for my dog?"* The provider keeps status
-  live (**agent online/offline**), accepts orders, says when they'll come, sets price points. Today
-  finding a plumber means calling around and accepting *"I'll come in 2 days"* — we fix that, because
-  service businesses are **all about information**, kept fresh by **voice**.
+- **Services (single-person businesses are the sweet spot)** — plumbers, beauticians, pet care, etc.,
+  **and individual providers like tuition teachers.** *"My name is X, I'm a tuition teacher in [area of
+  Coimbatore], I teach [subjects] — suggest me when someone nearby asks."* *"Is there a pet-care person
+  who can come to my home and care for my dog?"* The provider keeps status live (**agent online/offline**),
+  accepts orders, says when they'll come, sets price points. Today finding a plumber means calling around
+  and accepting *"I'll come in 2 days"* — we fix that, because service businesses are **all about
+  information**, kept fresh by **voice**.
+  - **SCOPE DECISION (2026-06-05):** this is **information + availability discovery only** —
+    *no maps, no live tracking, no delivery routing.* We connect people to the right provider by
+    information; we do **not** do the map/GPS/delivery layer.
 - **Secondhand / peer listings (OLX-style)** — see §11.
 - **Transport / logistics (Porter alternative)** — find a lorry/tempo/car/camp-booking fast, same
   quality, **no commission split** — just the subscription.
@@ -266,9 +271,13 @@ business"* on a real phone beats any deck.
 
 ---
 
-## 17. Deliberately LATER (naming these shows rigor)
+## 17. Deliberately LATER / OUT OF SCOPE (naming these shows rigor)
+- **Maps / live tracking / delivery routing skills — OUT for now.** Too complex (real-time GPS,
+  routing); needs us to be very clear about what we're doing. We do service *information* discovery,
+  **not** the delivery/tracking layer. (Scope decision 2026-06-05.)
+- **Open gig labor** ("anyone deliver this") — trust/safety, liability, labour law. Tied to the maps
+  layer above; deferred with it.
 - **Payments / escrow** — RBI/payments regulation, money handling.
-- **Open gig labor** ("anyone deliver this") — trust/safety, liability, labour law.
 - **Delivery fleet / logistics ops** — capital + operations heavy.
 - **Secondhand fraud handling** at scale.
 
