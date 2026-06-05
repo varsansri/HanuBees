@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useBee } from "@/components/bee/BeeProvider";
 import { analytics } from "@/lib/analytics";
+import { createClient } from "@/lib/supabase/client";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -16,6 +17,7 @@ const PURPLE = "#b794f6";
 type Msg = { role: "user" | "assistant"; content: string };
 
 // Turn @handle mentions into tappable purple links to that business's profile.
+// Displayed as "@handle.B" (handle is the business's bee name).
 function renderContent(text: string) {
   return text.split(/(@[a-zA-Z0-9_]+)/g).map((part, i) => {
     const m = /^@([a-zA-Z0-9_]+)$/.exec(part);
@@ -26,7 +28,7 @@ function renderContent(text: string) {
           href={`/${m[1]}.bee`}
           style={{ color: PURPLE, fontWeight: 600, textDecoration: "none" }}
         >
-          {part}
+          @{m[1]}.B
         </a>
       );
     }
@@ -47,6 +49,7 @@ export default function ChatPage() {
   const [input, setInput]       = useState("");
   const [loading, setLoading]   = useState(false);
   const [toast, setToast]       = useState("");
+  const [myHandle, setMyHandle] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const endRef   = useRef<HTMLDivElement>(null);
   const sendRef  = useRef<(t: string) => void>(() => {});
@@ -59,6 +62,18 @@ export default function ChatPage() {
       setToast("✓ Account created! Your agent is ready.");
       setTimeout(() => setToast(""), 3000);
     }
+  }, []);
+
+  // The signed-in account's own handle, shown above the messages they send.
+  useEffect(() => {
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data: account } = await supabase
+        .from("accounts").select("bee_name").eq("user_id", user.id).maybeSingle();
+      if (account?.bee_name) setMyHandle(account.bee_name);
+    })();
   }, []);
 
   // Bee ball: centered (hero) when empty, parked (mini) once chatting
@@ -140,7 +155,13 @@ export default function ChatPage() {
           </div>
         ) : (
           messages.map((m, i) => (
-            <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start", marginBottom: 12 }}>
+            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: m.role === "user" ? "flex-end" : "flex-start", marginBottom: 12 }}>
+              {/* Twitter-card style handle header */}
+              {m.role === "user" && myHandle && (
+                <span style={{ color: PURPLE, fontSize: 12, fontWeight: 600, margin: "0 6px 3px" }}>
+                  @{myHandle}.B
+                </span>
+              )}
               <div style={{
                 maxWidth: "82%", padding: "11px 15px", borderRadius: 16, fontSize: 15, lineHeight: 1.5,
                 whiteSpace: "pre-wrap", wordBreak: "break-word",
