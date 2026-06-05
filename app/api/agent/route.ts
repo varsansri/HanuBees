@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { llmChat, parseJson, type ChatMsg } from "@/lib/ai/llm";
 import { embedText, embedMissing } from "@/lib/ai/embed";
-import { consumerAgentNetworkQuery } from "@/lib/ai/agent-network";
+import { loadCatalog } from "@/lib/ai/concierge";
 
 export const runtime = "nodejs";
 
@@ -83,69 +83,11 @@ export async function POST(req: NextRequest) {
       .from("accounts").select("*").eq("user_id", user.id).maybeSingle();
     if (!account) return NextResponse.json({ error: "no_account" }, { status: 200 });
 
-    // Check if owner is asking about other businesses (network query)
-    const networkKeywords = [
-      "competitor",
-      "other photographer",
-      "other caterer",
-      "other venue",
-      "other dj",
-      "other makeup",
-      "how much do",
-      "what do they charge",
-      "what's the price for",
-      "find me",
-      "search for",
-      "compare",
-      "what do photographers charge",
-      "what do caterers charge",
-      "what do venues charge",
-    ];
-
-    const shouldQueryNetwork = networkKeywords.some((kw) =>
-      lastUser.toLowerCase().includes(kw)
-    );
-
-    if (shouldQueryNetwork) {
-      // Extract category from the question
-      const categoryKeywords: { [key: string]: string } = {
-        photographer: "photography",
-        caterer: "catering",
-        venue: "venue",
-        dj: "dj",
-        makeup: "makeup",
-        florist: "flowers",
-        cake: "cake",
-        transport: "transport",
-      };
-
-      let detectedCategory = "";
-      for (const [keyword, category] of Object.entries(categoryKeywords)) {
-        if (lastUser.toLowerCase().includes(keyword)) {
-          detectedCategory = category;
-          break;
-        }
-      }
-
-      const networkResult = await consumerAgentNetworkQuery(
-        lastUser,
-        detectedCategory,
-        account.city || "Coimbatore"
-      );
-
-      return NextResponse.json({
-        reply: networkResult.summary,
-        agents: networkResult.agents.map((a) => ({
-          name: a.agentName,
-          category: a.category,
-          response: a.answer,
-        })),
-        agentCount: networkResult.responseCount,
-        isNetworkQuery: true,
-      });
-    }
-
     const entries = await retrieve(supabase, account.id, lastUser, false);
+
+    // Concierge catalog: every business in the city + their public prices/services/hours,
+    // so the assistant can search by budget, list, compare, recommend, and drill into one.
+    const catalog = await loadCatalog(supabase, account.city || "Coimbatore");
 
     // Recent orders / important customer messages so the owner can ask about them
     const { data: convs } = await supabase.from("conversations").select("id").eq("account_id", account.id);
@@ -162,28 +104,41 @@ export async function POST(req: NextRequest) {
       ? activity.map((m) => `- ${new Date(m.created_at).toLocaleString()} ${m.is_order ? "[ORDER]" : "[QUESTION]"}${m.fulfilled ? " (done)" : ""}: ${m.content}`).join("\n")
       : "(no orders or flagged customer messages yet)";
 
-    const sys = `You are the management assistant for "${account.name}"${account.category ? `, a ${account.category} business` : ""}.
-Today is ${new Date().toLocaleDateString()}.
-The owner talks to you to manage their AI receptionist. Decide what to do with each message:
-- If the owner is giving you business info to remember (prices, hours, services, policies, FAQs, anything a customer might ask), STORE it.
-- If the owner is asking a question, just REPLY.
+    const sys = `You are the assistant inside Hanubees for "${account.name}"${account.category ? `, a ${account.category} business` : ""} in ${account.city || "Coimbatore"}.
+Today is ${new Date().toLocaleDateString()}. You do TWO jobs — decide per message which applies:
 
-Tag each stored entry with one of: pricing, hours, services, location, contact, policy, faq, other.
-Set visibility "public" for anything customers may see, "private" for owner-only notes.
+A) MANAGE THIS BUSINESS
+- If the owner gives you info to remember (prices, hours, services, policies, FAQs), STORE it.
+  Tag each entry: pricing, hours, services, location, contact, policy, faq, other.
+  visibility "public" for anything customers may see, "private" for owner-only notes.
+- If they ask about their own info, orders, bookings, or customer activity, REPLY from the data below.
 
-When the owner asks about orders, bookings, leads, or customer activity, answer from the activity list below.
+B) LOCAL SERVICES CONCIERGE (use the CATALOG below)
+- If the message is a discovery/shopping request — e.g. budgets ("under ₹500", "cheapest"),
+  "what services are available", "find/compare/recommend", or asking about ANOTHER business —
+  answer from the CATALOG. Then action is "reply".
+- Listing: show matching businesses as short bullets with their price and page link (/slug).
+- Budgets: parse the amount and only include businesses whose price fits; if none fit, say so and
+  suggest the closest options.
+- Recommendations: pick 1–3 and say WHY (price, services, hours). End by offering a next step,
+  e.g. "Want me to open <name>'s page or compare two of these?"
+- Drill-down: if they name one business, give its details from the catalog and suggest /slug.
+- Only use catalog facts. Never invent prices. If something isn't listed, say so.
 
-Existing info on file:
+== THIS BUSINESS — info on file ==
 ${dataBlock((entries ?? []) as any)}
 
-Recent orders & flagged customer messages:
+== THIS BUSINESS — recent orders & flagged messages ==
 ${activityBlock}
 
+== CATALOG: businesses in ${account.city || "Coimbatore"} ==
+${catalog}
+
 Respond with ONLY this JSON (no markdown):
-{"action":"store"|"reply","entries":[{"content":"...","tag":"...","visibility":"public"|"private"}],"reply":"short confirmation or answer"}`;
+{"action":"store"|"reply","entries":[{"content":"...","tag":"...","visibility":"public"|"private"}],"reply":"your concise answer; use line breaks and bullets for lists"}`;
 
     const msgs: ChatMsg[] = [{ role: "system", content: sys }, ...history.map((m) => ({ role: m.role, content: m.content })) as ChatMsg[]];
-    const { text, error } = await llmChat(msgs, { maxTokens: 700, temperature: 0.3 });
+    const { text, error } = await llmChat(msgs, { maxTokens: 1100, temperature: 0.3 });
     if (error) return NextResponse.json({ error }, { status: 500 });
 
     const parsed = parseJson<{ action: string; entries?: any[]; reply: string }>(text);
