@@ -32,7 +32,7 @@ export async function updateSession(request: NextRequest) {
 
   // Only the owner-facing app shell is protected. Everything else
   // (landing, public business pages /[slug], api, og) is public for SEO.
-  const PROTECTED = ["/chat", "/messages", "/dashboard", "/onboarding", "/profile", "/settings"];
+  const PROTECTED = ["/chat", "/messages", "/dashboard", "/onboarding", "/profile", "/settings", "/notifications"];
   const isProtected = PROTECTED.some(p => path === p || path.startsWith(p + "/"));
 
   if (!user && isProtected) {
