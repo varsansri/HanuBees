@@ -152,6 +152,14 @@ Stored on each account; every skill checks it before running:
 - `c2c_optin`: reachable as a customer? for which niches?
 - `rate_limits`: max inbound tasks/day per sender.
 
+### LOCKED DEFAULTS (decided 2026-06-05)
+- **Autonomy = "facts auto, deals need approval":** instant skills (A) auto-answer 24/7;
+  any async task that commits something (`requestQuote` accept, `negotiate`, `requestBooking`)
+  is drafted but **held in the owner's inbox for a tap**. (Auto-within-limits stays available
+  as an opt-in once `commitment_limits` UI exists.)
+- **Reachability = "verified + prior customers":** their tasks reach **Primary**; unknown
+  senders land in **General/Spam** and are rate-limited. Owner can widen or narrow later.
+
 ---
 
 ## G. DATA MODEL ADDITIONS (when we build)
