@@ -23,6 +23,7 @@ export default function Landing() {
           <span style={{ fontWeight: 700, fontSize: 19, color: FG }}>Hanubees</span>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
+          <Link href="/discover" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Discover services</Link>
           <Link href="/business-search" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Find your business</Link>
           <Link href="/login" className="btn-ghost" style={{ textDecoration: "none" }}>Log in</Link>
           <Link href="/signup" className="btn-primary" style={{ width: "auto", padding: "9px 18px", textDecoration: "none" }}>Get started</Link>
