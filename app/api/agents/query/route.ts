@@ -56,24 +56,67 @@ export async function POST(req: NextRequest) {
       .limit(5);
 
     // Build context for the agent
-    const agentKnowledge = {
+    const businessInfo = {
       name: account.name,
       category: account.category,
       liveFacts: liveFacts || [],
       richContext: richContext || [],
     };
 
-    // Generate response using LLM
+    // If we have pricing info, return it directly
+    const pricingFact = businessInfo.liveFacts.find(
+      (f: any) => f.info_type === "pricing"
+    );
+    const hoursInfo = businessInfo.liveFacts.find(
+      (f: any) => f.info_type === "hours"
+    );
+    const servicesInfo = businessInfo.liveFacts.find(
+      (f: any) => f.info_type === "services"
+    );
+
+    // Check if question is about pricing/hours/services - return direct info if available
+    const questionLower = question.toLowerCase();
+    if (
+      (questionLower.includes("price") ||
+        questionLower.includes("cost") ||
+        questionLower.includes("charge") ||
+        questionLower.includes("how much")) &&
+      pricingFact
+    ) {
+      return NextResponse.json({
+        agentId,
+        agentName: account.name,
+        question,
+        answer: `${account.name} - ${pricingFact.content}`,
+        category: account.category,
+      });
+    }
+
+    if (
+      (questionLower.includes("hour") ||
+        questionLower.includes("open") ||
+        questionLower.includes("when")) &&
+      hoursInfo
+    ) {
+      return NextResponse.json({
+        agentId,
+        agentName: account.name,
+        question,
+        answer: `${account.name} - ${hoursInfo.content}`,
+        category: account.category,
+      });
+    }
+
+    // For other questions, use LLM
     const systemPrompt = `You are ${account.name}, a ${account.category} business in Coimbatore.
 
 Your business information:
-${agentKnowledge.liveFacts.map((f: any) => `- ${f.info_type}: ${f.content}`).join("\n")}
+${businessInfo.liveFacts.map((f: any) => `- ${f.info_type}: ${f.content}`).join("\n") || "(No structured info yet)"}
 
 About your business:
-${agentKnowledge.richContext.map((r: any) => `- ${r.tag}: ${r.content}`).join("\n")}
+${businessInfo.richContext.map((r: any) => `- ${r.tag}: ${r.content}`).join("\n") || "(No additional context)"}
 
-Answer the following question directly and concisely based on your business information.
-If you don't have information about something, say so.`;
+Answer the following question directly and concisely based on your business information.`;
 
     const messages = [
       { role: "system" as const, content: systemPrompt },
