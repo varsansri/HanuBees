@@ -5,6 +5,41 @@
 
 ---
 
+## 🔖 SESSION CONTINUATION — read this first (updated 2026-06-05)
+
+**Companion docs (read for full picture):** `VISION.md` (full vision + investor lens), `SKILLS.md` (agent-skill catalog + locked consent defaults), `GTM.md` (marketing + sales playbook), `VISION_BOARD.md`, `claudevision.md`.
+
+**Infra facts**
+- Live: https://hanubees.com · Supabase project `whfxrovgvulmhqkhumuz` (url https://whfxrovgvulmhqkhumuz.supabase.co) · **RLS is ON**.
+- Deploys auto from `git push origin main`. To `next build` locally, export the **public** `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (they're public) — `vercel env pull` returns them empty because LLM/embedding keys are **Sensitive** (work only in prod). So anything needing LLM/embeddings (e.g. embedding backfill) must run in prod.
+- SQL editor: https://supabase.com/dashboard/project/whfxrovgvulmhqkhumuz/sql/new
+
+**Migrations already RUN in Supabase (verified live):**
+- `migration-upgrade.sql` PART A + A.2 (added `embedding`/`supersedes`/`source` to data_entries, `match_data_entries` RPC, HNSW index, + accounts cols location/logo_url/rating/review_count/follower_count/instagram/email/verified) + PART B (RLS re-enabled).
+- `phase1-watchers.sql` (watchers + notifications + 6 demo offers).
+- `phase-listings.sql` (listings table + 5 new-vertical demo providers + 10 listings).
+- NOT run: embedding backfill (`/api/backfill-embeddings`) — semantic search uses a recent-entries fallback; fine for demo.
+
+**Shipped & live today (all verified on prod):**
+- **Concierge in `/chat`** (owner mode): injects a catalog of all city businesses **+ listings** into the LLM; budget search, list, compare, recommend, drill-down, and **clarify-then-match** (asks 1–2 Qs, returns only real matches or "none, closest is…").
+- **Purple `@handle.B` links** for every business mention (→ `/<bee_name>.bee`); Twitter-card: user's own `@handle.B` above their messages. (`PURPLE=#b794f6`.)
+- **Watchers + Notification area** (`/notifications`, 🔔 nav): rules (keyword/category/min-discount/price-under) + color; folders Primary/General/Spam; engine `lib/watchers/engine.ts` runs on open/refresh (overnight cron = later).
+- **Structured Listings** (`listings` table, one account→many): verticals services/secondhand/realestate/rental/transport/b2b/product. `/listings` manager + **voice-list** (`/api/listings/draft` — speak/type → LLM structures → saves). Concierge + public agent surface them.
+- **Floating bee**: pinch-to-zoom (0.6–2.5×, persisted) + drag-to-edge minimize (peeking nub, tap to restore). Voice/tap/drag unchanged.
+- **Agent-to-agent network** runs in-process (`lib/ai/agent-network.ts`): `/api/agents/search`, `/api/agents/query`, `/api/consumer-agent`, `/discover`.
+
+**Data in DB:** 50 Coimbatore wedding-vertical demo businesses + 5 new-vertical providers (`cbehomes, anandused, priyatuition, easyrentals, skrtransport`) + 10 listings + 6 demo offers. **All demo (fake `user_id`s), not claimable.**
+
+**Scope LOCKED:** information+connection verticals only — **NO maps/tracking/delivery/cab/food** (speed-based). Only **1 of 4 skill kinds built** (Watchers). Monetization direction: flat **subscription, 0% commission**, family/IP, business↔customer mode (forming, not locked — see VISION.md risks).
+
+**Parked / NOT done:** real self-serve onboarding+claim of seeded businesses (`/api/create-account-enriched` returns 501 — needs real auth, anon auth not enabled); overnight cron; reviews/ratings; consent/safety layer + spam filtering; async tasks (Phase 2: askCustom/requestQuote/negotiate); customer-to-customer; escalation relay; embedding backfill; structured per-vertical attribute filtering.
+
+**▶ NEXT STEP (agreed with founder):** build the **Call-Onboarding tool** — a page/voice box where the founder, on a phone call with a business, enters/speaks their details and it instantly creates the account + agent + listings and returns the shareable `@handle.B` link to WhatsApp. (This is the GTM unlock; self-serve claim stays parked.) After that: async tasks (Phase 2).
+
+**Guardrails reaffirmed:** never paste secrets/tokens in chat; declined robocall/number-spoofing GTM (illegal — ACMA/TRAI); marketing stays truthful (no fake news, no reposting strangers' Snapmap footage). Legal GTM = manual founder calls (see GTM.md).
+
+---
+
 ## The Vision
 
 Every business has valuable information (prices, hours, services, policies). Every person wants answers fast without calling/waiting. Today that's broken: search → visit sites → call → wait.
