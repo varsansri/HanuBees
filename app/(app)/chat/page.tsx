@@ -11,8 +11,28 @@ const FG     = "#eaeaea";
 const MUTED  = "#a9a9a7";
 const BG2    = "#1a1a1a";
 const BG3    = "#242424";
+const PURPLE = "#b794f6";
 
 type Msg = { role: "user" | "assistant"; content: string };
+
+// Turn @handle mentions into tappable purple links to that business's profile.
+function renderContent(text: string) {
+  return text.split(/(@[a-zA-Z0-9_]+)/g).map((part, i) => {
+    const m = /^@([a-zA-Z0-9_]+)$/.exec(part);
+    if (m) {
+      return (
+        <a
+          key={i}
+          href={`/${m[1]}.bee`}
+          style={{ color: PURPLE, fontWeight: 600, textDecoration: "none" }}
+        >
+          {part}
+        </a>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
 
 const SUGGESTIONS = [
   "We charge $2000 for a full-day wedding shoot",
@@ -129,7 +149,7 @@ export default function ChatPage() {
                 border: m.role === "user" ? "none" : "1px solid rgba(152,170,157,0.18)",
                 borderBottomRightRadius: m.role === "user" ? 4 : 16,
                 borderBottomLeftRadius: m.role === "user" ? 16 : 4,
-              }}>{m.content}</div>
+              }}>{m.role === "assistant" ? renderContent(m.content) : m.content}</div>
             </div>
           ))
         )}

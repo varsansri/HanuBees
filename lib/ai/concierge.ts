@@ -46,7 +46,7 @@ export async function loadCatalog(
       (pick("contact") || a.phone) && `contact: ${pick("contact") || a.phone}`,
     ].filter(Boolean);
     lines.push(
-      `• ${a.name} — ${a.category || "business"} | page: /${a.slug}\n  ${parts.join(" | ") || "(no public details yet)"}`
+      `• ${a.name} (@${a.bee_name}) — ${a.category || "business"}\n  ${parts.join(" | ") || "(no public details yet)"}`
     );
   }
 
