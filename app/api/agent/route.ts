@@ -199,12 +199,26 @@ Respond with ONLY this JSON (no markdown):
   // RAG retrieval; anon RLS + public_only keep private facts out — safe by construction
   const entries = await retrieve(supabase, account.id, lastUser, true);
 
+  // This business's active listings (items/properties/services) so the agent can answer about them.
+  const { data: lst } = await supabase
+    .from("listings")
+    .select("vertical, title, description, price, area, status")
+    .eq("account_id", account.id)
+    .eq("status", "active")
+    .limit(50);
+  const listingsBlock = (lst && lst.length)
+    ? lst.map((l: any) => `- [${l.vertical}] ${l.title}${l.price != null ? ` — ₹${l.price}` : ""}${l.area ? ` (${l.area})` : ""}${l.description ? `: ${l.description}` : ""}`).join("\n")
+    : "(no active listings)";
+
   const sys = `You are the friendly AI receptionist for "${account.name}"${account.category ? `, a ${account.category} business` : ""}${account.city ? ` in ${account.city}` : ""}.
 ${account.bio ? account.bio + "\n" : ""}Answer customer questions using ONLY the information below. Be warm, concise, and helpful.
 If the answer is not in the information, do NOT make it up — say you'll pass the question to the team and ask for their contact or details.
 
 Business information:
 ${dataBlock((entries ?? []) as any)}
+
+Listings (items / properties / services for sale or rent):
+${listingsBlock}
 
 Respond with ONLY this JSON (no markdown):
 {"reply":"your message to the customer","answered":true|false,"isOrder":true|false}

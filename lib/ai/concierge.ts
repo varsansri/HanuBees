@@ -50,5 +50,31 @@ export async function loadCatalog(
     );
   }
 
-  return lines.join("\n");
+  const businessBlock = lines.join("\n");
+
+  // Structured listings (secondhand / real estate / rentals / services / transport / b2b).
+  // Fetched independent of the business-only filter above so individual providers count too.
+  const { data: listings } = await supabase
+    .from("listings")
+    .select("vertical, title, description, price, area, status, accounts!inner(bee_name, slug, city)")
+    .eq("status", "active")
+    .ilike("accounts.city", `%${city}%`)
+    .limit(120);
+
+  const listingLines: string[] = [];
+  for (const l of (listings || []) as any[]) {
+    const acc = l.accounts;
+    if (!acc) continue;
+    const price = l.price != null ? `₹${l.price}` : "price on ask";
+    listingLines.push(
+      `• @${acc.bee_name}.B — [${l.vertical}] ${l.title} | ${price}${l.area ? ` | ${l.area}` : ""}${l.description ? ` — ${l.description}` : ""}`
+    );
+  }
+
+  if (!listingLines.length) return businessBlock;
+
+  return `${businessBlock}
+
+LISTINGS (specific items/properties/services — match these by vertical, price, area):
+${listingLines.join("\n")}`;
 }
