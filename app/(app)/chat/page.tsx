@@ -31,6 +31,16 @@ export default function ChatPage() {
   const endRef   = useRef<HTMLDivElement>(null);
   const sendRef  = useRef<(t: string) => void>(() => {});
 
+  // Handle auto-login from enriched account creation
+  useEffect(() => {
+    const token = sessionStorage.getItem("auto_auth_token");
+    if (token) {
+      sessionStorage.removeItem("auto_auth_token");
+      setToast("✓ Account created! Your agent is ready.");
+      setTimeout(() => setToast(""), 3000);
+    }
+  }, []);
+
   // Bee ball: centered (hero) when empty, parked (mini) once chatting
   useEffect(() => { setMode(messages.length ? "mini" : "hero"); }, [messages.length, setMode]);
 

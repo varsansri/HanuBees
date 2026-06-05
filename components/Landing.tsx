@@ -23,6 +23,7 @@ export default function Landing() {
           <span style={{ fontWeight: 700, fontSize: 19, color: FG }}>Hanubees</span>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
+          <Link href="/business-search" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Find your business</Link>
           <Link href="/login" className="btn-ghost" style={{ textDecoration: "none" }}>Log in</Link>
           <Link href="/signup" className="btn-primary" style={{ width: "auto", padding: "9px 18px", textDecoration: "none" }}>Get started</Link>
         </div>
@@ -38,7 +39,8 @@ export default function Landing() {
           Give your business its own AI receptionist. It answers your customers instantly — from your own info. Free to start.
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 30, flexWrap: "wrap" }}>
-          <Link href="/signup" className="btn-primary" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Build my free agent</Link>
+          <Link href="/business-search" className="btn-primary" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Auto-setup: find your business</Link>
+          <Link href="/signup" className="btn-ghost" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Manual setup</Link>
         </div>
         <p style={{ fontSize: 12.5, color: MUTED, marginTop: 14 }}>No card needed · live in 2 minutes</p>
       </section>
