@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { analytics } from "@/lib/analytics";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -42,6 +43,7 @@ export default function OnboardingPage() {
       if (!user) { router.push("/login"); return; }
       const { data } = await supabase.from("accounts").select("id").eq("user_id", user.id).maybeSingle();
       if (data) { router.push("/chat"); return; }
+      analytics.onboardingStarted();
       setReady(true);
     })();
   }, [router, supabase]);
@@ -69,6 +71,7 @@ export default function OnboardingPage() {
     });
     setBusy(false);
     if (insErr) { setError(insErr.message); return; }
+    analytics.onboardingStepCompleted(2, `basics_${type}`);
     setStep("bee");
   };
 
@@ -82,8 +85,12 @@ export default function OnboardingPage() {
       const cleanName = beeName.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
       await supabase.from("accounts").update({ bee_name: cleanName }).eq("id", acc.id);
     }
+    analytics.onboardingStepCompleted(3, `bee_named_${beeName}`);
     setBusy(false);
-    if (type === "person") router.push("/chat");
+    if (type === "person") {
+      analytics.onboardingCompleted("person");
+      router.push("/chat");
+    }
     else setStep("seed");
   };
 
@@ -97,6 +104,8 @@ export default function OnboardingPage() {
       });
       const data = await res.json();
       if (data.error) { setError(data.error); setBusy(false); return; }
+      analytics.onboardingStepCompleted(4, "seed_complete");
+      analytics.onboardingCompleted("business");
       router.push("/chat");
     } catch {
       setError("Network error — try again.");

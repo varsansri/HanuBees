@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useBee } from "@/components/bee/BeeProvider";
+import { analytics } from "@/lib/analytics";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -42,6 +43,7 @@ export default function ChatPage() {
     setMessages(next);
     setInput("");
     setLoading(true);
+    analytics.chatMessageSent(content.split(/\s+/).length);
     try {
       const res = await fetch("/api/agent", {
         method: "POST",
@@ -54,7 +56,12 @@ export default function ChatPage() {
         setMessages((m) => [...m, { role: "assistant", content: "The agent is busy for a second — try that again." }]);
       } else {
         setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
-        if (data.stored) setToast(`Saved ${data.stored} to your agent`);
+        if (data.stored && Array.isArray(data.stored)) {
+          setToast(`Saved ${data.stored.length} to your agent`);
+          data.stored.forEach((fact: any) => {
+            analytics.factStored(fact.info_type || "unknown", fact.is_live_fact);
+          });
+        }
       }
     } catch {
       setMessages((m) => [...m, { role: "assistant", content: "Network error — try again." }]);

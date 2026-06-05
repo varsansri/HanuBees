@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { cache } from "@/lib/cache/usePageCache";
+import { analytics } from "@/lib/analytics";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -49,10 +50,12 @@ export default function MessagesPage() {
         setConvs(cached.convs);
         setMsgs(cached.msgs);
         setLoading(false);
+        analytics.cacheHit("messages");
         // Refresh in background
         loadFresh(account.id, cacheKey);
         return;
       }
+      analytics.cacheMiss("messages");
     }
 
     // Fresh fetch
@@ -87,6 +90,7 @@ export default function MessagesPage() {
   const toggleFulfilled = async (m: Msg) => {
     setMsgs((prev) => prev.map((x) => x.id === m.id ? { ...x, fulfilled: !x.fulfilled } : x));
     await supabase.from("messages").update({ fulfilled: !m.fulfilled }).eq("id", m.id);
+    analytics.messageFulfilled(m.conversation_id);
   };
 
   const important = msgs.filter((m) => m.is_important).sort((a, b) => +new Date(b.created_at) - +new Date(a.created_at));

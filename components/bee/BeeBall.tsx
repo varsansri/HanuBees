@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useBee } from "./BeeProvider";
+import { analytics } from "@/lib/analytics";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -64,6 +65,7 @@ export default function BeeBall() {
       if (text) deliver(text);
       return;
     }
+    analytics.voiceInputStarted();
     deliveredRef.current = false;
     setInterim("");
     const rec = new SR();
@@ -74,13 +76,23 @@ export default function BeeBall() {
       let txt = "";
       for (let i = 0; i < e.results.length; i++) txt += e.results[i][0].transcript;
       setInterim(txt);
-      if (e.results[e.results.length - 1].isFinal) deliver(txt);
+      if (e.results[e.results.length - 1].isFinal) {
+        analytics.voiceInputCompleted(txt);
+        deliver(txt);
+      }
     };
     rec.onend   = () => { if (interimRef.current) deliver(interimRef.current); setListening(false); setInterim(""); };
-    rec.onerror = () => { setListening(false); setInterim(""); };
+    rec.onerror = () => {
+      analytics.voiceInputFailed("speech_recognition_error");
+      setListening(false);
+      setInterim("");
+    };
     recRef.current = rec;
     setListening(true);
-    try { rec.start(); } catch { setListening(false); }
+    try { rec.start(); } catch {
+      analytics.voiceInputFailed("speech_recognition_exception");
+      setListening(false);
+    }
   };
 
   // keep latest interim available to onend without stale closure
@@ -91,6 +103,7 @@ export default function BeeBall() {
 
   // ── Tap ─────────────────────────────────────────────────────────────────
   const onTap = () => {
+    analytics.beeBallTapped();
     if (pathname !== "/chat") router.push("/chat");
     else window.dispatchEvent(new CustomEvent("bee:focus"));
   };
@@ -107,6 +120,7 @@ export default function BeeBall() {
     if (!startRef.current) return;
     const dx = e.clientX - startRef.current.x;
     const dy = e.clientY - startRef.current.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
     if (!movedRef.current && (Math.abs(dx) > MOVE_THRESHOLD || Math.abs(dy) > MOVE_THRESHOLD)) {
       movedRef.current = true;
       if (holdTimer.current) clearTimeout(holdTimer.current);
@@ -116,6 +130,7 @@ export default function BeeBall() {
       const x = Math.max(4, Math.min(window.innerWidth - size - 4, e.clientX - size / 2));
       const y = Math.max(4, Math.min(window.innerHeight - size - 4, e.clientY - size / 2));
       setPos({ x, y });
+      if (distance > 40) analytics.beeBallDragged(Math.round(distance));
     }
   };
 

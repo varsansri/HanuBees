@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { analytics } from "@/lib/analytics";
 
 const YELLOW = "#ffbe00";
 const GREEN  = "#98aa9d";
@@ -34,6 +35,7 @@ export default function PublicAgent({ account, highlights }: { account: Account;
     setMessages(next);
     setInput("");
     setLoading(true);
+    analytics.customerQuestionAsked(account.slug, content.split(/\s+/).length);
     try {
       const res = await fetch("/api/agent", {
         method: "POST",
@@ -42,7 +44,9 @@ export default function PublicAgent({ account, highlights }: { account: Account;
       });
       const data = await res.json();
       if (data.conversationId) setConvId(data.conversationId);
-      setMessages((m) => [...m, { role: "assistant", content: data.reply || "Thanks — I'll pass this to the team." }]);
+      const reply = data.reply || "Thanks — I'll pass this to the team.";
+      setMessages((m) => [...m, { role: "assistant", content: reply }]);
+      analytics.agentAnswerProvided(account.slug, reply.length, data.confidence);
     } catch {
       setMessages((m) => [...m, { role: "assistant", content: "Connection issue — please try again." }]);
     } finally {
