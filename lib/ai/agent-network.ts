@@ -1,7 +1,31 @@
-// Agent-to-agent network orchestration
-// Allows consumer agents to query multiple business agents and aggregate responses
+// Agent-to-agent network orchestration.
+// Runs entirely in-process: queries Supabase directly and calls the LLM helper.
+// (No HTTP self-calls — those failed in production because there is no localhost.)
 
-import { callLLM } from "./llm";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { llmChat } from "./llm";
+
+// Lazy client: never evaluate env at module load (breaks `next build` page-data
+// collection when env isn't injected yet). Created on first use instead.
+let _sb: SupabaseClient | null = null;
+function db(): SupabaseClient {
+  if (!_sb) {
+    _sb = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+  }
+  return _sb;
+}
+
+export interface NetworkAgent {
+  id: string;
+  name: string;
+  bee_name: string;
+  slug: string;
+  category: string | null;
+  city: string | null;
+}
 
 export interface AgentQueryResult {
   agentId: string;
@@ -11,162 +35,145 @@ export interface AgentQueryResult {
   relevanceScore: number;
 }
 
-export async function queryBusinessAgents(
-  businessAgents: Array<{ id: string; name: string; category: string }>,
-  question: string
-): Promise<AgentQueryResult[]> {
-  const results: AgentQueryResult[] = [];
-
-  // Query each agent in parallel
-  const promises = businessAgents.map(async (agent) => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/agents/query`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            agentId: agent.id,
-            question,
-          }),
-        }
-      );
-
-      if (!response.ok) return null;
-
-      const data = await response.json();
-      return data;
-    } catch {
-      return null;
-    }
-  });
-
-  const responses = await Promise.all(promises);
-
-  // Filter valid responses and score relevance
-  for (const response of responses) {
-    if (response) {
-      // Simple relevance scoring: check if answer contains key question words
-      const questionWords = question.toLowerCase().split(" ");
-      const answerLower = response.answer.toLowerCase();
-      const matches = questionWords.filter(
-        (w) => w.length > 3 && answerLower.includes(w)
-      ).length;
-      const relevanceScore = Math.min(
-        1,
-        matches / Math.max(1, questionWords.length)
-      );
-
-      results.push({
-        agentId: response.agentId,
-        agentName: response.agentName,
-        category: response.category,
-        answer: response.answer,
-        relevanceScore,
-      });
-    }
-  }
-
-  // Sort by relevance
-  return results.sort((a, b) => b.relevanceScore - a.relevanceScore);
+/** Find business agents by (optional) category + city. */
+export async function searchAgents(
+  category?: string,
+  city?: string,
+  limit = 5
+): Promise<NetworkAgent[]> {
+  let q = db()
+    .from("accounts")
+    .select("id, name, bee_name, slug, category, city")
+    .eq("type", "business")
+    .limit(limit);
+  if (category) q = q.ilike("category", `%${category}%`);
+  if (city) q = q.ilike("city", `%${city}%`);
+  const { data } = await q;
+  return (data || []) as NetworkAgent[];
 }
 
+/** Ask one agent a question, answering from its own stored data. */
+export async function queryOneAgent(
+  agent: NetworkAgent,
+  question: string
+): Promise<AgentQueryResult> {
+  const { data: facts } = await db()
+    .from("data_entries")
+    .select("content, info_type, tag, is_live_fact")
+    .eq("account_id", agent.id)
+    .eq("visibility", "public");
+
+  const live = (facts || []).filter((f: any) => f.is_live_fact);
+  const rich = (facts || []).filter((f: any) => !f.is_live_fact);
+
+  const q = question.toLowerCase();
+  const find = (type: string) =>
+    live.find((f: any) => (f.info_type || f.tag) === type);
+
+  // Fast paths: structured facts answered directly, no LLM cost.
+  const pricing = find("pricing");
+  if (pricing && /price|cost|charge|how much|rate|fee/.test(q)) {
+    return result(agent, `${agent.name}: ${pricing.content}`, 1);
+  }
+  const hours = find("hours");
+  if (hours && /hour|open|timing|when|close/.test(q)) {
+    return result(agent, `${agent.name}: ${hours.content}`, 1);
+  }
+  const services = find("services");
+  if (services && /service|offer|do you|provide/.test(q)) {
+    return result(agent, `${agent.name}: ${services.content}`, 0.9);
+  }
+
+  // General: let the LLM answer from this agent's knowledge.
+  const knowledge = [
+    ...live.map((f: any) => `- ${f.info_type || f.tag}: ${f.content}`),
+    ...rich.map((f: any) => `- ${f.tag || "info"}: ${f.content}`),
+  ].join("\n");
+
+  const sys = `You are ${agent.name}, a ${agent.category || "business"} in ${agent.city || "Coimbatore"}.
+Answer the question concisely using ONLY this information:
+${knowledge || "(no information on file)"}
+If the answer isn't here, say you don't have that detail.`;
+
+  const { text } = await llmChat(
+    [
+      { role: "system", content: sys },
+      { role: "user", content: question },
+    ],
+    { maxTokens: 220, temperature: 0.3 }
+  );
+
+  return result(agent, text ? `${agent.name}: ${text}` : `${agent.name}: I don't have that detail.`, 0.5);
+}
+
+function result(agent: NetworkAgent, answer: string, score: number): AgentQueryResult {
+  return {
+    agentId: agent.id,
+    agentName: agent.name,
+    category: agent.category || "",
+    answer,
+    relevanceScore: score,
+  };
+}
+
+/** Synthesize multiple agent answers into one comparison summary. */
 export async function aggregateAgentResponses(
   question: string,
   results: AgentQueryResult[]
 ): Promise<string> {
-  if (results.length === 0) {
-    return "No agents found that can help with your question.";
-  }
+  if (results.length === 0) return "No businesses found that can answer that yet.";
+  if (results.length === 1) return results[0].answer;
 
-  if (results.length === 1) {
-    return results[0].answer;
-  }
+  const block = results
+    .map((r, i) => `${i + 1}. ${r.answer}`)
+    .join("\n");
 
-  // Use LLM to synthesize responses from multiple agents
-  const responsesSummary = results
-    .map(
-      (r, i) =>
-        `${i + 1}. ${r.agentName} (${r.category}):\n${r.answer}`
-    )
-    .join("\n\n");
+  const { text } = await llmChat(
+    [
+      {
+        role: "system",
+        content:
+          "You compare options from multiple local businesses. Summarize clearly and concisely, highlighting price/option differences. Keep it short.",
+      },
+      { role: "user", content: `Question: "${question}"\n\nResponses:\n${block}` },
+    ],
+    { maxTokens: 350, temperature: 0.3 }
+  );
 
-  const synthesisPrompt = `
-You are a helpful assistant that gathers information from multiple service providers.
-
-A user asked: "${question}"
-
-Here are responses from different providers:
-
-${responsesSummary}
-
-Synthesize these responses into a helpful summary for the user.
-Highlight the key options and differences between providers.
-Be concise and organized.`;
-
-  const messages = [
-    {
-      role: "system" as const,
-      content:
-        "You are a helpful assistant synthesizing information from multiple providers.",
-    },
-    { role: "user" as const, content: synthesisPrompt },
-  ];
-
-  return await callLLM(messages);
+  // If the LLM is unavailable, fall back to listing the raw answers.
+  return text || block;
 }
 
+/** End-to-end: discover relevant agents, query them in parallel, synthesize. */
 export async function consumerAgentNetworkQuery(
   question: string,
   category?: string,
-  city?: string
+  city = "Coimbatore"
 ): Promise<{
   question: string;
   summary: string;
   agents: AgentQueryResult[];
   responseCount: number;
 }> {
-  // Step 1: Search for relevant agents
-  const searchParams = new URLSearchParams();
-  if (category) searchParams.append("category", category);
-  if (city) searchParams.append("city", city || "Coimbatore");
-  searchParams.append("limit", "5"); // Query top 5 agents
-
-  const searchResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/agents/search?${searchParams}`,
-    { method: "GET" }
-  );
-
-  if (!searchResponse.ok) {
-    return {
-      question,
-      summary: "Unable to search for agents.",
-      agents: [],
-      responseCount: 0,
-    };
-  }
-
-  const { agents } = await searchResponse.json();
-
+  const agents = await searchAgents(category, city, 5);
   if (agents.length === 0) {
     return {
       question,
-      summary: `No agents found for ${category || "your query"} in ${city || "Coimbatore"}.`,
+      summary: `No ${category || "businesses"} found in ${city} yet.`,
       agents: [],
       responseCount: 0,
     };
   }
 
-  // Step 2: Query each agent
-  const results = await queryBusinessAgents(agents, question);
+  const settled = await Promise.allSettled(
+    agents.map((a) => queryOneAgent(a, question))
+  );
+  const results = settled
+    .filter((s): s is PromiseFulfilledResult<AgentQueryResult> => s.status === "fulfilled")
+    .map((s) => s.value)
+    .sort((a, b) => b.relevanceScore - a.relevanceScore);
 
-  // Step 3: Synthesize responses
   const summary = await aggregateAgentResponses(question, results);
 
-  return {
-    question,
-    summary,
-    agents: results,
-    responseCount: results.length,
-  };
+  return { question, summary, agents: results, responseCount: results.length };
 }

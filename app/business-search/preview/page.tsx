@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -29,6 +29,14 @@ type EnrichedData = {
 };
 
 export default function PreviewPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+      <PreviewInner />
+    </Suspense>
+  );
+}
+
+function PreviewInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const uuid = searchParams.get("id");

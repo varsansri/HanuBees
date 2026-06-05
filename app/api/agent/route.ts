@@ -23,30 +23,41 @@ function dataBlock(entries: Entry[]): string {
  */
 async function retrieve(supabase: any, accountId: string, question: string, publicOnly: boolean): Promise<Entry[]> {
   const live_types = ['pricing', 'hours', 'services', 'contact', 'policy'];
-  const context_types = ['about', 'portfolio', 'faq', 'offer'];
 
-  // Tier 1: LIVE FACTS — fetch current (not superseded, effective now or earlier)
-  const { data: liveFacts } = await supabase
+  // Tier 1: LIVE FACTS — current versions (not superseded). Classify by info_type OR tag,
+  // so both seeded data (info_type) and owner-typed data (tag) are picked up.
+  let liveQ = supabase
     .from("data_entries")
     .select("content, tag")
     .eq("account_id", accountId)
     .eq("is_live_fact", true)
-    .in("info_type", live_types)
-    .is("supersedes", null) // current (not replaced by newer)
-    .lte("effective_date", new Date().toISOString().split('T')[0]) // effective now
-    .eq(publicOnly ? "visibility" : "visibility", publicOnly ? "public" : null)
-    .order("info_type, effective_date", { ascending: false });
+    .is("supersedes", null);
+  if (publicOnly) liveQ = liveQ.eq("visibility", "public");
+  const { data: liveFacts } = await liveQ;
 
-  // Tier 2: RICH CONTEXT — semantic search
+  // Tier 2: RICH CONTEXT — semantic search (needs embeddings + match_data_entries RPC)
   let contextFacts: Entry[] = [];
   const v = await embedText(question);
   if (v) {
     const { data, error } = await supabase.rpc("match_data_entries", {
       p_account: accountId, query_embedding: v, match_count: 6, public_only: publicOnly,
     });
-    if (!error && Array.isArray(data)) {
-      contextFacts = data.filter((d: any) => context_types.includes(d.info_type || '')) as Entry[];
-    }
+    if (!error && Array.isArray(data)) contextFacts = data as Entry[];
+  }
+
+  // Fallback when embeddings aren't ready yet: return a few recent non-live entries
+  // (about / portfolio / faq) so the agent still has context to answer from.
+  if (!contextFacts.length) {
+    let ctxQ = supabase
+      .from("data_entries")
+      .select("content, tag")
+      .eq("account_id", accountId)
+      .eq("is_live_fact", false)
+      .order("created_at", { ascending: false })
+      .limit(6);
+    if (publicOnly) ctxQ = ctxQ.eq("visibility", "public");
+    const { data: ctx } = await ctxQ;
+    contextFacts = (ctx || []) as Entry[];
   }
 
   return [...(liveFacts || []), ...contextFacts];
@@ -180,15 +191,26 @@ Respond with ONLY this JSON (no markdown):
 
     let stored = 0;
     if (parsed.action === "store" && Array.isArray(parsed.entries) && parsed.entries.length) {
+      const LIVE_TAGS = ["pricing", "hours", "services", "contact", "location", "policy"];
+      const today = new Date().toISOString().split("T")[0];
       const rows = parsed.entries
         .filter((e) => e?.content)
-        .map((e) => ({
-          account_id: account.id,
-          content: String(e.content).slice(0, 2000),
-          tag: e.tag ?? "other",
-          visibility: e.visibility === "private" ? "private" : "public",
-          source: "manual",
-        }));
+        .map((e) => {
+          const tag = e.tag ?? "other";
+          const isLive = LIVE_TAGS.includes(tag);
+          return {
+            account_id: account.id,
+            content: String(e.content).slice(0, 2000),
+            tag,
+            visibility: e.visibility === "private" ? "private" : "public",
+            source: "manual",
+            // Connect owner-typed facts to retrieval: live tags become LIVE FACTS,
+            // everything else stays as RICH CONTEXT (semantic).
+            is_live_fact: isLive,
+            info_type: isLive ? tag : null,
+            effective_date: isLive ? today : null,
+          };
+        });
       const { error: insErr } = await supabase.from("data_entries").insert(rows);
       if (!insErr) {
         stored = rows.length;

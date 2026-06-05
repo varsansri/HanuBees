@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+function db() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -13,7 +15,7 @@ export async function GET(req: NextRequest) {
     const city = url.searchParams.get("city");
     const limit = parseInt(url.searchParams.get("limit") || "10");
 
-    let query = supabase
+    let query = db()
       .from("accounts")
       .select(
         "id, name, bee_name, slug, category, city, phone, website, bio"
