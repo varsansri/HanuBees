@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { llmChat, parseJson, type ChatMsg } from "@/lib/ai/llm";
 import { embedText, embedMissing } from "@/lib/ai/embed";
+import { consumerAgentNetworkQuery } from "@/lib/ai/agent-network";
 
 export const runtime = "nodejs";
 
@@ -70,6 +71,68 @@ export async function POST(req: NextRequest) {
     const { data: account } = await supabase
       .from("accounts").select("*").eq("user_id", user.id).maybeSingle();
     if (!account) return NextResponse.json({ error: "no_account" }, { status: 200 });
+
+    // Check if owner is asking about other businesses (network query)
+    const networkKeywords = [
+      "competitor",
+      "other photographer",
+      "other caterer",
+      "other venue",
+      "other dj",
+      "other makeup",
+      "how much do",
+      "what do they charge",
+      "what's the price for",
+      "find me",
+      "search for",
+      "compare",
+      "what do photographers charge",
+      "what do caterers charge",
+      "what do venues charge",
+    ];
+
+    const shouldQueryNetwork = networkKeywords.some((kw) =>
+      lastUser.toLowerCase().includes(kw)
+    );
+
+    if (shouldQueryNetwork) {
+      // Extract category from the question
+      const categoryKeywords: { [key: string]: string } = {
+        photographer: "photography",
+        caterer: "catering",
+        venue: "venue",
+        dj: "dj",
+        makeup: "makeup",
+        florist: "flowers",
+        cake: "cake",
+        transport: "transport",
+      };
+
+      let detectedCategory = "";
+      for (const [keyword, category] of Object.entries(categoryKeywords)) {
+        if (lastUser.toLowerCase().includes(keyword)) {
+          detectedCategory = category;
+          break;
+        }
+      }
+
+      const networkResult = await consumerAgentNetworkQuery(
+        lastUser,
+        detectedCategory,
+        account.city || "Coimbatore"
+      );
+
+      return NextResponse.json({
+        reply: networkResult.summary,
+        agents: networkResult.agents.map((a) => ({
+          name: a.agentName,
+          category: a.category,
+          response: a.answer,
+        })),
+        agentCount: networkResult.responseCount,
+        isNetworkQuery: true,
+      });
+    }
 
     const entries = await retrieve(supabase, account.id, lastUser, false);
 
