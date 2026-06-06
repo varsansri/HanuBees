@@ -7,7 +7,16 @@
 
 ## 🔖 SESSION CONTINUATION — read this first (updated 2026-06-05)
 
-**Companion docs (read for full picture):** `VISION.md` (full vision + investor lens), `SKILLS.md` (agent-skill catalog + locked consent defaults), `GTM.md` (marketing + sales playbook), `VISION_BOARD.md`, `claudevision.md`.
+**Companion docs (read for full picture):** `VISION.md` (full vision + investor lens), `SKILLS.md` (agent-skill catalog + locked consent defaults), `GTM.md` (marketing + sales playbook), `VISION_BOARD.md`, `claudevision.md`, **`hanubees-marketing-team/`** (all marketing: social auto-poster, brand assets, SEO docs, credentials inventory — start at its README).
+
+---
+
+### 📣 MARKETING UPDATE (2026-06-06) — see `hanubees-marketing-team/docs/PROGRESS-2026-06-06.md`
+- **Social marketing now lives in `hanubees-marketing-team/`** (moved brand assets + social scripts there; data-ingest + `db.js` stay in `scripts/`). Run scripts from project root: `node hanubees-marketing-team/scripts/story-carousel.js auto`.
+- **5-slide data-viz STORY carousels** (`story-carousel.js`): cover→big-stat+donut→bars→flowchart→CTA. Brand font Space Grotesk, bee on every slide. **All numbers built live from the DB — never fabricated.** `auto` mode auto-picks the next un-posted **AU/US** city (TARGETS list), logs to new `story_log` table.
+- **Posted:** Los Angeles story → Instagram + TikTok ✓. **Next:** Melbourne. TikTok confirmed to support photo-mode carousels (≤90-char caption via `caption_tt`).
+- **Daily cron** (10:23) wakes the session to post the next city (session-only, expires 7 days; no system cron here).
+- **Open:** (1) ingest more AU/US cities to grow post volume; (2) port renderer to a **Vercel cron API route** (bundle font + add `sharp`) for true 24/7; (3) **set `NEXT_PUBLIC_GOOGLE_VERIFICATION`** (GSC token) — #1 SEO blocker.
 
 **Infra facts**
 - Live: https://hanubees.com · Supabase project `whfxrovgvulmhqkhumuz` (url https://whfxrovgvulmhqkhumuz.supabase.co) · **RLS is ON**.

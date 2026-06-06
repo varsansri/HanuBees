@@ -38,7 +38,7 @@ async function makeCard(o) {
     ${center}
     <text x="100" y="912" font-family="Roboto,sans-serif" font-size="30" font-weight="600" fill="#98aa9d">@hanubees · hanubees.com</text>
   </svg>`;
-  const bee = await sharp("assets/brand/bee.png").resize(150, 150, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+  const bee = await sharp("hanubees-marketing-team/assets/brand/bee.png").resize(150, 150, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
   return sharp(Buffer.from(svg)).composite([{ input: bee, top: 175, left: 870 }]).png().toBuffer();
 }
 
