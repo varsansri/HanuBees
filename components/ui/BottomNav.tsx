@@ -45,17 +45,15 @@ const tabs = [
     ),
   },
   {
-    href: "/listings",
-    label: "Listings",
+    href: "/map",
+    label: "Map",
     icon: (active: boolean) => (
       <svg width="26" height="26" viewBox="0 0 24 24"
         fill="none"
         stroke={active ? GREEN : MUTED}
         strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        <path d="M9 3 4 5v16l5-2 6 2 5-2V3l-5 2-6-2z"/>
+        <path d="M9 3v16M15 5v16"/>
       </svg>
     ),
   },

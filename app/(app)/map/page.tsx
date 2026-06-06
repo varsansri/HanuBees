@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", BG = "#121212";
@@ -65,11 +64,12 @@ export default function MapPage() {
     return () => { cancelled = true; };
   }, [city]);
 
+  // Sits above the bottom nav (which is ~82px tall).
   return (
-    <div style={{ position: "fixed", inset: 0, background: BG }}>
+    <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 82, background: BG }}>
       <div ref={containerRef} style={{ position: "absolute", inset: 0 }} />
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: "linear-gradient(#121212cc,#12121200)" }}>
-        <Link href="/" style={{ color: YELLOW, textDecoration: "none", fontWeight: 700, fontSize: 15 }}>← Hanubees</Link>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: "linear-gradient(#121212cc,#12121200)" }}>
+        <span style={{ color: YELLOW, fontWeight: 700, fontSize: 16 }}>Map</span>
         <select value={city} onChange={(e) => setCity(e.target.value)} style={{ background: "#1a1a1a", color: FG, border: "1px solid rgba(234,234,234,0.15)", borderRadius: 8, padding: "7px 10px", fontSize: 14, fontFamily: "inherit" }}>
           {Object.keys(CITY_CENTERS).map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
