@@ -53,9 +53,10 @@ export default async function CityHub({ city }: { city: City }) {
           ? `Explore ${all.length}+ businesses across ${counts.length} categories in ${city.name}, ${city.country}. Ask the AI to find exactly what you need.`
           : `We're building the ${city.name} directory. Check back soon.`}
       </p>
-      <Link href="/chat" style={{ display: "inline-block", color: YELLOW, fontWeight: 600, fontSize: 14, textDecoration: "none", marginBottom: 22 }}>
-        Ask the AI →
-      </Link>
+      <div style={{ display: "flex", gap: 16, marginBottom: 22 }}>
+        <Link href="/chat" style={{ color: YELLOW, fontWeight: 600, fontSize: 14, textDecoration: "none" }}>Ask the AI →</Link>
+        <Link href="/map" style={{ color: GREEN, fontWeight: 600, fontSize: 14, textDecoration: "none" }}>View on map →</Link>
+      </div>
 
       {/* Category grid */}
       {counts.length > 0 && (

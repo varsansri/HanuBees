@@ -97,9 +97,9 @@ async function insertRows(rows) {
   for (let i = 0; i < rows.length; i += 150) {
     const batch = rows.slice(i, i + 150);
     const json = JSON.stringify(batch).replace(/'/g, "''");
-    const sql = `insert into accounts (user_id,type,name,slug,bee_name,category,city,location,phone,website) ` +
-      `select user_id,'business',name,slug,bee_name,category,city,location,phone,website ` +
-      `from jsonb_to_recordset('${json}'::jsonb) as x(user_id text,name text,slug text,bee_name text,category text,city text,location text,phone text,website text) ` +
+    const sql = `insert into accounts (user_id,type,name,slug,bee_name,category,city,location,phone,website,lat,lng) ` +
+      `select user_id,'business',name,slug,bee_name,category,city,location,phone,website,lat,lng ` +
+      `from jsonb_to_recordset('${json}'::jsonb) as x(user_id text,name text,slug text,bee_name text,category text,city text,location text,phone text,website text,lat float8,lng float8) ` +
       `on conflict (slug) do nothing;`;
     await runSQL(sql);
   }
@@ -123,6 +123,8 @@ async function insertRows(rows) {
         location: t["addr:suburb"] || t["addr:city"] || null,
         phone: t.phone || t["contact:phone"] || null,
         website: t.website || t["contact:website"] || null,
+        lat: e.lat ?? e.center?.lat ?? null,
+        lng: e.lon ?? e.center?.lon ?? null,
       });
       byCat[label] = (byCat[label] || 0) + 1;
     }
