@@ -5,19 +5,43 @@
 
 type CatalogFact = { account_id: string; content: string; info_type: string | null; tag: string | null };
 
+const STOP = new Set([
+  "find","near","looking","for","the","any","with","what","that","this","your","you",
+  "want","need","around","available","please","give","show","list","best","good","under",
+  "over","from","have","does","area","city","coimbatore","there","about","much","cost","price",
+  "rent","buy","sell","service","services","business","businesses",
+]);
+
 export async function loadCatalog(
   supabase: any,
   city = "Coimbatore",
-  maxBusinesses = 80
+  query = "",
+  maxBusinesses = 50
 ): Promise<string> {
-  const { data: accounts } = await supabase
+  // Scales to a large directory: filter businesses by the query's keywords
+  // (category / name / area) instead of loading the whole city.
+  const terms = ((query || "").toLowerCase().match(/[a-z]{4,}/g) || [])
+    .filter((w) => !STOP.has(w))
+    .slice(0, 5);
+
+  let q = supabase
     .from("accounts")
-    .select("id, name, bee_name, slug, category, city, phone")
+    .select("id, name, bee_name, slug, category, city, phone, location")
     .eq("type", "business")
     .ilike("city", `%${city}%`)
     .limit(maxBusinesses);
 
-  if (!accounts?.length) return "(no businesses listed in this city yet)";
+  if (terms.length) {
+    const ors: string[] = [];
+    for (const t of terms) {
+      ors.push(`category.ilike.%${t}%`, `name.ilike.%${t}%`, `location.ilike.%${t}%`);
+    }
+    q = q.or(ors.join(","));
+  }
+
+  const { data: accounts } = await q;
+
+  if (!accounts?.length) return "(no matching businesses listed in this city yet)";
 
   const ids = accounts.map((a: any) => a.id);
   const { data: facts } = await supabase

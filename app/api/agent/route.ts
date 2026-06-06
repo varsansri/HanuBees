@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
 
     // Concierge catalog: every business in the city + their public prices/services/hours,
     // so the assistant can search by budget, list, compare, recommend, and drill into one.
-    const catalog = await loadCatalog(supabase, account.city || "Coimbatore");
+    const catalog = await loadCatalog(supabase, account.city || "Coimbatore", lastUser);
 
     // Recent orders / important customer messages so the owner can ask about them
     const { data: convs } = await supabase.from("conversations").select("id").eq("account_id", account.id);
