@@ -71,6 +71,25 @@ One genuine story = one city of real data. Currently mapped AU/US: **Los Angeles
 **Melbourne** (next). To grow toward ~40 posts, **ingest more AU/US cities** (each becomes a
 story): `node scripts/ingest-osm.js` / `ingest-city.js`. The `TARGETS` list is pre-wired.
 
+## `meet-carousel.js` — the viral "MEET X" format
+
+A 7-slide carousel modeled on the uncover.ai "MEET [person]" viral format, applied to our
+real data as **"MEET THE [N]"** (the un-reachable businesses in a city). Arc:
+1. **Hook** — `MEET` + giant number (no-phone count) + "the <City> businesses your customers can't reach"
+2. **The scale** — total mapped + % with no findable phone
+3. **The old way** — numbered step-by-step **flowchart** (Google → map → website → call & wait)
+4. **The data** — bar chart (no phone / no website / reachable)
+5. **The hidden cost** — emotional beat with the % number
+6. **The fix** — 2-step **flowchart** (Ask Hanubees → instant answer)
+7. **CTA** — free → hanubees.com
+
+All numbers pulled live from the DB; brand theme + Space Grotesk + bee on every slide.
+Highlighted keywords in brand yellow/red (scannable in 1s). Run:
+```bash
+node hanubees-marketing-team/scripts/meet-carousel.js render "Los Angeles"   # preview → /tmp/meet/
+node hanubees-marketing-team/scripts/meet-carousel.js post "Los Angeles"     # publish IG + TikTok
+```
+
 ## Other scripts
 
 - `post-carousel.js` — 2-page insight+promo carousel, drips from `carousel_queue`.
