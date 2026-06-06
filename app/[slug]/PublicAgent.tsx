@@ -80,6 +80,9 @@ export default function PublicAgent({ account, highlights }: { account: Account;
           </div>
         </div>
         {account.bio && <p style={{ fontSize: 13.5, color: FG, lineHeight: 1.5, margin: "14px 0 0" }}>{account.bio}</p>}
+        <a href={`/claim?id=${account.id}`} style={{ display: "inline-block", marginTop: 12, fontSize: 12.5, color: GREEN, textDecoration: "none", fontWeight: 600 }}>
+          Own this business? Claim it free →
+        </a>
       </div>
 
       {/* Chat */}
