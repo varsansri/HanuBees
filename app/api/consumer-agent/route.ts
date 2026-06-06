@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import { consumerAgentNetworkQuery } from "@/lib/ai/agent-network";
 import { analytics } from "@/lib/analytics";
 
@@ -36,6 +37,19 @@ export async function POST(req: NextRequest) {
       category,
       city
     );
+
+    // Demand logging: what consumers search + whether the network had an answer.
+    try {
+      const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+      await db.from("searches").insert({
+        query: String(question).slice(0, 200),
+        city,
+        category: category || null,
+        result_count: result.responseCount,
+        found: result.responseCount > 0,
+        source: "discover",
+      });
+    } catch {}
 
     // Track analytics
     analytics.customerQuestionAsked("consumer-network", question.split(/\s+/).length);

@@ -5,32 +5,43 @@
 
 type CatalogFact = { account_id: string; content: string; info_type: string | null; tag: string | null };
 
+// Cities we have directory data for. If the query names one, search there.
+const KNOWN_CITIES = ["coimbatore", "chennai", "los angeles", "melbourne"];
+
 const STOP = new Set([
   "find","near","looking","for","the","any","with","what","that","this","your","you",
   "want","need","around","available","please","give","show","list","best","good","under",
-  "over","from","have","does","area","city","coimbatore","there","about","much","cost","price",
+  "over","from","have","does","area","city","there","about","much","cost","price",
   "rent","buy","sell","service","services","business","businesses",
   // 3-letter noise (we now keep 3-letter content words like "eye","ent","spa")
-  "and","who","how","why","get","can","has","our","out","are","was","its","you","the","but","let",
+  "and","who","how","why","get","can","has","our","out","are","was","its","but","let",
+  // city tokens (handled separately, shouldn't act as match terms)
+  "coimbatore","chennai","los","angeles","melbourne",
 ]);
+
+export type CatalogResult = { text: string; city: string; count: number; isSearch: boolean };
 
 export async function loadCatalog(
   supabase: any,
   city = "Coimbatore",
   query = "",
   maxBusinesses = 50
-): Promise<string> {
+): Promise<CatalogResult> {
+  // If the query names a known city, search there instead of the default.
+  const ql = (query || "").toLowerCase();
+  let useCity = city;
+  for (const c of KNOWN_CITIES) if (ql.includes(c)) { useCity = c; break; }
+
   // Scales to a large directory: filter businesses by the query's keywords
   // (category / name / area) instead of loading the whole city.
-  const terms = ((query || "").toLowerCase().match(/[a-z]{3,}/g) || [])
-    .filter((w) => !STOP.has(w))
-    .slice(0, 6);
+  const terms = (ql.match(/[a-z]{3,}/g) || []).filter((w) => !STOP.has(w)).slice(0, 6);
+  const isSearch = terms.length > 0;
 
   let q = supabase
     .from("accounts")
     .select("id, name, bee_name, slug, category, city, phone, location")
     .eq("type", "business")
-    .ilike("city", `%${city}%`)
+    .ilike("city", `%${useCity}%`)
     .limit(maxBusinesses);
 
   if (terms.length) {
@@ -43,7 +54,9 @@ export async function loadCatalog(
 
   const { data: accounts } = await q;
 
-  if (!accounts?.length) return "(no matching businesses listed in this city yet)";
+  if (!accounts?.length) {
+    return { text: "(no matching businesses listed in this city yet)", city: useCity, count: 0, isSearch };
+  }
 
   const ids = accounts.map((a: any) => a.id);
   const { data: facts } = await supabase
@@ -84,7 +97,7 @@ export async function loadCatalog(
     .from("listings")
     .select("vertical, title, description, price, area, status, accounts!inner(bee_name, slug, city)")
     .eq("status", "active")
-    .ilike("accounts.city", `%${city}%`)
+    .ilike("accounts.city", `%${useCity}%`)
     .limit(120);
 
   const listingLines: string[] = [];
@@ -97,10 +110,10 @@ export async function loadCatalog(
     );
   }
 
-  if (!listingLines.length) return businessBlock;
+  const count = accounts.length + listingLines.length;
+  const text = listingLines.length
+    ? `${businessBlock}\n\nLISTINGS (specific items/properties/services — match these by vertical, price, area):\n${listingLines.join("\n")}`
+    : businessBlock;
 
-  return `${businessBlock}
-
-LISTINGS (specific items/properties/services — match these by vertical, price, area):
-${listingLines.join("\n")}`;
+  return { text, city: useCity, count, isSearch };
 }

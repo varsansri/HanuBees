@@ -88,6 +88,17 @@ export async function POST(req: NextRequest) {
     // Concierge catalog: every business in the city + their public prices/services/hours,
     // so the assistant can search by budget, list, compare, recommend, and drill into one.
     const catalog = await loadCatalog(supabase, account.city || "Coimbatore", lastUser);
+    // Demand logging: capture discovery searches (what people look for + whether we had it).
+    if (catalog.isSearch) {
+      supabase.from("searches").insert({
+        account_id: account.id,
+        query: lastUser.slice(0, 200),
+        city: catalog.city,
+        result_count: catalog.count,
+        found: catalog.count > 0,
+        source: "chat",
+      }).then(() => {}, () => {});
+    }
 
     // Recent orders / important customer messages so the owner can ask about them
     const { data: convs } = await supabase.from("conversations").select("id").eq("account_id", account.id);
@@ -144,7 +155,7 @@ ${dataBlock((entries ?? []) as any)}
 ${activityBlock}
 
 == CATALOG: businesses in ${account.city || "Coimbatore"} ==
-${catalog}
+${catalog.text}
 
 Respond with ONLY this JSON (no markdown):
 {"action":"store"|"reply","entries":[{"content":"...","tag":"...","visibility":"public"|"private"}],"reply":"your concise answer; use line breaks and bullets for lists"}`;
