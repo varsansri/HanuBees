@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/chat", "/messages", "/dashboard", "/onboarding", "/profile", "/settings", "/login", "/signup", "/forgot-password", "/reset-password"],
       },
     ],
-    sitemap: "https://hanubees.com/sitemap.xml",
+    sitemap: "https://www.hanubees.com/sitemap.xml",
   };
 }

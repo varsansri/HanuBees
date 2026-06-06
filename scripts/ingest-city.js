@@ -22,9 +22,20 @@ const AMEN_LABEL = { restaurant:"Restaurant", cafe:"Cafe", fast_food:"Fast Food"
 const SHOP_LABEL = { hairdresser:"Salon", beauty:"Beauty", car_repair:"Car Repair", supermarket:"Supermarket", electronics:"Electronics", clothes:"Clothing", bakery:"Bakery", hardware:"Hardware", mobile_phone:"Mobile Shop" };
 
 const CITIES = [
-  ["Los Angeles", 34.0522, -118.2437, 12000],
-  ["Melbourne", -37.8136, 144.9631, 11000],
-  ["Chennai", 13.0827, 80.2707, 11000],
+  ["Los Angeles", 34.0522, -118.2437, 8000],
+  ["Melbourne", -37.8136, 144.9631, 9000],
+  ["Chennai", 13.0827, 80.2707, 9000],
+];
+
+// Lighter tag sub-groups (fewer values per query = less likely to be throttled)
+const GROUPS = [
+  '["amenity"~"restaurant|cafe|fast_food"]',
+  '["amenity"~"hospital|clinic|pharmacy|dentist|doctors"]',
+  '["amenity"~"school|college|bank|veterinary"]',
+  '["shop"~"hairdresser|beauty|car_repair|supermarket|electronics|clothes|bakery|hardware|mobile_phone"]',
+  '["leisure"="fitness_centre"]',
+  '["tourism"="hotel"]',
+  '["office"="lawyer"]',
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -60,17 +71,14 @@ async function overpassQuery(q) {
   return [];
 }
 
-// Split into 3 lighter queries per city to avoid throttling on the big public mirrors.
+// Many light queries (one tag-group at a time) to avoid throttling on public mirrors.
 async function overpassCity(lat, lon, r) {
-  const groups = [
-    `node["amenity"~"${AMENITY}"](around:${r},${lat},${lon});way["amenity"~"${AMENITY}"](around:${r},${lat},${lon});`,
-    `node["shop"~"${SHOP}"](around:${r},${lat},${lon});way["shop"~"${SHOP}"](around:${r},${lat},${lon});`,
-    `node["leisure"="fitness_centre"](around:${r},${lat},${lon});node["tourism"="hotel"](around:${r},${lat},${lon});way["tourism"="hotel"](around:${r},${lat},${lon});node["office"="lawyer"](around:${r},${lat},${lon});`,
-  ];
   let all = [];
-  for (const g of groups) {
-    const els = await overpassQuery(`[out:json][timeout:90];(${g});out center tags 1200;`);
+  for (const sel of GROUPS) {
+    const g = `node${sel}(around:${r},${lat},${lon});way${sel}(around:${r},${lat},${lon});`;
+    const els = await overpassQuery(`[out:json][timeout:60];(${g});out center tags 800;`);
     all = all.concat(els);
+    console.error(`    group ${sel.slice(0, 28)} -> ${els.length}`);
     await sleep(5000);
   }
   return all;

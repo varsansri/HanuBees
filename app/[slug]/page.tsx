@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (city) {
     const title = `Businesses in ${city.name} — local directory | Hanubees`;
     const description = `Find local businesses in ${city.name}, ${city.country} — hospitals, restaurants, services and more. Ask Hanubees' AI.`;
-    return { title, description, alternates: { canonical: `https://hanubees.com/${city.slug}` }, openGraph: { title, description, url: `https://hanubees.com/${city.slug}`, type: "website" } };
+    return { title, description, alternates: { canonical: `https://www.hanubees.com/${city.slug}` }, openGraph: { title, description, url: `https://www.hanubees.com/${city.slug}`, type: "website" } };
   }
   const account = await getAccount(slug);
   if (!account) return { title: "Not found — Hanubees" };
@@ -42,8 +42,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = account.bio || `Chat with ${account.name}'s AI receptionist. Ask anything — answered instantly.`;
   return {
     title, description,
-    openGraph: { title, description, url: `https://hanubees.com/${slug}`, type: "website",
-      images: [{ url: "https://hanubees.com/api/og", width: 1200, height: 630 }] },
+    openGraph: { title, description, url: `https://www.hanubees.com/${slug}`, type: "website",
+      images: [{ url: "https://www.hanubees.com/api/og", width: 1200, height: 630 }] },
     twitter: { card: "summary_large_image", title, description },
   };
 }

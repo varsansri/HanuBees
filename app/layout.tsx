@@ -14,7 +14,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Hanubees — Your business, answered by AI",
   description: "Give your business its own AI receptionist. It answers your customers, anytime, from your own info. Free to start.",
-  metadataBase: new URL("https://hanubees.com"),
+  metadataBase: new URL("https://www.hanubees.com"),
   applicationName: "Hanubees",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Hanubees" },
   manifest: "/manifest.webmanifest",
@@ -29,16 +29,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hanubees",
     description: "Give your business its own AI receptionist. It answers your customers, anytime.",
-    url: "https://hanubees.com",
+    url: "https://www.hanubees.com",
     siteName: "Hanubees",
     type: "website",
-    images: [{ url: "https://hanubees.com/api/og", width: 1200, height: 630 }],
+    images: [{ url: "https://www.hanubees.com/api/og", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hanubees",
     description: "Give your business its own AI receptionist. It answers your customers, anytime.",
-    images: ["https://hanubees.com/api/og"],
+    images: ["https://www.hanubees.com/api/og"],
   },
 };
 
@@ -47,15 +47,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Hanubees",
-    url: "https://hanubees.com",
-    logo: "https://hanubees.com/icon-512.png",
+    url: "https://www.hanubees.com",
+    logo: "https://www.hanubees.com/icon-512.png",
     description: "AI-agent network for businesses — each business gets its own AI receptionist that answers customers and gets it found.",
   };
   const websiteLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Hanubees",
-    url: "https://hanubees.com",
+    url: "https://www.hanubees.com",
   };
 
   return (

@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const list = await getBusinesses(city.name, category);
   const title = `${cat.title} in ${city.name} (2026) — ${list.length} listed | Hanubees`;
   const description = `Find ${cat.title.toLowerCase()} in ${city.name}. ${list.length} listed with contact details — ask Hanubees' AI for prices, hours and more.`;
-  const url = `https://hanubees.com/${city.slug}/${cat.slug}`;
+  const url = `https://www.hanubees.com/${city.slug}/${cat.slug}`;
   return {
     title, description,
     alternates: { canonical: url },
@@ -60,7 +60,7 @@ export default async function CityCategoryPage({ params }: { params: Promise<{ s
         name: b.name,
         ...(b.phone ? { telephone: b.phone } : {}),
         ...(b.location ? { address: { "@type": "PostalAddress", addressLocality: b.location, addressRegion: city.name } } : {}),
-        url: `https://hanubees.com/${b.slug}`,
+        url: `https://www.hanubees.com/${b.slug}`,
       },
     })),
   };
@@ -68,9 +68,9 @@ export default async function CityCategoryPage({ params }: { params: Promise<{ s
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hanubees", item: "https://hanubees.com" },
-      { "@type": "ListItem", position: 2, name: city.name, item: `https://hanubees.com/${city.slug}` },
-      { "@type": "ListItem", position: 3, name: cat.title, item: `https://hanubees.com/${city.slug}/${cat.slug}` },
+      { "@type": "ListItem", position: 1, name: "Hanubees", item: "https://www.hanubees.com" },
+      { "@type": "ListItem", position: 2, name: city.name, item: `https://www.hanubees.com/${city.slug}` },
+      { "@type": "ListItem", position: 3, name: cat.title, item: `https://www.hanubees.com/${city.slug}/${cat.slug}` },
     ],
   };
 

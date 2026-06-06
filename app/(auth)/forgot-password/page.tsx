@@ -19,7 +19,7 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setLoading(true); setError("");
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://hanubees.com/reset-password",
+      redirectTo: "https://www.hanubees.com/reset-password",
     });
     if (error) { setError(error.message); setLoading(false); return; }
     setSent(true);

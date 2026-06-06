@@ -33,7 +33,7 @@ export default async function CityHub({ city }: { city: City }) {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `Businesses in ${city.name}`,
-    url: `https://hanubees.com/${city.slug}`,
+    url: `https://www.hanubees.com/${city.slug}`,
     about: `Local business directory for ${city.name}, ${city.country}`,
   };
 
