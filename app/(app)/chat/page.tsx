@@ -16,19 +16,21 @@ const PURPLE = "#b794f6";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-// Turn @handle mentions into tappable purple links to that business's profile.
-// Displayed as "@handle.B" (handle is the business's bee name).
+// Turn @handle mentions into purple profile links, and /map?... into a map button.
 function renderContent(text: string) {
-  return text.split(/(@[a-zA-Z0-9_]+)/g).map((part, i) => {
+  return text.split(/(@[a-zA-Z0-9_]+|\/map(?:\?[^\s)]*)?)/g).map((part, i) => {
     const m = /^@([a-zA-Z0-9_]+)$/.exec(part);
     if (m) {
       return (
-        <a
-          key={i}
-          href={`/${m[1]}.bee`}
-          style={{ color: PURPLE, fontWeight: 600, textDecoration: "none" }}
-        >
+        <a key={i} href={`/${m[1]}.bee`} style={{ color: PURPLE, fontWeight: 600, textDecoration: "none" }}>
           @{m[1]}.B
+        </a>
+      );
+    }
+    if (/^\/map(\?|$)/.test(part)) {
+      return (
+        <a key={i} href={part} style={{ color: "#121212", background: GREEN, fontWeight: 700, textDecoration: "none", borderRadius: 8, padding: "2px 10px", display: "inline-block", margin: "2px 0" }}>
+          🗺️ Open map
         </a>
       );
     }

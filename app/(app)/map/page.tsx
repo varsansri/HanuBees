@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", BG = "#121212";
@@ -12,13 +13,32 @@ const CITY_CENTERS: Record<string, [number, number]> = {
   Melbourne: [144.9631, -37.8136],
 };
 
+// normalize ?city= (accepts "coimbatore", "los-angeles", etc.)
+function resolveCity(raw: string | null): string {
+  if (!raw) return "Coimbatore";
+  const r = raw.toLowerCase().replace(/-/g, " ");
+  return Object.keys(CITY_CENTERS).find((c) => c.toLowerCase() === r) || "Coimbatore";
+}
+
 export default function MapPage() {
+  return (
+    <Suspense fallback={<div style={{ position: "fixed", inset: 0, background: BG }} />}>
+      <MapInner />
+    </Suspense>
+  );
+}
+
+function MapInner() {
+  const sp = useSearchParams();
+  const initialCity = resolveCity(sp.get("city"));
+  const category = sp.get("category") || "";
+
   const mapRef = useRef<any>(null);
   const glRef = useRef<any>(null);
   const popupRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const readyRef = useRef(false);
-  const [city, setCity] = useState("Coimbatore");
+  const [city, setCity] = useState(initialCity);
   const [count, setCount] = useState(0);
 
   // init map + globe once
@@ -102,7 +122,8 @@ export default function MapPage() {
 
   async function loadCity(c: string) {
     const map = mapRef.current; if (!map || !readyRef.current) return;
-    const res = await fetch(`/api/map?city=${encodeURIComponent(c)}`);
+    const catQ = category ? `&category=${encodeURIComponent(category)}` : "";
+    const res = await fetch(`/api/map?city=${encodeURIComponent(c)}${catQ}`);
     const data = await res.json();
     setCount(data.count || 0);
     const features = (data.businesses || [])
