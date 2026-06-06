@@ -23,10 +23,9 @@ export default function Landing() {
           <span style={{ fontWeight: 700, fontSize: 19, color: FG }}>Hanubees</span>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
-          <Link href="/discover" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Discover services</Link>
-          <Link href="/business-search" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Find your business</Link>
-          <Link href="/login" className="btn-ghost" style={{ textDecoration: "none" }}>Log in</Link>
-          <Link href="/signup" className="btn-primary" style={{ width: "auto", padding: "9px 18px", textDecoration: "none" }}>Get started</Link>
+          <Link href="/discover" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Browse</Link>
+          <Link href="/map" className="btn-ghost" style={{ textDecoration: "none", fontSize: 14 }}>Map</Link>
+          <Link href="/claim" className="btn-primary" style={{ width: "auto", padding: "9px 18px", textDecoration: "none" }}>List your business</Link>
         </div>
       </header>
 
@@ -34,16 +33,18 @@ export default function Landing() {
       <section style={{ textAlign: "center", padding: "60px 20px 40px", maxWidth: 720, margin: "0 auto" }}>
         <img src="/bee.png" alt="" style={{ width: 84, height: 84, filter: "drop-shadow(0 0 30px rgba(255,190,0,0.35))" }} />
         <h1 style={{ fontSize: 40, fontWeight: 700, color: FG, lineHeight: 1.1, margin: "24px 0 0", letterSpacing: "-0.02em" }}>
-          Your business,<br /><span style={{ color: YELLOW }}>answered by AI</span>
+          Find local businesses —<br /><span style={{ color: YELLOW }}>just ask.</span>
         </h1>
         <p style={{ fontSize: 17, color: MUTED, lineHeight: 1.55, margin: "18px auto 0", maxWidth: 520 }}>
-          Give your business its own AI receptionist. It answers your customers instantly — from your own info. Free to start.
+          Ask for anything in your city and get instant answers from each business&apos;s own AI. No signup to browse.
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 30, flexWrap: "wrap" }}>
-          <Link href="/business-search" className="btn-primary" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Auto-setup: find your business</Link>
-          <Link href="/signup" className="btn-ghost" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Manual setup</Link>
+          <Link href="/discover" className="btn-primary" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Start browsing →</Link>
+          <Link href="/map" className="btn-ghost" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16 }}>Open map</Link>
         </div>
-        <p style={{ fontSize: 12.5, color: MUTED, marginTop: 14 }}>No card needed · live in 2 minutes</p>
+        <p style={{ fontSize: 12.5, color: MUTED, marginTop: 14 }}>
+          Own a business? <Link href="/claim" style={{ color: GREEN, textDecoration: "none", fontWeight: 600 }}>List it free →</Link>
+        </p>
       </section>
 
       {/* Features */}
