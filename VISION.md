@@ -294,3 +294,50 @@ business"* on a real phone beats any deck.
 - Skill catalog + consent defaults specified in `SKILLS.md` (facts auto-answer; deals need owner approval;
   reachable by verified + prior customers).
 - **Parked:** real self-serve signup/claim flow (so a business can take over its seeded agent).
+
+---
+
+## 19. ADDENDUM (2026-06-06) — the static-website problem + the free-chatbot wedge
+
+**The problem we actually solve: static, low-discoverability presence.**
+- A business could explain itself in 300–400 pages, but no one reads that, so they're forced into a
+  thin "ad-copy" website that says almost nothing. Websites are cheap now but **not interactive, not
+  flexible, low discoverability**, and you can't really *sell* inside them. Editing needs a developer
+  or a PC. So owners give up and run on WhatsApp + word-of-mouth.
+- Instagram isn't the answer either: it **forces content-creation** and **validates by follower count**
+  — punishing great-but-small businesses that just want to do their work, not become creators.
+- Result today: customers **jump between Google → Maps → website → Instagram → a phone call**, asking
+  questions one at a time and forgetting half. **Friction is huge.**
+
+**Our fix: the business's agent replaces the website/Instagram/repetitive calls.**
+- The owner dumps *everything* once — text / voice / PDF / video / reviews / "why we're best" / honest
+  limitations — and the agent **remembers it all**. A customer can ask **a thousand questions**; the
+  agent answers from that context, and **pops up the right photo/video/message** when relevant.
+- It's a **prebuilt website-as-chat**: see the info, ask, get the exact amount you need — no scrolling
+  400 pages, no PC to edit, no developer.
+- **Custom persona/avatar:** the agent can role-play the business's character, not a generic bot.
+- **Not only businesses:** freelancers, secondhand sellers, anyone gets an agent. A secondhand-bike
+  seller lists on OLX and links to *their* Hanubees agent for questions. Per-product / per-link agents.
+- **Owner analytics:** every question asked = insight (frequent questions, trust signals, gaps).
+- **Flexibility/control:** owner can pin rules ("when asked X, say only Y").
+- **Local discovery:** "any tuition teacher / pet groomer / nail-only specialist near me?" — the
+  provider just tells their agent once; it surfaces when that question arises in that location.
+
+**The GTM wedge: a free, managed AI chatbot for any website.**
+- Every website wants an AI chatbot; today the options are **paid** (dev charges) or **static** (a dev
+  hardcodes a $5 OpenAI key → can't be changed without a developer/PC). **No good free + flexible one.**
+- We give them a **free chatbot they manage by talking to the AI** (no code, no PC) — and it also lives
+  **inside our platform**. Cheap for us (moderate tokens). 
+- **Why it wins for us:** every install feeds the **main platform** with data + users + a foothold; the
+  belief "teleports" from their website to **our app**. Once enough people use it *in our app*, it
+  stops being a "chatbot" and becomes their **agent / representative**.
+- **Positioning caution (founder):** we are NOT a chatbot company — we hate the word. Market the free
+  chatbot as the *acquisition wedge*, but brand the *outcome* (get discovered + answered), not the tool.
+  The "chatbot" label is changeable once the network has real users.
+
+**Open questions raised (answered in chat 2026-06-06):**
+1. Competition — managed AI website chatbots already exist & are commoditized (Chatbase, SiteGPT,
+   Tidio/Lyro, Intercom Fin, Chatling, Botpress, etc.). Our edge is NOT the chatbot — it's the
+   **discovery network + agent-to-agent + local proximity + data**. Don't compete as "another chatbot."
+2. Fear of being typecast as a chatbot provider — valid but changeable; lead with discovery/representation,
+   keep "chatbot" as the install, not the identity.
