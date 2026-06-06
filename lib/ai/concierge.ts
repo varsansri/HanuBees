@@ -15,9 +15,17 @@ const STOP = new Set([
   "rent","buy","sell","service","services","business","businesses",
   // 3-letter noise (we now keep 3-letter content words like "eye","ent","spa")
   "and","who","how","why","get","can","has","our","out","are","was","its","but","let",
-  // city tokens (handled separately, shouldn't act as match terms)
+  // city + country tokens (handled separately, shouldn't act as match terms)
   "coimbatore","chennai","los","angeles","melbourne",
+  "usa","america","american","united","states","australia","australian","aussie","india","indian",
 ]);
+
+// Country -> the cities we have data for.
+const COUNTRY: [string[], string[], string][] = [
+  [["usa", "u.s.", "america", "american", "united states"], ["Los Angeles"], "USA"],
+  [["australia", "australian", "aussie"], ["Melbourne"], "Australia"],
+  [["india", "indian"], ["Coimbatore", "Chennai"], "India"],
+];
 
 export type CatalogResult = { text: string; city: string; count: number; isSearch: boolean };
 
@@ -27,10 +35,20 @@ export async function loadCatalog(
   query = "",
   maxBusinesses = 50
 ): Promise<CatalogResult> {
-  // If the query names a known city, search there instead of the default.
   const ql = (query || "").toLowerCase();
+
+  // Resolve location: a country (multiple cities), a named city, or the default.
+  let citiesIn: string[] | null = null;
   let useCity = city;
-  for (const c of KNOWN_CITIES) if (ql.includes(c)) { useCity = c; break; }
+  let cityLabel = city;
+  for (const [keys, names, label] of COUNTRY) {
+    if (keys.some((k) => ql.includes(k))) { citiesIn = names; cityLabel = label; break; }
+  }
+  if (!citiesIn) {
+    for (const c of KNOWN_CITIES) if (ql.includes(c)) { useCity = c; break; }
+    cityLabel = useCity;
+  }
+  const listingCity = citiesIn ? citiesIn[0] : useCity;
 
   // Scales to a large directory: filter businesses by the query's keywords
   // (category / name / area) instead of loading the whole city.
@@ -41,8 +59,8 @@ export async function loadCatalog(
     .from("accounts")
     .select("id, name, bee_name, slug, category, city, phone, location")
     .eq("type", "business")
-    .ilike("city", `%${useCity}%`)
     .limit(maxBusinesses);
+  q = citiesIn ? q.in("city", citiesIn) : q.ilike("city", `%${useCity}%`);
 
   if (terms.length) {
     const ors: string[] = [];
@@ -55,7 +73,7 @@ export async function loadCatalog(
   const { data: accounts } = await q;
 
   if (!accounts?.length) {
-    return { text: "(no matching businesses listed in this city yet)", city: useCity, count: 0, isSearch };
+    return { text: "(no matching businesses listed yet)", city: cityLabel, count: 0, isSearch };
   }
 
   const ids = accounts.map((a: any) => a.id);
@@ -97,7 +115,7 @@ export async function loadCatalog(
     .from("listings")
     .select("vertical, title, description, price, area, status, accounts!inner(bee_name, slug, city)")
     .eq("status", "active")
-    .ilike("accounts.city", `%${useCity}%`)
+    .ilike("accounts.city", `%${listingCity}%`)
     .limit(120);
 
   const listingLines: string[] = [];
@@ -115,5 +133,5 @@ export async function loadCatalog(
     ? `${businessBlock}\n\nLISTINGS (specific items/properties/services — match these by vertical, price, area):\n${listingLines.join("\n")}`
     : businessBlock;
 
-  return { text, city: useCity, count, isSearch };
+  return { text, city: cityLabel, count, isSearch };
 }
