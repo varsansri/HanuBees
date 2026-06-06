@@ -77,10 +77,28 @@ export default async function CityCategoryPage({ params }: { params: Promise<{ s
   const otherCats = CATEGORIES.filter((c) => c.slug !== cat.slug).slice(0, 10);
   const otherCities = CITIES.filter((c) => c.slug !== city.slug);
 
+  // FAQ — useful for people + highly citable by AI answer engines (FAQPage schema)
+  const faqs = [
+    { q: `How many ${cat.title.toLowerCase()} are there in ${city.name}?`,
+      a: `Hanubees lists ${list.length} ${cat.title.toLowerCase()} in ${city.name}. You can ask any of them questions instantly through its AI.` },
+    { q: `How do I contact ${cat.title.toLowerCase()} in ${city.name}?`,
+      a: `Open any listing to see its phone and website, or just ask its AI agent on Hanubees — it answers prices, hours and availability 24/7.` },
+    { q: `What is the best ${cat.singular} in ${city.name}?`,
+      a: `Browse the list and ask each one directly. Hanubees ranks by profile completeness and how often each business is searched, with verified reviews coming soon.` },
+    { q: `Is Hanubees free to use?`,
+      a: `Yes — browsing and asking are completely free, with no signup. Businesses can claim a free AI agent too.` },
+  ];
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
+
   return (
     <div style={{ minHeight: "100vh", maxWidth: 760, margin: "0 auto", padding: "20px 16px 60px" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* Breadcrumb */}
       <nav style={{ fontSize: 12.5, color: MUTED, marginBottom: 14 }}>
@@ -135,6 +153,17 @@ export default async function CityCategoryPage({ params }: { params: Promise<{ s
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section style={{ marginTop: 34 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: FG, marginBottom: 12 }}>FAQ</h2>
+        {faqs.map((f, i) => (
+          <div key={i} style={{ marginBottom: 14 }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: FG, margin: 0 }}>{f.q}</p>
+            <p style={{ fontSize: 13.5, color: MUTED, margin: "4px 0 0", lineHeight: 1.5 }}>{f.a}</p>
+          </div>
+        ))}
       </section>
 
       <footer style={{ marginTop: 40, paddingTop: 16, borderTop: "1px solid rgba(234,234,234,0.06)", fontSize: 12.5, color: MUTED }}>

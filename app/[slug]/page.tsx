@@ -22,7 +22,7 @@ async function getAccount(slug: string) {
 
   const { data: account } = await db()
     .from("accounts")
-    .select("id, name, slug, bee_name, category, city, location, bio, logo_url, rating, review_count, follower_count")
+    .select("id, name, slug, bee_name, category, city, location, bio, logo_url, rating, review_count, follower_count, phone, website")
     .eq(lookupField, lookupValue).maybeSingle();
   return account;
 }
@@ -61,5 +61,26 @@ export default async function PublicAgentPage({ params }: { params: Promise<{ sl
     .from("data_entries").select("content, tag")
     .eq("account_id", account.id).eq("visibility", "public").limit(12);
 
-  return <PublicAgent account={account} highlights={(entries ?? []) as { content: string; tag: string | null }[]} />;
+  // LocalBusiness structured data — lets Google + AI engines read/cite this business.
+  const a = account as any;
+  const ld: any = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: a.name,
+    url: `https://www.hanubees.com/${a.slug}`,
+    ...(a.category ? { description: `${a.category}${a.city ? " in " + a.city : ""}` } : {}),
+    ...(a.bio ? { slogan: String(a.bio).slice(0, 200) } : {}),
+    ...(a.phone ? { telephone: a.phone } : {}),
+    ...(a.website ? { sameAs: [a.website] } : {}),
+    ...(a.logo_url ? { image: a.logo_url } : {}),
+    address: { "@type": "PostalAddress", ...(a.location ? { addressLocality: a.location } : {}), ...(a.city ? { addressRegion: a.city } : {}) },
+    ...(a.review_count > 0 ? { aggregateRating: { "@type": "AggregateRating", ratingValue: a.rating, reviewCount: a.review_count } } : {}),
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <PublicAgent account={account} highlights={(entries ?? []) as { content: string; tag: string | null }[]} />
+    </>
+  );
 }

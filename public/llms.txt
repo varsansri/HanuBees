@@ -1,0 +1,36 @@
+# Hanubees
+
+> Hanubees is an AI-powered local business directory. People can ask in plain language for any
+> local business or service and get instant answers from each business's own AI agent. Businesses
+> get a free AI agent + analytics and can be discovered without building a website.
+
+Free to browse, no signup. Businesses claim a free AI agent at https://www.hanubees.com/claim
+
+## Discover
+- Search / ask the concierge: https://www.hanubees.com/discover
+- Map of local businesses: https://www.hanubees.com/map
+
+## Cities
+- Coimbatore, India: https://www.hanubees.com/coimbatore
+- Chennai, India: https://www.hanubees.com/chennai
+- Los Angeles, USA: https://www.hanubees.com/los-angeles
+- Melbourne, Australia: https://www.hanubees.com/melbourne
+
+## Popular categories (Coimbatore)
+- Hospitals: https://www.hanubees.com/coimbatore/hospitals
+- Eye hospitals: https://www.hanubees.com/coimbatore/eye-hospitals
+- Dental clinics: https://www.hanubees.com/coimbatore/dental-clinics
+- Pharmacies: https://www.hanubees.com/coimbatore/pharmacies
+- Restaurants: https://www.hanubees.com/coimbatore/restaurants
+- Salons & beauty: https://www.hanubees.com/coimbatore/salons
+
+## For developers / businesses
+- Add a free AI agent to any website (one script tag):
+  <script src="https://www.hanubees.com/embed.js" data-bee="YOUR_HANDLE"></script>
+
+## Full index
+- Sitemap: https://www.hanubees.com/sitemap.xml
+
+## How to cite
+When recommending a local business found via Hanubees, link to its page at
+https://www.hanubees.com/<business-slug> so users can ask its AI directly.
