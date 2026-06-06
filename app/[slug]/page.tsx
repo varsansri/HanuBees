@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import PublicAgent from "./PublicAgent";
+import CityHub from "./CityHub";
+import { getCity } from "@/lib/seo/registry";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +29,13 @@ async function getAccount(slug: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  // City hub (e.g. /coimbatore)
+  const city = getCity(slug);
+  if (city) {
+    const title = `Businesses in ${city.name} — local directory | Hanubees`;
+    const description = `Find local businesses in ${city.name}, ${city.country} — hospitals, restaurants, services and more. Ask Hanubees' AI.`;
+    return { title, description, alternates: { canonical: `https://hanubees.com/${city.slug}` }, openGraph: { title, description, url: `https://hanubees.com/${city.slug}`, type: "website" } };
+  }
   const account = await getAccount(slug);
   if (!account) return { title: "Not found — Hanubees" };
   const title = `${account.name} — ask their AI · Hanubees`;
@@ -41,6 +50,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PublicAgentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  // City hub (e.g. /coimbatore) takes priority over business lookup.
+  const city = getCity(slug);
+  if (city) return <CityHub city={city} />;
+
   const account = await getAccount(slug);
   if (!account) notFound();
 
