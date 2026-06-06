@@ -47,6 +47,7 @@ export default function NotificationsPage() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [anon, setAnon] = useState(false);
 
   // new-watcher form
   const [label, setLabel] = useState("");
@@ -58,7 +59,7 @@ export default function NotificationsPage() {
 
   const loadNotifs = async (f = folder) => {
     const res = await fetch(`/api/notifications?folder=${f}`);
-    if (res.status === 401) { router.push("/login"); return; }
+    if (res.status === 401) { setAnon(true); setLoading(false); return; }
     const data = await res.json();
     setNotifs(data.notifications || []);
     setUnread(data.unread || {});
@@ -125,6 +126,18 @@ export default function NotificationsPage() {
     border: "1px solid rgba(234,234,234,0.12)", background: BG3, color: FG,
     fontSize: 14, fontFamily: "inherit", outline: "none",
   };
+
+  if (anon) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24, textAlign: "center" }}>
+        <p style={{ fontSize: 16, fontWeight: 700, color: FG }}>Alerts</p>
+        <p style={{ fontSize: 14, color: MUTED, margin: "8px 0 18px", maxWidth: 320 }}>
+          Sign in to save alerts — e.g. get notified when a business posts a 20%+ offer near you.
+        </p>
+        <Link href="/claim" style={{ background: YELLOW, color: "#121212", borderRadius: 10, padding: "11px 20px", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Sign in</Link>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh" }}>

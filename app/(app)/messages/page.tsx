@@ -33,13 +33,14 @@ export default function MessagesPage() {
   const [convs, setConvs] = useState<Conv[]>([]);
   const [msgs, setMsgs]   = useState<Msg[]>([]);
   const [loading, setLoading] = useState(true);
+  const [anon, setAnon] = useState(false);
   const [accountName, setAccountName] = useState("");
 
   const load = async (fromCache = false) => {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push("/login"); return; }
+    if (!user) { setAnon(true); setLoading(false); return; }
     const { data: account } = await supabase.from("accounts").select("id, name").eq("user_id", user.id).maybeSingle();
-    if (!account) { router.push("/onboarding"); return; }
+    if (!account) { setAnon(true); setLoading(false); return; }
     setAccountName(account.name);
 
     // Try cached data first (for instant back button)
@@ -96,6 +97,18 @@ export default function MessagesPage() {
   const important = msgs.filter((m) => m.is_important).sort((a, b) => +new Date(b.created_at) - +new Date(a.created_at));
   const lastByConv = (id: string) => msgs.filter((m) => m.conversation_id === id).sort((a, b) => +new Date(b.created_at) - +new Date(a.created_at))[0];
   const unreadByConv = (id: string) => msgs.filter((m) => m.conversation_id === id && m.role === "visitor" && !m.read).length;
+
+  if (anon) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24, textAlign: "center" }}>
+        <p style={{ fontSize: 16, fontWeight: 700, color: FG }}>Your messages</p>
+        <p style={{ fontSize: 14, color: MUTED, margin: "8px 0 18px", maxWidth: 320 }}>
+          Sign in to see conversations with businesses and manage your own.
+        </p>
+        <Link href="/claim" style={{ background: YELLOW, color: "#121212", borderRadius: 10, padding: "11px 20px", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>List / claim your business</Link>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh" }}>

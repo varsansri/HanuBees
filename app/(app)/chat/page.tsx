@@ -44,6 +44,12 @@ const SUGGESTIONS = [
   "Any new orders today?",
 ];
 
+const CONSUMER_SUGGESTIONS = [
+  "Eye hospitals in Coimbatore",
+  "Best dentist near RS Puram",
+  "Show me cafes on the map",
+];
+
 export default function ChatPage() {
   const router = useRouter();
   const { setMode, subscribe } = useBee();
@@ -52,6 +58,9 @@ export default function ChatPage() {
   const [loading, setLoading]   = useState(false);
   const [toast, setToast]       = useState("");
   const [myHandle, setMyHandle] = useState("");
+  const [chatMode, setChatMode] = useState<"owner" | "concierge">("concierge");
+  const chatModeRef = useRef<"owner" | "concierge">("concierge");
+  useEffect(() => { chatModeRef.current = chatMode; }, [chatMode]);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const endRef   = useRef<HTMLDivElement>(null);
   const sendRef  = useRef<(t: string) => void>(() => {});
@@ -66,15 +75,16 @@ export default function ChatPage() {
     }
   }, []);
 
-  // The signed-in account's own handle, shown above the messages they send.
+  // Owner mode only if they have a business; otherwise free public concierge.
   useEffect(() => {
     (async () => {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) { setChatMode("concierge"); return; }
       const { data: account } = await supabase
         .from("accounts").select("bee_name").eq("user_id", user.id).maybeSingle();
-      if (account?.bee_name) setMyHandle(account.bee_name);
+      if (account?.bee_name) { setMyHandle(account.bee_name); setChatMode("owner"); }
+      else setChatMode("concierge");
     })();
   }, []);
 
@@ -95,7 +105,7 @@ export default function ChatPage() {
       const res = await fetch("/api/agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode: "owner", messages: next }),
+        body: JSON.stringify({ mode: chatModeRef.current, messages: next }),
       });
       const data = await res.json();
       if (data.error === "no_account") { router.push("/onboarding"); return; }
@@ -141,12 +151,14 @@ export default function ChatPage() {
         {empty ? (
           <div style={{ textAlign: "center", paddingTop: "46vh" }}>
             {/* space held for the hero bee ball; prompt sits below it */}
-            <h1 style={{ fontSize: 20, fontWeight: 700, color: FG, marginTop: 70 }}>Talk to your agent</h1>
+            <h1 style={{ fontSize: 20, fontWeight: 700, color: FG, marginTop: 70 }}>
+              {chatMode === "owner" ? "Talk to your agent" : "Find local businesses"}
+            </h1>
             <p style={{ color: MUTED, fontSize: 14, marginTop: 6 }}>
-              Tell it about your business, or ask what&apos;s happening.
+              {chatMode === "owner" ? "Tell it about your business, or ask what's happening." : "Ask for anything in your city — instant answers from each business."}
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 22, alignItems: "center" }}>
-              {SUGGESTIONS.map((s) => (
+              {(chatMode === "owner" ? SUGGESTIONS : CONSUMER_SUGGESTIONS).map((s) => (
                 <button key={s} onClick={() => send(s)} style={{
                   background: BG2, border: "1px solid rgba(234,234,234,0.08)", color: FG,
                   borderRadius: 12, padding: "11px 16px", fontSize: 13.5, cursor: "pointer",
@@ -213,7 +225,7 @@ export default function ChatPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(input); } }}
-            placeholder="Message your agent…"
+            placeholder={chatMode === "owner" ? "Message your agent…" : "Ask for a business, service, or place…"}
             rows={1}
             style={{
               flex: 1, background: "none", border: "none", outline: "none", resize: "none",

@@ -67,12 +67,41 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: "Bad request" }, { status: 400 });
 
-  const mode: "owner" | "visitor" = body.mode === "visitor" ? "visitor" : "owner";
+  const mode: "owner" | "visitor" | "concierge" =
+    body.mode === "visitor" ? "visitor" : body.mode === "concierge" ? "concierge" : "owner";
   const history: InMsg[] = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
   const lastUser = [...history].reverse().find((m) => m.role === "user")?.content?.trim();
   if (!lastUser) return NextResponse.json({ error: "No message" }, { status: 400 });
 
   const supabase = await createClient();
+
+  // ── CONCIERGE: public discovery, no login. Search/compare/recommend across the directory. ──
+  if (mode === "concierge") {
+    const city = (body.city as string) || "Coimbatore";
+    const catalog = await loadCatalog(supabase, city, lastUser);
+    if (catalog.isSearch) {
+      supabase.from("searches").insert({
+        query: lastUser.slice(0, 200), city: catalog.city, result_count: catalog.count,
+        found: catalog.count > 0, source: "browse",
+      }).then(() => {}, () => {});
+    }
+    const sys = `You are Hanubees — a friendly local-services concierge. Help people find and compare
+local businesses. Default city: ${city} (but if the user names a city/country, answer for that).
+- CLARIFY then match: if the request is vague, ask 1–2 short questions (budget, area) FIRST, don't list yet.
+- Then list ONLY businesses that fit, as short bullets, each starting with the business's @handle.
+  Refer to a business EXACTLY by its @handle from the catalog (renders as a tappable link). If none fit,
+  say so and offer the closest options.
+- Recommend 1–3 with WHY (price/area/services). Use numbers/specifics, keep it tight.
+- If asked to see results on a map, end with a bare link: /map?city=<City>&category=<keyword>.
+- Use ONLY catalog facts; never invent prices/contacts.
+
+== CATALOG: businesses in ${catalog.city} ==
+${catalog.text}`;
+    const msgs: ChatMsg[] = [{ role: "system", content: sys }, ...history.map((m) => ({ role: m.role, content: m.content })) as ChatMsg[]];
+    const { text, error } = await llmChat(msgs, { maxTokens: 1000, temperature: 0.4 });
+    if (error) return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ reply: text || "Tell me what you're looking for and your area." });
+  }
 
   // ── OWNER: manage the agent (store info or answer about the business) ──────
   if (mode === "owner") {
