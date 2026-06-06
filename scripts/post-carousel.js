@@ -57,20 +57,28 @@ async function postCarousel({ emotion, insight, fix, caption, platform = "instag
   return { ok: res.ok, info: (await res.text()).slice(0, 200) };
 }
 
-// --- sample run (real Melbourne data) ---
-if (require.main === module) {
-  (async () => {
-    const accs = await (await fetch(`${ZB}/accounts`, { headers: { Authorization: `Bearer ${K}`, Accept: "application/json" } })).json();
-    const ig = (accs.accounts || []).find((a) => a.platform === "instagram");
-    if (!ig) { console.error("no IG"); return; }
-    const r = await postCarousel({
-      emotion: "QUIETLY",
-      insight: "Half of Melbourne's local businesses are nearly impossible to reach online.",
-      fix: "Hanubees gives every business a free AI that answers customers 24/7 — and gets it found.",
-      caption: "We mapped 151 Melbourne businesses — half have no quick way for customers to reach them. That's lost business, every day.\n\nHanubees fixes it free → hanubees.com\n\n#Melbourne #smallbusiness #AI #Hanubees",
-      accountId: ig._id,
-    });
-    console.log(r.ok ? "PUBLISHED carousel to Instagram ✓" : "FAILED: " + r.info);
-  })();
+async function sql(q) {
+  const r = await fetch(`https://api.supabase.com/v1/projects/${process.env.SUPABASE_PROJECT_REF}/database/query`,
+    { method: "POST", headers: { Authorization: `Bearer ${process.env.SUPABASE_ACCESS_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ query: q }) });
+  return r.ok ? r.json() : [];
 }
-module.exports = { makeCard, postCarousel };
+
+// Post the next queued carousel to ALL connected accounts (IG + TikTok).
+async function postNext() {
+  const accs = await (await fetch(`${ZB}/accounts`, { headers: { Authorization: `Bearer ${K}`, Accept: "application/json" } })).json();
+  const platforms = (accs.accounts || []).map((a) => ({ platform: a.platform, accountId: a._id }));
+  if (!platforms.length) { console.log("no social accounts connected"); return; }
+  const rows = await sql("select id, emotion, insight, fix, caption from carousel_queue where status='queued' order by created_at limit 1;");
+  if (!rows.length) { console.log("carousel queue empty — generate more."); return; }
+  const c = rows[0];
+  const u1 = await upload(await makeCard({ type: "insight", emotion: c.emotion, title: c.insight }));
+  const u2 = await upload(await makeCard({ type: "promo", title: c.fix }));
+  const res = await fetch(`${ZB}/posts`, { method: "POST", headers: { Authorization: `Bearer ${K}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ content: c.caption, mediaItems: [{ url: u1, type: "image" }, { url: u2, type: "image" }], platforms, publishNow: true }) });
+  const out = await res.text();
+  if (res.ok) { await sql(`update carousel_queue set status='posted', posted_at=now() where id='${c.id}';`); console.log("PUBLISHED to", platforms.map((p) => p.platform).join(" + "), "—", c.emotion); }
+  else console.error("FAILED:", out.slice(0, 250));
+}
+
+if (require.main === module) postNext();
+module.exports = { makeCard, postCarousel, postNext };
