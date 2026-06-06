@@ -16,18 +16,26 @@ async function runSQL(sql) {
   return r.json();
 }
 
+// Zernio API (verified): Bearer auth, POST /v1/posts {content, platforms[], status}.
+async function zernioPlatforms() {
+  const r = await fetch("https://api.zernio.com/v1/accounts", { headers: { Authorization: `Bearer ${ZERNIO}`, Accept: "application/json" } });
+  const d = await r.json().catch(() => ({}));
+  // each connected account -> its id; used as the post's target platforms
+  return (d.accounts || []).map((a) => a._id || a.id).filter(Boolean);
+}
+
 async function publish(text, link) {
   const body = link ? `${text}\n${link}` : text;
   if (ZERNIO) {
-    // Zernio unified API (adjust to exact spec when the key is added).
+    const platforms = await zernioPlatforms();
+    if (!platforms.length) { console.log("Zernio: no social account connected yet — connect one at zernio.com. Skipping."); return { ok: false, dry: true }; }
     const r = await fetch("https://api.zernio.com/v1/posts", {
       method: "POST", headers: { Authorization: `Bearer ${ZERNIO}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ text: body }),
+      body: JSON.stringify({ content: body, platforms, status: "published", visibility: "public" }),
     });
     const ok = r.ok; const data = await r.text();
-    return { ok, id: ok ? "zernio" : null, info: data.slice(0, 120) };
+    return { ok, id: ok ? "zernio" : null, info: data.slice(0, 160) };
   }
-  // dry-run
   console.log("DRY-RUN would post:\n" + body + "\n");
   return { ok: false, dry: true };
 }
