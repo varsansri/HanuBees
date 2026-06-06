@@ -10,6 +10,8 @@ const STOP = new Set([
   "want","need","around","available","please","give","show","list","best","good","under",
   "over","from","have","does","area","city","coimbatore","there","about","much","cost","price",
   "rent","buy","sell","service","services","business","businesses",
+  // 3-letter noise (we now keep 3-letter content words like "eye","ent","spa")
+  "and","who","how","why","get","can","has","our","out","are","was","its","you","the","but","let",
 ]);
 
 export async function loadCatalog(
@@ -20,9 +22,9 @@ export async function loadCatalog(
 ): Promise<string> {
   // Scales to a large directory: filter businesses by the query's keywords
   // (category / name / area) instead of loading the whole city.
-  const terms = ((query || "").toLowerCase().match(/[a-z]{4,}/g) || [])
+  const terms = ((query || "").toLowerCase().match(/[a-z]{3,}/g) || [])
     .filter((w) => !STOP.has(w))
-    .slice(0, 5);
+    .slice(0, 6);
 
   let q = supabase
     .from("accounts")
