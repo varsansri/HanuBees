@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getChats, type ChatEntry } from "@/lib/consumer/store";
+import ContributeBox from "@/components/consumer/ContributeBox";
 
 const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", MUTED = "var(--fg2)", BG2 = "var(--bg2)", BG3 = "var(--bg3)";
 
@@ -10,7 +11,7 @@ type Agent = { id: string; name: string; slug: string; bee_name: string; categor
 const CITIES = ["Los Angeles", "Melbourne", "Coimbatore", "Chennai"];
 
 export default function Hub() {
-  const [tab, setTab] = useState<"chats" | "explore">("chats");
+  const [tab, setTab] = useState<"chats" | "explore" | "share">("chats");
   const [chats, setChats] = useState<ChatEntry[]>([]);
   const [hanuLast, setHanuLast] = useState<string>("Hi 👋 I'm Hanubees — tap to find any local business.");
   const [q, setQ] = useState("");
@@ -24,6 +25,8 @@ export default function Hub() {
     const hanu = all.find((c) => c.slug === "hanubees");
     if (hanu?.last) setHanuLast(hanu.last);
     setChats(all.filter((c) => c.slug !== "hanubees"));
+    const t = new URLSearchParams(window.location.search).get("tab");
+    if (t === "share" || t === "explore" || t === "chats") setTab(t);
   }, []);
 
   const search = async () => {
@@ -48,9 +51,9 @@ export default function Hub() {
           <span style={{ fontSize: 19, fontWeight: 800, color: FG }}>Hanubees</span>
         </div>
         <div style={{ display: "flex", gap: 4, padding: "0 12px" }}>
-          {(["chats", "explore"] as const).map((t) => (
+          {(["chats", "explore", "share"] as const).map((t) => (
             <button key={t} onClick={() => setTab(t)} style={{ flex: 1, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "10px 0 12px", fontSize: 15, fontWeight: 700, color: tab === t ? FG : MUTED, borderBottom: tab === t ? `2px solid ${YELLOW}` : "2px solid transparent" }}>
-              {t === "chats" ? "Chats" : "Explore"}
+              {t === "chats" ? "Chats" : t === "explore" ? "Explore" : "Share"}
             </button>
           ))}
         </div>
@@ -123,6 +126,9 @@ export default function Hub() {
           </div>
         </div>
       )}
+
+      {/* SHARE */}
+      {tab === "share" && <ContributeBox />}
     </div>
   );
 }

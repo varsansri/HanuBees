@@ -34,7 +34,7 @@ export async function updateSession(request: NextRequest) {
   // (landing, public business pages /[slug], api, og) is public for SEO.
   // Free to use (no login): browse, chat, map, alerts, messages.
   // Login only to store your own data: profile, claim, onboarding, dashboard, settings.
-  const PROTECTED = ["/dashboard", "/onboarding", "/profile", "/settings", "/claim"];
+  const PROTECTED = ["/dashboard", "/onboarding", "/onboard", "/profile", "/settings", "/claim"];
   const isProtected = PROTECTED.some(p => path === p || path.startsWith(p + "/"));
 
   if (!user && isProtected) {

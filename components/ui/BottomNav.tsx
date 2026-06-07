@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const GREEN = "var(--green)";
 const MUTED = "var(--fg2)";
+const YELLOW = "var(--yellow)";
 
 const tabs = [
   {
@@ -32,15 +33,14 @@ const tabs = [
     ),
   },
   {
-    href: "/notifications",
-    label: "Alerts",
-    icon: (active: boolean) => (
+    href: "/hub?tab=share",
+    label: "Share",
+    center: true,
+    icon: () => (
       <svg width="26" height="26" viewBox="0 0 24 24"
-        fill={active ? GREEN : "none"}
-        stroke={active ? GREEN : MUTED}
-        strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
-        <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+        fill="none" stroke="#121212"
+        strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 5v14M5 12h14"/>
       </svg>
     ),
   },
@@ -78,7 +78,26 @@ export default function BottomNav() {
   return (
     <nav className="bottom-nav">
       {tabs.map((tab) => {
-        const active = pathname === tab.href || pathname.startsWith(tab.href + "/");
+        const base = tab.href.split("?")[0];
+        const active = pathname === base || pathname.startsWith(base + "/");
+
+        if ((tab as { center?: boolean }).center) {
+          return (
+            <Link key={tab.href} href={tab.href} aria-label={tab.label} style={{
+              display: "flex", alignItems: "center", justifyContent: "center",
+              width: 64, height: 48, textDecoration: "none",
+            }}>
+              <span style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 46, height: 46, borderRadius: "50%", background: YELLOW,
+                marginTop: -14, boxShadow: "0 3px 10px rgba(0,0,0,0.3)",
+              }}>
+                {tab.icon(active)}
+              </span>
+            </Link>
+          );
+        }
+
         return (
           <Link key={tab.href} href={tab.href} aria-label={tab.label} style={{
             display: "flex", alignItems: "center", justifyContent: "center",
