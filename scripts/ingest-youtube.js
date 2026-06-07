@@ -32,6 +32,11 @@ const CATEGORIES = TEST
   ? ["restaurant", "gym", "dentist"]
   : ["restaurant", "cafe", "gym", "salon", "dentist", "clinic", "photographer", "real estate", "tuition coaching", "boutique", "interior designer", "bakery"];
 
+// ONLY_CITY=<name> -> run just one city (small/targeted run). DELAY ms between searches.
+const REGION = { "Los Angeles": ["US", "en"], "Melbourne": ["AU", "en"], "Coimbatore": ["IN", "en"], "Chennai": ["IN", "en"], "Sydney": ["AU", "en"], "Brisbane": ["AU", "en"], "Perth": ["AU", "en"], "San Francisco": ["US", "en"], "New York": ["US", "en"], "Chicago": ["US", "en"] };
+if (process.env.ONLY_CITY) { const c = process.env.ONLY_CITY, rl = REGION[c] || ["US", "en"]; CITIES.length = 0; CITIES.push([c, rl[0], rl[1]]); }
+const DELAY = +(process.env.DELAY || 350);
+
 let quota = 0;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const slugify = (s) => s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 30);
@@ -109,7 +114,7 @@ async function runSQL(sql) {
           kept++;
         }
         console.log(`${city} / "${q}": ${items.length} videos -> ${kept} new (quota ${quota})`);
-        await sleep(350);
+        await sleep(DELAY);
       }
     }
   }
