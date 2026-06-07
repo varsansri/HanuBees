@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import ConsumerChat from "./ConsumerChat";
+import HanubeesChat from "./HanubeesChat";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ConsumerChatPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  // Reserved: the Hanubees guide assistant (always available, not a business account)
+  if (slug === "hanubees") return <HanubeesChat />;
   const account = await getAccount(slug);
   if (!account) notFound();
 

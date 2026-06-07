@@ -12,14 +12,19 @@ const CITIES = ["Los Angeles", "Melbourne", "Coimbatore", "Chennai"];
 export default function Hub() {
   const [tab, setTab] = useState<"chats" | "explore">("chats");
   const [chats, setChats] = useState<ChatEntry[]>([]);
+  const [hanuLast, setHanuLast] = useState<string>("Hi 👋 I'm Hanubees — tap to find any local business.");
   const [q, setQ] = useState("");
   const [city, setCity] = useState("");
   const [results, setResults] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
 
-  useEffect(() => { setChats(getChats()); }, []);
-  useEffect(() => { if (!getChats().length) setTab("explore"); }, []);
+  useEffect(() => {
+    const all = getChats();
+    const hanu = all.find((c) => c.slug === "hanubees");
+    if (hanu?.last) setHanuLast(hanu.last);
+    setChats(all.filter((c) => c.slug !== "hanubees"));
+  }, []);
 
   const search = async () => {
     setLoading(true); setSearched(true);
@@ -54,12 +59,21 @@ export default function Hub() {
       {/* CHATS */}
       {tab === "chats" && (
         <div style={{ padding: "8px 0" }}>
+          {/* Pinned: the Hanubees guide — always here, greets everyone */}
+          <Link href="/c/hanubees" style={{ display: "flex", gap: 13, alignItems: "center", padding: "12px 16px", textDecoration: "none", borderBottom: "1px solid var(--border)", background: "rgba(255,190,0,0.06)" }}>
+            <div style={{ width: 50, height: 50, borderRadius: "50%", background: BG2, border: `1.5px solid ${YELLOW}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <img src="/bee.png" alt="" style={{ width: 30, height: 30 }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 15.5, fontWeight: 800, color: FG }}>Hanubees <span style={{ fontSize: 11, fontWeight: 700, color: "#121212", background: YELLOW, borderRadius: 6, padding: "1px 6px", marginLeft: 4, verticalAlign: "middle" }}>GUIDE</span></div>
+              <div style={{ fontSize: 13, color: MUTED, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginTop: 2 }}>{hanuLast}</div>
+            </div>
+          </Link>
+
           {chats.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "70px 24px", color: MUTED }}>
-              <img src="/bee.png" alt="" style={{ width: 46, height: 46, opacity: 0.7 }} />
-              <p style={{ marginTop: 14, fontSize: 15, color: FG, fontWeight: 600 }}>No chats yet</p>
-              <p style={{ marginTop: 6, fontSize: 13.5 }}>Find a local business in Explore and ask it anything.</p>
-              <button onClick={() => setTab("explore")} style={{ marginTop: 18, background: YELLOW, color: "#121212", border: "none", borderRadius: 12, padding: "11px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Explore businesses</button>
+            <div style={{ textAlign: "center", padding: "44px 24px", color: MUTED }}>
+              <p style={{ fontSize: 14, color: MUTED }}>Your business chats will appear here.</p>
+              <button onClick={() => setTab("explore")} style={{ marginTop: 14, background: YELLOW, color: "#121212", border: "none", borderRadius: 12, padding: "11px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Explore businesses</button>
             </div>
           ) : (
             chats.map((c) => (
