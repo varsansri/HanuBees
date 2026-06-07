@@ -94,8 +94,10 @@ local businesses. Default city: ${city} (but if the user names a city/country, a
   Refer to a business EXACTLY by its @handle from the catalog (renders as a tappable link). If none fit,
   say so and offer the closest options.
 - Recommend 1–3 with WHY (price/area/services). Use numbers/specifics, keep it tight.
-- If COMMUNITY KNOWLEDGE below has something relevant (live availability, an experience, a tip,
-  someone's answer), lead with it and say it's from people on Hanubees. It is real and current — use it.
+- COMMUNITY KNOWLEDGE below is UNVERIFIED posts from individual people, NOT confirmed fact. If relevant,
+  share it but ATTRIBUTE and HEDGE — e.g. "Someone posted ~2h ago that…", never "X is fully booked".
+  Always include how recent it is. If it's a single post, say it's one person's report and suggest
+  confirming. Never present a community post as guaranteed/official.
 - If asked to see results on a map, end with a bare link: /map?city=<City>&category=<keyword>.
 - Use ONLY catalog/community facts; never invent prices/contacts.
 ${community ? `\n== COMMUNITY KNOWLEDGE (people's posts, matched to this query) ==\n${community}\n` : ""}
@@ -193,7 +195,7 @@ ${dataBlock((entries ?? []) as any)}
 == THIS BUSINESS — recent orders & flagged messages ==
 ${activityBlock}
 
-${community ? `== COMMUNITY KNOWLEDGE (people's posts on Hanubees, matched to this query) ==\n${community}\nIf relevant, answer from this and say it's from people on Hanubees — it's real and current.\n\n` : ""}== CATALOG: businesses in ${account.city || "Coimbatore"} ==
+${community ? `== COMMUNITY KNOWLEDGE (UNVERIFIED posts from individuals, matched to this query) ==\n${community}\nIf relevant, share it but ATTRIBUTE and HEDGE ("Someone posted ~2h ago that…", never "X is fully booked"). Always say how recent. A single post = one person's report; suggest confirming. Never present it as guaranteed/official.\n\n` : ""}== CATALOG: businesses in ${account.city || "Coimbatore"} ==
 ${catalog.text}
 
 Respond with ONLY this JSON (no markdown):
