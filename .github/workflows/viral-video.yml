@@ -1,0 +1,55 @@
+name: Viral video (render preview)
+
+# Phase 1: manual trigger → renders ONE branded shock-stat video from live data
+# and uploads it as a downloadable artifact. No auto-posting yet (added once the
+# look is approved). Free GitHub Actions minutes.
+on:
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'City (or "auto" for the biggest dataset)'
+        required: false
+        default: 'Coimbatore'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hanubees-marketing-team/video
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # System libs headless Chrome needs on the runner.
+      - name: Install Chrome deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libdbus-1-3 libatk1.0-0 libgbm1 libasound2t64 \
+            libatk-bridge2.0-0 libgtk-3-0 libxkbcommon0 libx11-xcb1 libxcomposite1 \
+            libxdamage1 libxrandr2 libxfixes3 libpango-1.0-0 libcairo2 fonts-liberation || true
+
+      - name: Install deps
+        run: npm install --no-audit --no-fund
+
+      - name: Build props from live data
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+          CITY: ${{ github.event.inputs.city }}
+        run: node scripts/fetch-data.js
+
+      - name: Render video
+        run: npx remotion render src/index.ts ShockStat out/video.mp4 --props=out/props.json --log=verbose
+
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hanubees-shockstat
+          path: |
+            hanubees-marketing-team/video/out/video.mp4
+            hanubees-marketing-team/video/out/props.json
+          retention-days: 14
