@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", MUTED = "#a9a9a7", BG2 = "#1a1a1a", BG3 = "#242424";
+const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", MUTED = "var(--fg2)", BG2 = "var(--bg2)", BG3 = "var(--bg3)";
 
 type Biz = { id: string; name: string; category: string | null; city: string | null; phone: string | null; claimed: boolean };
 
@@ -77,7 +77,7 @@ function ClaimInner() {
   };
 
   const inputStyle: React.CSSProperties = {
-    width: "100%", padding: "12px 14px", borderRadius: 12, border: "1px solid rgba(234,234,234,0.12)",
+    width: "100%", padding: "12px 14px", borderRadius: 12, border: "1px solid var(--border)",
     background: BG3, color: FG, fontSize: 15, fontFamily: "inherit", outline: "none",
   };
 
@@ -106,7 +106,7 @@ function ClaimInner() {
             {loading ? <p style={{ color: MUTED }}>Searching…</p> :
               results.map((b) => (
                 <button key={b.id} disabled={b.claimed} onClick={() => { setSelected(b); setError(""); setConfirm(""); }} style={{
-                  textAlign: "left", background: BG2, border: "1px solid rgba(234,234,234,0.07)", borderRadius: 12,
+                  textAlign: "left", background: BG2, border: "1px solid var(--border)", borderRadius: 12,
                   padding: 13, cursor: b.claimed ? "default" : "pointer", fontFamily: "inherit", opacity: b.claimed ? 0.5 : 1,
                 }}>
                   <p style={{ fontSize: 15, fontWeight: 600, color: FG, margin: 0 }}>{b.name}</p>
@@ -139,7 +139,7 @@ function ClaimInner() {
               padding: "12px", fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
             }}>{busy ? "Claiming…" : "Claim this business"}</button>
             <button onClick={() => { setSelected(null); setError(""); }} style={{
-              background: "transparent", color: MUTED, border: "1px solid rgba(234,234,234,0.15)",
+              background: "transparent", color: MUTED, border: "1px solid var(--border)",
               borderRadius: 10, padding: "12px 16px", fontSize: 14, cursor: "pointer", fontFamily: "inherit",
             }}>Back</button>
           </div>

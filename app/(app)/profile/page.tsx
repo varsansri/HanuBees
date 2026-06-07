@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
-const BG3    = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
+const BG3    = "var(--bg3)";
 
 type Account = {
   id: string; name: string; slug: string; bee_name: string; category: string | null; city: string | null;
@@ -33,6 +33,18 @@ export default function ProfilePage() {
   const [newText, setNewText] = useState("");
   const [liveType, setLiveType] = useState<"pricing" | "hours" | "services" | "contact" | "policy">("pricing");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    setTheme(document.documentElement.classList.contains("light") ? "light" : "dark");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    document.documentElement.classList.toggle("light", next === "light");
+    try { localStorage.setItem("theme", next); } catch {}
+    setTheme(next);
+  };
 
   const load = async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -103,9 +115,15 @@ export default function ProfilePage() {
       </div>
 
       {menuOpen && (
-        <div style={{ position: "fixed", top: 54, right: 12, zIndex: 80, background: BG2, border: "1px solid rgba(234,234,234,0.1)", borderRadius: 12, overflow: "hidden", minWidth: 180 }}>
+        <div style={{ position: "fixed", top: 54, right: 12, zIndex: 80, background: BG2, border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", minWidth: 180 }}>
           <Link href={`/${acc.slug}`} style={menuItem}>View public page</Link>
           <button onClick={() => { setEditing(true); setMenuOpen(false); }} style={{ ...menuItem, width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit" }}>Edit profile</button>
+          <button onClick={toggleTheme} style={{ ...menuItem, width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+            <span>{theme === "light" ? "Dark mode" : "Light mode"}</span>
+            {theme === "light"
+              ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+              : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={YELLOW} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>}
+          </button>
           <button onClick={logout} style={{ ...menuItem, width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", color: GREEN, fontFamily: "inherit" }}>Log out</button>
         </div>
       )}
@@ -137,14 +155,14 @@ export default function ProfilePage() {
         {acc.bio && <p style={{ fontSize: 14, color: FG, lineHeight: 1.5, margin: "12px 2px" }}>{acc.bio}</p>}
 
         {/* What the platform shows */}
-        <div style={{ background: BG2, borderRadius: 14, padding: 14, margin: "12px 0 20px", border: "1px solid rgba(234,234,234,0.06)" }}>
+        <div style={{ background: BG2, borderRadius: 14, padding: 14, margin: "12px 0 20px", border: "1px solid var(--border)" }}>
           <p style={{ fontSize: 12.5, color: MUTED, margin: 0, lineHeight: 1.5 }}>
             Your agent answers customers using your <b style={{ color: GREEN }}>public</b> info. <b style={{ color: YELLOW }}>Private</b> info is used for context but never shown to customers.
           </p>
         </div>
 
         {/* Business Info vs Content tabs */}
-        <div style={{ display: "flex", marginBottom: 14, borderBottom: "1px solid rgba(234,234,234,0.08)" }}>
+        <div style={{ display: "flex", marginBottom: 14, borderBottom: "1px solid var(--border)" }}>
           {(["live", "context"] as const).map((s) => (
             <button key={s} onClick={() => setSection(s)} className={section === s ? "tab tab-active" : "tab"} style={{ textTransform: "capitalize" }}>
               {s === "live" ? "Business Info" : "Content"}
@@ -174,7 +192,7 @@ export default function ProfilePage() {
                 </select>
                 <label style={labelStyle}>Details</label>
                 <textarea value={newText} onChange={(e) => setNewText(e.target.value)} placeholder={`Add ${liveType}…`} autoFocus
-                  style={{ width: "100%", minHeight: 80, background: BG3, color: FG, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none", resize: "vertical" }} />
+                  style={{ width: "100%", minHeight: 80, background: BG3, color: FG, border: "1px solid var(--border)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none", resize: "vertical" }} />
                 <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
                   <button className="btn-primary" style={{ width: "auto", padding: "9px 18px" }} onClick={() => addEntry()}>Save</button>
                   <button className="btn-ghost" onClick={() => { setAdding(false); setNewText(""); }}>Cancel</button>
@@ -194,7 +212,7 @@ export default function ProfilePage() {
                     <p style={{ fontSize: 13, color: MUTED, margin: 0 }}>Not set</p>
                   ) : (
                     items.map((e) => (
-                      <div key={e.id} style={{ background: BG3, border: "1px solid rgba(234,234,234,0.07)", borderRadius: 10, padding: "10px 12px", marginBottom: 8 }}>
+                      <div key={e.id} style={{ background: BG3, border: "1px solid var(--border)", borderRadius: 10, padding: "10px 12px", marginBottom: 8 }}>
                         <p style={{ fontSize: 13.5, color: FG, margin: 0, lineHeight: 1.4 }}>{e.content}</p>
                         <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
                           <button onClick={() => remove(e)} style={{ ...linkBtn, fontSize: 12 }}>Delete</button>
@@ -212,7 +230,7 @@ export default function ProfilePage() {
             {adding ? (
               <div style={{ marginBottom: 14 }}>
                 <textarea value={newText} onChange={(e) => setNewText(e.target.value)} placeholder="Add content (about, portfolio, faq, offers)…" autoFocus
-                  style={{ width: "100%", minHeight: 70, background: BG3, color: FG, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none", resize: "vertical" }} />
+                  style={{ width: "100%", minHeight: 70, background: BG3, color: FG, border: "1px solid var(--border)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none", resize: "vertical" }} />
                 <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
                   <button className="btn-primary" style={{ width: "auto", padding: "9px 18px" }} onClick={addEntry}>Save</button>
                   <button className="btn-ghost" onClick={() => { setAdding(false); setNewText(""); }}>Cancel</button>
@@ -226,7 +244,7 @@ export default function ProfilePage() {
               <p style={{ color: MUTED, fontSize: 13.5, textAlign: "center", padding: "20px 0" }}>No content yet.</p>
             ) : (
               entries.map((e) => (
-                <div key={e.id} style={{ background: BG2, border: "1px solid rgba(234,234,234,0.07)", borderRadius: 12, padding: "12px 14px", marginBottom: 9 }}>
+                <div key={e.id} style={{ background: BG2, border: "1px solid var(--border)", borderRadius: 12, padding: "12px 14px", marginBottom: 9 }}>
                   <p style={{ fontSize: 14, color: FG, margin: 0, lineHeight: 1.45 }}>{e.content}</p>
                   <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 9 }}>
                     {e.tag && <span style={{ fontSize: 11, color: GREEN, background: "rgba(152,170,157,0.12)", padding: "2px 8px", borderRadius: 6 }}>{e.tag}</span>}
@@ -242,7 +260,7 @@ export default function ProfilePage() {
       {/* Edit profile sheet */}
       {editing && (
         <div style={{ position: "fixed", inset: 0, zIndex: 90, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "flex-end" }} onClick={() => setEditing(false)}>
-          <div onClick={(e) => e.stopPropagation()} style={{ background: "#121212", borderTopLeftRadius: 20, borderTopRightRadius: 20, width: "100%", maxWidth: 720, margin: "0 auto", padding: 20, maxHeight: "85vh", overflowY: "auto", borderTop: "1px solid rgba(255,190,0,0.2)" }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: "var(--bg)", borderTopLeftRadius: 20, borderTopRightRadius: 20, width: "100%", maxWidth: 720, margin: "0 auto", padding: 20, maxHeight: "85vh", overflowY: "auto", borderTop: "1px solid rgba(255,190,0,0.2)" }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: FG, marginTop: 0 }}>Edit profile</h2>
             {([["bio", "Bio"], ["city", "City"], ["category", "Category"], ["logo_url", "Logo image URL"], ["phone", "Phone"], ["email", "Email"], ["website", "Website"], ["instagram", "Instagram"]] as const).map(([k, label]) => (
               <div key={k} style={{ marginBottom: 12 }}>
@@ -260,9 +278,9 @@ export default function ProfilePage() {
   );
 }
 
-const menuItem: React.CSSProperties = { display: "block", padding: "12px 16px", fontSize: 14, color: FG, textDecoration: "none", borderBottom: "1px solid rgba(234,234,234,0.06)" };
+const menuItem: React.CSSProperties = { display: "block", padding: "12px 16px", fontSize: 14, color: FG, textDecoration: "none", borderBottom: "1px solid var(--border)" };
 const linkBtn: React.CSSProperties = { background: "none", border: "none", color: GREEN, fontSize: 12.5, cursor: "pointer", padding: 0, fontFamily: "inherit", fontWeight: 600 };
-const inputStyle: React.CSSProperties = { width: "100%", background: BG3, color: FG, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none" };
+const inputStyle: React.CSSProperties = { width: "100%", background: BG3, color: FG, border: "1px solid var(--border)", borderRadius: 12, padding: 12, fontSize: 14, fontFamily: "inherit", outline: "none" };
 const labelStyle: React.CSSProperties = { display: "block", fontSize: 13, color: MUTED, marginBottom: 8, fontWeight: 600 };
 function Trust({ value, label }: { value: string | number; label: string }) {
   return (

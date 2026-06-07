@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const GREEN = "#98aa9d";
-const MUTED = "#a9a9a7";
+const GREEN = "var(--green)";
+const MUTED = "var(--fg2)";
 
 const tabs = [
   {

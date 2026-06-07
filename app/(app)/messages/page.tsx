@@ -7,11 +7,11 @@ import { createClient } from "@/lib/supabase/client";
 import { cache } from "@/lib/cache/usePageCache";
 import { analytics } from "@/lib/analytics";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
 
 type Msg = {
   id: string; conversation_id: string; role: string; content: string;
@@ -140,10 +140,10 @@ export default function MessagesPage() {
                   <span style={{ fontWeight: 700, fontSize: 14, color: FG }}>Important & Orders</span>
                 </div>
                 {important.map((m) => (
-                  <div key={m.id} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "9px 0", borderTop: "1px solid rgba(234,234,234,0.06)" }}>
+                  <div key={m.id} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "9px 0", borderTop: "1px solid var(--border)" }}>
                     <button onClick={() => toggleFulfilled(m)} aria-label="Toggle fulfilled" style={{
                       marginTop: 2, width: 20, height: 20, borderRadius: 6, flexShrink: 0, cursor: "pointer",
-                      border: `1.6px solid ${m.fulfilled ? GREEN : "#3a3a38"}`, background: m.fulfilled ? GREEN : "transparent",
+                      border: `1.6px solid ${m.fulfilled ? GREEN : "var(--fg3)"}`, background: m.fulfilled ? GREEN : "transparent",
                       display: "flex", alignItems: "center", justifyContent: "center",
                     }}>
                       {m.fulfilled && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>}
@@ -172,8 +172,8 @@ export default function MessagesPage() {
                 const unread = unreadByConv(c.id);
                 return (
                   <Link key={c.id} href={`/messages/${c.id}`} style={{ textDecoration: "none" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 6px", borderBottom: "1px solid rgba(234,234,234,0.05)" }}>
-                      <div className="avatar" style={{ width: 46, height: 46, fontSize: 17, background: "#242424" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 6px", borderBottom: "1px solid var(--border)" }}>
+                      <div className="avatar" style={{ width: 46, height: 46, fontSize: 17, background: "var(--bg3)" }}>
                         {(c.visitor_name ?? "C")[0].toUpperCase()}
                       </div>
                       <div style={{ flex: 1, minWidth: 0 }}>

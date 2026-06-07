@@ -4,9 +4,9 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const MUTED  = "#a9a9a7";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const MUTED  = "var(--fg2)";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail]   = useState("");
@@ -30,19 +30,19 @@ export default function ForgotPasswordPage() {
     <div style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
-      padding: "24px", background: "#121212",
+      padding: "24px", background: "var(--bg)",
     }}>
       <div style={{ width: "100%", maxWidth: 360 }}>
 
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <img src="/bee.png" alt="Hanubees" style={{ width: 80, height: "auto", margin: "0 auto 20px", display: "block" }} />
-          <h2 style={{ fontSize: 22, fontWeight: 700, color: "#eaeaea", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: "var(--fg)", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>
             {sent ? "Email sent" : "Forgot password?"}
           </h2>
           <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.6 }}>
             {sent
-              ? <>Check <span style={{ color: "#eaeaea", fontWeight: 600 }}>{email}</span><br />for a password reset link.</>
+              ? <>Check <span style={{ color: "var(--fg)", fontWeight: 600 }}>{email}</span><br />for a password reset link.</>
               : "Enter your email and we'll send you a reset link."
             }
           </p>
@@ -59,8 +59,8 @@ export default function ForgotPasswordPage() {
           </form>
         ) : (
           <button onClick={() => { setSent(false); setEmail(""); }} style={{
-            width: "100%", background: "#1a1a1a",
-            border: "1px solid rgba(234,234,234,0.08)",
+            width: "100%", background: "var(--bg2)",
+            border: "1px solid var(--border)",
             borderRadius: 12, padding: "13px",
             color: MUTED, fontSize: 14, fontWeight: 600,
             cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif",

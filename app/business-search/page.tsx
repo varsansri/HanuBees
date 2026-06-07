@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const YELLOW = "#ffbe00";
-const GREEN = "#98aa9d";
-const FG = "#eaeaea";
-const MUTED = "#a9a9a7";
-const BG2 = "#1a1a1a";
-const BG3 = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN = "var(--green)";
+const FG = "var(--fg)";
+const MUTED = "var(--fg2)";
+const BG2 = "var(--bg2)";
+const BG3 = "var(--bg3)";
 
 export default function BusinessSearchPage() {
   const router = useRouter();
@@ -81,7 +81,7 @@ export default function BusinessSearchPage() {
               width: "100%",
               padding: "12px 14px",
               borderRadius: 12,
-              border: `1px solid rgba(234,234,234,0.12)`,
+              border: `1px solid var(--border)`,
               background: BG3,
               color: FG,
               fontSize: 15,
@@ -106,7 +106,7 @@ export default function BusinessSearchPage() {
               width: "100%",
               padding: "12px 14px",
               borderRadius: 12,
-              border: `1px solid rgba(234,234,234,0.12)`,
+              border: `1px solid var(--border)`,
               background: BG3,
               color: FG,
               fontSize: 15,
@@ -141,7 +141,7 @@ export default function BusinessSearchPage() {
           padding: "14px 18px",
           borderRadius: 12,
           border: "none",
-          background: (name.trim() && city.trim() && !loading) ? YELLOW : "#3a3a38",
+          background: (name.trim() && city.trim() && !loading) ? YELLOW : "var(--fg3)",
           color: "#121212",
           fontSize: 15,
           fontWeight: 700,

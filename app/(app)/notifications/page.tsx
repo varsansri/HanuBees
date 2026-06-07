@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
-const BG3    = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
+const BG3    = "var(--bg3)";
 const PURPLE = "#b794f6";
 
 const COLORS = [
-  { name: "Yellow", hex: "#ffbe00" },
+  { name: "Yellow", hex: "var(--yellow)" },
   { name: "Red",    hex: "#e0574d" },
-  { name: "Green",  hex: "#98aa9d" },
+  { name: "Green",  hex: "var(--green)" },
   { name: "Purple", hex: "#b794f6" },
   { name: "Blue",   hex: "#6aa3f0" },
 ];
@@ -123,7 +123,7 @@ export default function NotificationsPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%", padding: "10px 12px", borderRadius: 10,
-    border: "1px solid rgba(234,234,234,0.12)", background: BG3, color: FG,
+    border: "1px solid var(--border)", background: BG3, color: FG,
     fontSize: 14, fontFamily: "inherit", outline: "none",
   };
 
@@ -152,19 +152,19 @@ export default function NotificationsPage() {
 
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "8px 12px 110px" }}>
         {/* Watchers strip */}
-        <div style={{ background: BG2, borderRadius: 16, padding: 14, marginBottom: 16, border: "1px solid rgba(234,234,234,0.06)" }}>
+        <div style={{ background: BG2, borderRadius: 16, padding: 14, marginBottom: 16, border: "1px solid var(--border)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: watchers.length || showForm ? 10 : 0 }}>
             <span style={{ fontSize: 13.5, fontWeight: 700, color: FG }}>What I'm watching</span>
             <button onClick={() => setShowForm((s) => !s)} style={{
               background: showForm ? "transparent" : YELLOW, color: showForm ? MUTED : "#121212",
-              border: showForm ? "1px solid rgba(234,234,234,0.15)" : "none",
+              border: showForm ? "1px solid var(--border)" : "none",
               borderRadius: 9, padding: "6px 12px", fontSize: 12.5, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
             }}>{showForm ? "Cancel" : "+ New watcher"}</button>
           </div>
 
           {/* Active watchers */}
           {watchers.map((w) => (
-            <div key={w.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", borderTop: "1px solid rgba(234,234,234,0.06)" }}>
+            <div key={w.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", borderTop: "1px solid var(--border)" }}>
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: w.color, flexShrink: 0 }} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{ fontSize: 13.5, color: FG, margin: 0 }}>{w.label}</p>
@@ -183,7 +183,7 @@ export default function NotificationsPage() {
 
           {/* New watcher form */}
           {showForm && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 9, marginTop: 10, borderTop: "1px solid rgba(234,234,234,0.06)", paddingTop: 12 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 9, marginTop: 10, borderTop: "1px solid var(--border)", paddingTop: 12 }}>
               <input style={inputStyle} placeholder="Name this alert (e.g. Big wedding offers)" value={label} onChange={(e) => setLabel(e.target.value)} />
               <input style={inputStyle} placeholder="Keyword (optional, e.g. wedding)" value={query} onChange={(e) => setQuery(e.target.value)} />
               <input style={inputStyle} placeholder="Category (optional, e.g. Photography)" value={category} onChange={(e) => setCategory(e.target.value)} />
@@ -201,7 +201,7 @@ export default function NotificationsPage() {
                 ))}
               </div>
               <button onClick={createWatcher} disabled={!label.trim()} style={{
-                background: label.trim() ? YELLOW : "#3a3a38", color: "#121212", border: "none",
+                background: label.trim() ? YELLOW : "var(--fg3)", color: "#121212", border: "none",
                 borderRadius: 10, padding: "11px", fontSize: 14, fontWeight: 700,
                 cursor: label.trim() ? "pointer" : "default", fontFamily: "inherit", marginTop: 2,
               }}>Create watcher</button>
@@ -214,7 +214,7 @@ export default function NotificationsPage() {
           {FOLDERS.map((f) => (
             <button key={f} onClick={() => switchFolder(f)} style={{
               flex: 1, padding: "9px 0", borderRadius: 10, fontFamily: "inherit", cursor: "pointer",
-              border: "1px solid rgba(234,234,234,0.08)", fontSize: 13, fontWeight: 600,
+              border: "1px solid var(--border)", fontSize: 13, fontWeight: 600,
               textTransform: "capitalize",
               background: folder === f ? BG3 : "transparent",
               color: folder === f ? FG : MUTED,
@@ -236,7 +236,7 @@ export default function NotificationsPage() {
           notifs.map((n) => (
             <div key={n.id} onClick={() => markRead(n)} style={{
               display: "flex", gap: 11, padding: "12px 6px", cursor: "pointer",
-              borderBottom: "1px solid rgba(234,234,234,0.05)", opacity: n.read ? 0.6 : 1,
+              borderBottom: "1px solid var(--border)", opacity: n.read ? 0.6 : 1,
             }}>
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: n.color, flexShrink: 0, marginTop: 5 }} />
               <div style={{ flex: 1, minWidth: 0 }}>

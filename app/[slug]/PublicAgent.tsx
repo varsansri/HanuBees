@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { analytics } from "@/lib/analytics";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
-const BG3    = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
+const BG3    = "var(--bg3)";
 
 type Account = {
   id: string; name: string; slug: string; category: string | null; city: string | null;
@@ -97,7 +97,7 @@ export default function PublicAgent({ account, highlights }: { account: Account;
             <p style={{ color: MUTED, fontSize: 13.5, marginTop: 4 }}>No waiting, no calls. Get answers now.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 22, alignItems: "center" }}>
               {chips.map((s) => (
-                <button key={s} onClick={() => send(s)} style={{ background: BG2, border: "1px solid rgba(234,234,234,0.08)", color: FG, borderRadius: 12, padding: "11px 18px", fontSize: 14, cursor: "pointer", fontFamily: "inherit", maxWidth: 360, width: "100%" }}>{s}</button>
+                <button key={s} onClick={() => send(s)} style={{ background: BG2, border: "1px solid var(--border)", color: FG, borderRadius: 12, padding: "11px 18px", fontSize: 14, cursor: "pointer", fontFamily: "inherit", maxWidth: 360, width: "100%" }}>{s}</button>
               ))}
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function PublicAgent({ account, highlights }: { account: Account;
 
       {/* Input */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, padding: "10px 14px 18px", background: "rgba(18,18,18,0.94)", backdropFilter: "blur(16px)" }}>
-        <div style={{ maxWidth: 640, margin: "0 auto", display: "flex", alignItems: "flex-end", gap: 8, background: BG3, borderRadius: 18, padding: "6px 6px 6px 14px", border: "1px solid rgba(234,234,234,0.08)" }}>
+        <div style={{ maxWidth: 640, margin: "0 auto", display: "flex", alignItems: "flex-end", gap: 8, background: BG3, borderRadius: 18, padding: "6px 6px 6px 14px", border: "1px solid var(--border)" }}>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -136,7 +136,7 @@ export default function PublicAgent({ account, highlights }: { account: Account;
             rows={1}
             style={{ flex: 1, background: "none", border: "none", outline: "none", resize: "none", color: FG, fontSize: 15, fontFamily: "inherit", maxHeight: 120, padding: "7px 0" }}
           />
-          <button onClick={() => send(input)} disabled={!input.trim() || loading} aria-label="Send" style={{ width: 38, height: 38, borderRadius: 12, border: "none", flexShrink: 0, background: input.trim() && !loading ? YELLOW : "#3a3a38", cursor: input.trim() && !loading ? "pointer" : "default", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <button onClick={() => send(input)} disabled={!input.trim() || loading} aria-label="Send" style={{ width: 38, height: 38, borderRadius: 12, border: "none", flexShrink: 0, background: input.trim() && !loading ? YELLOW : "var(--fg3)", cursor: input.trim() && !loading ? "pointer" : "default", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
           </button>
         </div>

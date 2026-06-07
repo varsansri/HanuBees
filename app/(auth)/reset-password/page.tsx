@@ -5,9 +5,9 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const MUTED  = "#a9a9a7";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const MUTED  = "var(--fg2)";
 
 export default function ResetPasswordPage() {
   const [password, setPassword]   = useState("");
@@ -40,14 +40,14 @@ export default function ResetPasswordPage() {
 
   if (done) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", background: "#121212" }}>
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", background: "var(--bg)" }}>
         <div style={{ textAlign: "center" }}>
           <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(152,170,157,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2.5" strokeLinecap="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: "#eaeaea", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>Password updated</h2>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: "var(--fg)", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>Password updated</h2>
           <p style={{ color: MUTED, fontSize: 14 }}>Redirecting you to login…</p>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function ResetPasswordPage() {
 
   if (!ready) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", background: "#121212" }}>
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", background: "var(--bg)" }}>
         <p style={{ color: MUTED, fontSize: 14 }}>Verifying reset link…</p>
       </div>
     );
@@ -66,12 +66,12 @@ export default function ResetPasswordPage() {
     <div style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
-      padding: "24px", background: "#121212",
+      padding: "24px", background: "var(--bg)",
     }}>
       <div style={{ width: "100%", maxWidth: 360 }}>
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <img src="/bee.png" alt="Hanubees" style={{ width: 80, height: "auto", margin: "0 auto 20px", display: "block" }} />
-          <h2 style={{ fontSize: 22, fontWeight: 700, color: "#eaeaea", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: "var(--fg)", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>
             Set new password
           </h2>
           <p style={{ color: MUTED, fontSize: 14 }}>Choose a strong password for your account.</p>

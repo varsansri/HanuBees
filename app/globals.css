@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: dark;
   --bg:      #121212;
   --bg2:     #1a1a1a;
   --bg3:     #242424;
@@ -13,6 +14,23 @@
   --amber:   #ffbe00;
   --green:   #98aa9d;
 }
+
+/* Light mode — toggled by adding .light on <html> (persisted in localStorage) */
+html.light {
+  color-scheme: light;
+  --bg:      #faf8f3;
+  --bg2:     #ffffff;
+  --bg3:     #f1ece2;
+  --border:  rgba(20,18,12,0.12);
+  --fg:      #1a1712;
+  --fg2:     #6b675e;
+  --fg3:     #d4cdc0;
+  --yellow:  #ffbe00;
+  --amber:   #ffbe00;
+  --green:   #5f7d6e;
+}
+
+html, body { transition: background-color 0.2s ease, color 0.2s ease; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", MUTED = "#a9a9a7", BG = "#121212", BG2 = "#1a1a1a", BG3 = "#242424";
+const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", MUTED = "var(--fg2)", BG = "var(--bg)", BG2 = "var(--bg2)", BG3 = "var(--bg3)";
 
 type Account = { id: string; name: string; slug: string; bee_name: string; category: string | null; city: string | null };
 type Msg = { role: "user" | "assistant"; content: string };
@@ -66,7 +66,7 @@ export default function EmbedChat({ account }: { account: Account }) {
       </div>
 
       {/* Input */}
-      <div style={{ padding: 10, borderTop: "1px solid rgba(234,234,234,0.07)", background: BG2 }}>
+      <div style={{ padding: 10, borderTop: "1px solid var(--border)", background: BG2 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "flex-end", background: BG3, borderRadius: 14, padding: "5px 5px 5px 12px" }}>
           <textarea
             value={input} onChange={(e) => setInput(e.target.value)} rows={1}
@@ -76,7 +76,7 @@ export default function EmbedChat({ account }: { account: Account }) {
           />
           <button onClick={() => send(input)} disabled={!input.trim() || loading} aria-label="Send" style={{
             width: 34, height: 34, borderRadius: 10, border: "none", flexShrink: 0,
-            background: input.trim() && !loading ? YELLOW : "#3a3a38", cursor: input.trim() && !loading ? "pointer" : "default",
+            background: input.trim() && !loading ? YELLOW : "var(--fg3)", cursor: input.trim() && !loading ? "pointer" : "default",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>

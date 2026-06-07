@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import posthog from "posthog-js";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const MUTED  = "#a9a9a7";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const MUTED  = "var(--fg2)";
 
 export default function SignupPage() {
   const [step, setStep]         = useState<"form"|"otp">("form");
@@ -83,17 +83,17 @@ export default function SignupPage() {
       <div style={{
         minHeight: "100vh", display: "flex", flexDirection: "column",
         alignItems: "center", justifyContent: "center",
-        padding: "24px", background: "#121212",
+        padding: "24px", background: "var(--bg)",
       }}>
         <div style={{ width: "100%", maxWidth: 360 }}>
           <div style={{ textAlign: "center", marginBottom: 36 }}>
             <img src="/bee.png" alt="Hanubees" style={{ width: 80, height: "auto", margin: "0 auto 20px", display: "block" }} />
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: "#eaeaea", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: "var(--fg)", fontFamily: "'Space Grotesk', sans-serif", marginBottom: 8 }}>
               Check your email
             </h2>
             <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.6 }}>
               We sent a 6-digit code to<br />
-              <span style={{ color: "#eaeaea", fontWeight: 600 }}>{email}</span>
+              <span style={{ color: "var(--fg)", fontWeight: 600 }}>{email}</span>
             </p>
           </div>
 
@@ -110,9 +110,9 @@ export default function SignupPage() {
                 style={{
                   width: 38, height: 52, textAlign: "center",
                   fontSize: 22, fontWeight: 700,
-                  background: "#1a1a1a",
-                  border: `2px solid ${digit ? GREEN : "rgba(234,234,234,0.1)"}`,
-                  borderRadius: 12, color: "#eaeaea", outline: "none",
+                  background: "var(--bg2)",
+                  border: `2px solid ${digit ? GREEN : "var(--border)"}`,
+                  borderRadius: 12, color: "var(--fg)", outline: "none",
                   fontFamily: "'Space Grotesk', sans-serif",
                   transition: "border-color 0.15s",
                 }}
@@ -153,12 +153,12 @@ export default function SignupPage() {
     <div style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
-      padding: "24px", background: "#121212",
+      padding: "24px", background: "var(--bg)",
     }}>
       <div style={{ width: "100%", maxWidth: 360 }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <img src="/bee.png" alt="Hanubees" style={{ width: 140, height: "auto", margin: "0 auto 8px", display: "block" }} />
-          <p style={{ color: "#a9a9a7", fontSize: 14, marginTop: 8, fontWeight: 500 }}>
+          <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 8, fontWeight: 500 }}>
             Join the health community
           </p>
         </div>

@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import posthog from "posthog-js";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const MUTED  = "#a9a9a7";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const MUTED  = "var(--fg2)";
 
 export default function LoginPage() {
   const [email, setEmail]       = useState("");
@@ -33,12 +33,12 @@ export default function LoginPage() {
     <div style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
-      padding: "24px", background: "#121212",
+      padding: "24px", background: "var(--bg)",
     }}>
       <div style={{ width: "100%", maxWidth: 360 }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <img src="/bee.png" alt="Hanubees" style={{ width: 140, height: "auto", margin: "0 auto 8px", display: "block" }} />
-          <p style={{ color: "#a9a9a7", fontSize: 14, marginTop: 8, fontWeight: 500, letterSpacing: "0.01em" }}>
+          <p style={{ color: "var(--fg2)", fontSize: 14, marginTop: 8, fontWeight: 500, letterSpacing: "0.01em" }}>
             Your health journey, shared.
           </p>
         </div>

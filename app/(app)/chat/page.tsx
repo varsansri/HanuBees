@@ -6,12 +6,12 @@ import { useBee } from "@/components/bee/BeeProvider";
 import { analytics } from "@/lib/analytics";
 import { createClient } from "@/lib/supabase/client";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
-const BG3    = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
+const BG3    = "var(--bg3)";
 const PURPLE = "#b794f6";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -160,7 +160,7 @@ export default function ChatPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 22, alignItems: "center" }}>
               {(chatMode === "owner" ? SUGGESTIONS : CONSUMER_SUGGESTIONS).map((s) => (
                 <button key={s} onClick={() => send(s)} style={{
-                  background: BG2, border: "1px solid rgba(234,234,234,0.08)", color: FG,
+                  background: BG2, border: "1px solid var(--border)", color: FG,
                   borderRadius: 12, padding: "11px 16px", fontSize: 13.5, cursor: "pointer",
                   maxWidth: 420, fontFamily: "inherit",
                 }}>{s}</button>
@@ -218,7 +218,7 @@ export default function ChatPage() {
         <div style={{
           maxWidth: 720, margin: "0 auto", display: "flex", alignItems: "flex-end", gap: 8,
           background: BG3, borderRadius: 18, padding: "6px 6px 6px 14px",
-          border: "1px solid rgba(234,234,234,0.08)",
+          border: "1px solid var(--border)",
         }}>
           <textarea
             ref={inputRef}
@@ -234,7 +234,7 @@ export default function ChatPage() {
           />
           <button onClick={() => send(input)} disabled={!input.trim() || loading} aria-label="Send" style={{
             width: 38, height: 38, borderRadius: 12, border: "none", flexShrink: 0,
-            background: input.trim() && !loading ? YELLOW : "#3a3a38",
+            background: input.trim() && !loading ? YELLOW : "var(--fg3)",
             cursor: input.trim() && !loading ? "pointer" : "default",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>

@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
 
 type Account = { id: string; name: string; rating: number; review_count: number; follower_count: number; category: string | null; city: string | null; bio: string | null; logo_url: string | null };
 
@@ -87,7 +87,7 @@ export default function DashboardPage() {
         <div style={{ background: BG2, border: `1px solid rgba(255,190,0,0.2)`, borderRadius: 18, padding: 20, marginBottom: 16, textAlign: "center" }}>
           <p style={{ color: MUTED, fontSize: 12.5, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", margin: 0 }}>Agent score</p>
           <p style={{ fontSize: 52, fontWeight: 700, color: YELLOW, margin: "4px 0 0", lineHeight: 1 }}>{score}</p>
-          <div style={{ height: 6, background: "#242424", borderRadius: 4, marginTop: 14, overflow: "hidden" }}>
+          <div style={{ height: 6, background: "var(--bg3)", borderRadius: 4, marginTop: 14, overflow: "hidden" }}>
             <div style={{ width: `${score}%`, height: "100%", background: YELLOW, transition: "width 0.6s" }} />
           </div>
           <p style={{ color: MUTED, fontSize: 12.5, marginTop: 10 }}>Higher score = higher ranking when customers search.</p>
@@ -105,11 +105,11 @@ export default function DashboardPage() {
 
         {/* Knowledge gaps */}
         {gaps.length > 0 && (
-          <div style={{ background: BG2, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 16, padding: 16, marginBottom: 16 }}>
+          <div style={{ background: BG2, border: "1px solid var(--border)", borderRadius: 16, padding: 16, marginBottom: 16 }}>
             <p style={{ fontWeight: 700, fontSize: 14, color: FG, marginTop: 0, marginBottom: 4 }}>Knowledge gaps</p>
             <p style={{ color: MUTED, fontSize: 12.5, marginTop: 0, marginBottom: 12 }}>Questions your agent couldn&apos;t answer. Add these in Chat to fix them.</p>
             {gaps.map((g, i) => (
-              <div key={i} style={{ display: "flex", gap: 8, padding: "7px 0", borderTop: "1px solid rgba(234,234,234,0.06)" }}>
+              <div key={i} style={{ display: "flex", gap: 8, padding: "7px 0", borderTop: "1px solid var(--border)" }}>
                 <span style={{ color: YELLOW, fontSize: 11, marginTop: 3 }}>▸</span>
                 <p style={{ fontSize: 13.5, color: FG, margin: 0, lineHeight: 1.4 }}>{g}</p>
               </div>
@@ -134,7 +134,7 @@ export default function DashboardPage() {
 
 function Stat({ label, value, accent }: { label: string; value: string | number; accent?: string }) {
   return (
-    <div style={{ background: BG2, border: "1px solid rgba(234,234,234,0.08)", borderRadius: 14, padding: "14px 16px" }}>
+    <div style={{ background: BG2, border: "1px solid var(--border)", borderRadius: 14, padding: "14px 16px" }}>
       <p style={{ fontSize: 26, fontWeight: 700, color: accent ?? FG, margin: 0, lineHeight: 1 }}>{value}</p>
       <p style={{ fontSize: 12, color: MUTED, margin: "6px 0 0" }}>{label}</p>
     </div>

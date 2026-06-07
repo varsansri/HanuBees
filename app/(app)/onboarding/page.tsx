@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { analytics } from "@/lib/analytics";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
-const BG3    = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
+const BG3    = "var(--bg3)";
 
 const CATEGORIES = [
   "Wedding Photography", "Videography", "Catering", "Event Planning",
@@ -118,10 +118,10 @@ export default function OnboardingPage() {
   return (
     <div style={{ minHeight: "100vh", maxWidth: 520, margin: "0 auto", padding: "32px 20px 120px" }}>
       <div style={{ display: "flex", gap: 6, marginBottom: 28 }}>
-        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "type" ? YELLOW : "#3a3a38" }} />
-        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "basics" || step === "bee" || step === "seed" ? YELLOW : "#3a3a38" }} />
-        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "bee" || step === "seed" ? YELLOW : "#3a3a38" }} />
-        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "seed" ? YELLOW : "#3a3a38" }} />
+        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "type" ? YELLOW : "var(--fg3)" }} />
+        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "basics" || step === "bee" || step === "seed" ? YELLOW : "var(--fg3)" }} />
+        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "bee" || step === "seed" ? YELLOW : "var(--fg3)" }} />
+        <div style={{ flex: 1, height: 3, borderRadius: 2, background: step === "seed" ? YELLOW : "var(--fg3)" }} />
       </div>
 
       {step === "type" ? (
@@ -132,14 +132,14 @@ export default function OnboardingPage() {
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <button onClick={() => { setType("business"); setStep("basics"); }} style={{
-              padding: 20, borderRadius: 14, border: "1px solid rgba(234,234,234,0.1)",
+              padding: 20, borderRadius: 14, border: "1px solid var(--border)",
               background: BG2, cursor: "pointer", fontFamily: "inherit", textAlign: "left",
             }}>
               <p style={{ fontSize: 16, fontWeight: 700, color: FG, margin: "0 0 6px" }}>Business</p>
               <p style={{ fontSize: 13, color: MUTED, margin: 0 }}>Get your own AI receptionist to answer customers</p>
             </button>
             <button onClick={() => { setType("person"); setStep("basics"); }} style={{
-              padding: 20, borderRadius: 14, border: "1px solid rgba(234,234,234,0.1)",
+              padding: 20, borderRadius: 14, border: "1px solid var(--border)",
               background: BG2, cursor: "pointer", fontFamily: "inherit", textAlign: "left",
             }}>
               <p style={{ fontSize: 16, fontWeight: 700, color: FG, margin: "0 0 6px" }}>Person / Individual</p>
@@ -170,7 +170,7 @@ export default function OnboardingPage() {
                     padding: "8px 13px", borderRadius: 10, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
                     background: category === c ? GREEN : BG3,
                     color: category === c ? "#121212" : FG,
-                    border: "1px solid rgba(234,234,234,0.08)", fontWeight: category === c ? 700 : 400,
+                    border: "1px solid var(--border)", fontWeight: category === c ? 700 : 400,
                   }}>{c}</button>
                 ))}
               </div>
@@ -213,7 +213,7 @@ export default function OnboardingPage() {
             placeholder={"https://yourbusiness.com.au\n\nWe shoot weddings across Melbourne. Full-day coverage $2400, includes 600+ edited photos. Available weekends, book 3 months ahead."}
             style={{
               width: "100%", minHeight: 200, background: BG3, color: FG, fontFamily: "inherit",
-              border: "1px solid rgba(234,234,234,0.08)", borderRadius: 14, padding: 14, fontSize: 14.5,
+              border: "1px solid var(--border)", borderRadius: 14, padding: 14, fontSize: 14.5,
               outline: "none", resize: "vertical", lineHeight: 1.5,
             }}
           />

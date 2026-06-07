@@ -4,7 +4,8 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", BG = "#121212";
+const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", BG = "var(--bg)";
+const MAP_YELLOW = "#ffbe00"; // MapLibre paint can't parse CSS var() — needs a literal color
 
 const CITY_CENTERS: Record<string, [number, number]> = {
   Coimbatore: [76.9558, 11.0168],
@@ -81,7 +82,7 @@ function MapInner() {
           id: "biz-glow", type: "circle", source: "biz",
           paint: {
             "circle-radius": ["interpolate", ["linear"], ["zoom"], 8, 7, 14, 16],
-            "circle-color": YELLOW, "circle-blur": 1, "circle-opacity": 0.45,
+            "circle-color": MAP_YELLOW, "circle-blur": 1, "circle-opacity": 0.45,
           },
         });
         // solid dot
@@ -89,7 +90,7 @@ function MapInner() {
           id: "biz-dot", type: "circle", source: "biz",
           paint: {
             "circle-radius": ["interpolate", ["linear"], ["zoom"], 8, 3.5, 14, 7],
-            "circle-color": YELLOW, "circle-stroke-width": 1.5, "circle-stroke-color": "#121212",
+            "circle-color": MAP_YELLOW, "circle-stroke-width": 1.5, "circle-stroke-color": "#121212",
           },
         });
 
@@ -151,7 +152,7 @@ function MapInner() {
       <div ref={containerRef} style={{ position: "absolute", inset: 0 }} />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: "linear-gradient(#121212dd,#12121200)" }}>
         <span style={{ color: YELLOW, fontWeight: 700, fontSize: 16 }}>Map</span>
-        <select value={city} onChange={(e) => setCity(e.target.value)} style={{ background: "#1a1a1a", color: FG, border: "1px solid rgba(234,234,234,0.15)", borderRadius: 8, padding: "7px 10px", fontSize: 14, fontFamily: "inherit" }}>
+        <select value={city} onChange={(e) => setCity(e.target.value)} style={{ background: "var(--bg2)", color: FG, border: "1px solid var(--border)", borderRadius: 8, padding: "7px 10px", fontSize: 14, fontFamily: "inherit" }}>
           {Object.keys(CITY_CENTERS).map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
         <span style={{ color: GREEN, fontSize: 13, fontWeight: 600 }}>{count} on map</span>

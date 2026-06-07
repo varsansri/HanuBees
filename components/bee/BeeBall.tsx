@@ -5,10 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useBee } from "./BeeProvider";
 import { analytics } from "@/lib/analytics";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG      = "#eaeaea";
-const MUTED  = "#a9a9a7";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG      = "var(--fg)";
+const MUTED  = "var(--fg2)";
 
 const MOVE_THRESHOLD = 6;    // px before a press becomes a drag
 const HOLD_MS        = 380;  // press duration before voice starts
@@ -246,7 +246,7 @@ export default function BeeBall() {
 
       {listening && (
         <div style={{ position: "fixed", left: 16, right: 16, bottom: 96, zIndex: 121, pointerEvents: "none", textAlign: "center" }}>
-          <div style={{ display: "inline-block", maxWidth: "90%", background: "#1a1a1a", border: `1px solid rgba(152,170,157,0.3)`, borderRadius: 14, padding: "10px 16px" }}>
+          <div style={{ display: "inline-block", maxWidth: "90%", background: "var(--bg2)", border: `1px solid rgba(152,170,157,0.3)`, borderRadius: 14, padding: "10px 16px" }}>
             <p style={{ color: interim ? FG : MUTED, fontSize: 14, margin: 0 }}>{interim || "Listening… release to send"}</p>
           </div>
         </div>

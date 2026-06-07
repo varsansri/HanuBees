@@ -3,12 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const YELLOW = "#ffbe00";
-const GREEN = "#98aa9d";
-const FG = "#eaeaea";
-const MUTED = "#a9a9a7";
-const BG2 = "#1a1a1a";
-const BG3 = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN = "var(--green)";
+const FG = "var(--fg)";
+const MUTED = "var(--fg2)";
+const BG2 = "var(--bg2)";
+const BG3 = "var(--bg3)";
 
 type AgentResponse = {
   name: string;
@@ -104,7 +104,7 @@ export default function DiscoverPage() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "16px 20px",
-          borderBottom: "1px solid rgba(234,234,234,0.06)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
@@ -170,7 +170,7 @@ export default function DiscoverPage() {
                 width: "100%",
                 padding: "10px 12px",
                 borderRadius: 8,
-                border: `1px solid rgba(234,234,234,0.12)`,
+                border: `1px solid var(--border)`,
                 background: BG3,
                 color: FG,
                 fontSize: 13,
@@ -205,7 +205,7 @@ export default function DiscoverPage() {
                 width: "100%",
                 padding: "10px 12px",
                 borderRadius: 8,
-                border: `1px solid rgba(234,234,234,0.12)`,
+                border: `1px solid var(--border)`,
                 background: BG3,
                 color: FG,
                 fontSize: 13,
@@ -234,7 +234,7 @@ export default function DiscoverPage() {
               flex: 1,
               padding: "12px 14px",
               borderRadius: 8,
-              border: `1px solid rgba(234,234,234,0.12)`,
+              border: `1px solid var(--border)`,
               background: BG3,
               color: FG,
               fontSize: 15,
@@ -250,7 +250,7 @@ export default function DiscoverPage() {
               borderRadius: 8,
               border: "none",
               background:
-                question.trim() && !loading ? YELLOW : "#3a3a38",
+                question.trim() && !loading ? YELLOW : "var(--fg3)",
               color: "#121212",
               fontSize: 14,
               fontWeight: 700,
@@ -342,7 +342,7 @@ export default function DiscoverPage() {
                       key={i}
                       style={{
                         background: BG3,
-                        border: "1px solid rgba(234,234,234,0.08)",
+                        border: "1px solid var(--border)",
                         borderRadius: 12,
                         padding: 16,
                       }}

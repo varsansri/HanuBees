@@ -6,7 +6,7 @@ import { CITIES, CATEGORIES, getCity, getCategory, termFilter } from "@/lib/seo/
 
 export const revalidate = 86400; // ISR: rebuild daily
 
-const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", MUTED = "#a9a9a7", BG2 = "#1a1a1a";
+const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", MUTED = "var(--fg2)", BG2 = "var(--bg2)";
 
 function db() {
   return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
@@ -124,7 +124,7 @@ export default async function CityCategoryPage({ params }: { params: Promise<{ s
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {list.map((b: any) => (
           <Link key={b.slug} href={`/${b.slug}`} style={{ textDecoration: "none" }}>
-            <div style={{ background: BG2, border: "1px solid rgba(234,234,234,0.06)", borderRadius: 12, padding: 14 }}>
+            <div style={{ background: BG2, border: "1px solid var(--border)", borderRadius: 12, padding: 14 }}>
               <p style={{ fontSize: 15.5, fontWeight: 600, color: FG, margin: 0 }}>{b.name}</p>
               <p style={{ fontSize: 12.5, color: MUTED, margin: "3px 0 0" }}>
                 {[b.category, b.location].filter(Boolean).join(" · ")}
@@ -166,7 +166,7 @@ export default async function CityCategoryPage({ params }: { params: Promise<{ s
         ))}
       </section>
 
-      <footer style={{ marginTop: 40, paddingTop: 16, borderTop: "1px solid rgba(234,234,234,0.06)", fontSize: 12.5, color: MUTED }}>
+      <footer style={{ marginTop: 40, paddingTop: 16, borderTop: "1px solid var(--border)", fontSize: 12.5, color: MUTED }}>
         Powered by <Link href="/" style={{ color: GREEN, textDecoration: "none" }}>Hanubees</Link> — your business, answered by AI.
       </footer>
     </div>

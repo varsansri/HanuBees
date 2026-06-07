@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { CITIES, CATEGORIES, type City } from "@/lib/seo/registry";
 
-const YELLOW = "#ffbe00", GREEN = "#98aa9d", FG = "#eaeaea", MUTED = "#a9a9a7", BG2 = "#1a1a1a";
+const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", MUTED = "var(--fg2)", BG2 = "var(--bg2)";
 
 function db() {
   return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
@@ -82,7 +82,7 @@ export default async function CityHub({ city }: { city: City }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {featured.map((b: any) => (
               <Link key={b.slug} href={`/${b.slug}`} style={{ textDecoration: "none" }}>
-                <div style={{ background: BG2, border: "1px solid rgba(234,234,234,0.06)", borderRadius: 10, padding: 12 }}>
+                <div style={{ background: BG2, border: "1px solid var(--border)", borderRadius: 10, padding: 12 }}>
                   <p style={{ fontSize: 14.5, fontWeight: 600, color: FG, margin: 0 }}>{b.name}</p>
                   <p style={{ fontSize: 12, color: MUTED, margin: "2px 0 0" }}>{[b.category, b.location].filter(Boolean).join(" · ")}</p>
                 </div>
@@ -103,7 +103,7 @@ export default async function CityHub({ city }: { city: City }) {
         </div>
       </section>
 
-      <footer style={{ marginTop: 40, paddingTop: 16, borderTop: "1px solid rgba(234,234,234,0.06)", fontSize: 12.5, color: MUTED }}>
+      <footer style={{ marginTop: 40, paddingTop: 16, borderTop: "1px solid var(--border)", fontSize: 12.5, color: MUTED }}>
         Powered by <Link href="/" style={{ color: GREEN, textDecoration: "none" }}>Hanubees</Link> — your business, answered by AI.
       </footer>
     </div>

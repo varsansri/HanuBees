@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-const YELLOW = "#ffbe00";
-const GREEN  = "#98aa9d";
-const FG     = "#eaeaea";
-const MUTED  = "#a9a9a7";
-const BG2    = "#1a1a1a";
+const YELLOW = "var(--yellow)";
+const GREEN  = "var(--green)";
+const FG     = "var(--fg)";
+const MUTED  = "var(--fg2)";
+const BG2    = "var(--bg2)";
 
 const FEATURES = [
   { t: "Answers customers 24/7", d: "Your agent replies instantly with your prices, hours, and services — even while you sleep." },
@@ -50,7 +50,7 @@ export default function Landing() {
       {/* Features */}
       <section style={{ maxWidth: 880, margin: "0 auto", padding: "30px 20px 60px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14 }}>
         {FEATURES.map((f) => (
-          <div key={f.t} style={{ background: BG2, border: "1px solid rgba(234,234,234,0.07)", borderRadius: 16, padding: 20 }}>
+          <div key={f.t} style={{ background: BG2, border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
             <div style={{ width: 10, height: 10, borderRadius: 3, background: GREEN, marginBottom: 12 }} />
             <h3 style={{ fontSize: 16, fontWeight: 700, color: FG, margin: 0 }}>{f.t}</h3>
             <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.5, margin: "8px 0 0" }}>{f.d}</p>
@@ -65,7 +65,7 @@ export default function Landing() {
         <Link href="/signup" className="btn-primary" style={{ width: "auto", padding: "14px 28px", textDecoration: "none", fontSize: 16, display: "inline-block", marginTop: 22 }}>Get started</Link>
       </section>
 
-      <footer style={{ textAlign: "center", padding: "24px", borderTop: "1px solid rgba(234,234,234,0.06)", color: MUTED, fontSize: 13 }}>
+      <footer style={{ textAlign: "center", padding: "24px", borderTop: "1px solid var(--border)", color: MUTED, fontSize: 13 }}>
         © Hanubees
       </footer>
     </div>

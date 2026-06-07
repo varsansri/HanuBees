@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-const GREEN = "#98aa9d";
-const FG    = "#eaeaea";
-const MUTED = "#a9a9a7";
-const BG2   = "#1a1a1a";
-const BG3   = "#242424";
+const GREEN = "var(--green)";
+const FG    = "var(--fg)";
+const MUTED = "var(--fg2)";
+const BG2   = "var(--bg2)";
+const BG3   = "var(--bg3)";
 
 type Msg = { id: string; role: string; content: string; created_at: string; is_order: boolean };
 

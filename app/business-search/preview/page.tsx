@@ -4,13 +4,13 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-const YELLOW = "#ffbe00";
-const GREEN = "#98aa9d";
-const FG = "#eaeaea";
-const MUTED = "#a9a9a7";
-const BG = "#121212";
-const BG2 = "#1a1a1a";
-const BG3 = "#242424";
+const YELLOW = "var(--yellow)";
+const GREEN = "var(--green)";
+const FG = "var(--fg)";
+const MUTED = "var(--fg2)";
+const BG = "var(--bg)";
+const BG2 = "var(--bg2)";
+const BG3 = "var(--bg3)";
 
 type EnrichedData = {
   uuid: string;
