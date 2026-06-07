@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContribute } from "@/components/consumer/ContributeProvider";
 
 const GREEN = "var(--green)";
 const MUTED = "var(--fg2)";
@@ -33,7 +34,7 @@ const tabs = [
     ),
   },
   {
-    href: "/hub?tab=share",
+    href: "#share",
     label: "Share",
     center: true,
     icon: () => (
@@ -74,6 +75,7 @@ const tabs = [
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const { open } = useContribute();
 
   return (
     <nav className="bottom-nav">
@@ -83,9 +85,9 @@ export default function BottomNav() {
 
         if ((tab as { center?: boolean }).center) {
           return (
-            <Link key={tab.href} href={tab.href} aria-label={tab.label} style={{
+            <button key={tab.href} onClick={open} aria-label={tab.label} style={{
               display: "flex", alignItems: "center", justifyContent: "center",
-              width: 64, height: 48, textDecoration: "none",
+              width: 64, height: 48, background: "none", border: "none", cursor: "pointer", padding: 0,
             }}>
               <span style={{
                 display: "flex", alignItems: "center", justifyContent: "center",
@@ -94,7 +96,7 @@ export default function BottomNav() {
               }}>
                 {tab.icon(active)}
               </span>
-            </Link>
+            </button>
           );
         }
 

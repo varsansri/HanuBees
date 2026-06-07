@@ -194,6 +194,26 @@ html, body {
 }
 .fade-in { animation: fadeIn 0.3s ease forwards; }
 
+/* Contribute bottom sheet */
+@keyframes sheetUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.sheet-up { animation: sheetUp 0.26s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* Bee acting as a mic — pulses while listening */
+@keyframes beePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(152, 170, 157, 0.55); }
+  70%  { box-shadow: 0 0 0 16px rgba(152, 170, 157, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(152, 170, 157, 0); }
+}
+.bee-listening { animation: beePulse 1.3s ease-out infinite; }
+@keyframes beeFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+.bee-float { animation: beeFloat 2.6s ease-in-out infinite; }
+
 /* Tab — yellow active */
 .tab-active {
   color: var(--yellow) !important;

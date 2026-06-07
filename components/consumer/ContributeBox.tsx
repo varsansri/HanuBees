@@ -19,7 +19,7 @@ const KIND_LABEL: Record<string, string> = {
   question: "Question",
 };
 
-export default function ContributeBox() {
+export default function ContributeBox({ onDone }: { onDone?: () => void }) {
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -51,7 +51,7 @@ export default function ContributeBox() {
   };
 
   const submit = async () => {
-    if (!text.trim()) { setError("Share what you know — a place, a price, a tip, or a question."); return; }
+    if (!text.trim()) { setError("Tap the bee and talk, or type what you know."); return; }
     try { recRef.current?.stop(); } catch {}
     setBusy(true); setError(""); setSaved(null);
     try {
@@ -72,31 +72,40 @@ export default function ContributeBox() {
   const again = () => { setSaved(null); setError(""); };
 
   return (
-    <div style={{ padding: "16px" }}>
-      <p style={{ fontSize: 14, color: MUTED, margin: "0 0 14px", lineHeight: 1.5 }}>
+    <div style={{ padding: "10px 16px 4px" }}>
+      <p style={{ fontSize: 14, color: MUTED, margin: "0 0 16px", lineHeight: 1.5 }}>
         Know something the internet doesn't? Free PG slots, a great cheap find, a useful tip,
-        or a question no one answers — drop it here. Just talk; the bee sorts it out. Anonymous.
+        or a question no one answers. Tap the bee and just talk — it sorts it out. Anonymous.
       </p>
 
       {!saved && (
         <>
-          <div style={{ position: "relative" }}>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="e.g. Sri Sai PG in Coimbatore near Gandhipuram has 2 beds free, ₹4500/month, decent food…"
-              rows={6}
-              style={{ width: "100%", boxSizing: "border-box", padding: 14, background: BG2, color: FG, border: "1px solid var(--border)", borderRadius: 14, fontSize: 15, lineHeight: 1.5, resize: "vertical", outline: "none", fontFamily: "inherit" }}
-            />
+          {/* Bee acts as the mic */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 16 }}>
             <button
               onClick={toggleVoice}
-              aria-label={listening ? "Stop" : "Speak"}
-              style={{ position: "absolute", right: 12, bottom: 14, width: 44, height: 44, borderRadius: 999, border: "none", cursor: "pointer", fontSize: 20, background: listening ? GREEN : YELLOW, color: "#121212", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.25)" }}
+              aria-label={listening ? "Stop listening" : "Tap to talk"}
+              className={listening ? "bee-listening" : "bee-float"}
+              style={{
+                width: 92, height: 92, borderRadius: "50%", cursor: "pointer",
+                border: listening ? `2px solid ${GREEN}` : "2px solid var(--border)",
+                background: BG2, display: "flex", alignItems: "center", justifyContent: "center", padding: 0,
+              }}
             >
-              {listening ? "■" : "🎤"}
+              <img src="/bee.png" alt="" style={{ width: 58, height: 58, pointerEvents: "none" }} />
             </button>
+            <p style={{ fontSize: 12.5, color: listening ? GREEN : MUTED, margin: "10px 0 0", fontWeight: 600 }}>
+              {listening ? "Listening… tap the bee to stop" : "Tap the bee to talk"}
+            </p>
           </div>
-          {listening && <p style={{ fontSize: 12, color: GREEN, margin: "8px 2px 0" }}>Listening… tap ■ to stop.</p>}
+
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="…or type it here. e.g. Sri Sai PG in Coimbatore near Gandhipuram has 2 beds free, ₹4500/month, decent food"
+            rows={5}
+            style={{ width: "100%", boxSizing: "border-box", padding: 14, background: BG2, color: FG, border: "1px solid var(--border)", borderRadius: 14, fontSize: 15, lineHeight: 1.5, resize: "vertical", outline: "none", fontFamily: "inherit" }}
+          />
           {error && <p style={{ fontSize: 13, color: GREEN, margin: "12px 2px 0" }}>{error}</p>}
           <button
             onClick={submit}
@@ -125,9 +134,10 @@ export default function ContributeBox() {
               <button onClick={again} style={{ marginTop: 10, background: "none", border: "none", color: GREEN, fontSize: 13, fontWeight: 700, cursor: "pointer", padding: 0, fontFamily: "inherit" }}>Add more →</button>
             </div>
           )}
-          {!saved.followup && (
-            <button onClick={again} style={{ width: "100%", marginTop: 10, padding: 13, borderRadius: 14, border: "1px solid var(--border)", background: "transparent", color: FG, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Share something else →</button>
-          )}
+          <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
+            <button onClick={again} style={{ flex: 1, padding: 13, borderRadius: 14, border: "1px solid var(--border)", background: "transparent", color: FG, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Share another</button>
+            {onDone && <button onClick={onDone} style={{ flex: 1, padding: 13, borderRadius: 14, border: "none", background: YELLOW, color: "#121212", fontSize: 15, fontWeight: 800, cursor: "pointer", fontFamily: "inherit" }}>Done</button>}
+          </div>
         </div>
       )}
     </div>
