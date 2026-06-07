@@ -30,9 +30,14 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
   // Location is only requested AFTER save, and only when the place couldn't be found.
   const [locState, setLocState] = useState<"idle" | "asking" | "pinned" | "denied">("idle");
   const recRef = useRef<any>(null);
-  const baseRef = useRef("");
+  const stopRef = useRef(false);          // user pressed stop → don't auto-restart
+  const finalRef = useRef("");            // accumulated final transcript (survives restarts)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastTapRef = useRef(0);           // for double-tap detection
 
-  useEffect(() => () => { try { recRef.current?.stop(); } catch {} }, []);
+  const MAX_MS = 10 * 60 * 1000;          // hard stop after 10 minutes
+
+  useEffect(() => () => { stopRef.current = true; if (timeoutRef.current) clearTimeout(timeoutRef.current); try { recRef.current?.stop(); } catch {} }, []);
 
   const sharePresentLocation = () => {
     if (typeof navigator === "undefined" || !navigator.geolocation) { setLocState("denied"); return; }
@@ -52,29 +57,60 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
     );
   };
 
-  const toggleVoice = () => {
-    const SR = (typeof window !== "undefined") &&
-      ((window as any).webkitSpeechRecognition || (window as any).SpeechRecognition);
-    if (!SR) { setError("Voice isn't supported here — type instead."); return; }
-    if (listening) { try { recRef.current?.stop(); } catch {} return; }
+  const getSR = () =>
+    (typeof window !== "undefined") &&
+    ((window as any).webkitSpeechRecognition || (window as any).SpeechRecognition);
+
+  // Keep recognition alive across the browser's silence-based auto-stops, so it
+  // records continuously until the user taps stop (or the 10-min cap).
+  const spawnRec = () => {
+    const SR = getSR();
     const rec = new SR();
     rec.lang = "en-US"; rec.interimResults = true; rec.continuous = true;
-    baseRef.current = text ? text + " " : "";
     rec.onresult = (e: any) => {
-      let chunk = "";
-      for (let i = e.resultIndex; i < e.results.length; i++) chunk += e.results[i][0].transcript;
-      setText(baseRef.current + chunk);
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const r = e.results[i];
+        if (r.isFinal) finalRef.current += r[0].transcript + " ";
+        else interim += r[0].transcript;
+      }
+      setText((finalRef.current + interim).trim());
     };
-    rec.onend = () => setListening(false);
-    rec.onerror = () => setListening(false);
+    rec.onend = () => { if (!stopRef.current) { try { spawnRec(); } catch { setListening(false); } } };
+    rec.onerror = (ev: any) => { if (ev?.error === "not-allowed" || ev?.error === "service-not-allowed") { stopRef.current = true; setListening(false); setError("Mic permission needed — allow it and try again."); } };
     recRef.current = rec;
-    setError(""); setListening(true);
-    try { rec.start(); } catch { setListening(false); }
+    try { rec.start(); } catch {}
+  };
+
+  const startVoice = () => {
+    if (!getSR()) { setError("Voice isn't supported here — type instead."); return; }
+    setError("");
+    stopRef.current = false;
+    finalRef.current = text ? text.trim() + " " : "";
+    setListening(true);
+    spawnRec();
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(stopVoice, MAX_MS);  // 10-min hard cap
+  };
+
+  const stopVoice = () => {
+    stopRef.current = true;
+    if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; }
+    try { recRef.current?.stop(); } catch {}
+    setListening(false);
+  };
+
+  // Tap to stop while recording; double-tap to start when idle.
+  const onBeeTap = () => {
+    if (listening) { stopVoice(); return; }
+    const now = Date.now();
+    if (now - lastTapRef.current < 350) { lastTapRef.current = 0; startVoice(); }
+    else lastTapRef.current = now;
   };
 
   const submit = async () => {
-    if (!text.trim()) { setError("Tap the bee and talk, or type what you know."); return; }
-    try { recRef.current?.stop(); } catch {}
+    if (!text.trim()) { setError("Double-tap the bee and talk, or type what you know."); return; }
+    stopVoice();
     setBusy(true); setError(""); setSaved(null);
     try {
       const res = await fetch("/api/contribute", {
@@ -105,8 +141,8 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
           {/* Bee acts as the mic */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 16 }}>
             <button
-              onClick={toggleVoice}
-              aria-label={listening ? "Stop listening" : "Tap to talk"}
+              onClick={onBeeTap}
+              aria-label={listening ? "Tap to stop recording" : "Double-tap to record"}
               className={listening ? "bee-listening" : "bee-float"}
               style={{
                 width: 92, height: 92, borderRadius: "50%", cursor: "pointer",
@@ -117,7 +153,7 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
               <img src="/bee.png" alt="" style={{ width: 58, height: 58, pointerEvents: "none" }} />
             </button>
             <p style={{ fontSize: 12.5, color: listening ? GREEN : MUTED, margin: "10px 0 0", fontWeight: 600 }}>
-              {listening ? "Listening… tap the bee to stop" : "Tap the bee to talk"}
+              {listening ? "Recording… tap the bee to stop" : "Double-tap the bee to record"}
             </p>
           </div>
 
