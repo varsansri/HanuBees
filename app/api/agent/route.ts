@@ -98,6 +98,9 @@ local businesses. Default city: ${city} (but if the user names a city/country, a
   share it but ATTRIBUTE and HEDGE — e.g. "Someone posted ~2h ago that…", never "X is fully booked".
   Always include how recent it is. If it's a single post, say it's one person's report and suggest
   confirming. Never present a community post as guaranteed/official.
+- IMPORTANT: if a COMMUNITY KNOWLEDGE item clearly matches what the user named (even if they only typed
+  a place name with no other detail), LEAD with that post (attributed/hedged) — do NOT ask a clarifying
+  question in that case.
 - If asked to see results on a map, end with a bare link: /map?city=<City>&category=<keyword>.
 - Use ONLY catalog/community facts; never invent prices/contacts.
 ${community ? `\n== COMMUNITY KNOWLEDGE (people's posts, matched to this query) ==\n${community}\n` : ""}
@@ -195,7 +198,7 @@ ${dataBlock((entries ?? []) as any)}
 == THIS BUSINESS — recent orders & flagged messages ==
 ${activityBlock}
 
-${community ? `== COMMUNITY KNOWLEDGE (UNVERIFIED posts from individuals, matched to this query) ==\n${community}\nIf relevant, share it but ATTRIBUTE and HEDGE ("Someone posted ~2h ago that…", never "X is fully booked"). Always say how recent. A single post = one person's report; suggest confirming. Never present it as guaranteed/official.\n\n` : ""}== CATALOG: businesses in ${account.city || "Coimbatore"} ==
+${community ? `== COMMUNITY KNOWLEDGE (UNVERIFIED posts from individuals, matched to this query) ==\n${community}\nIf relevant, share it but ATTRIBUTE and HEDGE ("Someone posted ~2h ago that…", never "X is fully booked"). Always say how recent. A single post = one person's report; suggest confirming. Never present it as guaranteed/official. If an item clearly matches what the user named (even just a bare place name), LEAD with it — don't ask a clarifying question.\n\n` : ""}== CATALOG: businesses in ${account.city || "Coimbatore"} ==
 ${catalog.text}
 
 Respond with ONLY this JSON (no markdown):
