@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { llmChat, parseJson, type ChatMsg } from "@/lib/ai/llm";
 import { embedText, embedMissing } from "@/lib/ai/embed";
 import { loadCatalog } from "@/lib/ai/concierge";
+import { loadContributionsBlock } from "@/lib/ai/contributions";
 
 export const runtime = "nodejs";
 
@@ -85,6 +86,7 @@ export async function POST(req: NextRequest) {
         found: catalog.count > 0, source: "browse",
       }).then(() => {}, () => {});
     }
+    const community = await loadContributionsBlock(supabase, lastUser);
     const sys = `You are Hanubees — a friendly local-services concierge. Help people find and compare
 local businesses. Default city: ${city} (but if the user names a city/country, answer for that).
 - CLARIFY then match: if the request is vague, ask 1–2 short questions (budget, area) FIRST, don't list yet.
@@ -92,9 +94,11 @@ local businesses. Default city: ${city} (but if the user names a city/country, a
   Refer to a business EXACTLY by its @handle from the catalog (renders as a tappable link). If none fit,
   say so and offer the closest options.
 - Recommend 1–3 with WHY (price/area/services). Use numbers/specifics, keep it tight.
+- If COMMUNITY KNOWLEDGE below has something relevant (live availability, an experience, a tip,
+  someone's answer), lead with it and say it's from people on Hanubees. It is real and current — use it.
 - If asked to see results on a map, end with a bare link: /map?city=<City>&category=<keyword>.
-- Use ONLY catalog facts; never invent prices/contacts.
-
+- Use ONLY catalog/community facts; never invent prices/contacts.
+${community ? `\n== COMMUNITY KNOWLEDGE (people's posts, matched to this query) ==\n${community}\n` : ""}
 == CATALOG: businesses in ${catalog.city} ==
 ${catalog.text}`;
     const msgs: ChatMsg[] = [{ role: "system", content: sys }, ...history.map((m) => ({ role: m.role, content: m.content })) as ChatMsg[]];
@@ -117,6 +121,7 @@ ${catalog.text}`;
     // Concierge catalog: every business in the city + their public prices/services/hours,
     // so the assistant can search by budget, list, compare, recommend, and drill into one.
     const catalog = await loadCatalog(supabase, account.city || "Coimbatore", lastUser);
+    const community = await loadContributionsBlock(supabase, lastUser);
     // Demand logging: capture discovery searches (what people look for + whether we had it).
     if (catalog.isSearch) {
       supabase.from("searches").insert({
@@ -188,7 +193,7 @@ ${dataBlock((entries ?? []) as any)}
 == THIS BUSINESS — recent orders & flagged messages ==
 ${activityBlock}
 
-== CATALOG: businesses in ${account.city || "Coimbatore"} ==
+${community ? `== COMMUNITY KNOWLEDGE (people's posts on Hanubees, matched to this query) ==\n${community}\nIf relevant, answer from this and say it's from people on Hanubees — it's real and current.\n\n` : ""}== CATALOG: businesses in ${account.city || "Coimbatore"} ==
 ${catalog.text}
 
 Respond with ONLY this JSON (no markdown):
