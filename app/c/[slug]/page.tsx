@@ -23,6 +23,7 @@ async function getAccount(slug: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  if (slug === "hanubees") return { title: "Hanubees — your local guide", description: "Find any local business and get instant answers, free." };
   const a = await getAccount(slug);
   if (!a) return { title: "Not found — Hanubees" };
   const title = `Chat with ${a.name} · Hanubees`;
