@@ -30,6 +30,9 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const text = String(body?.text || "").trim();
   const authorId = String(body?.anonId || "").trim() || "anon-unknown";
+  // Device "present location" (if the contributor granted permission) — primary signal.
+  let lat: number | null = Number.isFinite(body?.lat) ? Number(body.lat) : null;
+  let lng: number | null = Number.isFinite(body?.lng) ? Number(body.lng) : null;
   if (!text) return NextResponse.json({ error: "Say or type something to share." }, { status: 400 });
 
   // ── 1. LLM: free text/voice → structured contribution ─────────────────────
@@ -53,8 +56,10 @@ Extract:
 - ttl_hours: how many hours this stays TRUE. For availability default ~72 unless they imply otherwise (e.g. "today only" → 24). For experience/tip/question use null (evergreen).
 - followup: ONE short question to make this more useful (e.g. ask the price, the area, or how many slots), or null if it's already solid.
 
+- place_based: true if this is tied to a SPECIFIC physical place that belongs on a map (a named PG/shop/venue, "slots here", "this address"). false for general tips/questions with no specific place.
+
 Never invent prices, places, or facts not stated. Respond with ONLY JSON (no markdown):
-{"kind":"...","place_name":...,"city":...,"area":...,"category":...,"title":"...","content":"...","price":<number|null>,"rating":<1-5|null>,"ttl_hours":<number|null>,"followup":<string|null>}`;
+{"kind":"...","place_name":...,"city":...,"area":...,"category":...,"title":"...","content":"...","price":<number|null>,"rating":<1-5|null>,"ttl_hours":<number|null>,"place_based":<bool>,"followup":<string|null>}`;
 
   const msgs: ChatMsg[] = [{ role: "system", content: sys }, { role: "user", content: text }];
   const { text: out, error } = await llmChat(msgs, { maxTokens: 600, temperature: 0.2 });
@@ -76,6 +81,27 @@ Never invent prices, places, or facts not stated. Respond with ONLY JSON (no mar
     if (match && match[0]) { account_id = match[0].id; matchedName = match[0].name; }
   }
 
+  // ── 2b. Resolve coordinates ───────────────────────────────────────────────
+  // Prefer device location. Else inherit the matched account's coords. Else
+  // geocode the place text (keyless, via OpenStreetMap Nominatim) — best-effort.
+  if ((lat == null || lng == null) && account_id) {
+    const { data: acc } = await admin.from("accounts").select("lat, lng").eq("id", account_id).maybeSingle();
+    if (acc?.lat != null && acc?.lng != null) { lat = Number(acc.lat); lng = Number(acc.lng); }
+  }
+  if (lat == null || lng == null) {
+    const place = [p.place_name, p.area, p.city].filter(Boolean).join(", ");
+    if (place) {
+      try {
+        const u = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(place)}`;
+        const r = await fetch(u, { headers: { "User-Agent": "Hanubees/1.0 (hanubees.com)" } });
+        if (r.ok) {
+          const j = await r.json();
+          if (Array.isArray(j) && j[0]?.lat && j[0]?.lon) { lat = parseFloat(j[0].lat); lng = parseFloat(j[0].lon); }
+        }
+      } catch {}
+    }
+  }
+
   // ── 3. Freshness window ───────────────────────────────────────────────────
   const ttl = p.ttl_hours != null ? Number(p.ttl_hours) : DEFAULT_TTL_HOURS[kind];
   const valid_until = ttl && ttl > 0 ? new Date(Date.now() + ttl * 3600_000).toISOString() : null;
@@ -94,17 +120,26 @@ Never invent prices, places, or facts not stated. Respond with ONLY JSON (no mar
     rating: p.rating && p.rating >= 1 && p.rating <= 5 ? Math.round(p.rating) : null,
     author_id: authorId.slice(0, 80),
     valid_until,
+    lat,
+    lng,
   };
   const { data: saved, error: insErr } = await admin
-    .from("contributions").insert(row).select("id, kind, title, place_name, city, valid_until").single();
+    .from("contributions").insert(row).select("id, kind, title, place_name, city, valid_until, lat, lng").single();
   if (insErr || !saved) {
     return NextResponse.json({ error: insErr?.message || "Could not save that." }, { status: 500 });
   }
+
+  // Only ask the contributor for a location when this is about a specific place
+  // AND we couldn't find it ourselves (no device coords, no match, no geocode).
+  const place_based = p.place_based === true || kind === "availability";
+  const needs_location = place_based && (lat == null || lng == null);
 
   return NextResponse.json({
     ok: true,
     contribution: saved,
     matched_place: matchedName,
+    needs_location,
+    place_label: [p.place_name, p.area, p.city].filter(Boolean).join(", ") || null,
     followup: p.followup ? String(p.followup).slice(0, 200) : null,
   });
 }

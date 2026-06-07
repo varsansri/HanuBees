@@ -9,6 +9,8 @@ type Saved = {
   ok: true;
   contribution: { id: string; kind: string; title: string; place_name: string | null; city: string | null; valid_until: string | null };
   matched_place: string | null;
+  needs_location: boolean;
+  place_label: string | null;
   followup: string | null;
 };
 
@@ -25,10 +27,30 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
   const [error, setError] = useState("");
   const [saved, setSaved] = useState<Saved | null>(null);
   const [listening, setListening] = useState(false);
+  // Location is only requested AFTER save, and only when the place couldn't be found.
+  const [locState, setLocState] = useState<"idle" | "asking" | "pinned" | "denied">("idle");
   const recRef = useRef<any>(null);
   const baseRef = useRef("");
 
   useEffect(() => () => { try { recRef.current?.stop(); } catch {} }, []);
+
+  const sharePresentLocation = () => {
+    if (typeof navigator === "undefined" || !navigator.geolocation) { setLocState("denied"); return; }
+    setLocState("asking");
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          await fetch("/api/contribute/locate", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: saved?.contribution.id, lat: pos.coords.latitude, lng: pos.coords.longitude }),
+          });
+          setLocState("pinned");
+        } catch { setLocState("denied"); }
+      },
+      () => setLocState("denied"),
+      { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+    );
+  };
 
   const toggleVoice = () => {
     const SR = (typeof window !== "undefined") &&
@@ -69,7 +91,7 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
     setBusy(false);
   };
 
-  const again = () => { setSaved(null); setError(""); };
+  const again = () => { setSaved(null); setError(""); setLocState("idle"); };
 
   return (
     <div style={{ padding: "10px 16px 4px" }}>
@@ -128,8 +150,31 @@ export default function ContributeBox({ onDone }: { onDone?: () => void }) {
             {[saved.matched_place || saved.contribution.place_name, saved.contribution.city].filter(Boolean).join(" · ") || "Local knowledge"}
             {saved.contribution.valid_until && <> · fresh for now</>}
           </p>
-          {saved.followup && (
+          {/* Location prompt — only when it's about a place we couldn't pin */}
+          {saved.needs_location && locState !== "pinned" && (
             <div style={{ background: BG3, borderRadius: 12, padding: "12px 14px", marginTop: 4 }}>
+              <p style={{ fontSize: 13, color: FG, margin: "0 0 10px" }}>
+                {locState === "denied"
+                  ? "Couldn't get your location. You can add the area in the text instead."
+                  : `We couldn't pin ${saved.place_label || "this place"} on the map. Add your present location so others can find it?`}
+              </p>
+              {locState !== "denied" && (
+                <button
+                  onClick={sharePresentLocation}
+                  disabled={locState === "asking"}
+                  style={{ display: "inline-flex", alignItems: "center", gap: 7, background: GREEN, color: "#121212", border: "none", borderRadius: 999, padding: "9px 16px", fontSize: 13.5, fontWeight: 700, cursor: locState === "asking" ? "default" : "pointer", fontFamily: "inherit" }}
+                >
+                  <span>📍</span>{locState === "asking" ? "Getting location…" : "Use my present location"}
+                </button>
+              )}
+            </div>
+          )}
+          {locState === "pinned" && (
+            <p style={{ fontSize: 13, color: GREEN, fontWeight: 600, margin: "4px 0 0" }}>📍 Pinned on the map ✓</p>
+          )}
+
+          {saved.followup && (
+            <div style={{ background: BG3, borderRadius: 12, padding: "12px 14px", marginTop: 10 }}>
               <p style={{ fontSize: 13, color: FG, margin: 0 }}>{saved.followup}</p>
               <button onClick={again} style={{ marginTop: 10, background: "none", border: "none", color: GREEN, fontSize: 13, fontWeight: 700, cursor: "pointer", padding: 0, fontFamily: "inherit" }}>Add more →</button>
             </div>

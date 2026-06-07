@@ -6,6 +6,11 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", BG = "var(--bg)";
 const MAP_YELLOW = "#ffbe00"; // MapLibre paint can't parse CSS var() — needs a literal color
+const MAP_GREEN = "#98aa9d";  // contributions (people's local knowledge)
+
+const KIND_LABEL: Record<string, string> = {
+  availability: "Live availability", experience: "Experience", tip: "Tip", question: "Question",
+};
 
 const CITY_CENTERS: Record<string, [number, number]> = {
   Coimbatore: [76.9558, 11.0168],
@@ -41,6 +46,7 @@ function MapInner() {
   const readyRef = useRef(false);
   const [city, setCity] = useState(initialCity);
   const [count, setCount] = useState(0);
+  const [contribCount, setContribCount] = useState(0);
 
   // init map + globe once
   useEffect(() => {
@@ -111,6 +117,40 @@ function MapInner() {
         map.on("mouseenter", "biz-dot", () => (map.getCanvas().style.cursor = "pointer"));
         map.on("mouseleave", "biz-dot", () => (map.getCanvas().style.cursor = ""));
 
+        // ── Contributions layer (people's local knowledge), green ──
+        map.addSource("contrib", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+        map.addLayer({
+          id: "contrib-glow", type: "circle", source: "contrib",
+          paint: {
+            "circle-radius": ["interpolate", ["linear"], ["zoom"], 8, 8, 14, 18],
+            "circle-color": MAP_GREEN, "circle-blur": 1, "circle-opacity": 0.5,
+          },
+        });
+        map.addLayer({
+          id: "contrib-dot", type: "circle", source: "contrib",
+          paint: {
+            "circle-radius": ["interpolate", ["linear"], ["zoom"], 8, 4, 14, 8],
+            "circle-color": MAP_GREEN, "circle-stroke-width": 1.5, "circle-stroke-color": "#121212",
+          },
+        });
+        map.on("click", "contrib-dot", (e: any) => {
+          const f = e.features?.[0]; if (!f) return;
+          const p = f.properties || {};
+          popupRef.current
+            .setLngLat(f.geometry.coordinates)
+            .setHTML(
+              `<div style="font-family:sans-serif;min-width:180px">
+                 <span style="font-size:10px;font-weight:700;color:#121212;background:#98aa9d;border-radius:5px;padding:1px 6px">${p.kindLabel || "Info"}</span><br/>
+                 <strong style="font-size:14px;display:block;margin-top:5px">${p.title || ""}</strong>
+                 <span style="font-size:12px;color:#555">${p.content || ""}</span><br/>
+                 <span style="font-size:11px;color:#888">${[p.place_name, p.area].filter(Boolean).join(" · ")}</span>
+                 ${p.price ? `<br/><span style="font-size:12px;color:#0a7">₹${p.price}</span>` : ""}
+               </div>`)
+            .addTo(map);
+        });
+        map.on("mouseenter", "contrib-dot", () => (map.getCanvas().style.cursor = "pointer"));
+        map.on("mouseleave", "contrib-dot", () => (map.getCanvas().style.cursor = ""));
+
         readyRef.current = true;
         // smooth spin into the city
         map.flyTo({ center: CITY_CENTERS[city], zoom: 11.5, speed: 0.7, curve: 1.6 });
@@ -136,6 +176,25 @@ function MapInner() {
       }));
     const src = map.getSource("biz");
     if (src) src.setData({ type: "FeatureCollection", features });
+
+    // contributions for this city
+    try {
+      const cRes = await fetch(`/api/contributions/map?city=${encodeURIComponent(c)}`);
+      const cData = await cRes.json();
+      setContribCount(cData.count || 0);
+      const cFeatures = (cData.contributions || [])
+        .filter((x: any) => x.lat != null && x.lng != null)
+        .map((x: any) => ({
+          type: "Feature",
+          geometry: { type: "Point", coordinates: [x.lng, x.lat] },
+          properties: {
+            kindLabel: KIND_LABEL[x.kind] || "Info", title: x.title,
+            content: x.content, place_name: x.place_name, area: x.area, price: x.price,
+          },
+        }));
+      const cSrc = map.getSource("contrib");
+      if (cSrc) cSrc.setData({ type: "FeatureCollection", features: cFeatures });
+    } catch { setContribCount(0); }
   }
 
   // city change
@@ -155,7 +214,8 @@ function MapInner() {
         <select value={city} onChange={(e) => setCity(e.target.value)} style={{ background: "var(--bg2)", color: FG, border: "1px solid var(--border)", borderRadius: 8, padding: "7px 10px", fontSize: 14, fontFamily: "inherit" }}>
           {Object.keys(CITY_CENTERS).map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
-        <span style={{ color: GREEN, fontSize: 13, fontWeight: 600 }}>{count} on map</span>
+        <span style={{ color: YELLOW, fontSize: 13, fontWeight: 600 }}>{count} places</span>
+        {contribCount > 0 && <span style={{ color: GREEN, fontSize: 13, fontWeight: 600 }}>· {contribCount} from people</span>}
       </div>
     </div>
   );
