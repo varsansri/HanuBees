@@ -26,18 +26,23 @@ async function viaPexels() {
 }
 
 async function viaOpenverse() {
-  const url = `https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&license=cc0,pdm&size=large&page_size=${count}`;
+  // commercial-use licenses (CC0/BY/BY-SA/PDM), but SKIP rawpixel (its results are watermarked).
+  // Leaves clean Wikimedia + Flickr photos — no key, no watermark. Good for organic content.
+  const url = `https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&license_type=commercial&size=large&page_size=${count * 3}`;
   const j = await (await fetch(url, { headers: { Accept: "application/json" } })).json();
   let i = 0;
   for (const r of j.results || []) {
+    if (r.source === "rawpixel") continue;        // watermarked previews
+    if (!r.width || r.width < 1000) continue;
     try {
       const buf = Buffer.from(await (await fetch(r.url)).arrayBuffer());
-      if (buf.length < 8000) continue;
+      if (buf.length < 40000) continue;
       const f = `${outDir}/cand${++i}.jpg`; fs.writeFileSync(f, buf);
-      console.log(`  ${f}  ${r.width}x${r.height}  ${r.license}  | ${(r.title || "").slice(0, 50)}`);
+      console.log(`  ${f}  ${r.width}x${r.height}  ${r.source}/${r.license}  | ${(r.title || "").slice(0, 46)}`);
     } catch (e) { console.log("  skip", (e.message || "").slice(0, 50)); }
+    if (i >= count) break;
   }
-  console.log(`Openverse "${q}" -> ${j.result_count} total (note: rawpixel results carry watermarks)`);
+  console.log(`Openverse(clean) "${q}" -> ${j.result_count} total, ${i} downloaded (Wikimedia/Flickr, no watermark)`);
 }
 
 (async () => {
