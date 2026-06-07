@@ -31,6 +31,13 @@ export async function GET(req: NextRequest) {
       query = query.ilike("city", `%${city}%`);
     }
 
+    // free-text "specific need" search across name / category / bio
+    const q = url.searchParams.get("q");
+    if (q && q.trim()) {
+      const s = q.trim().replace(/[%,]/g, " ");
+      query = query.or(`name.ilike.%${s}%,category.ilike.%${s}%,bio.ilike.%${s}%`);
+    }
+
     const { data: agents, error } = await query;
 
     if (error) {
