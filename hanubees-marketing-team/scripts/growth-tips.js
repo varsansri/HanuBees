@@ -18,9 +18,19 @@ function setupFonts() {
 setupFonts();
 
 const K = process.env.ZERNIO_API_KEY; const ZB = "https://api.zernio.com/v1";
-const Y = "#ffbe00", G = "#98aa9d", FG = "#eaeaea", MUT = "#9a9aa6", DARK = "#121212";
+const Y = "#ffbe00", DARK = "#121212";
 const FF = "Space Grotesk, Roboto, sans-serif";
 const W = 1080, H = 1350;
+const THEMES = {
+  dark: { headline: "#eaeaea", pill: Y, pillText: DARK, note: "#9a9aa6", line: Y, lineOp: 0.45,
+    nodeFill: "#1d1f27", nodeRing: Y, nodeIcon: Y, labelPill: Y, labelText: DARK, tip: "#eaeaea",
+    footer: "#98aa9d", hubFill: "#1d1f27", hubRing: Y,
+    bgRect: `<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d0f1a"/><stop offset="0.6" stop-color="#15182a"/><stop offset="1" stop-color="#0a0c14"/></linearGradient><radialGradient id="gl" cx="0.5" cy="0.55" r="0.55"><stop offset="0" stop-color="#ffbe00" stop-opacity="0.16"/><stop offset="1" stop-color="#ffbe00" stop-opacity="0"/></radialGradient></defs><rect width="${W}" height="${H}" fill="url(#bg)"/><rect width="${W}" height="${H}" fill="url(#gl)"/>` },
+  light: { headline: "#1a1712", pill: Y, pillText: "#1a1712", note: "#7a756b", line: "#caa106", lineOp: 0.8,
+    nodeFill: "#ffffff", nodeRing: "#e0b400", nodeIcon: "#1a1712", labelPill: "#1a1712", labelText: "#ffffff", tip: "#2b2a26",
+    footer: "#9a9384", hubFill: "#ffffff", hubRing: "#e0b400",
+    bgRect: `<defs><radialGradient id="gl" cx="0.5" cy="0.5" r="0.7"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#efe8da"/></radialGradient></defs><rect width="${W}" height="${H}" fill="url(#gl)"/>` },
+};
 const xml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 function wrap(t, max) { const w = String(t).split(/\s+/), o = []; let c = ""; for (const x of w) { if ((c + " " + x).trim().length > max) { if (c) o.push(c.trim()); c = x; } else c += " " + x; } if (c.trim()) o.push(c.trim()); return o; }
 
@@ -42,27 +52,25 @@ function icon(name, x, y, size, color) {
   return `<g transform="translate(${x - size / 2} ${y - size / 2}) scale(${s})" fill="none" stroke="${color}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${IC[name] || IC.star}</g>`;
 }
 
-function node(cx, cy, ic, label, tip, side) {
+function node(cx, cy, ic, label, tip, side, T) {
   const r = 56;
-  const ring = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#1d1f27" stroke="${Y}" stroke-width="2.5"/>${icon(ic, cx, cy, 50, Y)}`;
-  // label pill under circle
+  const ring = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${T.nodeFill}" stroke="${T.nodeRing}" stroke-width="2.5"/>${icon(ic, cx, cy, 50, T.nodeIcon)}`;
   const lw = label.length * 17 + 36, lx = cx - lw / 2, ly = cy + r + 8;
-  const pill = `<rect x="${lx}" y="${ly}" width="${lw}" height="40" rx="20" fill="${Y}"/><text x="${cx}" y="${ly + 27}" font-family="${FF}" font-size="22" font-weight="800" fill="${DARK}" text-anchor="middle">${xml(label)}</text>`;
-  // tip text beside the node (left side -> right-aligned to the left; right side -> left-aligned)
+  const pill = `<rect x="${lx}" y="${ly}" width="${lw}" height="40" rx="20" fill="${T.labelPill}"/><text x="${cx}" y="${ly + 27}" font-family="${FF}" font-size="22" font-weight="800" fill="${T.labelText}" text-anchor="middle">${xml(label)}</text>`;
   const tl = wrap(tip, 15);
   const anchor = side === "L" ? "end" : "start";
   const tx = side === "L" ? cx - r - 22 : cx + r + 22;
   const ty = cy - (tl.length - 1) * 15;
   const tspans = tl.map((l, i) => `<tspan x="${tx}" dy="${i === 0 ? 0 : 28}">${xml(l)}</tspan>`).join("");
-  const text = `<text x="${tx}" y="${ty}" font-family="${FF}" font-size="23" font-weight="600" fill="${FG}" text-anchor="${anchor}">${tspans}</text>`;
+  const text = `<text x="${tx}" y="${ty}" font-family="${FF}" font-size="23" font-weight="600" fill="${T.tip}" text-anchor="${anchor}">${tspans}</text>`;
   return ring + pill + text;
 }
 
-function dottedLine(x1, y1, x2, y2) {
-  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${Y}" stroke-opacity="0.45" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round"/>`;
+function dottedLine(x1, y1, x2, y2, T) {
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${T.line}" stroke-opacity="${T.lineOp}" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round"/>`;
 }
 
-function buildSvg(p) {
+function buildSvg(p, T) {
   const hub = { x: 540, y: 720 };
   const L = [450, 710, 970], Rs = [450, 710, 970];
   const lx = 340, rx = 740;
@@ -73,23 +81,24 @@ function buildSvg(p) {
   let lines = "", nodes = "";
   p.tips.forEach((t, i) => {
     const s = slots[i];
-    lines += dottedLine(hub.x, hub.y, s.x, s.y);
-    nodes += node(s.x, s.y, t.icon, t.label, t.tip, s.side);
+    lines += dottedLine(hub.x, hub.y, s.x, s.y, T);
+    nodes += node(s.x, s.y, t.icon, t.label, t.tip, s.side, T);
   });
   const head = wrap(p.title, 16);
   const headSvg = head.map((l, i) => `<tspan x="540" dy="${i === 0 ? 0 : 78}">${xml(l)}</tspan>`).join("");
   const subW = p.sub.length * 16 + 64;
+  const subY = head.length > 1 ? 285 : 205;
+  const hubDisc = `<circle cx="${hub.x}" cy="${hub.y}" r="108" fill="${T.hubFill}" stroke="${T.hubRing}" stroke-width="2.5"/>`;
   return `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d0f1a"/><stop offset="0.6" stop-color="#15182a"/><stop offset="1" stop-color="#0a0c14"/></linearGradient>
-    <radialGradient id="gl" cx="0.5" cy="0.56" r="0.5"><stop offset="0" stop-color="#ffbe00" stop-opacity="0.16"/><stop offset="1" stop-color="#ffbe00" stop-opacity="0"/></radialGradient></defs>
-    <rect width="${W}" height="${H}" fill="url(#bg)"/><rect width="${W}" height="${H}" fill="url(#gl)"/>
-    <text x="540" y="120" font-family="${FF}" font-size="68" font-weight="800" fill="${FG}" text-anchor="middle" letter-spacing="-2">${headSvg}</text>
-    <rect x="${540 - subW / 2}" y="${head.length > 1 ? 285 : 205}" width="${subW}" height="58" rx="29" fill="${Y}"/>
-    <text x="540" y="${(head.length > 1 ? 285 : 205) + 39}" font-family="${FF}" font-size="27" font-weight="800" fill="${DARK}" text-anchor="middle">${xml(p.sub)}</text>
-    <text x="540" y="${(head.length > 1 ? 285 : 205) + 88}" font-family="${FF}" font-size="21" font-weight="600" fill="${MUT}" text-anchor="middle">${xml(p.note || "")}</text>
+    ${T.bgRect}
+    <text x="540" y="120" font-family="${FF}" font-size="68" font-weight="800" fill="${T.headline}" text-anchor="middle" letter-spacing="-2">${headSvg}</text>
+    <rect x="${540 - subW / 2}" y="${subY}" width="${subW}" height="58" rx="29" fill="${T.pill}"/>
+    <text x="540" y="${subY + 39}" font-family="${FF}" font-size="27" font-weight="800" fill="${T.pillText}" text-anchor="middle">${xml(p.sub)}</text>
+    <text x="540" y="${subY + 88}" font-family="${FF}" font-size="21" font-weight="600" fill="${T.note}" text-anchor="middle">${xml(p.note || "")}</text>
     ${lines}
+    ${hubDisc}
     ${nodes}
-    <text x="540" y="1305" font-family="${FF}" font-size="26" font-weight="700" fill="${G}" text-anchor="middle">@hanubees · free AI for local businesses · hanubees.com</text>
+    <text x="540" y="1305" font-family="${FF}" font-size="26" font-weight="700" fill="${T.footer}" text-anchor="middle">@hanubees · free AI for local businesses · hanubees.com</text>
   </svg>`;
 }
 
@@ -123,10 +132,11 @@ const PROFS = {
     { icon: "pin", label: "Local", tip: "List areas covered" }, { icon: "bee", label: "Hanubees", tip: HANU } ] },
 };
 
-async function build(prof) {
+async function build(prof, theme) {
   const p = PROFS[prof];
   if (!p) { console.log("unknown profession. options:", Object.keys(PROFS).join(", ")); process.exit(1); }
-  return toPng(buildSvg(p));
+  const T = THEMES[theme] || THEMES.dark;
+  return toPng(buildSvg(p, T));
 }
 
 async function upload(buf) {
@@ -138,8 +148,9 @@ async function upload(buf) {
 (async () => {
   const mode = process.argv[2] || "render";
   const prof = process.argv[3] || "plumber";
-  const png = await build(prof);
-  if (mode === "render") { fs.mkdirSync("/tmp/tips", { recursive: true }); fs.writeFileSync(`/tmp/tips/${prof}.png`, png); console.log(`rendered -> /tmp/tips/${prof}.png`); return; }
+  const theme = process.argv[4] || process.env.THEME || "dark";
+  const png = await build(prof, theme);
+  if (mode === "render") { fs.mkdirSync("/tmp/tips", { recursive: true }); fs.writeFileSync(`/tmp/tips/${prof}-${theme}.png`, png); console.log(`rendered -> /tmp/tips/${prof}-${theme}.png`); return; }
   const url = await upload(png);
   const p = PROFS[prof];
   const cap_ig = `${p.title} 🐝\n\nThe ones that grow fastest do these:\n• ${p.tips.map((t) => t.tip).join("\n• ")}\n\nHanubees gives every local business a free AI that answers customers instantly, 24/7.\nFree → hanubees.com\n#${prof.replace(/-/g, "")} #smallbusiness #growthtips #Hanubees`;
