@@ -125,11 +125,11 @@ async function runSQL(sql) {
     category: b.category, city: b.city, phone: b.phone, website: b.website, instagram: b.instagram || null,
   }));
   for (let i = 0; i < accRows.length; i += 150) {
-    const json = JSON.stringify(accRows.slice(i, i + 150)).replace(/'/g, "''");
+    const json = JSON.stringify(accRows.slice(i, i + 150));
     await runSQL(
       `insert into accounts (user_id,type,name,slug,bee_name,category,city,phone,website,instagram) ` +
       `select user_id,'business',name,slug,bee_name,category,city,phone,website,instagram ` +
-      `from jsonb_to_recordset('${json}'::jsonb) as x(user_id text,name text,slug text,bee_name text,category text,city text,phone text,website text,instagram text) ` +
+      `from jsonb_to_recordset($hbz$${json}$hbz$::jsonb) as x(user_id text,name text,slug text,bee_name text,category text,city text,phone text,website text,instagram text) ` +
       `on conflict (user_id) do nothing;`
     );
   }
@@ -141,11 +141,11 @@ async function runSQL(sql) {
     if (b.phone) deRows.push({ user_id: `yt-${b.chId}`, content: `Phone: ${b.phone}`, tag: "contact", info_type: "contact", is_live: true });
   }
   for (let i = 0; i < deRows.length; i += 150) {
-    const json = JSON.stringify(deRows.slice(i, i + 150)).replace(/'/g, "''");
+    const json = JSON.stringify(deRows.slice(i, i + 150));
     await runSQL(
       `insert into data_entries (account_id,content,tag,info_type,visibility,is_live_fact) ` +
       `select a.id, v.content, v.tag, v.info_type, 'public', v.is_live ` +
-      `from jsonb_to_recordset('${json}'::jsonb) as v(user_id text,content text,tag text,info_type text,is_live bool) ` +
+      `from jsonb_to_recordset($hbz$${json}$hbz$::jsonb) as v(user_id text,content text,tag text,info_type text,is_live bool) ` +
       `join accounts a on a.user_id = v.user_id;`
     );
   }
