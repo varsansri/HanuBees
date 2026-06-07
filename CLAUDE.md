@@ -18,6 +18,25 @@
 - **Daily cron** (10:23) wakes the session to post the next city (session-only, expires 7 days; no system cron here).
 - **Open:** (1) ingest more AU/US cities to grow post volume; (2) port renderer to a **Vercel cron API route** (bundle font + add `sharp`) for true 24/7; (3) **set `NEXT_PUBLIC_GOOGLE_VERIFICATION`** (GSC token) — #1 SEO blocker.
 
+---
+
+### 🗓️ 2026-06-07 — big day (consumer hub + light mode + ingest + creative content)
+**Read `docs/COPILOT_SPEC.md`** — the founder's full vision for the consumer hub + page-aware bee copilot (3 phases).
+
+**Product shipped (live):**
+- **Light/dark mode** (`app/globals.css` `html.light` overrides; hardcoded hex across ~23 app/component files mapped to CSS vars; MapLibre/og keep literal hex). Toggle in **Profile → ☰ menu**; persisted in localStorage; applied pre-paint via inline script in `app/layout.tsx`.
+- **Consumer hub (Phase 1, anonymous/on-device):** `/hub` = WhatsApp/IG-style **Chats** (local list) + **Explore** (discovery via `/api/agents/search`, now supports free-text `q`). `/c/[slug]` = shareable deep-link straight into a business's agent chat (name on top, back, Follow, intro greeting + quick-replies, autonomous answering). `lib/consumer/store.ts` = localStorage (anon id, chats, msgs, follows). **Pinned `/c/hanubees` guide** auto-greets everyone + finds businesses (tappable cards).
+- NOT yet: Phase 2 (page-aware bee + owner voice-edit from message area) · Phase 3 (drag-to-pin 3-party chat) · QR share for owners.
+
+**Data / ingest:**
+- YouTube ingest run: **+281 businesses → 2,087 total** (LA 1,107 · Melbourne 267 · Coimbatore 551 · Chennai 162), **+89 Instagram handles**. New rules in `scripts/ingest-youtube.js`: **top-of-niche** (two intents `<cat> in <city>` + `best <cat> <city>`), **look for links** (extract instagram), quota guard, `ONLY_CITY`/`DELAY`, **dollar-quoted** bulk inserts (fixed JSON-escape bug). Daily YT quota is ~10k (search=100 ea); resets midnight PT.
+
+**Marketing (see `hanubees-marketing-team/`):**
+- **growth-tips.js** — hub-and-spoke "Growth Tips for <Profession>" (bee hub, dotted spokes), now a **4-slide carousel** (infographic → why → more → Hanubees-helps), **light/dark** themes, **24 professions**, `tips_queue` + `auto` + **4 daily crons** (9:08/12:43/16:17/19:52). Posted plumber + dog-groomer.
+- **creative-posts.js** — fixes "same template" critique: **3 distinct aesthetics** (statement / playbook / myth-vs-move) + agent-authored creative sector copy, meant to rotate. Awaiting founder sign-off before scaling into the queue.
+- **meet-carousel.js** photo-hero support + **fetch-image.js** (no-key clean images: Pexels if key, else Openverse commercial Wikimedia/Flickr skipping watermarked rawpixel; UA header for Wikimedia).
+- Session crons are **session-only, expire in 7 days** (no system cron here); true 24/7 needs the Vercel-cron port.
+
 **Infra facts**
 - Live: https://hanubees.com · Supabase project `whfxrovgvulmhqkhumuz` (url https://whfxrovgvulmhqkhumuz.supabase.co) · **RLS is ON**.
 - Deploys auto from `git push origin main`. To `next build` locally, export the **public** `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (they're public) — `vercel env pull` returns them empty because LLM/embedding keys are **Sensitive** (work only in prod). So anything needing LLM/embeddings (e.g. embedding backfill) must run in prod.
