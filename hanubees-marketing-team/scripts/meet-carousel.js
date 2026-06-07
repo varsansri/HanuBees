@@ -141,9 +141,39 @@ async function toPng(svg) {
   return sharp(Buffer.from(svg)).composite([{ input: bee, top: 56, left: 84 }]).png().toBuffer();
 }
 
-async function buildSlides(d) {
+// photo-hero version of slide 1 (viral "MEET X" look: relevant image up top, text band below)
+async function heroPng(d, i, total, photoPath) {
+  const W = 1080, PH = 620;
+  const photo = await sharp(photoPath).resize(W, PH, { fit: "cover", position: process.env.CROP || "attention" }).modulate({ brightness: 0.6, saturation: 0.62 }).toBuffer();
+  const base = `<svg width="1080" height="1080" xmlns="http://www.w3.org/2000/svg">${DEFS}<rect width="1080" height="1080" fill="url(#bg)"/></svg>`;
+  const scrim = `<svg width="1080" height="1080" xmlns="http://www.w3.org/2000/svg"><defs>
+    <linearGradient id="tf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0c14" stop-opacity="0.62"/><stop offset="0.22" stop-color="#0a0c14" stop-opacity="0"/></linearGradient>
+    <linearGradient id="bf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0c14" stop-opacity="0"/><stop offset="0.75" stop-color="#0a0c14" stop-opacity="0.92"/><stop offset="1" stop-color="#0a0c14" stop-opacity="1"/></linearGradient></defs>
+    <rect x="0" y="0" width="1080" height="${PH}" fill="url(#tf)"/>
+    <rect x="0" y="${PH - 300}" width="1080" height="${1080 - (PH - 300)}" fill="url(#bf)"/></svg>`;
+  const txt = `<svg width="1080" height="1080" xmlns="http://www.w3.org/2000/svg">
+    ${t(205, 108, 30, 700, FG)}@hanubees</text>
+    ${t(990, 108, 30, 700, "#d4d5db", 'text-anchor="end"')}${i + 1}/${total}</text>
+    ${t(540, 712, 42, 700, G, 'text-anchor="middle" letter-spacing="8"')}MEET THE</text>
+    ${t(540, 882, 180, 800, Y, 'text-anchor="middle" letter-spacing="-6"')}${d.noPhone}</text>
+    ${rich([{ t: "the " }, { t: d.city }, { t: " businesses your" }], 540, 955, 46, 700, "middle")}
+    ${rich([{ t: "customers " }, { t: "can’t reach", c: RED }, { t: "." }], 540, 1008, 46, 700, "middle")}
+    ${t(90, 1055, 28, 700, Y)}swipe →</text>
+  </svg>`;
+  const bee = await sharp("hanubees-marketing-team/assets/brand/bee.png").resize(110, 110, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+  return sharp(Buffer.from(base)).composite([
+    { input: photo, top: 0, left: 0 },
+    { input: Buffer.from(scrim), top: 0, left: 0 },
+    { input: Buffer.from(txt), top: 0, left: 0 },
+    { input: bee, top: 56, left: 84 },
+  ]).png().toBuffer();
+}
+
+async function buildSlides(d, heroPath) {
   const T = 7;
-  return Promise.all([s1_hook, s2_scale, s3_oldway, s4_data, s5_cost, s6_fix, s7_cta].map((fn, i) => toPng(fn(d, i, T))));
+  const rest = [s2_scale, s3_oldway, s4_data, s5_cost, s6_fix, s7_cta].map((fn, k) => toPng(fn(d, k + 1, T)));
+  const first = heroPath ? heroPng(d, 0, T, heroPath) : toPng(s1_hook(d, 0, T));
+  return Promise.all([first, ...rest]);
 }
 
 async function sql(q) {
@@ -168,9 +198,10 @@ async function upload(buf) {
 (async () => {
   const mode = process.argv[2] || "render";
   const city = process.argv[3] || "Los Angeles";
+  const heroPath = process.argv[4] || process.env.HERO_IMG || null; // optional relevant photo for slide 1
   const d = await cityData(city);
   if (!d.total) { console.log("no data for", city); return; }
-  const slides = await buildSlides(d);
+  const slides = await buildSlides(d, heroPath);
 
   if (mode === "render") {
     fs.mkdirSync("/tmp/meet", { recursive: true });
