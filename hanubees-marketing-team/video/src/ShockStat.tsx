@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  AbsoluteFill, Sequence, Img, staticFile,
+  AbsoluteFill, Sequence, Img, Audio, staticFile,
   useCurrentFrame, useVideoConfig, interpolate, spring, delayRender, continueRender,
 } from "remotion";
 import { loadFont } from "@remotion/fonts";
@@ -15,6 +15,7 @@ export type ShockStatProps = {
   noSite: number;
   reachable: number;
   pct: number;
+  music?: "drive" | "tense" | "uplift"; // royalty-free bed (CC-BY, credited in caption)
 };
 
 // Brand
@@ -144,6 +145,8 @@ const CTA: React.FC = () => (
 export const ShockStat: React.FC<ShockStatProps> = (props) => {
   return (
     <AbsoluteFill style={{ backgroundColor: BG, fontFamily: FONT }}>
+      {/* royalty-free music bed (kept low; drops further once voiceover lands) */}
+      <Audio src={staticFile(`music/${props.music ?? "drive"}.mp3`)} volume={0.32} />
       <AbsoluteFill style={{ background: "radial-gradient(120% 80% at 50% 0%, #1c1c1c 0%, #121212 60%)" }} />
       {/* persistent bee + handle */}
       <Img src={staticFile("bee.png")} style={{ position: "absolute", top: 70, right: 70, width: 130, height: "auto", zIndex: 5 }} />

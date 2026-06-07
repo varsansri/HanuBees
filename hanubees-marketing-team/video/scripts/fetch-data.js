@@ -54,10 +54,20 @@ const esc = (s) => String(s).replace(/'/g, "''");
   if (!row || +row.total < 1) { console.error("No data for city:", want); process.exit(1); }
 
   const total = +row.total, noPhone = +row.no_phone, noSite = +row.no_site, reachable = +row.reachable;
+
+  // Rotate the royalty-free music bed (CC-BY by Kevin MacLeod, incompetech.com).
+  const TRACKS = { drive: "Hitman", tense: "The Complex", uplift: "Inspired" };
+  const keys = Object.keys(TRACKS);
+  const music = (process.env.MUSIC && keys.includes(process.env.MUSIC))
+    ? process.env.MUSIC
+    : keys[Math.abs([...row.city].reduce((a, c) => a + c.charCodeAt(0), 0)) % keys.length];
+  const credit = `\n\n🎵 "${TRACKS[music]}" by Kevin MacLeod (incompetech.com) — CC BY 4.0`;
+
   const props = {
     city: row.city, total, noPhone, noSite, reachable,
     pct: Math.round((noPhone / total) * 100),
-    caption_ig: `We mapped ${total} ${row.city} businesses — ${noPhone} have no phone you can find online, ${noSite} have no website at all. Customers lost every day.\n\nHanubees gives every business a free AI that answers instantly. Free → hanubees.com\n#${row.city.replace(/\s+/g, "")} #smallbusiness #AI #Hanubees`,
+    music,
+    caption_ig: `We mapped ${total} ${row.city} businesses — ${noPhone} have no phone you can find online, ${noSite} have no website at all. Customers lost every day.\n\nHanubees gives every business a free AI that answers instantly. Free → hanubees.com\n#${row.city.replace(/\s+/g, "")} #smallbusiness #AI #Hanubees${credit}`,
     caption_tt: `${total} ${row.city} businesses, ${noPhone} unreachable online. Hanubees fixes it free.`.slice(0, 90),
   };
 

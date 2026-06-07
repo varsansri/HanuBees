@@ -10,6 +10,7 @@ const defaultProps: ShockStatProps = {
   noSite: 300,
   reachable: 193,
   pct: 65,
+  music: "drive",
 };
 
 export const RemotionRoot: React.FC = () => {
