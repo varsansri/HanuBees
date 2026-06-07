@@ -8,6 +8,7 @@ import { upsertChat, getMsgs, setMsgs, type Msg } from "@/lib/consumer/store";
 const YELLOW = "var(--yellow)", GREEN = "var(--green)", FG = "var(--fg)", MUTED = "var(--fg2)", BG2 = "var(--bg2)", BG3 = "var(--bg3)";
 
 type Agent = { name: string; slug: string; category: string | null; city: string | null };
+type Contribution = { id: string; kind: string; title: string; content: string; place_name: string | null; area: string | null; price: number | null; valid_until: string | null; created_at: string };
 type RMsg = Msg & { agents?: Agent[] };
 
 const GREETING = "Hi 👋 I'm Hanubees — your local guide. I help you find local businesses and get instant answers, free. Tell me what you're looking for (e.g. “dentist in Melbourne” or “dog grooming”).";
@@ -40,12 +41,31 @@ export default function HanubeesChat() {
     const next: RMsg[] = [...messages, { role: "user", content }];
     setMessages(next); persist(next); setInput(""); setLoading(true);
     try {
-      const res = await fetch(`/api/agents/search?q=${encodeURIComponent(content)}&limit=6`);
-      const data = await res.json();
-      const agents: Agent[] = data.agents || [];
-      const reply = agents.length
-        ? `Here's what I found for “${content}” — tap any to chat with their AI:`
-        : `I couldn't find a match for “${content}” yet. Try a category (e.g. “salon”) or add a city.`;
+      const [aRes, cRes] = await Promise.all([
+        fetch(`/api/agents/search?q=${encodeURIComponent(content)}&limit=6`),
+        fetch(`/api/contributions/search?q=${encodeURIComponent(content)}&limit=6`),
+      ]);
+      const agents: Agent[] = (await aRes.json()).agents || [];
+      const contribs: Contribution[] = (await cRes.json()).contributions || [];
+
+      const fmtAge = (iso: string) => {
+        const h = Math.max(0, (Date.now() - new Date(iso).getTime()) / 3.6e6);
+        return h < 1 ? "just now" : h < 24 ? `${Math.round(h)}h ago` : `${Math.round(h / 24)}d ago`;
+      };
+
+      let reply: string;
+      if (contribs.length) {
+        const lines = contribs.map((c) => {
+          const where = [c.place_name, c.area].filter(Boolean).join(", ");
+          const extras = [c.price ? `₹${c.price}` : null, c.valid_until ? "live" : null].filter(Boolean).join(" · ");
+          return `• ${where ? where + " — " : ""}${c.content}${extras ? `  (${extras}, ${fmtAge(c.created_at)})` : `  (${fmtAge(c.created_at)})`}`;
+        }).join("\n");
+        reply = `Here's what people shared about that:\n\n${lines}${agents.length ? `\n\nAnd businesses you can ask directly:` : ""}`;
+      } else {
+        reply = agents.length
+          ? `Here's what I found for “${content}” — tap any to chat with their AI:`
+          : `No info on that yet. Be the first — tap + to share what you know, and others will find it here.`;
+      }
       const after: RMsg[] = [...next, { role: "assistant", content: reply, agents }];
       setMessages(after); persist(after);
     } catch {
