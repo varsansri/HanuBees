@@ -21,6 +21,7 @@ function setupFonts() {
 }
 setupFonts();
 const K = process.env.ZERNIO_API_KEY; const ZB = "https://api.zernio.com/v1";
+const { postImages } = require("./zernio.js");
 const Y = "#ffbe00", G = "#98aa9d", FG = "#eaeaea", MUT = "#8a8a99", RED = "#e0574d";
 const xml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 function wrap(t, max) { const w = String(t).split(/\s+/), o = []; let c = ""; for (const x of w) { if ((c + " " + x).trim().length > max) { if (c) o.push(c.trim()); c = x; } else c += " " + x; } if (c.trim()) o.push(c.trim()); return o; }
@@ -172,18 +173,7 @@ async function nextCity() {
 
 async function publish(story) {
   const slides = await buildSlides(story);
-  const urls = [];
-  for (const b of slides) urls.push(await upload(b));
-  const media = urls.map((u) => ({ url: u, type: "image" }));
-  const accs = await (await fetch(`${ZB}/accounts`, { headers: { Authorization: `Bearer ${K}`, Accept: "application/json" } })).json();
-  const ok = [];
-  for (const a of accs.accounts || []) {
-    const cap = a.platform === "tiktok" ? story.caption_tt : story.caption_ig;
-    const res = await fetch(`${ZB}/posts`, { method: "POST", headers: { Authorization: `Bearer ${K}`, "Content-Type": "application/json" }, body: JSON.stringify({ content: cap, mediaItems: media, platforms: [{ platform: a.platform, accountId: a._id }], publishNow: true }) });
-    if (res.ok) { ok.push(a.platform); console.log(a.platform, "PUBLISHED ✓"); }
-    else console.log(a.platform, "FAILED:", (await res.text()).slice(0, 160));
-  }
-  return ok;
+  return await postImages(slides, story.caption_ig, story.caption_tt); // IG + TikTok + Threads
 }
 
 // Fallback hardcoded LA story (used only if no city resolved)

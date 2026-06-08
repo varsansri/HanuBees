@@ -23,6 +23,7 @@ function setupFonts() {
 setupFonts();
 
 const K = process.env.ZERNIO_API_KEY; const ZB = "https://api.zernio.com/v1";
+const { postImages } = require("./zernio.js");
 const Y = "#ffbe00", G = "#98aa9d", FG = "#eaeaea", MUT = "#8a8a99", RED = "#e0574d";
 const FF = "Space Grotesk, Roboto, sans-serif";
 const xml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -213,14 +214,6 @@ async function upload(buf) {
   const cap_ig = `MEET THE ${d.noPhone}.\n\nWe mapped ${d.total} businesses in ${city}. ${d.noPhone} have no phone a customer can find (${d.pct}%), ${d.noSite} have no website at all. When people can't reach you, they call the next name on the list.\n\nHanubees gives every business a free AI that answers customers instantly, 24/7 — and gets it found.\n\nFree → hanubees.com\n#${city.replace(/\s+/g, "")} #smallbusiness #AI #marketing #Hanubees`;
   const cap_tt = `MEET THE ${d.noPhone}: ${city} shops customers can't reach. Hanubees fixes it free.`.slice(0, 90);
 
-  const urls = []; for (const b of slides) urls.push(await upload(b));
-  const media = urls.map((u) => ({ url: u, type: "image" }));
-  const accs = await (await fetch(`${ZB}/accounts`, { headers: { Authorization: `Bearer ${K}`, Accept: "application/json" } })).json();
-  const ok = [];
-  for (const a of accs.accounts || []) {
-    const cap = a.platform === "tiktok" ? cap_tt : cap_ig;
-    const res = await fetch(`${ZB}/posts`, { method: "POST", headers: { Authorization: `Bearer ${K}`, "Content-Type": "application/json" }, body: JSON.stringify({ content: cap, mediaItems: media, platforms: [{ platform: a.platform, accountId: a._id }], publishNow: true }) });
-    if (res.ok) { ok.push(a.platform); console.log(a.platform, "PUBLISHED ✓"); } else console.log(a.platform, "FAILED:", (await res.text()).slice(0, 160));
-  }
+  const ok = await postImages(slides, cap_ig, cap_tt); // IG + TikTok + Threads
   if (ok.length) { await sql(`insert into story_log (city, slides, platforms) values ('${escq(city + " (MEET)")}', 7, '${ok.join("+")}');`); console.log("logged:", city, "MEET ->", ok.join("+")); }
 })();

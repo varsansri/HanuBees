@@ -20,6 +20,7 @@ function setupFonts() {
 setupFonts();
 
 const K = process.env.ZERNIO_API_KEY; const ZB = "https://api.zernio.com/v1";
+const { postImages } = require("./zernio.js");
 const Y = "#ffbe00", DARK = "#121212";
 const FF = "Space Grotesk, Roboto, sans-serif";
 const W = 1080, H = 1350;
@@ -153,16 +154,8 @@ function captions(prof) {
 }
 async function publish(prof, theme) {
   const slides = await buildSlides(prof, theme);
-  const urls = []; for (const b of slides) urls.push(await upload(b));
-  const media = urls.map((u) => ({ url: u, type: "image" }));
   const cap = captions(prof);
-  const accs = await (await fetch(`${ZB}/accounts`, { headers: { Authorization: `Bearer ${K}`, Accept: "application/json" } })).json();
-  const ok = [];
-  for (const a of accs.accounts || []) {
-    const res = await fetch(`${ZB}/posts`, { method: "POST", headers: { Authorization: `Bearer ${K}`, "Content-Type": "application/json" }, body: JSON.stringify({ content: a.platform === "tiktok" ? cap.tt : cap.ig, mediaItems: media, platforms: [{ platform: a.platform, accountId: a._id }], publishNow: true }) });
-    if (res.ok) { ok.push(a.platform); console.log(a.platform, "PUBLISHED ✓"); } else console.log(a.platform, "FAILED:", (await res.text()).slice(0, 150));
-  }
-  return ok;
+  return await postImages(slides, cap.ig, cap.tt); // IG + TikTok + Threads (both keys)
 }
 
 // ---------- profession data ----------
