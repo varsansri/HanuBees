@@ -10,8 +10,7 @@ on:
         description: 'Specific script id (e.g. c01), or blank for next un-posted'
         required: false
         default: ''
-  schedule:
-    - cron: '21 2,5,8,11,14,17 * * *'
+  # schedule disabled — fanout.yml now drives posting (unique per account)
 
 concurrency:
   group: viral-batch

@@ -1,0 +1,66 @@
+name: Viral fan-out (unique per account)
+
+# Each connected account gets a DIFFERENT, un-posted script — no duplicates anywhere.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 6,16 * * *'   # 2×/day UTC
+
+concurrency:
+  group: fanout
+  cancel-in-progress: false
+
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+  SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+  ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+  ZERNIO_API_KEY_2: ${{ secrets.ZERNIO_API_KEY_2 }}
+  ZERNIO_API_KEY_3: ${{ secrets.ZERNIO_API_KEY_3 }}
+  ZERNIO_API_KEY_4: ${{ secrets.ZERNIO_API_KEY_4 }}
+  GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    defaults:
+      run:
+        working-directory: hanubees-marketing-team/video
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - id: plan
+        run: node scripts/plan-fanout.js
+
+  post:
+    needs: plan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    defaults:
+      run:
+        working-directory: hanubees-marketing-team/video
+    env:
+      VIDEO_ID: ${{ matrix.scriptId }}
+      KEY_ENV: ${{ matrix.keyEnv }}
+      ACCOUNT_ID: ${{ matrix.accountId }}
+      PLATFORM: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Chrome + emoji fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libdbus-1-3 libatk1.0-0 libgbm1 libasound2t64 \
+            libatk-bridge2.0-0 libgtk-3-0 libxkbcommon0 libx11-xcb1 libxcomposite1 \
+            libxdamage1 libxrandr2 libxfixes3 libpango-1.0-0 libcairo2 fonts-liberation fonts-noto-color-emoji || true
+      - run: npm install --no-audit --no-fund
+      - run: node scripts/build-content.js
+      - run: npx remotion render src/index.ts HookVideo out/video.mp4 --props=out/props.json --timeout=90000
+      - run: node scripts/post-one.js
+      - run: node scripts/mark-posted.js
