@@ -17,7 +17,7 @@ const path = require("path");
 
 const ZB = "https://api.zernio.com/v1";
 const OUT = path.join(__dirname, "../out");
-const KEYS = [process.env.ZERNIO_API_KEY, process.env.ZERNIO_API_KEY_2, process.env.ZERNIO_API_KEY_3].filter(Boolean);
+const KEYS = [process.env.ZERNIO_API_KEY, process.env.ZERNIO_API_KEY_2, process.env.ZERNIO_API_KEY_3, process.env.ZERNIO_API_KEY_4].filter(Boolean);
 
 async function uploadVideo(key, buf) {
   const pre = await (await fetch(`${ZB}/media/presign`, {

@@ -29,6 +29,7 @@ jobs:
       ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
       ZERNIO_API_KEY_2: ${{ secrets.ZERNIO_API_KEY_2 }}
       ZERNIO_API_KEY_3: ${{ secrets.ZERNIO_API_KEY_3 }}
+      ZERNIO_API_KEY_4: ${{ secrets.ZERNIO_API_KEY_4 }}
       GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
       VIDEO_ID: ${{ github.event.inputs.video_id }}
     steps:
