@@ -19,6 +19,7 @@ jobs:
       SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
       ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
       ZERNIO_API_KEY_2: ${{ secrets.ZERNIO_API_KEY_2 }}
+      ZERNIO_API_KEY_3: ${{ secrets.ZERNIO_API_KEY_3 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

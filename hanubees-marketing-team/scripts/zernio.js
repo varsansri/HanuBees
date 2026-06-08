@@ -25,7 +25,7 @@ async function uploadImg(key, buf) {
 }
 
 async function postImages(buffers, capIg, capTt) {
-  const keys = [process.env.ZERNIO_API_KEY, process.env.ZERNIO_API_KEY_2].filter(Boolean);
+  const keys = [process.env.ZERNIO_API_KEY, process.env.ZERNIO_API_KEY_2, process.env.ZERNIO_API_KEY_3].filter(Boolean);
   const ok = [];
   for (const key of keys) {
     let accs = [];
