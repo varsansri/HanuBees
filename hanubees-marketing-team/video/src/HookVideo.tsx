@@ -35,9 +35,6 @@ const SceneCard: React.FC<{ s: Scene; accent: string }> = ({ s, accent }) => {
   const rise = spring({ frame: frame - 6, fps, config: SPRING.soft });
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", padding: "0 80px", textAlign: "center" }}>
-      {s.emoji && (
-        <div style={{ position: "absolute", top: 200, fontSize: 150, transform: `scale(${pop})` }}>{s.emoji}</div>
-      )}
       {s.big && (
         <div style={{ fontSize: TYPE.huge, fontWeight: 800, color: accent, transform: `scale(${interpolate(pop, [0, 1], [0.4, 1])})`, lineHeight: 1 }}>
           {s.big}

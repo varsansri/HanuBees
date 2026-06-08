@@ -33,10 +33,10 @@ export const MemeOpener: React.FC<{ hook: string; emotion: Emotion; gifSrc?: str
     <AbsoluteFill style={{ backgroundColor: COLORS.bg, fontFamily: FONT, transform: `translate(${shx}px, ${shy}px)` }}>
       <AbsoluteFill style={{ background: `radial-gradient(120% 80% at 50% 18%, ${e.accent}22 0%, ${COLORS.bg} 55%)` }} />
 
-      {/* meme reaction */}
-      <div style={{ position: "absolute", top: 230, width: "100%", display: "flex", justifyContent: "center", transform: `scale(${slam})` }}>
+      {/* meme reaction — real footage is the star */}
+      <div style={{ position: "absolute", top: 190, width: "100%", display: "flex", justifyContent: "center", transform: `scale(${slam})` }}>
         {gifSrc
-          ? <Gif src={gifSrc} width={520} height={520} fit="contain" style={{ borderRadius: 28 }} />
+          ? <Gif src={gifSrc} width={760} height={620} fit="cover" style={{ borderRadius: 32, border: `6px solid ${e.accent}`, boxShadow: "0 16px 50px rgba(0,0,0,0.5)" }} />
           : <div style={{ fontSize: 360, lineHeight: 1 }}>{e.emoji}</div>}
       </div>
 
