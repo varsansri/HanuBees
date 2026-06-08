@@ -36,7 +36,7 @@ async function uploadVideo(buf) {
   if (!fs.existsSync(videoPath)) { console.error("No out/video.mp4 — render first"); process.exit(1); }
   const props = JSON.parse(fs.readFileSync(propsPath, "utf8"));
 
-  console.log("Uploading video for", props.city, "…");
+  console.log("Uploading video for", props.city || props.business || props.id || "post", "…");
   const url = await uploadVideo(fs.readFileSync(videoPath));
   const media = [{ url, type: "video" }];
 
