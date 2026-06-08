@@ -1,6 +1,19 @@
-// 36 distinct customer-angle video scripts. Each maps a VISION customer problem →
+// 36+ distinct customer-angle video scripts. Each maps a VISION customer problem →
 // a 1000-Viral-Hooks template → a meme/number-driven short. emotion drives the
 // first-3s feeling (accent color + music + opener reaction). Keep them DIFFERENT.
+//
+// ── HANUBEES VIRAL HOOK FORMULA (every new script MUST follow this) ──────────
+//  1. SHOCK HOOK (hook): stop the scroll in the first line — a customer pain made
+//     hyper-specific, ideally with a number. ("Are you still calling 6 shops...?")
+//  2. PROOF NUMBER: a concrete, undeniable number in the FIRST scene (6 calls, 0
+//     replies, 78%, ₹4,500, 2 sec). Use numbers everywhere — they read as truth.
+//  3. NUMBERED FRAMEWORK: 2–3 tight escalating beats (pain → twist → the bee fixes
+//     it), one per scene, each with a number or hard punch. No fluff.
+//  4. SOFT CTA: low-friction, not salesy ("Just ask. Free." / "Be the one who
+//     already knows."). Never "buy now".
+//  Rules: CUSTOMER angle only · ONE idea per video · pick emotion (shock /
+//  frustration / relief / curiosity) so the first 3s FEEL right · every script
+//  different from the rest.
 module.exports = [
   { id: "c01", emotion: "frustration", hook: "Are you still calling 6 shops to find ONE thing?",
     scenes: [{ big: "6", text: "shops called", emoji: "📞" }, { big: "0", text: "actually picked up", emoji: "🦗" }, { text: "I asked ONE bee. Got every answer.", emoji: "🐝" }], cta: "Stop dialing. Just ask." },
