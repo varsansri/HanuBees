@@ -36,7 +36,7 @@ export const MemeOpener: React.FC<{ hook: string; emotion: Emotion; gifSrc?: str
       {/* meme reaction — real footage is the star */}
       <div style={{ position: "absolute", top: 190, width: "100%", display: "flex", justifyContent: "center", transform: `scale(${slam})` }}>
         {gifSrc
-          ? <Gif src={gifSrc} width={760} height={620} fit="cover" style={{ borderRadius: 32, border: `6px solid ${e.accent}`, boxShadow: "0 16px 50px rgba(0,0,0,0.5)" }} />
+          ? <Gif src={gifSrc.startsWith("http") ? gifSrc : staticFile(gifSrc)} width={760} height={620} fit="cover" style={{ borderRadius: 32, border: `6px solid ${e.accent}`, boxShadow: "0 16px 50px rgba(0,0,0,0.5)" }} />
           : <div style={{ fontSize: 360, lineHeight: 1 }}>{e.emoji}</div>}
       </div>
 

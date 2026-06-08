@@ -4,7 +4,7 @@ import { staticFile, delayRender, continueRender } from "remotion";
 import { loadFont } from "@remotion/fonts";
 
 export const FONT = "Space Grotesk";
-const h = delayRender("font");
+const h = delayRender("font", { timeoutInMilliseconds: 90000 });
 loadFont({ family: FONT, url: staticFile("SpaceGrotesk.ttf") }).then(() => continueRender(h)).catch(() => continueRender(h));
 
 export const FPS = 30;

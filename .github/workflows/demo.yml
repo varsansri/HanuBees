@@ -35,7 +35,7 @@ jobs:
       - name: Build demo props
         run: node scripts/build-demo.js
       - name: Render demo
-        run: npx remotion render src/index.ts DemoVideo out/video.mp4 --props=out/props.json
+        run: npx remotion render src/index.ts DemoVideo out/video.mp4 --props=out/props.json --timeout=90000
       - name: Upload
         uses: actions/upload-artifact@v4
         with:

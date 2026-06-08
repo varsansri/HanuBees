@@ -43,7 +43,7 @@ jobs:
         run: node scripts/fetch-data.js
 
       - name: Render video
-        run: npx remotion render src/index.ts ShockStat out/video.mp4 --props=out/props.json --log=verbose
+        run: npx remotion render src/index.ts ShockStat out/video.mp4 --props=out/props.json --timeout=90000 --log=verbose
 
       - name: Upload video artifact
         uses: actions/upload-artifact@v4

@@ -46,7 +46,7 @@ jobs:
       - name: Pick next script + build props
         run: node scripts/build-content.js
       - name: Render video
-        run: npx remotion render src/index.ts HookVideo out/video.mp4 --props=out/props.json
+        run: npx remotion render src/index.ts HookVideo out/video.mp4 --props=out/props.json --timeout=90000
       - name: Post to IG + TikTok
         run: node scripts/post.js
       - name: Log as posted

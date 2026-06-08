@@ -36,7 +36,13 @@ async function fetchGif(term) {
     const r = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${GIPHY}&q=${encodeURIComponent(term)}&limit=20&rating=pg-13`, { signal: AbortSignal.timeout(15000) });
     const d = await r.json();
     const list = (d.data || []).filter((g) => g?.images?.downsized_medium?.url);
-    return list.length ? list[Math.floor(Math.random() * list.length)].images.downsized_medium.url : null;
+    if (!list.length) return null;
+    const url = list[Math.floor(Math.random() * list.length)].images.downsized_medium.url;
+    // download locally so the renderer serves it via staticFile (no per-frame remote fetch)
+    const buf = Buffer.from(await (await fetch(url, { signal: AbortSignal.timeout(20000) })).arrayBuffer());
+    fs.mkdirSync(path.join(__dirname, "../public"), { recursive: true });
+    fs.writeFileSync(path.join(__dirname, "../public/opener.gif"), buf);
+    return "opener.gif";
   } catch { return null; }
 }
 

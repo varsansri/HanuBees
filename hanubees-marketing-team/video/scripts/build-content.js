@@ -40,7 +40,12 @@ async function fetchGif(emotion, id) {
     const list = (d.data || []).filter((g) => g?.images?.downsized_medium?.url || g?.images?.original?.url);
     if (!list.length) return null;
     const g = list[hash(id + emotion) % list.length];
-    return (g.images.downsized_medium || g.images.original).url;
+    const url = (g.images.downsized_medium || g.images.original).url;
+    // download locally → renderer serves via staticFile (no per-frame remote fetch)
+    const buf = Buffer.from(await (await fetch(url, { signal: AbortSignal.timeout(20000) })).arrayBuffer());
+    fs.mkdirSync(path.join(__dirname, "../public"), { recursive: true });
+    fs.writeFileSync(path.join(__dirname, "../public/opener.gif"), buf);
+    return "opener.gif";
   } catch { return null; }
 }
 
