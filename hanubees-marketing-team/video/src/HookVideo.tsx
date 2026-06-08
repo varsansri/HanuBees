@@ -30,7 +30,6 @@ const accentize = (s: string, accent: string) =>
 const SceneCard: React.FC<{ s: Scene; accent: string }> = ({ s, accent }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const flash = interpolate(frame, [0, 3], [0.5, 0], { extrapolateRight: "clamp" }); // smash-cut
   const pop = spring({ frame, fps, config: SPRING.snappy });
   const rise = spring({ frame: frame - 6, fps, config: SPRING.soft });
   return (
@@ -44,7 +43,6 @@ const SceneCard: React.FC<{ s: Scene; accent: string }> = ({ s, accent }) => {
         {accentize(s.text, accent)}
       </div>
       {s.sub && <div style={{ fontSize: TYPE.cap, color: COLORS.muted, marginTop: 18, opacity: rise }}>{s.sub}</div>}
-      <AbsoluteFill style={{ background: "#fff", opacity: flash, pointerEvents: "none" }} />
     </AbsoluteFill>
   );
 };

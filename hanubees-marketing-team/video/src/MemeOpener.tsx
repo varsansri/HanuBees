@@ -11,8 +11,6 @@ export const MemeOpener: React.FC<{ hook: string; emotion: Emotion; gifSrc?: str
   const { fps } = useVideoConfig();
   const e = EMOTION[emotion];
 
-  // entry flash (frames 0-3)
-  const flash = interpolate(frame, [0, 4], [1, 0], { extrapolateRight: "clamp" });
   // decaying camera shake over first ~14 frames
   const decay = interpolate(frame, [0, 16], [1, 0], { extrapolateRight: "clamp" });
   const shx = Math.sin(frame * 2.1) * e.shake * decay;
@@ -44,8 +42,6 @@ export const MemeOpener: React.FC<{ hook: string; emotion: Emotion; gifSrc?: str
       <div style={{ position: "absolute", top: 880, left: 70, right: 70, textAlign: "center", transform: `scale(${hookScale})`, opacity: hookS }}>
         <div style={{ fontSize: TYPE.hook, fontWeight: 800, lineHeight: 1.12 }}>{parts}</div>
       </div>
-
-      <AbsoluteFill style={{ background: "#fff", opacity: flash, pointerEvents: "none" }} />
     </AbsoluteFill>
   );
 };
