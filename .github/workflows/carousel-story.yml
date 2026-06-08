@@ -1,0 +1,42 @@
+name: Carousel — story (auto)
+
+# Self-driving data-story carousels. Schedule = real post to IG+TikTok+Threads.
+# Manual dispatch = safe render-only test (uploads slides, no post).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 4 * * *'   # 1×/day UTC
+
+concurrency:
+  group: carousel-story
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+      ZERNIO_API_KEY_2: ${{ secrets.ZERNIO_API_KEY_2 }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Fonts for sharp/SVG
+        run: sudo apt-get update && sudo apt-get install -y fontconfig fonts-liberation || true
+      - name: Install sharp
+        run: cd hanubees-marketing-team && npm install --no-audit --no-fund
+      - name: Render test (manual only — no post)
+        if: github.event_name == 'workflow_dispatch'
+        run: node hanubees-marketing-team/scripts/story-carousel.js render "Coimbatore"
+      - name: Upload slides (manual test)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-slides-${{ github.run_id }}
+          path: /tmp/story/*.png
+          retention-days: 7
+      - name: Auto-post (scheduled)
+        if: github.event_name == 'schedule'
+        run: node hanubees-marketing-team/scripts/story-carousel.js auto
