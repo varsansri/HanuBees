@@ -1,9 +1,8 @@
 import React from "react";
 import {
   AbsoluteFill, Sequence, Img, Audio, staticFile,
-  useCurrentFrame, useVideoConfig, interpolate, spring, delayRender, continueRender,
+  useCurrentFrame, useVideoConfig, interpolate, spring,
 } from "remotion";
-import { loadFont } from "@remotion/fonts";
 
 export const FPS = 30;
 export const DURATION = 450; // 15s
@@ -20,12 +19,7 @@ export type ShockStatProps = {
 
 // Brand
 const BG = "#121212", YELLOW = "#FFBE00", GREEN = "#98AA9D", FG = "#EAEAEA", MUTED = "#A9A9A7";
-const FONT = "Space Grotesk";
-
-const fontHandle = delayRender("load-font");
-loadFont({ family: FONT, url: staticFile("SpaceGrotesk.ttf") })
-  .then(() => continueRender(fontHandle))
-  .catch(() => continueRender(fontHandle));
+const FONT = "Space Grotesk"; // loaded once in theme.ts (single delayRender)
 
 // rises + fades in with a spring
 const Rise: React.FC<{ delay?: number; children: React.ReactNode; style?: React.CSSProperties }> = ({ delay = 0, children, style }) => {
