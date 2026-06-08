@@ -1,7 +1,19 @@
 // Shared Zernio poster for image carousels. Posts across BOTH keys:
 // ZERNIO_API_KEY (Instagram + TikTok) and ZERNIO_API_KEY_2 (Threads + YouTube).
 // Images skip YouTube (video-only). TikTok gets the short caption, others the IG one.
+const fs = require("fs");
+const path = require("path");
 const ZB = "https://api.zernio.com/v1";
+
+// Digit-safe env load (the callers' loaders use [A-Z_]+ which misses ZERNIO_API_KEY_2).
+(function loadEnv() {
+  try {
+    for (const l of fs.readFileSync(path.join(__dirname, "../../.env.local"), "utf8").split("\n")) {
+      const m = l.match(/^\s*([A-Za-z0-9_]+)\s*=\s*(.*)$/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "").trim();
+    }
+  } catch {}
+})();
 
 async function uploadImg(key, buf) {
   const pre = await (await fetch(`${ZB}/media/presign`, {
