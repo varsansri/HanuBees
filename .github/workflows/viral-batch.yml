@@ -41,7 +41,7 @@ jobs:
             libxdamage1 libxrandr2 libxfixes3 libpango-1.0-0 libcairo2 fonts-liberation \
             fonts-noto-color-emoji || true
       - name: Install deps
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Pick next script + build props
         run: node scripts/build-content.js
       - name: Render video
