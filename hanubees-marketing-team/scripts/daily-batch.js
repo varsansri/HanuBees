@@ -445,6 +445,128 @@ const CONCEPTS = [
         ["3", "Culture became the product.", "Famous service, fierce loyalty — Amazon bought them for ~$1.2B."],
       ], "Filter hard for people who actually believe. — Hanubees"],
     ] },
+
+  // ── BATCH 4 (origin stories + finance) ──────────────────────────────────────
+  { id: "airbnb", company: "Airbnb",
+    kicker: "OWNS ZERO HOTELS", headline: "Airbnb owns zero hotels.",
+    question: "So how is it worth more than most hotel chains?",
+    slides: [
+      ["THE HOSTS ARE THE HOTEL", [
+        ["1", "It owns no property.", "Hosts own the rooms. Airbnb owns the software and the trust layer between strangers."],
+        ["2", "Users built the supply for free.", "Millions of hosts created millions of listings — without Airbnb building a single room."],
+      ]],
+      ["THE REAL PRODUCT", [
+        ["3", "It sells trust.", "Reviews, payments, cover — that's what made sleeping in a stranger's home feel safe."],
+      ], "Own the network, not the assets. — Hanubees"],
+    ] },
+  { id: "dropbox", company: "Dropbox",
+    kicker: "IT LAUNCHED WITH JUST A VIDEO", headline: "Dropbox launched with a 3-minute video.",
+    question: "75,000 signups overnight — before the product existed. How?",
+    slides: [
+      ["DEMAND BEFORE PRODUCT", [
+        ["1", "He filmed what it WOULD do.", "No working app — just a demo video showing the dream. Posted it online."],
+        ["2", "The waitlist exploded.", "5,000 → 75,000 overnight. He'd proven people wanted it before building it."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Then he built only that.", "No guessing. He built exactly what 75,000 people had already lined up for."],
+      ], "Sell the demand before you build the product. — Hanubees"],
+    ] },
+  { id: "reddit", company: "Reddit",
+    kicker: "IT FAKED ITS FIRST USERS", headline: "Reddit's founders faked its early users.",
+    question: "They posted as hundreds of fake accounts. Why?",
+    slides: [
+      ["THE EMPTY ROOM PROBLEM", [
+        ["1", "An empty forum feels dead.", "Nobody posts where nobody is. So they filled it themselves — fake account after fake account."],
+        ["2", "It looked alive, so it became alive.", "Real users assumed it was popular, joined in, and the fakes were no longer needed."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Fake it till the network is real.", "Every social product dies in the empty room. They engineered their way past it."],
+      ], "Solve the 'empty room' to start a network. — Hanubees"],
+    ] },
+  { id: "dell", company: "Dell",
+    kicker: "BUILT IN A DORM ROOM", headline: "Michael Dell built a PC empire from his dorm.",
+    question: "He skipped stores entirely. Why did that win?",
+    slides: [
+      ["HE CUT THE MIDDLEMAN", [
+        ["1", "He sold direct.", "No retail shelf, no markup. Straight from Dell to you — and he kept the difference."],
+        ["2", "Build-to-order.", "He only built a machine once it was sold. Zero dead stock sitting in warehouses."],
+      ]],
+      ["THE MODEL", [
+        ["3", "Lower prices, fatter margins.", "Cutting the store let him undercut rivals AND make more per sale. Both at once."],
+      ], "Cut the middleman and own the customer. — Hanubees"],
+    ] },
+  { id: "walmart", company: "Walmart",
+    kicker: "THE FRUGAL BILLIONAIRE", headline: "America's richest man drove an old pickup.",
+    question: "Sam Walton's empire ran on one boring idea. What?",
+    slides: [
+      ["ONE OBSESSION", [
+        ["1", "Everyday low prices.", "Not flashy sales — relentlessly low, always. He made it a religion."],
+        ["2", "He obsessed over costs.", "Every cent he cut from costs, he cut from prices. That pulled in the whole country."],
+      ]],
+      ["THE DISCIPLINE", [
+        ["3", "He stayed humble.", "Richest man in America, still drove a beat-up truck and scouted stores himself."],
+      ], "Pick one obsession and out-execute everyone on it. — Hanubees"],
+    ] },
+  { id: "blackrock", company: "BlackRock",
+    kicker: "IT MANAGES ~$10 TRILLION", headline: "BlackRock manages around $10 trillion.",
+    question: "More than almost any nation's economy. How?",
+    slides: [
+      ["IT RUNS THE BORING MONEY", [
+        ["1", "Pensions, index funds, savings.", "The unglamorous money of the whole world quietly flows through it."],
+        ["2", "Its software runs finance.", "'Aladdin' tracks the risk of a huge slice of global markets. Invisible, essential."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Quiet + indispensable = scale.", "No hype, no logo on a stadium — just the plumbing everyone depends on."],
+      ], "Own the boring infrastructure everyone relies on. — Hanubees"],
+    ] },
+  { id: "zoom", company: "Zoom",
+    kicker: "DENIED A VISA 8 TIMES", headline: "Eric Yuan was rejected for a US visa 8 times.",
+    question: "He got in on the 9th — then built Zoom. How'd it win?",
+    slides: [
+      ["HE DID THE BASICS FLAWLESSLY", [
+        ["1", "It just worked.", "While rivals lagged, froze and crashed, Zoom's calls were smooth. That was the whole pitch."],
+        ["2", "One obsession: ease.", "He measured happiness, not features. Does the call feel effortless? Ship that."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Persistence built it twice.", "8 visa rejections, then years out-executing giants. He never took no as final."],
+      ], "Do the basics flawlessly — it beats flash. — Hanubees"],
+    ] },
+  { id: "x", company: "Twitter",
+    kicker: "IT WAS A SIDE PROJECT", headline: "Twitter started as a side project.",
+    question: "At a failing podcast company. How'd it take over the world?",
+    slides: [
+      ["A HACK-DAY IDEA", [
+        ["1", "The main company was dying.", "Odeo (podcasts) was losing to Apple. A team side-project became Twitter."],
+        ["2", "140 characters forced simplicity.", "Anyone could post anything in seconds. The limit was the feature."],
+      ]],
+      ["THE LESSON", [
+        ["3", "It became the world's pulse.", "Real-time news, jokes, revolutions — all in a box built as an afterthought."],
+      ], "Your side project might be the real business. — Hanubees"],
+    ] },
+  { id: "jpmorgan", company: "JPMorgan",
+    kicker: "IT STAYED BORING IN 2008", headline: "JPMorgan survived 2008 by being boring.",
+    question: "Wall Street blew up. It got stronger. Why?",
+    slides: [
+      ["DISCIPLINE WHILE OTHERS GAMBLED", [
+        ["1", "It dodged the worst bets.", "When everyone piled into risky subprime, Jamie Dimon largely sat it out."],
+        ["2", "A 'fortress balance sheet.'", "It hoarded cash for the storm instead of chasing the last dollar of the boom."],
+      ]],
+      ["THE PAYOFF", [
+        ["3", "It bought the wreckage cheap.", "When rivals collapsed, JPMorgan scooped them up at fire-sale prices."],
+      ], "Discipline in the boom wins the bust. — Hanubees"],
+    ] },
+  { id: "bridgewater", company: "Bridgewater",
+    kicker: "EVERY MEETING IS RECORDED", headline: "The biggest hedge fund records every meeting.",
+    question: "Ray Dalio calls it 'radical transparency.' Why?",
+    slides: [
+      ["EGO IS THE ENEMY", [
+        ["1", "Anyone can critique anyone.", "Even the boss gets rated openly. No hiding, no politics, no sacred cows."],
+        ["2", "Logic over hierarchy.", "Decisions run on data and merit, not who has the biggest title in the room."],
+      ]],
+      ["THE SYSTEM", [
+        ["3", "It's written down.", "The whole culture lives in 'Principles' — brutal honesty, by design."],
+      ], "Kill ego with radical transparency. — Hanubees"],
+    ] },
 ];
 
 (async () => {
