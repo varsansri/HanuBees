@@ -64,6 +64,18 @@ const CONCEPTS = [
         ["3", "He sells the shovels.", "OpenAI, Google, Meta — every AI company pays the 'Nvidia tax.' In a gold rush, sell shovels."],
       ], "Pick a hard problem early. Be the only one ready when the wave hits. — Hanubees"],
     ] },
+  { id: "meta", face: "/tmp/founders/zuck0.jpg", logo: "/tmp/logo_meta.png",
+    kicker: "FROM A HARVARD DORM ROOM", headline: "Meta is worth $1.5 TRILLION.",
+    question: "Zuckerberg built it in a dorm in 2004. How?",
+    slides: [
+      ["HE GAVE IT AWAY FREE", [
+        ["1", "Free got him the users.", "Facebook cost $0 → billions joined → THEN he sold their attention to advertisers. Users are the product."],
+        ["2", "He bought his rivals.", "Instagram for $1B (2012). WhatsApp for $19B (2014). Can't kill a competitor? Buy it."],
+      ]],
+      ["THE SCALE", [
+        ["3", "~4 billion people use his apps.", "Facebook, Instagram, WhatsApp — nearly half the planet. Attention at a scale nobody else has."],
+      ], "Free + scale first. Monetize the attention later. — Hanubees"],
+    ] },
   { id: "apple", face: "/tmp/founders/jobs0.jpg", logo: "/tmp/logo_apple.png",
     kicker: "FROM A GARAGE TO $4.5 TRILLION", headline: "Apple is worth $4.5 TRILLION.",
     question: "It started in a garage in 1976. How?",
@@ -80,7 +92,9 @@ const CONCEPTS = [
 
 (async () => {
   const bee = await sharp(path.join(__dirname, "../assets/brand/bee.png")).resize(70, 70, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+  const only = process.argv[2];
   for (const cfg of CONCEPTS) {
+    if (only && cfg.id !== only) continue;
     const dir = path.join(__dirname, `../out/daily/${cfg.id}`); fs.mkdirSync(dir, { recursive: true });
     const wm = await sharp(cfg.logo).resize(640, 640, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .composite([{ input: Buffer.from([255, 255, 255, 235]), raw: { width: 1, height: 1, channels: 4 }, tile: true, blend: "dest-out" }]).png().toBuffer();
