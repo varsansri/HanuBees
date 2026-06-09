@@ -7,7 +7,39 @@
 
 ## 🔖 SESSION CONTINUATION — read this first (updated 2026-06-05)
 
-**Companion docs (read for full picture):** `VISION.md` (full vision + investor lens), `SKILLS.md` (agent-skill catalog + locked consent defaults), `GTM.md` (marketing + sales playbook), `VISION_BOARD.md`, `claudevision.md`, **`hanubees-marketing-team/`** (all marketing: social auto-poster, brand assets, SEO docs, credentials inventory — start at its README).
+**Companion docs (read for full picture):** `VISION.md` (full vision + investor lens), `SKILLS.md` (agent-skill catalog + locked consent defaults), `GTM.md` (marketing + sales playbook), `VISION_BOARD.md`, `claudevision.md`, **`hanubees-marketing-team/`** (all marketing), `docs/BUSINESS_APP_SPEC.md` (two-app split), `docs/COPILOT_SPEC.md` (consumer hub vision).
+
+---
+
+## ⭐ 2026-06-09 — MAJOR UPDATE (read this, it's the current state)
+
+### A. Consumer-first wedge (live)
+- **Pivot:** go consumer-first. People drop hyper-local, perishable info (PG slots, prices, tips, questions) the open web misses. Differentiator = **freshness** (Google's data rots; ours decays via `valid_until`).
+- **Capture:** `app/hub` **Share tab** + a **"+" bottom-sheet** (in-place, `ContributeProvider`/`ContributeSheet`) → **bee.png is the mic** (double-tap to record, manual stop, 10-min cap). `POST /api/contribute` (anon, service-role): LLM auto-detects kind (availability/experience/tip/question), sets freshness, best-effort attaches to a place. Table **`contributions`** (RAN). Location: self-resolves coords (matched account → OSM geocode); only prompts "use my present location" when **place-based AND unfound** → `/api/contribute/locate`. **Map** shows them as **green pins** (fresh-only) via `/api/contributions/map`.
+- **Answer layer:** `/api/contributions/search` + injected into the `/c/hanubees` guide chat AND `/api/agent` concierge/owner (`lib/ai/contributions.ts`). Community posts are shown **attributed + hedged + dated** (never as fact); leads with a matched post even on a bare name.
+- **Call-Onboarding:** `/onboard` (founder-only) + `/api/onboard-call` → speak a business → instant account+agent+listings → shareable `@handle.bee` + WhatsApp link. Uses **`lib/supabase/admin.ts`** (service-role).
+- **Needs in prod (DONE):** `SUPABASE_SERVICE_ROLE_KEY` in Vercel.
+
+### B. Email FIXED (Resend)
+- Auth email (signup OTP + reset) was broken (personal Gmail SMTP). Now **Resend** SMTP in Supabase. **Gotchas:** username must be lowercase `resend`; never PATCH Supabase SMTP via Mgmt API (wipes the block — edit in dashboard). Also fixed `site_url`→prod + `uri_allow_list`. Full notes: memory `reference-hanubees-email`.
+
+### C. THE VIRAL VIDEO MACHINE (the big one — `hanubees-marketing-team/video/`)
+Goal #1 = eyeballs via volume + learning. **Remotion** engine, rendered + posted **100% free on GitHub Actions** (no session needed).
+- **Formats:** `HookVideo` (meme-GIF opener via Giphy → number scenes → CTA, music bed), `DemoVideo` (F1-style phone-mockup demo), `ShockStat` (data video). Design system `src/theme.ts` (font/colors/emotion→accent+music). Music = 3 CC-BY beds in `public/music`. **Hook formula baked into `content.js` top** (shock hook → proof number → numbered framework → soft CTA).
+- **Content:** `scripts/content.js` = **52 customer-angle scripts** (c01–c52), all formula-built; `build-content.js` picks one → props+caption (+ downloads Giphy gif local).
+- **FAN-OUT (unique per account):** **4 Zernio keys → 8 accounts** (IG hanubees, TikTok riaze_charlie, Threads hanubees, YouTube hugo_mapa, IG+Threads fxabsolute, IG+Threads hanubees.biz). `plan-fanout.js` assigns each account a DISTINCT un-posted script → `fanout.yml` (matrix) renders + `post-one.js` posts ONE account. **Globally non-repeating** via `video_log`. **2×/day.** **Threads gets the hook as TEXT** (Zernio silently drops video on Threads).
+- **Carousels** (`story-carousel`/`growth-tips`/`meet`) → `scripts/zernio.js postImages` → IG+TikTok+Threads (YouTube skipped, images). On GitHub Actions: `carousel-tips.yml` (3×/day) + `carousel-story.yml` (1×/day).
+- **Learning loop:** `scripts/analytics.js` → `post_perf` table + eyeballs leaderboard (both/all keys). **Strategist** (session cron, daily) reads it + writes ~16 new formula scripts to keep the fanout fed.
+- **Keys/secrets (in `.env.local` + GH secrets):** `ZERNIO_API_KEY[_2.._4]`, `GIPHY_API_KEY`, `SUPABASE_ACCESS_TOKEN`/`PROJECT_REF`.
+- **CI gotchas:** pin all `@remotion/*` exact 4.0.290 (no `^`); NO committed lockfile (ARM breaks x64 `npm ci`) → `npm install`; load font once (theme.ts) w/ 90s timeout + render `--timeout=90000`; download Giphy to `public/opener.gif`; apt `fonts-noto-color-emoji`.
+
+### D. Business app (two-app split — Phase 0/1 built)
+- **Plan:** `docs/BUSINESS_APP_SPEC.md`. Customer app (this one) strips owner pages; NEW **business app** = `business-app/` (separate Vercel project, **same Supabase**), domain **`biz.hanubees.com`** (Cloudflare CNAME, NOT nameserver switch).
+- **Built:** OTP login, protected shell+nav, **Dashboard** (readiness/facts/listings + public link), **Train** (teach by text/voice → `data_entries` → **live iframe preview** of the real public agent), **Profile** (identity+QR), Conversations/Catalog stubs. Builds clean. Excluded from customer build (root `tsconfig` + `.vercelignore`).
+- **Next:** Train AI-structuring, Conversations (intervene), Catalog editing, then strip owner routes from customer app.
+
+### Infra quick-ref
+- Customer app deploys from `git push origin main` (Vercel). Business app = its own Vercel project, Root Dir `business-app`. DNS on **Cloudflare**. Supabase project `whfxrovgvulmhqkhumuz`, **RLS on**, service-role key in prod. Posting = Zernio (4 keys, 8 accounts).
 
 ---
 
