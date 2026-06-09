@@ -5,7 +5,14 @@ creates a batch of unique founder/company posts → schedules them to drip acros
 
 ## DAILY MODEL (locked)
 - Founder triggers → I create the batch → I **schedule** it (Zernio `scheduledFor`).
-- Target 130/day in chunks of ~10 per trigger; realistic **~8–10/batch** at the quality bar.
+- **VOLUME: ~100–130/day is the goal and is SAFE if done right.** What gets flagged is NOT the
+  daily count — it's **burst velocity** (many posts in seconds), **duplicate content**, and
+  **robotic identical timing**. Our posts are all unique → safe. So: **2–4 posts per account per
+  "wave," with RANDOM gaps**, several waves/day → **~10–15 posts/account/day**. 8 accounts ×
+  ~12–15 ≈ 100–130/day. (Earlier "~8–10/day total" was too conservative — corrected by founder.)
+- **HARD CAP to respect:** Instagram's official Graph API (what Zernio uses) allows **~25
+  posts / 24h per account** — IG counts API posts directly. Stay ≤~20/IG/day. Threads tolerates
+  much more. The gate on volume is **content supply**, so keep the library big.
 - **Each piece unique per account.** No fakes, real facts only. 4× quality bar.
 - **Niche:** famous companies + founders, **evergreen surprising business facts** (not just
   market caps). US/global giants — **NO India/Coimbatore**.
@@ -49,7 +56,9 @@ locally uses fallback font (Space Grotesk applies in the CI/render farm).
 ## SCHEDULING PATTERN (how Batch 3 was scheduled)
 Array of `{off(min from now), keyEnv, platform, user, type:"video"|"carousel", src, cap}`.
 presign+PUT each media → `POST /posts` with `scheduledFor: new Date(Date.now()+off*60000).toISOString(), timezone:"Etc/UTC"`.
-Stagger `off` by ~75 min; if an account gets 2 posts, space them ~10h apart.
+**Cadence (corrected):** give each account ~10–15 posts/day in waves of 2–4, with **RANDOM gaps**
+(jitter the `off` minutes — e.g. base interval ± a random 10–25 min — so timing isn't robotic).
+Never bunch many posts on one account within a few minutes. Threads = heaviest, IG ≤~20/day.
 
 ## STATE — 2026-06-09
 - **Library:** 46/50 usable.
