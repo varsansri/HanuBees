@@ -22,19 +22,24 @@ const PLATFORM = process.env.PLATFORM;
 (async () => {
   if (!KEY || !ACCOUNT_ID || !PLATFORM) { console.error("Missing KEY_ENV/ACCOUNT_ID/PLATFORM"); process.exit(1); }
   const props = JSON.parse(fs.readFileSync(path.join(OUT, "props.json"), "utf8"));
-  const buf = fs.readFileSync(path.join(OUT, "video.mp4"));
 
-  const pre = await (await fetch(`${ZB}/media/presign`, {
-    method: "POST", headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ filename: "hanubees.mp4", contentType: "video/mp4" }),
-  })).json();
-  const put = await fetch(pre.uploadUrl, { method: "PUT", headers: { "Content-Type": "video/mp4" }, body: buf });
-  if (!put.ok) { console.error("upload failed", put.status); process.exit(1); }
+  // Threads silently drops video via Zernio → post the hook as TEXT instead (lands reliably).
+  let mediaItems = [];
+  if (PLATFORM !== "threads") {
+    const buf = fs.readFileSync(path.join(OUT, "video.mp4"));
+    const pre = await (await fetch(`${ZB}/media/presign`, {
+      method: "POST", headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ filename: "hanubees.mp4", contentType: "video/mp4" }),
+    })).json();
+    const put = await fetch(pre.uploadUrl, { method: "PUT", headers: { "Content-Type": "video/mp4" }, body: buf });
+    if (!put.ok) { console.error("upload failed", put.status); process.exit(1); }
+    mediaItems = [{ url: pre.publicUrl, type: "video" }];
+  }
 
   const cap = PLATFORM === "tiktok" ? props.caption_tt : props.caption_ig;
   const res = await fetch(`${ZB}/posts`, {
     method: "POST", headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ content: cap, mediaItems: [{ url: pre.publicUrl, type: "video" }], platforms: [{ platform: PLATFORM, accountId: ACCOUNT_ID }], publishNow: true }),
+    body: JSON.stringify({ content: cap, mediaItems, platforms: [{ platform: PLATFORM, accountId: ACCOUNT_ID }], publishNow: true }),
   });
   console.log(`${PLATFORM}/${ACCOUNT_ID} [${props.id}]:`, res.ok ? "PUBLISHED ✓" : "FAILED " + (await res.text()).slice(0, 160));
   if (!res.ok) process.exit(1);
