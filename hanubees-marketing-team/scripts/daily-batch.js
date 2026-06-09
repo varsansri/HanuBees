@@ -151,6 +151,104 @@ const CONCEPTS = [
         ["3", "He never split the stock.", "One Class-A share costs ~$600,000+. Boring, patient, compounded for 60 years."],
       ], "Boring + patient + compounding beats flashy. — Hanubees"],
     ] },
+
+  // ── BATCH 1 (evergreen surprising business facts) ───────────────────────────
+  { id: "netflix", face: "/tmp/wiki_netflix.jpg", logo: "/tmp/logo_netflix.png",
+    kicker: "THEY LAUGHED AT A $50M OFFER", headline: "Blockbuster could've bought Netflix for $50M.",
+    question: "They said no — then went bankrupt. Why?",
+    slides: [
+      ["NETFLIX SOLVED THE THING EVERYONE HATED", [
+        ["1", "No late fees.", "Blockbuster made millions on late fees — the one thing customers despised. Netflix killed them."],
+        ["2", "It ate its own business.", "It bet on streaming and cannibalized its own profitable DVD arm before anyone could."],
+      ]],
+      ["THEN IT BECAME THE STUDIO", [
+        ["3", "Own the content, own the customer.", "It stopped renting other people's films and made its own. Now it can't be replaced."],
+      ], "Kill your own cash cow before someone else does. — Hanubees"],
+    ] },
+  { id: "starbucks", face: "/tmp/wiki_starbucks.jpg", logo: "/tmp/logo_starbucks.png",
+    kicker: "IT'S NOT ABOUT COFFEE", headline: "Starbucks doesn't really sell coffee.",
+    question: "So why is there one on every corner?",
+    slides: [
+      ["IT SELLS A PLACE TO BE", [
+        ["1", "The 'third place.'", "Not home, not work — a place to sit, meet, exist. The coffee is just the ticket in."],
+        ["2", "Premium price on a commodity.", "Coffee is cheap. The experience, the cup, the name — that's the markup you happily pay."],
+      ]],
+      ["IT'S SECRETLY A BANK", [
+        ["3", "It holds ~$1B+ of your money.", "Unspent gift-card and app balances — billions sitting interest-free. Genius."],
+      ], "Sell the experience around the product, not the product. — Hanubees"],
+    ] },
+  { id: "nike", face: "/tmp/wiki_nike.jpg", logo: "/tmp/logo_nike.png",
+    kicker: "THE LOGO COST $35", headline: "The Nike swoosh cost $35.",
+    question: "Now it's one of the most valuable brands alive. How?",
+    slides: [
+      ["FROM A CAR TRUNK", [
+        ["1", "Knight sold shoes from his car.", "He drove to track meets selling running shoes out of the trunk. No store, no ads."],
+        ["2", "A student drew the swoosh for $35.", "Carolyn Davidson, 1971. He said he didn't even love it at first."],
+      ]],
+      ["THE REAL PRODUCT", [
+        ["3", "Nike sells belief, not rubber.", "'Just Do It,' the athletes, the story. You're buying who you want to become."],
+      ], "A brand is a feeling people pay extra for. — Hanubees"],
+    ] },
+  { id: "uber", face: "/tmp/wiki_uber.jpg", logo: "/tmp/logo_uber.png",
+    kicker: "OWNS ZERO CARS", headline: "Uber owns zero cars.",
+    question: "So how did it reshape every city on earth?",
+    slides: [
+      ["IT OWNS THE SOFTWARE, NOT THE FLEET", [
+        ["1", "Drivers bring the cars.", "Uber owns the app and the demand. The most expensive asset — the cars — isn't theirs."],
+        ["2", "It solved trust.", "GPS, ratings, cashless pay — suddenly getting in a stranger's car felt safe."],
+      ]],
+      ["WHY IT KEEPS WINNING", [
+        ["3", "Network effects.", "More riders pull more drivers, which pull more riders. The loop defends itself."],
+      ], "Own the network, not the assets. — Hanubees"],
+    ] },
+  { id: "spotify", face: "/tmp/wiki_spotify.jpg", logo: "/tmp/logo_spotify.png",
+    kicker: "IT KILLED PIRACY", headline: "Spotify killed music piracy.",
+    question: "Not with lawsuits. With what?",
+    slides: [
+      ["IT BEAT 'FREE'", [
+        ["1", "It made legal easier than stealing.", "Instant, every song, no viruses, no downloads. More convenient than piracy itself."],
+        ["2", "Free hooks you, premium pays.", "The free tier builds the habit; ads + subscriptions turn it into billions."],
+      ]],
+      ["THE QUIET POWER", [
+        ["3", "It owns discovery.", "Playlists + the algorithm decide what 600M+ people hear next. That's real power."],
+      ], "Beat 'free' by being more convenient than free. — Hanubees"],
+    ] },
+  { id: "ikea", face: "/tmp/wiki_ikea.jpg", logo: "/tmp/logo_ikea.png",
+    kicker: "YOU BUILD IT YOURSELF", headline: "IKEA makes YOU build the furniture.",
+    question: "And somehow you love it more. Why?",
+    slides: [
+      ["THE WORK IS THE TRICK", [
+        ["1", "Flat-pack = low prices.", "Boxes ship cheap and stack tight — lower costs become lower prices you can't resist."],
+        ["2", "The 'IKEA effect.'", "Psychologists proved it: you value what you build with your own hands far more."],
+      ]],
+      ["THE MAZE", [
+        ["3", "You walk past everything.", "The one-way layout forces impulse buys. The $1 meatballs just keep you inside longer."],
+      ], "Make the customer part of the work — they value it more. — Hanubees"],
+    ] },
+  { id: "oracle", face: "/tmp/wiki_oracle.jpg", logo: null, wordmark: "ORACLE",
+    kicker: "BORING SOFTWARE, BILLIONS", headline: "Oracle sells 'boring' database software.",
+    question: "So how is its founder one of the richest alive?",
+    slides: [
+      ["IT'S IMPOSSIBLE TO LEAVE", [
+        ["1", "Databases run everything.", "Banks, airlines, governments. Once your company runs on Oracle, switching is terrifying."],
+        ["2", "Lock-in is the business.", "Licensing, renewals, audits — recurring billions from customers who can't walk away."],
+      ]],
+      ["THE TARGET", [
+        ["3", "He sold to the enterprise.", "Not millions of consumers — a few giant clients on massive, sticky contracts."],
+      ], "Boring + mission-critical + hard-to-leave = a money machine. — Hanubees"],
+    ] },
+  { id: "disney", face: "/tmp/wiki_disney.jpg", logo: null, wordmark: "DISNEY",
+    kicker: "FIRED FOR 'LACKING IMAGINATION'", headline: "Walt Disney was fired for 'lacking imagination.'",
+    question: "Then he built a forever empire. How?",
+    slides: [
+      ["HE BET ON A MOUSE", [
+        ["1", "He sold experiences, not films.", "Movies were the start — he saw characters people would want to live inside of."],
+        ["2", "The flywheel.", "Films → characters → parks → merch → more films. Each part feeds the next, forever."],
+      ]],
+      ["THE REAL PRODUCT", [
+        ["3", "He sold magic to families.", "Not entertainment — emotion, nostalgia, childhood. That never goes out of style."],
+      ], "Build a flywheel where every part feeds the others. — Hanubees"],
+    ] },
 ];
 
 (async () => {
