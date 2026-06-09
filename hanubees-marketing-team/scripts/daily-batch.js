@@ -249,6 +249,80 @@ const CONCEPTS = [
         ["3", "He sold magic to families.", "Not entertainment — emotion, nostalgia, childhood. That never goes out of style."],
       ], "Build a flywheel where every part feeds the others. — Hanubees"],
     ] },
+
+  // ── BATCH 2 ─────────────────────────────────────────────────────────────────
+  { id: "whatsapp", face: "/tmp/wiki_whatsapp.jpg", logo: "/tmp/logo_whatsapp.png",
+    kicker: "55 EMPLOYEES. $19 BILLION.", headline: "WhatsApp had 55 staff when Facebook paid $19B.",
+    question: "For a free messaging app. Why so much?",
+    slides: [
+      ["IT DID ONE THING PERFECTLY", [
+        ["1", "No ads, no games, no clutter.", "Just messaging that always worked. They obsessed over one thing while rivals bloated."],
+        ["2", "55 people, 450M+ users.", "Almost no staff served half a billion people. Insane leverage per employee."],
+      ]],
+      ["WHAT FB ACTUALLY BOUGHT", [
+        ["3", "Your contacts, not the app.", "The real asset was the network — everyone you know was already on it."],
+      ], "Do ONE thing flawlessly at massive scale. — Hanubees"],
+    ] },
+  { id: "shopify", face: "/tmp/wiki_shopify.jpg", logo: "/tmp/logo_shopify.png",
+    kicker: "IT STARTED AS A SNOWBOARD SHOP", headline: "Shopify began as a snowboard store.",
+    question: "Now it powers millions of businesses. How?",
+    slides: [
+      ["HE BUILT WHAT DIDN'T EXIST", [
+        ["1", "He couldn't find good software.", "Tobi wanted to sell snowboards online, hated every tool — so he built his own."],
+        ["2", "He sold the shovels.", "He stopped selling boards and sold the store-builder. Every seller pays him rent."],
+      ]],
+      ["THE BIG BET", [
+        ["3", "It arms the rebels vs Amazon.", "Millions of independent stores that don't want to be swallowed by Amazon."],
+      ], "If the tool doesn't exist, build it — then sell it to everyone. — Hanubees"],
+    ] },
+  { id: "spacex", face: "/tmp/wiki_spacex.jpg", logo: "/tmp/logo_spacex.png",
+    kicker: "ROCKETS THAT COME BACK", headline: "SpaceX lands its rockets to reuse them.",
+    question: "Nobody else does this. Why does it matter?",
+    slides: [
+      ["IT ATTACKED THE BIGGEST COST", [
+        ["1", "Everyone threw rockets away.", "After one flight, gone — like scrapping a jet after one trip. Musk landed and reflew them."],
+        ["2", "~10x cheaper launches.", "Reusability slashed the cost of reaching orbit. A moat no rival has caught."],
+      ]],
+      ["THE PROOF", [
+        ["3", "NASA now buys rides from it.", "A private company out-innovated government space programs. Let that sink in."],
+      ], "Attack the cost nobody else dares to. — Hanubees"],
+    ] },
+  { id: "dyson", face: "/tmp/wiki_dyson.jpg", logo: null, wordmark: "DYSON",
+    kicker: "5,126 FAILURES FIRST", headline: "James Dyson failed 5,126 times.",
+    question: "The 5,127th try built a billion-dollar brand. How?",
+    slides: [
+      ["HE REFUSED TO QUIT", [
+        ["1", "5,127 prototypes over 5 years.", "Broke and in debt, he kept building. Most people quit at try #10."],
+        ["2", "No store would sell it.", "So he sold direct — and kept all the margin for himself."],
+      ]],
+      ["THE PREMIUM", [
+        ["3", "He made 'boring' desirable.", "Vacuums, fans, dryers — obsessive design lets him charge 5x the price."],
+      ], "The 5,127th try is still a try. Persistence is a strategy. — Hanubees"],
+    ] },
+  { id: "lego", face: "/tmp/wiki_lego.jpg", logo: null, wordmark: "LEGO",
+    kicker: "THE BIGGEST TIRE MAKER ON EARTH", headline: "Lego makes more tires than anyone.",
+    question: "A toy company. More tires than Goodyear. How?",
+    slides: [
+      ["OBSESSIVE CONSISTENCY", [
+        ["1", "~300M+ tiny tires a year.", "More wheels than any real tire company — just very, very small ones."],
+        ["2", "A 1958 brick still fits today.", "Every brick interlocks across 65 years. That standard never slips."],
+      ]],
+      ["THE MODEL", [
+        ["3", "It sells systems, not toys.", "Endless combinations mean endless buying. One set always needs another."],
+      ], "Obsessive consistency builds a moat customers trust. — Hanubees"],
+    ] },
+  { id: "patagonia", face: "/tmp/wiki_patagonia.jpg", logo: null, wordmark: "PATAGONIA",
+    kicker: "HE GAVE THE COMPANY AWAY", headline: "Patagonia's founder gave it all away.",
+    question: "He handed over a ~$3B company. Why?",
+    slides: [
+      ["VALUES OVER PROFIT", [
+        ["1", "He donated the whole company.", "In 2022 Chouinard transferred ownership (~$3B) to fight climate change."],
+        ["2", "It told you NOT to buy.", "Its famous ad literally said 'Don't Buy This Jacket.' On purpose."],
+      ]],
+      ["THE TWIST", [
+        ["3", "It made people trust — and buy.", "Anti-consumerism became the most powerful brand loyalty money can't buy."],
+      ], "Radical values can be your strongest brand. — Hanubees"],
+    ] },
 ];
 
 (async () => {
