@@ -36,7 +36,9 @@ const PLATFORM = process.env.PLATFORM;
     mediaItems = [{ url: pre.publicUrl, type: "video" }];
   }
 
-  const cap = PLATFORM === "tiktok" ? props.caption_tt : props.caption_ig;
+  const cap = PLATFORM === "tiktok" ? props.caption_tt
+    : PLATFORM === "youtube" ? (props.caption_yt || props.caption_ig)
+    : props.caption_ig;
   const res = await fetch(`${ZB}/posts`, {
     method: "POST", headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({ content: cap, mediaItems, platforms: [{ platform: PLATFORM, accountId: ACCOUNT_ID }], publishNow: true }),

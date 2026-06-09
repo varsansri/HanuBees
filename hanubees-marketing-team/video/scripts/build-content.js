@@ -71,13 +71,36 @@ async function sql(q) {
   const music = MUSIC[pick.emotion] || "drive";
   const gifSrc = await fetchGif(pick.emotion, pick.id);
   const credit = `\n\n🎵 "${TRACKS[music]}" — Kevin MacLeod (incompetech.com), CC BY 4.0`;
-  const hashtags = "#hanubees #localbusiness #smallbusiness #AI #reels #fyp";
+
+  // SEARCH-SURFACE strategy: these are now BRAND accounts, so (1) no #fyp/#reels
+  // (oversaturated noise + identical blocks read as spam), (2) rotate niche,
+  // SEARCHABLE tags so every post differs and surfaces in in-app search.
+  // Pull a stable-but-rotating set keyed off the script id.
+  const TAG_POOL = [
+    "localbusiness", "smallbusiness", "shoplocal", "supportlocal", "smallbusinesstips",
+    "businessgrowth", "customerservice", "aiforbusiness", "findlocal", "localbiz",
+    "businesstips", "smallbiz", "entrepreneur", "marketingtips", "businessowner",
+  ];
+  const pickTags = (n, seed) => {
+    const out = [], used = new Set();
+    for (let i = 0; out.length < n; i++) {
+      const t = TAG_POOL[(hash(seed) + i * 7) % TAG_POOL.length];
+      if (!used.has(t)) { used.add(t); out.push("#" + t); }
+    }
+    return out.join(" ");
+  };
+  const igTags = `#hanubees ${pickTags(5, pick.id)}`;
+  const ttTags = pickTags(2, pick.id + "tt"); // TikTok SEO weights caption keywords; keep it tight
+  // YouTube Shorts surface by TITLE keywords + #shorts. Lead with the hook (reads as a
+  // query), then #shorts (discovery signal) + niche tags in the description.
+  const ytTags = `#shorts #hanubees ${pickTags(4, pick.id + "yt")}`;
 
   const props = {
     id: pick.id, emotion: pick.emotion, music, gifSrc: gifSrc || undefined,
     hook: pick.hook, scenes: pick.scenes, cta: pick.cta,
-    caption_ig: `${pick.hook}\n\n${pick.cta} → hanubees.com\n\n${hashtags}${credit}`,
-    caption_tt: `${pick.hook} ${pick.cta}`.slice(0, 90),
+    caption_ig: `${pick.hook}\n\n${pick.cta} → hanubees.com\n\n${igTags}${credit}`,
+    caption_tt: `${pick.hook} ${pick.cta} ${ttTags}`.slice(0, 150),
+    caption_yt: `${pick.hook}\n\n${pick.cta} → hanubees.com\n\n${ytTags}${credit}`,
   };
 
   fs.mkdirSync(path.join(__dirname, "../out"), { recursive: true });
