@@ -121,4 +121,22 @@ module.exports = [
     scenes: [{ big: "4 days", text: "of silence" }, { text: "They ARE taking customers — they just didn't reply." }, { text: "The bee says yes in 2 seconds." }], cta: "Get the yes, instantly." },
   { id: "c52", emotion: "curiosity", hook: "Everyone's calling around. You already booked it.",
     scenes: [{ big: "1", text: "chat, sorted" }, { text: "While they wait on hold, you're done." }, { text: "Ask the bee, skip the line." }], cta: "Be done before they start." },
+
+  // ── c53–c58: LEARNING-LOOP batch (2026-06-09) ──────────────────────────────
+  // The #1 performer on the leaderboard was a REAL-DB number hook
+  // ("551 Coimbatore businesses — 358 have no phone"). These bake verified
+  // counts from our own DB (2,088 mapped) straight into the shock hook — numbers
+  // read as truth. NEVER edit a count without re-checking the DB (brand guardrail).
+  { id: "c53", emotion: "shock", hook: "We mapped 551 shops in Coimbatore. 358 have no phone you can reach.",
+    scenes: [{ big: "358", text: "of 551 — unreachable", emoji: "📵" }, { text: "They're open. You just can't get an answer." }, { text: "Their bee answers for them. 24/7." }], cta: "Reach the unreachable. Just ask." },
+  { id: "c54", emotion: "shock", hook: "1,107 LA businesses on the map. 623 you literally cannot call.",
+    scenes: [{ big: "623", text: "no phone, Los Angeles", emoji: "☎️" }, { text: "More than half the city, on mute." }, { text: "The bee gives every one of them a voice." }], cta: "Every shop, finally answerable." },
+  { id: "c55", emotion: "frustration", hook: "Of 1,107 LA shops we mapped, 1,062 have no Instagram either.",
+    scenes: [{ big: "96%", text: "invisible online", emoji: "👻" }, { text: "No phone, no insta — how do you even ask?" }, { text: "One bee. One chat. Real answer." }], cta: "Find the ones hiding offline." },
+  { id: "c56", emotion: "curiosity", hook: "We've mapped 2,088 businesses across 4 cities. Most can't be reached.",
+    scenes: [{ big: "2,088", text: "shops, 4 cities", emoji: "🗺️" }, { big: "1,160", text: "with no phone at all" }, { text: "Each one gets a bee that answers." }], cta: "The directory that actually replies." },
+  { id: "c57", emotion: "shock", hook: "156 of 267 Melbourne businesses we mapped have no phone number.",
+    scenes: [{ big: "156", text: "of 267 — silent", emoji: "🦗" }, { text: "Open for business, impossible to ask." }, { text: "The bee speaks for them, instantly." }], cta: "Ask the ones nobody can call." },
+  { id: "c58", emotion: "relief", hook: "Chennai's different: only 23 of 162 shops we mapped lack a phone.",
+    scenes: [{ big: "139", text: "reachable — but still slow", emoji: "⏳" }, { text: "Reachable isn't the same as answering fast." }, { text: "The bee replies in 2 seconds, every time." }], cta: "Fast beats reachable. Just ask." },
 ];

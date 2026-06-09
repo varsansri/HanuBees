@@ -16,7 +16,9 @@ const path = require("path");
 
 const ZB = "https://api.zernio.com/v1";
 const REF = process.env.SUPABASE_PROJECT_REF, TOKEN = process.env.SUPABASE_ACCESS_TOKEN;
-const KEYS = [process.env.ZERNIO_API_KEY, process.env.ZERNIO_API_KEY_2].filter(Boolean);
+// pull EVERY connected account across all 4 Zernio keys (must match plan-fanout's KEY_ENVS),
+// else the leaderboard is blind to accounts on keys 3-4 and the strategist biases on partial data.
+const KEYS = [process.env.ZERNIO_API_KEY, process.env.ZERNIO_API_KEY_2, process.env.ZERNIO_API_KEY_3, process.env.ZERNIO_API_KEY_4].filter(Boolean);
 const esc = (s) => String(s == null ? "" : s).replace(/'/g, "''");
 const num = (v) => (Number.isFinite(+v) ? +v : 0);
 
