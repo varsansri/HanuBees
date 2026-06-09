@@ -27,13 +27,25 @@ Read this + `VIRALITY-LEVERS.md` before every run. Last set: 2026-06-09.
 ## 1. ACCOUNTS & CADENCE (the numbers)
 ═══════════════════════════════════════════════════════════════════════════════
 1.1  8 accounts via 4 Zernio keys: IG ×3, Threads ×3, TikTok ×1, YouTube ×1.
-1.2  **Daily volume: 8 posts/day = 1 unique post per account** (start point; the
-     brain may scale to 16 when quality holds + caps allow). Quality is fixed, only
-     pace flexes.
-1.3  Per-account safe ceiling: **≤2 posts/account/day**, spaced ≥4h apart.
-1.4  **Every account gets a DIFFERENT post** — nothing duplicated anywhere
-     (enforced via `video_log` / `post_log`).
-1.5  Post timing = audience-local peak windows (morning + evening), not arbitrary UTC.
+1.2  **VOLUME = high, but PLATFORM-TIERED to never get banned** (founder call
+     2026-06-09; ban = brand death). Per-account/day safe ceilings:
+       - Threads (text): up to **25/day** ✅
+       - YouTube Shorts: ~**10–15/day**
+       - TikTok: ~**5/day** (ramp, watch for throttle)
+       - Instagram: ~**5/day** (hard cap — 25 = near-certain shadowban)
+     Net ≈ 100–150 posts/day total. NEVER uniform 25 everywhere.
+1.3  **Ramp, don't slam:** start mid, watch each platform for throttle/flags, climb
+     only where tolerated. Space posts ≥3–4h.
+1.4  **Every post is DIFFERENT** — nothing duplicated anywhere (`post_log`).
+1.5  Post timing = audience-local peak windows, not arbitrary UTC.
+1.6  **PRODUCTION = Concept × Variant model** (founder call 2026-06-09):
+       - Brain hand-crafts **master CONCEPTS** (hook + edge + design), each fully
+         **4×-iterated** (Section 5). Creativity = me, fresh, high-effort.
+       - Each concept → **multiple genuinely-different VARIANTS** (different footage,
+         business category, city, topic) → each unique, each gets the Pass-4
+         ship-check. e.g. ~25 concepts × variants ⇒ the day's volume.
+       - The 4× bar lives on the CONCEPT/master; variants inherit the vetted concept
+         + individual Pass-4. NO lazy dupes — every variant must truly differ.
 
 ═══════════════════════════════════════════════════════════════════════════════
 ## 2. THE 4 LEVERS (every post picks ≥1) — see VIRALITY-LEVERS.md
