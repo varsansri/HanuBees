@@ -50,6 +50,42 @@ introduces Hanubees, answers anything, and sells the value as the chat deepens.
 - **Behavior insights** — learn what visitors actually ask about you.
 - Bottom line: a static website does nothing; this is a **useful, evolving asset.**
 
+## MORE VALUE PROPS (round 2)
+- **24/7 availability.** Today, businesses run on websites + WhatsApp groups managed by humans
+  who aren't always there. A customer hesitant to ask, browsing at night or 7–8am, gets no
+  answer. The agent is there **24×7** — serves them when you can't.
+- **Kills repetitive Q&A.** Owners answer the *same* questions all day to customers/prospects.
+  The agent handles the repetitive stuff so you focus on the creative work only you can do.
+- **It's a receptionist / personal assistant.** Great for a **solo** business (covers for you)
+  AND a **multi-employee** business (front-desk receptionist). Upload educational material,
+  product/material info, docs — the possibilities are huge.
+- **Do it once.** Set it up, then only feed updates when something changes → we make it live.
+- **Step-by-step guidance.** With your accumulated data + its own reasoning, it can walk a
+  confused visitor through things — e.g. *"is this cotton? how do I understand this?"* — instead
+  of you having to answer. Basic info is handled for you.
+- **Privacy & security.** All data stored privately/securely. The AI grows with you; you don't
+  have to be personally available for routine questions.
+- **Honest framing of "it's AI":** some dismiss AI as less personal — but this is the advantage
+  and where things are going: the repetitive work automates, you keep the creative. It
+  *represents* you; it doesn't replace the human touch where it matters.
+
+## PRODUCT FEATURES TO OFFER
+- **Two agent types:** a **personal agent** OR a **business agent** — we build either (or both,
+  as separate agent links). Business updates reflect on the business agent only.
+- **Access levels / password-gated info.** Sensitive business info can be locked. The owner sets
+  a code (e.g. `772131`); when a visitor enters it in the bot, deeper/private info unlocks. So
+  you can serve **different levels of users** from the same agent.
+
+## ⛔ EXPLICITLY EXCLUDED (do NOT pitch this now — founder's instruction)
+- The "AI reviews the owner's OWN conversation logs / flags vulnerabilities in their data /
+  audits chats between visitors and the agent" idea. **Not offered now. Leave it out of the bot
+  and the pitch.** (Founder mentioned it, then said remove it.)
+
+## FOUNDER MOTIVATION (origin — usable as a genuine story)
+3 years in AI; has built a website. His **uncle runs a small store/business** — people like him
+field endless questions and want a website, but a pricey static site does nothing useful. That
+pain is *why* Hanubees exists: build your own AI that actually works for you, not a dead page.
+
 ## EXAMPLE QUESTIONS THE BOT MUST HANDLE WELL
 - "What's your experience? How many projects have you done?" → real GitHub count + 3yrs AI.
 - "Why should I make my own AI agent?" → the value prop above.
