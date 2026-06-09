@@ -76,6 +76,25 @@ introduces Hanubees, answers anything, and sells the value as the chat deepens.
   a code (e.g. `772131`); when a visitor enters it in the bot, deeper/private info unlocks. So
   you can serve **different levels of users** from the same agent.
 
+## ACCESS MODES (public vs owner) — how the link behaves
+- **Same intro for everyone** who opens the link (prospect or anyone).
+- **Public visitor:** just types → gets *general* business info. No login, no friction.
+- **Owner logged in:** the chat asks for confirmation (password + business profile). Once
+  entered → **unlimited access to ALL your stored information.**
+- **Optional code-wall** for special/trusted users: owner sets a code → entering it unlocks
+  extra info, while still protecting the owner's private data. Different tiers from one agent.
+
+## PERSONAL-ASSISTANT MODE (persistent memory — a KEY differentiator)
+- Unlike ChatGPT (forgets each chat, has no standing access to your files), **your agent
+  permanently stores your data** — PDFs, spreadsheets, records — as sensitive, private, exposed
+  only to you.
+- **Meeting use case:** representing your business with a big PDF/dataset, just ask (by **text or
+  voice**): *"What was March 31 overall revenue and the profit I told you? Do you have the
+  spreadsheet? Show me."* → instant answer, because it's stored in YOUR AI. No re-uploading to
+  ChatGPT every time, no digging, no waiting.
+- So it's both a **receptionist** (for visitors) AND your private **personal assistant/accountant**
+  (for you). All provided data is stored and treated as sensitive.
+
 ## ⛔ EXPLICITLY EXCLUDED (do NOT pitch this now — founder's instruction)
 - The "AI reviews the owner's OWN conversation logs / flags vulnerabilities in their data /
   audits chats between visitors and the agent" idea. **Not offered now. Leave it out of the bot
