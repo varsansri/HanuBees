@@ -23,8 +23,8 @@ function wrap(text, x, y, size, weight, fill, anchor = "start") {
 
 async function poster(cfg) {
   const bg = await sharp(cfg.face).resize(W, H, { fit: "cover", position: "top" }).toBuffer();
-  const logo = await sharp(cfg.logo).resize(190, 190, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
   let t = "", y = 832;
+  if (!cfg.logo && cfg.wordmark) t += `<text x="70" y="132" font-family="${FONT}" font-size="46" font-weight="800" fill="${C.fg}" paint-order="stroke" stroke="#000" stroke-width="9" stroke-linejoin="round">${cfg.wordmark}</text>`;
   t += wrap(cfg.kicker, 70, y, 33, 800, C.y).svg; y += 66;
   const head = wrap(cfg.headline, 70, y, 72, 800, C.fg); t += head.svg; y += head.height + 22;
   t += wrap(cfg.question, 70, y, 48, 600, C.y).svg;
@@ -33,7 +33,10 @@ async function poster(cfg) {
     <rect x="0" y="${H - 600}" width="${W}" height="600" fill="url(#b)"/>${t}
     <text x="146" y="1285" font-family="${FONT}" font-size="33" font-weight="800" fill="${C.g}">@hanubees</text></svg>`;
   const bee = await sharp(path.join(__dirname, "../assets/brand/bee.png")).resize(76, 76, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
-  return sharp(bg).composite([{ input: Buffer.from(grad), top: 0, left: 0 }, { input: logo, top: 58, left: 60 }, { input: bee, top: 1232, left: 60 }]).png().toBuffer();
+  const comps = [{ input: Buffer.from(grad), top: 0, left: 0 }];
+  if (cfg.logo) { const logo = await sharp(cfg.logo).resize(190, 190, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer(); comps.push({ input: logo, top: 58, left: 60 }); }
+  comps.push({ input: bee, top: 1232, left: 60 });
+  return sharp(bg).composite(comps).png().toBuffer();
 }
 
 function explainSVG(kicker, items, footer) {
@@ -88,6 +91,66 @@ const CONCEPTS = [
         ["3", "They built a religion.", "People don't buy Apple — they belong to it. Brand loyalty is the deepest moat there is."],
       ], "Sell how it FEELS, not what it does. — Hanubees"],
     ] },
+  { id: "amazon", face: "/tmp/wiki_bezos.jpg", logo: "/tmp/logo_amazon.png",
+    kicker: "STARTED IN A GARAGE, 1994", headline: "Amazon is worth $2.87 TRILLION.",
+    question: "Bezos sold books from a garage. How?",
+    slides: [
+      ["BOOKS WERE THE TROJAN HORSE", [
+        ["1", "He picked books on purpose.", "Easy to ship, huge catalog. A wedge to win your trust — then sell you everything else."],
+        ["2", "He made $0 profit on purpose.", "For years he reinvested every dollar into growth instead of profit. Scale first."],
+      ]],
+      ["THE REAL MONEY", [
+        ["3", "He rented out his own plumbing.", "AWS — he sold Amazon's own servers to the world. It now prints most of Amazon's profit."],
+      ], "Win a niche, reinvest everything, then sell your infrastructure. — Hanubees"],
+    ] },
+  { id: "microsoft", face: "/tmp/wiki_gates.jpg", logo: "/tmp/logo_microsoft.png",
+    kicker: "THE HARVARD DROPOUT", headline: "Microsoft is worth $3.1 TRILLION.",
+    question: "Gates left Harvard to build it. Smart?",
+    slides: [
+      ["HE SOLD COPIES, NOT MACHINES", [
+        ["1", "Software copies for free.", "Write it once, sell infinite copies at near-zero cost. Others sold the box; he sold the brain."],
+        ["2", "One deal made him king.", "He licensed DOS to IBM in 1980 — but kept the right to sell it to everyone else. Genius."],
+      ]],
+      ["THE VISION", [
+        ["3", "A computer on every desk.", "He said it when computers were toys — then built the software they'd all run."],
+      ], "Own what copies for free. Software beats hardware. — Hanubees"],
+    ] },
+  { id: "alphabet", face: "/tmp/wiki_page.jpg", logo: "/tmp/logo_google.png",
+    kicker: "TWO STANFORD STUDENTS", headline: "Google is worth $4.6 TRILLION.",
+    question: "It began as a research project. How?",
+    slides: [
+      ["10X BETTER, THEN FREE", [
+        ["1", "They made search actually work.", "PageRank ranked pages by who links to them — 10x better than every rival overnight."],
+        ["2", "Free to you, sold to advertisers.", "Search costs you $0. They sell your intent — $200B+ a year in ads."],
+      ]],
+      ["THE MOAT", [
+        ["3", "They own how you find things.", "~90% of all search runs through Google. It's the front door to the internet."],
+      ], "Be 10x better, give it free, sell the attention. — Hanubees"],
+    ] },
+  { id: "tesla", face: "/tmp/wiki_musk.jpg", logo: "/tmp/logo_tesla.png",
+    kicker: "A CAR COMPANY?", headline: "Tesla is worth $1.2 TRILLION.",
+    question: "More than Toyota, Ford & GM combined. Why?",
+    slides: [
+      ["NOT PRICED AS A CARMAKER", [
+        ["1", "Wall Street bets on the future.", "It's valued as an AI, energy and robotics company that happens to sell cars today."],
+        ["2", "It sells direct — no dealers.", "Owns the whole chain: the cars, the software, the over-the-air updates."],
+      ]],
+      ["THE REAL BET", [
+        ["3", "Autonomy + energy, not cars.", "Robotaxis, batteries, AI — that's the trillion-dollar story investors are paying for."],
+      ], "Sell the future you're building, not the product you ship today. — Hanubees"],
+    ] },
+  { id: "berkshire", face: "/tmp/wiki_buffett.jpg", logo: null, wordmark: "BERKSHIRE HATHAWAY",
+    kicker: "A FAILING TEXTILE MILL", headline: "Berkshire is worth $1 TRILLION.",
+    question: "Buffett bought a dying mill. How'd it get here?",
+    slides: [
+      ["HE TURNED IT INTO A MACHINE", [
+        ["1", "He used it as a piggy bank.", "Shut the textile business, used the cash to buy great companies outright. Patience over hype."],
+        ["2", "Insurance gave him free money.", "Premiums he invests before paying claims — billions of 'float' to compound for decades."],
+      ]],
+      ["THE DISCIPLINE", [
+        ["3", "He never split the stock.", "One Class-A share costs ~$600,000+. Boring, patient, compounded for 60 years."],
+      ], "Boring + patient + compounding beats flashy. — Hanubees"],
+    ] },
 ];
 
 (async () => {
@@ -96,14 +159,15 @@ const CONCEPTS = [
   for (const cfg of CONCEPTS) {
     if (only && cfg.id !== only) continue;
     const dir = path.join(__dirname, `../out/daily/${cfg.id}`); fs.mkdirSync(dir, { recursive: true });
-    const wm = await sharp(cfg.logo).resize(640, 640, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
-      .composite([{ input: Buffer.from([255, 255, 255, 235]), raw: { width: 1, height: 1, channels: 4 }, tile: true, blend: "dest-out" }]).png().toBuffer();
+    const wm = cfg.logo ? await sharp(cfg.logo).resize(640, 640, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .composite([{ input: Buffer.from([255, 255, 255, 235]), raw: { width: 1, height: 1, channels: 4 }, tile: true, blend: "dest-out" }]).png().toBuffer() : null;
     await sharp(await poster(cfg)).png().toFile(path.join(dir, "s0.png"));
     for (let j = 0; j < cfg.slides.length; j++) {
       const [k, items, footer] = cfg.slides[j];
-      await sharp({ create: { width: W, height: H, channels: 4, background: C.bg } })
-        .composite([{ input: wm, top: 760, left: 500 }, { input: Buffer.from(explainSVG(k, items, footer)), top: 0, left: 0 }, { input: bee, top: 60, left: 940 }])
-        .png().toFile(path.join(dir, `s${j + 1}.png`));
+      const ec = [];
+      if (wm) ec.push({ input: wm, top: 760, left: 500 });
+      ec.push({ input: Buffer.from(explainSVG(k, items, footer)), top: 0, left: 0 }, { input: bee, top: 60, left: 940 });
+      await sharp({ create: { width: W, height: H, channels: 4, background: C.bg } }).composite(ec).png().toFile(path.join(dir, `s${j + 1}.png`));
     }
     console.log("built", cfg.id, "→", cfg.slides.length + 1, "slides");
   }
