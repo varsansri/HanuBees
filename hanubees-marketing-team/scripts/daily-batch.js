@@ -323,6 +323,128 @@ const CONCEPTS = [
         ["3", "It made people trust — and buy.", "Anti-consumerism became the most powerful brand loyalty money can't buy."],
       ], "Radical values can be your strongest brand. — Hanubees"],
     ] },
+
+  // ── BATCH 3 (from the asset library) ────────────────────────────────────────
+  { id: "openai", company: "OpenAI",
+    kicker: "FASTEST APP IN HISTORY", headline: "ChatGPT hit 100M users in 2 months.",
+    question: "Faster than any app ever. How did OpenAI do it?",
+    slides: [
+      ["IT BUILT IN THE OPEN", [
+        ["1", "It started as a non-profit.", "Founded in 2015 to research AI safely — the profit came later, almost by accident."],
+        ["2", "It just let people try it.", "No ads, no waitlist games — it put ChatGPT in front of everyone and let it spread."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Magic sells itself.", "When a product feels like magic the first time, users become the marketing."],
+      ], "Build something people HAVE to show their friends. — Hanubees"],
+    ] },
+  { id: "stripe", company: "Stripe",
+    kicker: "SEVEN LINES OF CODE", headline: "Stripe moves billions with 7 lines of code.",
+    question: "Two brothers built the internet's checkout. How?",
+    slides: [
+      ["THEY REMOVED THE PAIN", [
+        ["1", "Payments used to take weeks.", "Banks, forms, approvals. The Collison brothers made it 7 lines a developer pastes in."],
+        ["2", "They served developers, not bosses.", "Win the engineers and the company follows. Bottom-up beat top-down sales."],
+      ]],
+      ["THE MOAT", [
+        ["3", "They became invisible plumbing.", "You don't see Stripe — but it quietly powers millions of checkouts you use."],
+      ], "Make the painful thing effortless and you own it. — Hanubees"],
+    ] },
+  { id: "snap", company: "Snapchat",
+    kicker: "HE SAID NO TO $3 BILLION", headline: "He turned down $3B from Facebook at 23.",
+    question: "Everyone called Evan Spiegel insane. Was he?",
+    slides: [
+      ["HE BET ON A NEW BEHAVIOR", [
+        ["1", "Messages that disappear.", "While everyone made posts permanent, he made them vanish — and teens loved it."],
+        ["2", "He rejected the $3B.", "At 23, he bet his idea was worth more than Facebook's check. Conviction."],
+      ]],
+      ["THE PAYOFF", [
+        ["3", "He invented the format others copied.", "Stories, filters, AR — features Instagram and everyone else later cloned."],
+      ], "Sometimes the boldest move is saying no. — Hanubees"],
+    ] },
+  { id: "linkedin", company: "LinkedIn",
+    kicker: "'BORING' SOLD FOR $26 BILLION", headline: "Microsoft paid $26B for LinkedIn.",
+    question: "For a 'boring' work network. Why so much?",
+    slides: [
+      ["BORING IS A MOAT", [
+        ["1", "It owns your professional identity.", "Your résumé, your network, your job history — all in one place you can't leave."],
+        ["2", "Every job change updates it for free.", "Users keep their own data fresh because their careers depend on it."],
+      ]],
+      ["THE VALUE", [
+        ["3", "Recruiters pay a fortune.", "Access to the world's professionals is worth billions — and only LinkedIn has it."],
+      ], "Own the boring data nobody else has. — Hanubees"],
+    ] },
+  { id: "salesforce", company: "Salesforce",
+    kicker: "IT SOLD 'NO SOFTWARE'", headline: "Salesforce got rich selling 'No Software.'",
+    question: "Its logo literally crossed out the word. Why?",
+    slides: [
+      ["IT KILLED THE OLD WAY", [
+        ["1", "Software used to ship on discs.", "Expensive, slow, outdated fast. Benioff rented it over the web instead — pay monthly."],
+        ["2", "That model is now everything.", "Every app you 'subscribe' to copied this. He named the category: SaaS."],
+      ]],
+      ["THE LOCK-IN", [
+        ["3", "Your whole company lives in it.", "Once your sales data is inside, leaving means rebuilding everything. You don't."],
+      ], "Turn a one-time sale into rent forever. — Hanubees"],
+    ] },
+  { id: "pinterest", company: "Pinterest",
+    kicker: "IT'S NOT SOCIAL MEDIA", headline: "Pinterest isn't social media.",
+    question: "No followers, no drama. So what is it?",
+    slides: [
+      ["IT'S A SEARCH ENGINE", [
+        ["1", "People come to PLAN, not scroll.", "Weddings, kitchens, outfits — they're searching for ideas, in a buying mindset."],
+        ["2", "No likes, no clout, no toxicity.", "It skipped the social-media arms race entirely. Calmer = stickier."],
+      ]],
+      ["WHY ADVERTISERS LOVE IT", [
+        ["3", "Intent beats attention.", "Someone planning a kitchen is worth more than someone bored. That's the gold."],
+      ], "Capture intent, not just attention. — Hanubees"],
+    ] },
+  { id: "ford", company: "Ford",
+    kicker: "HE DOUBLED EVERYONE'S PAY", headline: "Henry Ford doubled wages to $5 a day.",
+    question: "His rivals thought he was mad. He got richer. How?",
+    slides: [
+      ["IT WASN'T CHARITY", [
+        ["1", "Turnover was killing him.", "Workers quit constantly. Doubling pay in 1914 made them stay — and get good."],
+        ["2", "He created his own customers.", "Now his own workers could afford the cars they built. Demand, manufactured."],
+      ]],
+      ["THE BIG IDEA", [
+        ["3", "The assembly line.", "He didn't invent the car — he invented building it cheap enough for everyone."],
+      ], "Pay people well — they become your workforce AND your market. — Hanubees"],
+    ] },
+  { id: "alibaba", company: "Alibaba",
+    kicker: "REJECTED 30 TIMES", headline: "KFC rejected Jack Ma. So did Harvard — 10x.",
+    question: "Then he built a $100B+ empire. How?",
+    slides: [
+      ["HE WAS TURNED DOWN EVERYWHERE", [
+        ["1", "24 applied to KFC, 23 got in.", "He was the only reject. Harvard said no ten times. He kept going anyway."],
+        ["2", "He connected China to the world.", "Alibaba let tiny factories sell globally — millions of them, all at once."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Rejection isn't a verdict.", "Every no was data, not destiny. Persistence outlasted every gatekeeper."],
+      ], "The gatekeepers are often just wrong. — Hanubees"],
+    ] },
+  { id: "lvmh", company: "LVMH",
+    kicker: "THE RICHEST MAN SELLS HANDBAGS", headline: "Bernard Arnault got rich selling luxury.",
+    question: "He owns 75+ brands that pretend to be rivals. Why?",
+    slides: [
+      ["SCARCITY IS THE PRODUCT", [
+        ["1", "Louis Vuitton, Dior, Tiffany…", "He owns them all — brands that act like competitors but share one owner."],
+        ["2", "They make LESS on purpose.", "Limited supply keeps prices — and desire — sky high. Never discount luxury."],
+      ]],
+      ["THE EMPIRE", [
+        ["3", "He sells status, not stuff.", "A bag's cost is tiny. You're paying for what carrying it says about you."],
+      ], "Scarcity + status can beat scale. — Hanubees"],
+    ] },
+  { id: "tonyhsieh", company: "Zappos",
+    kicker: "IT PAID PEOPLE $2,000 TO QUIT", headline: "Zappos offered new hires $2,000 to quit.",
+    question: "On day one. On purpose. Why would a company do that?",
+    slides: [
+      ["IT FILTERED FOR BELIEVERS", [
+        ["1", "Take the cash and leave.", "Anyone who'd quit for $2,000 didn't believe in the mission. Good — let them go."],
+        ["2", "The ones who stayed were all-in.", "You're left with a team that chose the work over easy money."],
+      ]],
+      ["THE RESULT", [
+        ["3", "Culture became the product.", "Famous service, fierce loyalty — Amazon bought them for ~$1.2B."],
+      ], "Filter hard for people who actually believe. — Hanubees"],
+    ] },
 ];
 
 (async () => {
@@ -330,6 +452,11 @@ const CONCEPTS = [
   const only = process.argv[2];
   for (const cfg of CONCEPTS) {
     if (only && cfg.id !== only) continue;
+    // pull assets from the LIBRARY by id (unless the concept hard-codes its own paths)
+    const lib = path.join(__dirname, "../assets/library", cfg.id);
+    if (!cfg.face && fs.existsSync(path.join(lib, "photo.jpg"))) cfg.face = path.join(lib, "photo.jpg");
+    if (cfg.logo === undefined) cfg.logo = fs.existsSync(path.join(lib, "logo.png")) ? path.join(lib, "logo.png") : null;
+    if (!cfg.logo && !cfg.wordmark) cfg.wordmark = (cfg.company || cfg.id).toUpperCase();
     const dir = path.join(__dirname, `../out/daily/${cfg.id}`); fs.mkdirSync(dir, { recursive: true });
     const wm = cfg.logo ? await sharp(cfg.logo).resize(640, 640, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .composite([{ input: Buffer.from([255, 255, 255, 235]), raw: { width: 1, height: 1, channels: 4 }, tile: true, blend: "dest-out" }]).png().toBuffer() : null;

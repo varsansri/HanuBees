@@ -48,8 +48,8 @@
     "id": "meta",
     "company": "Meta",
     "founder": "Mark Zuckerberg",
-    "mode": "unusable",
-    "photoW": 374,
+    "mode": "founder+logo",
+    "photoW": 960,
     "hasLogo": true,
     "wordmark": "META"
   },
@@ -273,8 +273,8 @@
     "id": "mcdonalds",
     "company": "McDonald's",
     "founder": "Ray Kroc",
-    "mode": "unusable",
-    "photoW": 226,
+    "mode": "founder+logo",
+    "photoW": 719,
     "hasLogo": true,
     "wordmark": "MCDONALD'S"
   },
@@ -291,8 +291,8 @@
     "id": "walmart",
     "company": "Walmart",
     "founder": "Sam Walton",
-    "mode": "unusable",
-    "photoW": 324,
+    "mode": "founder+wordmark",
+    "photoW": 400,
     "hasLogo": false,
     "wordmark": "WALMART"
   },
@@ -417,8 +417,8 @@
     "id": "openai",
     "company": "OpenAI",
     "founder": "Sam Altman",
-    "mode": "unusable",
-    "photoW": 390,
+    "mode": "founder+wordmark",
+    "photoW": 960,
     "hasLogo": false,
     "wordmark": "OPENAI"
   },

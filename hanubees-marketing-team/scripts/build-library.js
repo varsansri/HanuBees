@@ -13,18 +13,36 @@ const LIB = path.join(__dirname, "../assets/library");
 const FORCE = process.argv.includes("--force");
 const MIN_W = 400; // founder photo must be at least this wide to use as a hero
 
-async function getPhoto(wiki, dest) {
-  const api = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(wiki)}&prop=pageimages&piprop=thumbnail&pithumbsize=900&format=json`;
-  const j = await (await fetch(api, { ...UA, signal: AbortSignal.timeout(20000) })).json();
-  const pg = Object.values(j.query.pages)[0] || {};
-  const url = (pg.thumbnail || {}).source;
-  if (!url) return { ok: false, reason: "no thumbnail" };
-  const buf = Buffer.from(await (await fetch(url, { ...UA, signal: AbortSignal.timeout(20000) })).arrayBuffer());
-  const img = sharp(buf);
-  const meta = await img.metadata();
+async function saveIfBigEnough(buf, dest) {
+  const img = sharp(buf), meta = await img.metadata();
   if ((meta.width || 0) < MIN_W) return { ok: false, reason: `too small (${meta.width}px)`, w: meta.width };
   await img.jpeg({ quality: 90 }).toFile(dest);
   return { ok: true, w: meta.width };
+}
+// Source 1: Wikipedia article lead photo (pageimages)
+async function tryPageImages(wiki, dest) {
+  const api = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(wiki)}&prop=pageimages&piprop=thumbnail&pithumbsize=900&format=json`;
+  const j = await (await fetch(api, { ...UA, signal: AbortSignal.timeout(20000) })).json();
+  const url = ((Object.values(j.query.pages)[0] || {}).thumbnail || {}).source;
+  if (!url) return { ok: false, reason: "no thumbnail" };
+  return saveIfBigEnough(Buffer.from(await (await fetch(url, { ...UA, signal: AbortSignal.timeout(20000) })).arrayBuffer()), dest);
+}
+// Source 2: Wikidata (P18 image) → Commons FilePath. More complete, less rate-limited.
+async function tryWikidata(wiki, dest) {
+  const pp = await (await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(wiki)}&prop=pageprops&ppprop=wikibase_item&format=json`, { ...UA, signal: AbortSignal.timeout(20000) })).json();
+  const qid = ((Object.values(pp.query.pages)[0] || {}).pageprops || {}).wikibase_item;
+  if (!qid) return { ok: false, reason: "no wikidata id" };
+  const ent = await (await fetch(`https://www.wikidata.org/wiki/Special:EntityData/${qid}.json`, { ...UA, signal: AbortSignal.timeout(20000) })).json();
+  const fname = (((ent.entities[qid].claims.P18 || [])[0] || {}).mainsnak || {}).datavalue?.value;
+  if (!fname) return { ok: false, reason: "no P18 image" };
+  const url = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(fname)}?width=900`;
+  return saveIfBigEnough(Buffer.from(await (await fetch(url, { ...UA, signal: AbortSignal.timeout(20000) })).arrayBuffer()), dest);
+}
+async function getPhoto(wiki, dest) {
+  let r = await tryPageImages(wiki, dest).catch((e) => ({ ok: false, reason: "pi:" + e.message.slice(0, 20) }));
+  if (r.ok) return r;
+  const r2 = await tryWikidata(wiki, dest).catch((e) => ({ ok: false, reason: "wd:" + e.message.slice(0, 20) }));
+  return r2.ok ? { ...r2, via: "wikidata" } : r; // keep first reason if both fail
 }
 async function getLogo(slug, color, dest) {
   if (!slug) return { ok: false, reason: "no slug (wordmark)" };
