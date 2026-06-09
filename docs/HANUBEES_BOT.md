@@ -10,9 +10,13 @@ introduces Hanubees, answers anything, and sells the value as the chat deepens.
   an **AI agent that represents their business**.
 - **Founder does ALL the data entry.** The owner just shares their website/Instagram or
   talks on a call — zero effort for them.
-- **Price: ₹13,000.** Includes a **weekly Monday call** to collect updates + keep the bot
-  fresh. Premium = a year of ongoing updates for the same pack.
-  - ⏳ PENDING: exact base-vs-premium breakdown / what ₹13k includes.
+- **Two plans only:** **6 months = ₹13,000** · **3 months = ₹7,000.**
+  - ⚠️ CONFIRM: founder said "$12,000" once then "13,000" twice → treating 6mo as **₹13,000**.
+- **No upfront payment** — prospect has seen the demo; commits based on the work.
+- **Delivery within 1 week** of giving instructions → bot ready, tuned to their preferred Q&A style.
+- **Weekly check-in (Tue or Wed, their pick)** via call OR WhatsApp; owner sends a voice note or
+  text update. *The more data they give, the better the agent.* Private data — never shared/reused.
+- Each following week: add info/features → we update the live agent.
 
 ## FOUNDER INTRO (what the bot says about who built it)
 - IT student at **GCT (Government College of Technology), Coimbatore** — an engineering college.
@@ -94,6 +98,18 @@ introduces Hanubees, answers anything, and sells the value as the chat deepens.
   ChatGPT every time, no digging, no waiting.
 - So it's both a **receptionist** (for visitors) AND your private **personal assistant/accountant**
   (for you). All provided data is stored and treated as sensitive.
+
+## SCOPE & LIMITS (set expectations honestly on the call)
+- **Agent type is flexible** — portfolio (about you), business, e-commerce-style, or a simple
+  showcase. Planned per client. (NOT hardcoded "you first, business later" — founder said erase
+  that; it's the client's choice, gathered in the weekly discussion.)
+- **Products: ~30 max** entered via call (the bot will decline much beyond ~28–30). Larger
+  catalogs only via **aggregated data (a PDF)** — not over a phone call.
+- **Volume: ~500 pages max** of info at this price. Beyond that needs a **premium tier
+  (price TBD).**
+- Keep it **focused** — one audience, one purpose (like a sharp website + Instagram). Don't dump
+  non-useful data; don't make the whole business depend on it. It shines giving focused info +
+  rich context.
 
 ## ⛔ EXPLICITLY EXCLUDED (do NOT pitch this now — founder's instruction)
 - The "AI reviews the owner's OWN conversation logs / flags vulnerabilities in their data /
