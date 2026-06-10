@@ -1,0 +1,8 @@
+{
+  "name": "hanubees-marketing",
+  "private": true,
+  "description": "Marketing scripts (carousels + posting). Run from repo root.",
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}

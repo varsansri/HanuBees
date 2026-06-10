@@ -64,9 +64,13 @@ Never bunch many posts on one account within a few minutes. Threads = heaviest, 
 - **Library:** 46/50 usable.
 - **Batches built:** wealthy-8, Batch1(8), Batch2(6), Batch3(10), Batch4(10).
 - **POSTED LIVE today:** 16 (wealthy-8 + Batch1).
-- **SCHEDULED today:** Batch3 (10) dripping 12:19–23:36 UTC.
-- **BUILT, not scheduled:** Batch2 (6: whatsapp, shopify, spacex, dyson, lego, patagonia) +
-  Batch4 (10: airbnb, dropbox, reddit, dell, walmart, blackrock, zoom, x, jpmorgan, bridgewater).
+- **SCHEDULED today:** Batch3 (10) dripping 12:19–23:36 UTC; **Batch2 (6) + Batch4 (10) NOW
+  SCHEDULED** (16 posts, 17:44–22:24 UTC, via `scripts/schedule-batch.js --live`) — each of the
+  8 brand accounts got 2 UNIQUE subjects (IG/YT=video reel, TikTok/Threads=image carousel),
+  random gaps, NCS credit on videos. Reels for all 16 rendered to `out/daily/<id>/reel.mp4`.
+- **`scripts/schedule-batch.js`** = the reusable scheduler (extracts CONCEPTS from daily-batch.js,
+  re-renders reels with a known music map, assigns subject→account-slot uniquely, schedules with
+  jitter). Dry-run by default; `--live` to schedule. Use this for future batches.
 - **Subjects USED (don't repeat):** nvidia, apple, meta, amazon, microsoft, google, tesla,
   berkshire, netflix, starbucks, nike, uber, spotify, ikea, oracle, disney, whatsapp, shopify,
   spacex, dyson, lego, patagonia, openai, stripe, snap, linkedin, salesforce, pinterest, ford,
@@ -75,7 +79,8 @@ Never bunch many posts on one account within a few minutes. Threads = heaviest, 
 - **Subjects LEFT in library:** mcdonalds, virgin, harley, softbank, palantir (≈5) → RESTOCK.
 
 ## NEXT (tomorrow)
-1. **Restock** `subjects.js` (+20–30 new companies/founders) → re-run `build-library.js`.
-2. **Schedule Batch 4** (10) into tomorrow's slots (scheduling pattern above).
-3. Optionally schedule **Batch 2** (6).
-4. Continue daily batches on trigger.
+1. **Restock** `subjects.js` (+20–30 new companies/founders) → re-run `build-library.js`
+   (≈5 subjects left: mcdonalds, virgin, harley, softbank, palantir).
+2. **Build the next batch** (fresh CONCEPTS in daily-batch.js for the new subjects) →
+   render → `node scripts/schedule-batch.js --live` to drip them.
+3. Continue daily batches on trigger. (Batch2 + Batch4 already scheduled 2026-06-09.)

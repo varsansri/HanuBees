@@ -1,0 +1,26 @@
+{
+  "name": "Hanubees",
+  "tagline": "Find local businesses — just ask.",
+  "colors": {
+    "yellow": "#ffbe00",
+    "green": "#98aa9d",
+    "fg": "#eaeaea",
+    "muted": "#a9a9a7",
+    "bg": "#121212",
+    "card": "#1a1a1a",
+    "input": "#242424",
+    "purple": "#b794f6"
+  },
+  "font": {
+    "web": "Space Grotesk",
+    "weights": [300, 400, 500, 700],
+    "imageFallback": "Roboto (Android system font, used by sharp/SVG rendering)"
+  },
+  "logo": "assets/brand/bee.png",
+  "rules": [
+    "bee.png appears on every generated image",
+    "yellow = primary accent (emotion words, CTAs); green = secondary",
+    "errors shown in green, not red; no emojis in UI (posts may use sparingly)",
+    "dark background #121212; premium gradient + liquid-glass look for social cards"
+  ]
+}

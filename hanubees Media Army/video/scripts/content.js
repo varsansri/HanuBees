@@ -1,0 +1,143 @@
+require("./_env");
+// 36+ distinct customer-angle video scripts. Each maps a VISION customer problem →
+// a 1000-Viral-Hooks template → a meme/number-driven short. emotion drives the
+// first-3s feeling (accent color + music + opener reaction). Keep them DIFFERENT.
+//
+// ── HANUBEES VIRAL HOOK FORMULA (every new script MUST follow this) ──────────
+//  1. SHOCK HOOK (hook): stop the scroll in the first line — a customer pain made
+//     hyper-specific, ideally with a number. ("Are you still calling 6 shops...?")
+//  2. PROOF NUMBER: a concrete, undeniable number in the FIRST scene (6 calls, 0
+//     replies, 78%, ₹4,500, 2 sec). Use numbers everywhere — they read as truth.
+//  3. NUMBERED FRAMEWORK: 2–3 tight escalating beats (pain → twist → the bee fixes
+//     it), one per scene, each with a number or hard punch. No fluff.
+//  4. SOFT CTA: low-friction, not salesy ("Just ask. Free." / "Be the one who
+//     already knows."). Never "buy now".
+//  Rules: CUSTOMER angle only · ONE idea per video · pick emotion (shock /
+//  frustration / relief / curiosity) so the first 3s FEEL right · every script
+//  different from the rest.
+module.exports = [
+  { id: "c01", emotion: "frustration", hook: "Are you still calling 6 shops to find ONE thing?",
+    scenes: [{ big: "6", text: "shops called", emoji: "📞" }, { big: "0", text: "actually picked up", emoji: "🦗" }, { text: "I asked ONE bee. Got every answer.", emoji: "🐝" }], cta: "Stop dialing. Just ask." },
+  { id: "c02", emotion: "shock", hook: "You have ONE weirdly specific question. The internet has 0 answers.",
+    scenes: [{ text: "'Ship it by Friday, customized, under ₹500?'" }, { big: "0", text: "websites can answer that" }, { text: "The shop's bee replied in 2 seconds.", emoji: "⚡" }], cta: "Ask anything. Get a real answer." },
+  { id: "c03", emotion: "frustration", hook: "Finding a place WITHOUT vs WITH the bee.",
+    scenes: [{ big: "5", text: "apps: Google, Maps, site, Insta, a call", emoji: "😵‍💫" }, { big: "1", text: "chat with the bee", emoji: "🐝" }, { text: "Same answer. 1 minute vs 20." }], cta: "One chat. Done." },
+  { id: "c04", emotion: "frustration", hook: "If you LOVE being left on read by businesses, skip this.",
+    scenes: [{ text: "'Hi, are you open?'" }, { big: "3 days", text: "later... still 'Seen'", emoji: "💀" }, { text: "The bee replies in 2 seconds. 24/7.", emoji: "🐝" }], cta: "Never get ghosted again." },
+  { id: "c05", emotion: "curiosity", hook: "The biggest cheat code for finding the ONE good shop near you.",
+    scenes: [{ text: "Not the 50 average ones.", emoji: "👀" }, { text: "'Within 1km, who's actually known for this?'" }, { big: "5 sec", text: "ranked answer, with ratings." }], cta: "Find the best, not the nearest." },
+  { id: "c06", emotion: "frustration", hook: "Every business website, in ONE sentence:",
+    scenes: [{ big: "5", text: "tabs open", emoji: "🗂️" }, { big: "0", text: "answers to YOUR question" }, { text: "Just ask the bee instead." }], cta: "Skip the website maze." },
+  { id: "c07", emotion: "curiosity", hook: "Can't find a wooden water bottle ANYWHERE?",
+    scenes: [{ big: "10", text: "sites scrolled, nothing", emoji: "😩" }, { text: "'Who near me makes custom ones?'" }, { text: "The bee finds shops that actually do." }], cta: "Ask for the exact thing you want." },
+  { id: "c08", emotion: "relief", hook: "POV: you want to ask about a bike for sale but hate calling strangers.",
+    scenes: [{ emoji: "😬", text: "Call a stranger? No thanks." }, { text: "So you text their bee instead." }, { big: "100", text: "questions, zero awkwardness", emoji: "😮‍💨" }], cta: "Ask everything. Call no one." },
+  { id: "c09", emotion: "shock", hook: "The shop you GAMBLED on vs the one the bee found.",
+    scenes: [{ big: "2.1★", text: "random pick", emoji: "🙃" }, { big: "4.8★", text: "bee's pick in 5 seconds", emoji: "✨" }, { text: "Highest-rated, nearest, one ask." }], cta: "Stop gambling on shops." },
+  { id: "c10", emotion: "shock", hook: "Google can't tell you this. The bee can.",
+    scenes: [{ text: "'Any beds free RIGHT NOW?'", emoji: "🛏️" }, { big: "2", text: "beds. ₹4,500. Today." }, { text: "Live info Google never has." }], cta: "Answers that are true today." },
+  { id: "c11", emotion: "relief", hook: "Tell me you've asked 5 shops the same 5 questions — without telling me.",
+    scenes: [{ big: "25", text: "messages typed", emoji: "😮‍💨" }, { text: "Ask the bee ONCE." }, { text: "It remembers. It answers. Every shop." }], cta: "Ask once, not 25 times." },
+  { id: "c12", emotion: "curiosity", hook: "It's 1AM. You need an answer. Everything's closed.",
+    scenes: [{ emoji: "🌙", text: "Every shop: closed." }, { text: "Their bee: wide awake." }, { big: "24/7", text: "answers, even at 3AM" }], cta: "The bee never sleeps." },
+  { id: "c13", emotion: "relief", hook: "Need something rare second-hand? Don't beg in 4 WhatsApp groups.",
+    scenes: [{ big: "4", text: "groups, 0 replies", emoji: "📵" }, { text: "Ask the bee to find whoever HAS it." }, { text: "It checks every agent for you." }], cta: "Find anything. Ask anyone." },
+  { id: "c14", emotion: "frustration", hook: "How many minutes have you wasted on hold this year?",
+    scenes: [{ big: "100s", text: "of minutes. Gone.", emoji: "⏳" }, { text: "The bee answers instantly." }, { big: "0", text: "hold music. ever." }], cta: "Zero hold. Real answers." },
+  { id: "c15", emotion: "shock", hook: "You called 7 shops just to compare ONE price.",
+    scenes: [{ big: "7", text: "calls", emoji: "📞" }, { text: "The bee lists every price, side by side." }, { big: "1", text: "ask. all prices.", emoji: "💸" }], cta: "Compare in seconds." },
+  { id: "c16", emotion: "curiosity", hook: "There's a shop 800m away that's PERFECT. You'll never find it.",
+    scenes: [{ emoji: "📍", text: "Buried on page 6 of Google." }, { text: "The bee knows it by what it's good at." }, { text: "Ask. It surfaces." }], cta: "Discover what's hiding nearby." },
+  { id: "c17", emotion: "frustration", hook: "The hours online said OPEN. You drove there. CLOSED.",
+    scenes: [{ emoji: "🚗", text: "Wasted trip." }, { big: "0", text: "trust in Google hours" }, { text: "The bee's info is live, from the owner." }], cta: "Never drive to a closed door." },
+  { id: "c18", emotion: "relief", hook: "Getting a quote shouldn't take 5 phone calls.",
+    scenes: [{ big: "5", text: "calls for one quote", emoji: "😤" }, { text: "Ask the bee. It gets quotes for you." }, { text: "Overnight, while you sleep." }], cta: "Quotes without the calls." },
+  { id: "c19", emotion: "shock", hook: "What if every shop answered you in YOUR language?",
+    scenes: [{ text: "Tamil, English — however you ask.", emoji: "🗣️" }, { text: "The bee replies the same way." }, { text: "No more 'sorry, no English'." }], cta: "Ask in your language." },
+  { id: "c20", emotion: "curiosity", hook: "Before you buy it, ask the people who already did.",
+    scenes: [{ emoji: "🤔", text: "'Is it actually worth ₹2,000?'" }, { text: "Real experiences from real locals." }, { text: "On the bee, not buried in 100 reviews." }], cta: "Know before you go." },
+  { id: "c21", emotion: "frustration", hook: "You DM'd the shop on Instagram. It's been 6 days.",
+    scenes: [{ big: "6 days", text: "'Seen'", emoji: "💀" }, { text: "Their bee would've replied in 2 seconds." }, { text: "Day or night." }], cta: "Get replies, not 'Seen'." },
+  { id: "c22", emotion: "relief", hook: "Planning anything in a new city is 20 open tabs.",
+    scenes: [{ big: "20", text: "tabs", emoji: "😵" }, { text: "Ask the local bee: stays, food, prices." }, { big: "1", text: "chat instead", emoji: "🐝" }], cta: "Plan with one bee." },
+  { id: "c23", emotion: "shock", hook: "Whoever replies FIRST usually wins your money.",
+    scenes: [{ big: "78%", text: "go with the first reply", sub: "MIT / InsideSales" }, { text: "So the fastest shop wins — not the best." }, { text: "The bee makes everyone reply instantly." }], cta: "May the fastest answer win." },
+  { id: "c24", emotion: "curiosity", hook: "The answer you want is NEVER on the website.",
+    scenes: [{ text: "'Eggless? Gluten-free? Today?'", emoji: "🍰" }, { big: "0", text: "websites say" }, { text: "The bee asks the owner and tells you." }], cta: "Ask the question that matters." },
+  { id: "c25", emotion: "frustration", hook: "Why does finding a plumber cost 10 calls AND a commission?",
+    scenes: [{ big: "10", text: "calls", emoji: "📞" }, { text: "Apps add a fee just to connect you." }, { text: "The bee connects you direct. Free." }], cta: "No middleman. No fee." },
+  { id: "c26", emotion: "relief", hook: "Imagine never repeating yourself to a business again.",
+    scenes: [{ text: "It remembers what you asked.", emoji: "🧠" }, { text: "And what you like." }, { big: "0", text: "starting over" }], cta: "It remembers, so you don't." },
+  { id: "c27", emotion: "shock", hook: "Half the good shops near you are basically INVISIBLE online.",
+    scenes: [{ big: "65%", text: "have no findable phone", sub: "in your city" }, { text: "You can't reach them. They lose you." }, { text: "The bee makes them answerable." }], cta: "Reach the unreachable." },
+  { id: "c28", emotion: "curiosity", hook: "What's the weirdest thing you'd ask a shop if you weren't shy?",
+    scenes: [{ emoji: "👀", text: "'Open? Parking? Pet-friendly? Price?'" }, { text: "Ask the bee ALL of it." }, { big: "0", text: "judgment" }], cta: "Ask the awkward stuff." },
+  { id: "c29", emotion: "frustration", hook: "3 shops. 3 prices. 3 phone calls. 1 headache.",
+    scenes: [{ big: "3", text: "calls to compare", emoji: "🤯" }, { text: "The bee compares them for you." }, { text: "Cheapest, nearest, best — instantly." }], cta: "Compare without the calls." },
+  { id: "c30", emotion: "relief", hook: "It's late, you need something, and you don't want to call.",
+    scenes: [{ emoji: "🌙", text: "'Who's open near me right now?'" }, { text: "The bee checks live and tells you." }, { big: "24/7", text: "always answering" }], cta: "Ask any time." },
+  { id: "c31", emotion: "shock", hook: "You'll waste 40 hours this year just trying to REACH businesses.",
+    scenes: [{ big: "40 hrs", text: "calling, waiting, searching", emoji: "⏳" }, { text: "The bee gives it back." }, { big: "2 sec", text: "answers" }], cta: "Take your time back." },
+  { id: "c32", emotion: "curiosity", hook: "The best info about your city isn't on Google. It's in people's heads.",
+    scenes: [{ text: "Free slots. Real prices. What's good.", emoji: "🧠" }, { text: "Locals drop it. The bee serves it." }, { text: "Fresh, today, true." }], cta: "Tap into local know-how." },
+  { id: "c33", emotion: "frustration", hook: "'We'll call you back.' (They never call back.)",
+    scenes: [{ emoji: "📵", text: "The callback that never comes." }, { text: "The bee answers now — no callback." }, { big: "0", text: "waiting" }], cta: "Get the answer now." },
+  { id: "c34", emotion: "relief", hook: "What if asking any local business felt like texting a friend?",
+    scenes: [{ text: "Same app. Same chat.", emoji: "💬" }, { text: "Every shop, one place." }, { big: "1", text: "app for all of it" }], cta: "Local, made simple." },
+  { id: "c35", emotion: "shock", hook: "Every unanswered question is a sale lost — and your time lost.",
+    scenes: [{ big: "1000s", text: "of questions unanswered daily", emoji: "❓" }, { text: "The bee answers them — for free." }, { text: "Everybody wins." }], cta: "Ask. Get answered." },
+  { id: "c36", emotion: "curiosity", hook: "POV: you found it before anyone else because you asked the bee.",
+    scenes: [{ emoji: "😎", text: "Free slot. Best price. First." }, { text: "While they're still calling around." }, { big: "1", text: "chat ahead of everyone" }], cta: "Be the one who already knows." },
+
+  // ── Batch 2 (2026-06-09) — formula-built, biased to winners (reverse-psych, "still doing X?", data-shock)
+  { id: "c37", emotion: "frustration", hook: "If you LOVE seeing 'DM for price' and getting no reply, skip this.",
+    scenes: [{ big: "3 days", text: "since you asked the price" }, { big: "0", text: "replies" }, { text: "The bee says the price in 2 seconds." }], cta: "Prices, instantly. Free." },
+  { id: "c38", emotion: "frustration", hook: "You called 4 times. 4 voicemails. 0 humans.",
+    scenes: [{ big: "4", text: "voicemails left" }, { big: "0", text: "called you back" }, { text: "The bee answers on the first try, every try." }], cta: "Skip the voicemail." },
+  { id: "c39", emotion: "frustration", hook: "You drove 20 minutes. The sign said CLOSED.",
+    scenes: [{ big: "20 min", text: "each way, wasted" }, { text: "Their hours online were 3 weeks old." }, { text: "Ask the bee first — its info is live." }], cta: "Check before you go." },
+  { id: "c40", emotion: "relief", hook: "6 friends. 1 'where do we eat?'. 45 minutes of nothing.",
+    scenes: [{ big: "45 min", text: "deciding, still hungry" }, { text: "Ask the bee: open now, price, vibe." }, { big: "1", text: "answer, everyone fed" }], cta: "Decide in seconds." },
+  { id: "c41", emotion: "frustration", hook: "The number on Google? Disconnected 2 years ago.",
+    scenes: [{ big: "2 yrs", text: "dead number, still listed" }, { text: "You can't reach a business that can't be reached." }, { text: "The bee always picks up." }], cta: "A line that actually answers." },
+  { id: "c42", emotion: "relief", hook: "You'd pick the local shop — if it ever answered.",
+    scenes: [{ text: "The big chain replies in seconds." }, { big: "0", text: "replies from the small guy" }, { text: "The bee gives small shops the same instant answer." }], cta: "Support local, actually reachable." },
+  { id: "c43", emotion: "shock", hook: "During the rush, 100 people call. The shop answers 3.",
+    scenes: [{ big: "100", text: "callers" }, { big: "3", text: "got through" }, { text: "The bee answers all 100 at once." }], cta: "Everyone gets an answer." },
+  { id: "c44", emotion: "frustration", hook: "You only find out the 'minimum order' AFTER you call.",
+    scenes: [{ big: "₹500", text: "minimum — surprise" }, { text: "Hidden terms waste everyone's time." }, { text: "The bee tells you upfront." }], cta: "No surprises. Just ask." },
+  { id: "c45", emotion: "frustration", hook: "You traveled across town. They're out of stock.",
+    scenes: [{ big: "0", text: "in stock — nobody told you" }, { text: "A 2-second question saves the whole trip." }, { text: "Ask the bee: in stock right now?" }], cta: "Know it's there before you go." },
+  { id: "c46", emotion: "relief", hook: "2 quotes. 5 days of phone tag.",
+    scenes: [{ big: "5 days", text: "for 2 numbers" }, { text: "The bee gathers quotes while you sleep." }, { big: "2", text: "prices, by morning" }], cta: "Quotes without the tag." },
+  { id: "c47", emotion: "curiosity", hook: "You're the friend everyone asks 'know a good place?'",
+    scenes: [{ big: "10", text: "'do you know...' texts a week" }, { text: "Now you just send the bee." }, { text: "It knows every local spot." }], cta: "Be the friend with answers." },
+  { id: "c48", emotion: "frustration", hook: "Booking ONE appointment took 7 messages.",
+    scenes: [{ big: "7", text: "messages over 2 days" }, { text: "'Tuesday?' 'No.' 'Thursday?'..." }, { text: "The bee books it in one ask." }], cta: "Book in one message." },
+  { id: "c49", emotion: "curiosity", hook: "New in town? You don't know who's good — or reachable.",
+    scenes: [{ big: "0", text: "local contacts" }, { text: "Locals know; you don't — yet." }, { text: "Ask the bee what people actually rate." }], cta: "Get local, instantly." },
+  { id: "c50", emotion: "relief", hook: "Your parents gave up calling — nobody answered.",
+    scenes: [{ big: "5", text: "calls, no pickup" }, { text: "Asking a question shouldn't be a fight." }, { text: "The bee answers simply, anytime." }], cta: "Answers everyone can reach." },
+  { id: "c51", emotion: "frustration", hook: "You asked 'are you taking new customers?' 4 days ago.",
+    scenes: [{ big: "4 days", text: "of silence" }, { text: "They ARE taking customers — they just didn't reply." }, { text: "The bee says yes in 2 seconds." }], cta: "Get the yes, instantly." },
+  { id: "c52", emotion: "curiosity", hook: "Everyone's calling around. You already booked it.",
+    scenes: [{ big: "1", text: "chat, sorted" }, { text: "While they wait on hold, you're done." }, { text: "Ask the bee, skip the line." }], cta: "Be done before they start." },
+
+  // ── c53–c58: LEARNING-LOOP batch (2026-06-09) ──────────────────────────────
+  // The #1 performer on the leaderboard was a REAL-DB number hook
+  // ("551 Coimbatore businesses — 358 have no phone"). These bake verified
+  // counts from our own DB (2,088 mapped) straight into the shock hook — numbers
+  // read as truth. NEVER edit a count without re-checking the DB (brand guardrail).
+  { id: "c53", emotion: "shock", hook: "We mapped 551 shops in Coimbatore. 358 have no phone you can reach.",
+    scenes: [{ big: "358", text: "of 551 — unreachable", emoji: "📵" }, { text: "They're open. You just can't get an answer." }, { text: "Their bee answers for them. 24/7." }], cta: "Reach the unreachable. Just ask." },
+  { id: "c54", emotion: "shock", hook: "1,107 LA businesses on the map. 623 you literally cannot call.",
+    scenes: [{ big: "623", text: "no phone, Los Angeles", emoji: "☎️" }, { text: "More than half the city, on mute." }, { text: "The bee gives every one of them a voice." }], cta: "Every shop, finally answerable." },
+  { id: "c55", emotion: "frustration", hook: "Of 1,107 LA shops we mapped, 1,062 have no Instagram either.",
+    scenes: [{ big: "96%", text: "invisible online", emoji: "👻" }, { text: "No phone, no insta — how do you even ask?" }, { text: "One bee. One chat. Real answer." }], cta: "Find the ones hiding offline." },
+  { id: "c56", emotion: "curiosity", hook: "We've mapped 2,088 businesses across 4 cities. Most can't be reached.",
+    scenes: [{ big: "2,088", text: "shops, 4 cities", emoji: "🗺️" }, { big: "1,160", text: "with no phone at all" }, { text: "Each one gets a bee that answers." }], cta: "The directory that actually replies." },
+  { id: "c57", emotion: "shock", hook: "156 of 267 Melbourne businesses we mapped have no phone number.",
+    scenes: [{ big: "156", text: "of 267 — silent", emoji: "🦗" }, { text: "Open for business, impossible to ask." }, { text: "The bee speaks for them, instantly." }], cta: "Ask the ones nobody can call." },
+  { id: "c58", emotion: "relief", hook: "Chennai's different: only 23 of 162 shops we mapped lack a phone.",
+    scenes: [{ big: "139", text: "reachable — but still slow", emoji: "⏳" }, { text: "Reachable isn't the same as answering fast." }, { text: "The bee replies in 2 seconds, every time." }], cta: "Fast beats reachable. Just ask." },
+];

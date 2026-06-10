@@ -1,0 +1,23 @@
+{
+  "name": "hanubees-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hanubees viral short-form video engine (Remotion). Data-driven 9:16 shock-stat videos.",
+  "scripts": {
+    "data": "node scripts/fetch-data.js",
+    "render": "remotion render src/index.ts ShockStat out/video.mp4 --props=out/props.json",
+    "studio": "remotion studio src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "@remotion/fonts": "4.0.290",
+    "@remotion/gif": "4.0.290",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "typescript": "^5.6.3"
+  }
+}

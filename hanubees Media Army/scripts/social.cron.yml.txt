@@ -1,0 +1,20 @@
+name: social-autopilot
+# The "brain" posts one queued item/day to our own brand accounts.
+# Add repo secrets to activate: SUPABASE_PROJECT_REF, SUPABASE_ACCESS_TOKEN, ZERNIO_API_KEY
+on:
+  schedule:
+    - cron: "30 4 * * *"   # ~10:00 IST daily
+  workflow_dispatch: {}
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: node scripts/social-post.js
+        env:
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
