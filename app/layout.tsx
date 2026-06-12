@@ -1,84 +1,40 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-import PostHogProvider from "@/components/PostHogProvider";
-import RegisterSW from "@/components/pwa/RegisterSW";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#121212",
+  themeColor: "#ff7a18",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
-  title: "Hanubees — Your business, answered by AI",
-  description: "Give your business its own AI receptionist. It answers your customers, anytime, from your own info. Free to start.",
+  title: "Annam — AI calorie counter for Indian food",
+  description:
+    "Snap a photo of your Indian plate — idli, poha, sambar, chutney, dal, sabzi — and instantly get calories, protein, carbs, fiber and fat. Built for Indian food.",
   metadataBase: new URL("https://www.hanubees.com"),
-  applicationName: "Hanubees",
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Hanubees" },
-  manifest: "/manifest.webmanifest",
-  // Optional: set NEXT_PUBLIC_GOOGLE_VERIFICATION to your Search Console token.
-  verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
-    ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
-    : undefined,
-  icons: {
-    icon: "/bee.png",
-    apple: "/icon-192.png",
-  },
+  applicationName: "Annam",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Annam" },
+  icons: { icon: "/icon.png", apple: "/apple-icon.png" },
   openGraph: {
-    title: "Hanubees",
-    description: "Give your business its own AI receptionist. It answers your customers, anytime.",
+    title: "Annam — Snap your plate, know your macros",
+    description:
+      "AI calorie counter built for Indian food. Photo in, full nutrition out.",
     url: "https://www.hanubees.com",
-    siteName: "Hanubees",
+    siteName: "Annam",
     type: "website",
-    images: [{ url: "https://www.hanubees.com/api/og", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hanubees",
-    description: "Give your business its own AI receptionist. It answers your customers, anytime.",
-    images: ["https://www.hanubees.com/api/og"],
+    title: "Annam — AI calorie counter for Indian food",
+    description: "Snap your plate, know your macros. Built for Indian food.",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Hanubees",
-    url: "https://www.hanubees.com",
-    logo: "https://www.hanubees.com/icon-512.png",
-    description: "AI-agent network for businesses — each business gets its own AI receptionist that answers customers and gets it found.",
-  };
-  const websiteLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Hanubees",
-    url: "https://www.hanubees.com",
-  };
-
   return (
     <html lang="en">
-      <body>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');}catch(e){}})();`,
-          }}
-        />
-        <PostHogProvider>{children}</PostHogProvider>
-        <RegisterSW />
-      </body>
-      <Script id="ld-org" type="application/ld+json" strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Script id="ld-website" type="application/ld+json" strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
-      <Script
-        defer
-        src="https://cloud.umami.is/script.js"
-        data-website-id="f8958711-c907-4cac-89f7-34e55c9f065c"
-        strategy="afterInteractive"
-      />
+      <body>{children}</body>
     </html>
   );
 }

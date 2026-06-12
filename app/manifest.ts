@@ -1,21 +1,20 @@
 import type { MetadataRoute } from "next";
 
-// Makes Hanubees installable as an app ("Add to Home Screen") — no app store needed.
+// Makes Annam installable ("Add to Home Screen") — snap food, get calories, no app store.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Hanubees — your business, answered by AI",
-    short_name: "Hanubees",
-    description: "Give your business its own AI receptionist. Find and connect with local agents.",
-    start_url: "/chat",
+    name: "Annam — AI calorie counter for Indian food",
+    short_name: "Annam",
+    description: "Snap your Indian plate and instantly get calories, protein, carbs, fiber and fat.",
+    start_url: "/",
     scope: "/",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#121212",
-    theme_color: "#121212",
+    background_color: "#fff8f0",
+    theme_color: "#ff7a18",
     icons: [
-      { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-      { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/icon-maskable.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+      { src: "/icon.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/apple-icon.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }
