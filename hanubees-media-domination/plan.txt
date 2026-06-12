@@ -1,0 +1,188 @@
+================================================================================
+ HANUBEES MEDIA DOMINATION — PLAN
+ Location: /root/hanubees/hanubees-media-domination
+ Status: PLANNING (founder said: plan now, do NOT build the generator yet)
+ Last updated: 2026-06-11
+================================================================================
+
+This file is the detailed explanation of WHAT we are building and HOW. It is the
+companion to requested.txt (the raw running log of founder requests) and
+CONTENT_METHOD.md (the locked, hard-coded content rules). If you ever lose
+context, read these three files first.
+
+--------------------------------------------------------------------------------
+0. ONE-LINE SUMMARY
+--------------------------------------------------------------------------------
+A faceless "marketing agency" content engine that pumps out high-volume,
+carefully-crafted "TOP 10 of <niche> THIS YEAR" posts built on DIFFERENCE /
+comparison hooks, using real scraped photos of the subjects, locked Hanubees
+branding, posted across 8 accounts — IMAGE carousels to Threads, VIDEO reels to
+Instagram/TikTok/YouTube. Every piece of content is unique to one account.
+
+--------------------------------------------------------------------------------
+1. ACCOUNTS (8 total — inherited from "hanubees Media Army")
+--------------------------------------------------------------------------------
+4 Zernio keys -> 8 brand slots:
+  ZERNIO_API_KEY    instagram  hanubees          VIDEO
+  ZERNIO_API_KEY    tiktok     riaze_charlie     VIDEO
+  ZERNIO_API_KEY_2  threads    hanubees          IMAGE
+  ZERNIO_API_KEY_2  youtube    hugo_mapa         VIDEO
+  ZERNIO_API_KEY_3  instagram  fxabsolute.com_   VIDEO
+  ZERNIO_API_KEY_3  threads    fxabsolute.com_   IMAGE
+  ZERNIO_API_KEY_4  instagram  hanubees.biz      VIDEO
+  ZERNIO_API_KEY_4  threads    hanubees.biz      IMAGE
+=> 5 VIDEO slots + 3 IMAGE (Threads) slots.
+YouTube may hit API limits sometimes — ACCEPTED, let it fail gracefully.
+
+--------------------------------------------------------------------------------
+2. KEYS (collected — copied into ./.env.local from "hanubees Media Army")
+--------------------------------------------------------------------------------
+Posting:   ZERNIO_API_KEY, _2, _3, _4
+LLM:       GEMINI_API_KEY, OPENAI_API_KEY, CEREBRAS_API_KEY, GOOGLE_API_KEY
+Data:      SUPABASE_PROJECT_REF, SUPABASE_ACCESS_TOKEN (shared dedup DB)
+Misc:      GIPHY_API_KEY
+(Whatever else image-scraping needs — e.g. a search API key — is an OPEN ITEM.)
+
+--------------------------------------------------------------------------------
+3. BRANDING — LOCKED. USE ONLY THESE. (from Hanubees brand.json)
+--------------------------------------------------------------------------------
+FONT (only this font, nothing else):
+  Space Grotesk  — file: assets/brand/fonts/SpaceGrotesk.ttf
+  weights 300/400/500/700  (image fallback Roboto only if Space Grotesk missing)
+COLORS (only these hex values):
+  yellow  #ffbe00   <- primary accent (the hook word, key numbers, CTAs)
+  green   #98aa9d   <- secondary accent
+  fg      #eaeaea   <- main text
+  muted   #a9a9a7   <- sub text
+  bg      #121212   <- base background
+  card    #1a1a1a
+  input   #242424
+  purple  #b794f6
+LOGO: assets/brand/bee.png — appears on EVERY slide (small watermark logo) +
+      "hanubees.com" wordmark watermark on every slide.
+Look: dark #121212 base, premium gradient + liquid-glass, YouTube-thumbnail
+      punch (NOT plain text-on-dark cards).
+
+--------------------------------------------------------------------------------
+4. CONTENT METHOD — LOCKED (full detail in CONTENT_METHOD.md)
+--------------------------------------------------------------------------------
+Topic universe: "TOP 10 of <niche> THIS YEAR" — wealthiest companies, wealthiest
+people, footballers, cars, female influencers, music artists, influencers,
+business creators, etc. Always current-year framing.
+
+The ONLY format right now = DIFFERENCE / COMPARISON. (Q&A and raw-numbers are
+allowed flavors, but DIFFERENCES win views, so that is the single focus.)
+
+Per-post narrative (the "story" that continues as you swipe):
+  -> pick a TOP 10 of a niche
+  -> COMPARE it against something relevant
+  -> frame slide 1 as a QUESTION (the difference)
+  -> slides 2-3 reveal the COMPARISON / DIFFERENCE in HARD REAL NUMBERS
+  -> resolve with the answer/solution
+  -> slide 4 = the fixed Hanubees agency card (see sec 6)
+
+TRUTH ONLY: no fake stats ever. LLM drafts the facts, a verification pass
+confirms the numbers before anything renders. (Default — founder may override.)
+
+--------------------------------------------------------------------------------
+5. SLIDE ANATOMY — 4 slides per post (LOCKED)
+--------------------------------------------------------------------------------
+Canvas: 1080 x 1080 (Threads carousel). Reel = same slides re-rendered 1080x1920.
+
+Slides 1-3 (the content slides) composition, back-to-front:
+  (a) BACKGROUND: dark #121212 + premium gradient.
+  (b) LOGO LAYER (behind): the subject's brand logo, BACKGROUND REMOVED, large,
+      sitting behind the person.
+  (c) PERSON LAYER (front): a DIFFERENT photo of the subject on each slide
+      (cut-out / foreground). Last 4 years only — fresh media.
+  (d) BLACK GRADIENT: bottom 30% of the canvas, black -> transparent going up.
+  (e) TEXT: lives ONLY inside that bottom-30% band. Perfectly aligned, clearly
+      visible, Space Grotesk, brand colors. This carries the Q&A / difference.
+  (f) WATERMARKS: bee.png logo + "hanubees.com" on every slide.
+
+Slide 4 (FIXED agency card — identical role on every post):
+  - Hanubees bee PNG placed BIGGER (hero).
+  - Copy (final wording TBD with founder, working draft):
+    "We're a marketing agency producing a high volume of posts and videos
+     to dominate social media."
+  - Same font + colors. This slide is mandatory on EVERY post.
+
+NON-NEGOTIABLE: every single image is individually PLANNED (layout/alignment/
+crop) THEN created. No batch-stamping ugly templates. Craft each one.
+
+--------------------------------------------------------------------------------
+6. HOOKS — source of truth
+--------------------------------------------------------------------------------
+Hooks come ONLY from the "1,000 Viral Hooks (PBL)" PDF, now saved at
+docs/hooks/1000-viral-hooks.pdf (63 pages). Format = fill-in-the-blank templates
+with "(insert X)" slots, grouped by category — see docs/hooks/HOOK_FORMAT.md.
+Adapt a template's slots to the top-10 subject + comparison; never invent hooks
+from scratch. P1 = extract all ~1000 templates into a JSON hook-bank.
+UNBLOCKED (PDF received 2026-06-12).
+
+--------------------------------------------------------------------------------
+7. MEDIA SCRAPING PIPELINE
+--------------------------------------------------------------------------------
+For each subject in a post:
+  - Pull photos from >= 5 different sources (Wikimedia Commons, + others TBD).
+  - FILTER: only images from the LAST 4 YEARS (no dated/funny old photos).
+  - Collect as MANY assets as possible so each slide uses a different image.
+  - Grab the brand LOGO; prefer already-transparent Wikimedia PNG/SVG; otherwise
+    background-remove it locally (rembg / U2Net — free, unlimited). Default.
+  - Cut out the person where needed for the foreground layer.
+Store scraped raw assets under assets/scraped/<subject>/.
+
+--------------------------------------------------------------------------------
+8. UNIQUENESS (hard rule)
+--------------------------------------------------------------------------------
+Every post is 100% unique to ONE account/platform. The same subject/info is
+never reused on a second account. Reuse the shared Supabase "claim" DB
+(claim.js pattern from Media Army) so two accounts never ship the same thing.
+
+--------------------------------------------------------------------------------
+9. PLATFORM ROUTING
+--------------------------------------------------------------------------------
+THREADS  -> IMAGE carousel (the 4 slides as-is).
+IG / TIKTOK / YOUTUBE -> VIDEO reel built FROM the same 4 slides (+ music),
+                         1080x1920, via the ffmpeg make-reel pipeline.
+Image posts are ONLY for Threads. Other platforms always get the video.
+
+--------------------------------------------------------------------------------
+10. LIFECYCLE / CLEANUP  (build LATER — not now)
+--------------------------------------------------------------------------------
+Each image is created once. After a post is posted via the scheduler, its PNG is
+DELETED (post-then-delete, programmed). Deferred until after posters look right.
+
+--------------------------------------------------------------------------------
+11. DESIGN ITERATION LOOP  (how we get to "good looking")
+--------------------------------------------------------------------------------
+- Founder will share THEME / INSPIRATION images. Take inspiration from them.
+- Produce DIFFERENT VARIATIONS; NAME each template (e.g. "template-aurora",
+  "template-noir").
+- Render samples and SAVE them to PHONE STORAGE so founder can view them
+  (target: /sdcard/Documents/Hanubees/media-domination/<template>/...).
+- When founder says "this looks good/great" -> that template is FIXED (locked)
+  and becomes the production renderer.
+
+--------------------------------------------------------------------------------
+12. BUILD PHASES (proposed order)
+--------------------------------------------------------------------------------
+  P0  Scaffold + collect keys + branding + logs        [DONE this session]
+  P1  Get the 1000-hooks PDF -> hook bank in its format [BLOCKED on founder file]
+  P2  Topic/comparison generator (top-10 + difference) + truth verification
+  P3  Media scraper (5+ sources, last-4-years, rembg cutouts)
+  P4  Layout/composition planner per image (alignment first)
+  P5  Slide renderer (Space Grotesk + brand colors, 4-slide anatomy, slide-4 card)
+  P6  Template VARIATIONS -> samples to phone -> founder picks -> lock
+  P7  Reel builder (slides -> 1080x1920 video + music)
+  P8  Scheduler + per-account uniqueness/claim + post-then-delete cleanup
+
+--------------------------------------------------------------------------------
+13. OPEN ITEMS NEEDING FOUNDER INPUT
+--------------------------------------------------------------------------------
+  [1] The 1000-hooks PDF — where is it? (not found anywhere)
+  [2] Confirm/override the 3 locked defaults (slide structure, LLM+verify facts,
+      rembg cutouts) — see requested.txt.
+  [3] Exact final wording for the slide-4 agency card.
+  [4] Which image-search source(s)/keys are allowed beyond Wikimedia.
+================================================================================

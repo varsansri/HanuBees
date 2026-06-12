@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "nvidia",
+    "ok": true,
+    "when": "now",
+    "account": "hanubees",
+    "why": ""
+  },
+  {
+    "slug": "tesla",
+    "ok": true,
+    "when": "now",
+    "account": "hanubees",
+    "why": ""
+  },
+  {
+    "slug": "apple",
+    "ok": true,
+    "when": "now",
+    "account": "hanubees.ai",
+    "why": ""
+  },
+  {
+    "slug": "amazon",
+    "ok": false,
+    "why": "media (<3 clean faces or no logo)"
+  },
+  {
+    "slug": "microsoft",
+    "ok": true,
+    "when": "now",
+    "account": "hanubees.biz",
+    "why": ""
+  },
+  {
+    "slug": "meta",
+    "ok": false,
+    "why": "media (<3 clean faces or no logo)"
+  },
+  {
+    "slug": "berkshire",
+    "ok": false,
+    "why": "media (<3 clean faces or no logo)"
+  },
+  {
+    "slug": "google",
+    "ok": true,
+    "when": "sched",
+    "account": "hanubees.ai",
+    "why": ""
+  },
+  {
+    "slug": "lvmh",
+    "ok": false,
+    "why": "media (<3 clean faces or no logo)"
+  },
+  {
+    "slug": "oracle",
+    "ok": false,
+    "why": "media (<3 clean faces or no logo)"
+  }
+]

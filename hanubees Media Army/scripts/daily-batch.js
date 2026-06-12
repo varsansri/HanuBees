@@ -21,16 +21,66 @@ function wrap(text, x, y, size, weight, fill, anchor = "start") {
   return { svg: `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${fill}">${t}</text>`, height: lines.length * lh };
 }
 
+// Hero-card poster: brand logo (or wordmark) + accent glow on a clean dark bg. No face — used
+// for company-MOMENT concepts that don't have a single founder photo. Always brand-safe.
+async function posterCard(cfg) {
+  const accent = cfg.accent || C.y;
+  const bgSvg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><defs>
+      <radialGradient id="g" cx="50%" cy="24%" r="65%"><stop offset="0%" stop-color="${accent}" stop-opacity="0.34"/><stop offset="50%" stop-color="${accent}" stop-opacity="0.06"/><stop offset="100%" stop-color="#0b0b0b" stop-opacity="0"/></radialGradient></defs>
+    <rect width="${W}" height="${H}" fill="#0b0b0b"/><rect width="${W}" height="${H}" fill="url(#g)"/>
+    <rect x="0" y="0" width="${W}" height="8" fill="${accent}"/></svg>`;
+  const comps = [];
+  let brandBottom = 470; // y where the brand mark ends; text starts below
+  if (cfg.logo && fs.existsSync(cfg.logo)) {
+    const logo = await sharp(cfg.logo).resize(380, 320, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+    const lm = await sharp(logo).metadata();
+    comps.push({ input: logo, top: 250, left: Math.round((W - (lm.width || 380)) / 2) });
+    brandBottom = 250 + (lm.height || 320) + 40;
+  }
+  // text block (kicker / headline / question), centered, below the brand mark
+  const g1 = 20, g2 = 24;
+  const kick = wrap(cfg.kicker, W / 2, 0, 33, 800, accent, "middle");
+  const head = wrap(cfg.headline, W / 2, 0, 70, 800, C.fg, "middle");
+  const ques = wrap(cfg.question, W / 2, 0, 44, 600, accent, "middle");
+  const totalH = kick.height + g1 + head.height + g2 + ques.height;
+  let cy = Math.max(brandBottom + 30, Math.min(760, 1180 - totalH));
+  let txt = "";
+  if (!cfg.logo) { // wordmark hero
+    const wm = (cfg.company || cfg.id).toUpperCase();
+    txt += `<text x="${W / 2}" y="430" text-anchor="middle" font-family="${FONT}" font-size="96" font-weight="800" fill="${C.fg}">${xml(wm)}</text>`;
+    cy = Math.max(560, Math.min(760, 1180 - totalH));
+  }
+  txt += wrap(cfg.kicker, W / 2, cy, 33, 800, accent, "middle").svg; cy += kick.height + g1;
+  txt += wrap(cfg.headline, W / 2, cy, 70, 800, C.fg, "middle").svg; cy += head.height + g2;
+  txt += wrap(cfg.question, W / 2, cy, 44, 600, accent, "middle").svg;
+  const handle = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">${txt}<text x="146" y="1285" font-family="${FONT}" font-size="33" font-weight="800" fill="${C.g}">@hanubees</text></svg>`;
+  const bee = await sharp(path.join(__dirname, "../assets/brand/bee.png")).resize(76, 76, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+  comps.push({ input: Buffer.from(handle), top: 0, left: 0 }, { input: bee, top: 1232, left: 60 });
+  return sharp(Buffer.from(bgSvg)).composite(comps).png().toBuffer();
+}
+
 async function poster(cfg) {
+  if (cfg.hero) return posterCard(cfg);
   const bg = await sharp(cfg.face).resize(W, H, { fit: "cover", position: "top" }).toBuffer();
-  let t = "", y = 832;
+  let t = "";
   if (!cfg.logo && cfg.wordmark) t += `<text x="70" y="132" font-family="${FONT}" font-size="46" font-weight="800" fill="${C.fg}" paint-order="stroke" stroke="#000" stroke-width="9" stroke-linejoin="round">${cfg.wordmark}</text>`;
-  t += wrap(cfg.kicker, 70, y, 33, 800, C.y).svg; y += 66;
-  const head = wrap(cfg.headline, 70, y, 72, 800, C.fg); t += head.svg; y += head.height + 22;
-  t += wrap(cfg.question, 70, y, 48, 600, C.y).svg;
+  // Measure each block so the kicker/headline/question never collide and never overrun the @handle.
+  const g1 = 20, g2 = 24;
+  const kick = wrap(cfg.kicker, 70, 0, 33, 800, C.y);
+  const head = wrap(cfg.headline, 70, 0, 72, 800, C.fg);
+  const ques = wrap(cfg.question, 70, 0, 48, 600, C.y);
+  const totalH = kick.height + g1 + head.height + g2 + ques.height;
+  // bottom-anchor the block above the @handle/bee (1200), but never start lower than the default 832
+  let y = Math.min(832, 1200 - totalH);
+  y = Math.max(y, 360);
+  let cy = y;
+  t += wrap(cfg.kicker, 70, cy, 33, 800, C.y).svg; cy += kick.height + g1;
+  t += wrap(cfg.headline, 70, cy, 72, 800, C.fg).svg; cy += head.height + g2;
+  t += wrap(cfg.question, 70, cy, 48, 600, C.y).svg;
+  const gradTop = Math.min(H - 600, Math.round(y - 90));
   const grad = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><defs>
       <linearGradient id="b" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#000" stop-opacity="0.96"/><stop offset="58%" stop-color="#000" stop-opacity="0.82"/><stop offset="100%" stop-color="#000" stop-opacity="0"/></linearGradient></defs>
-    <rect x="0" y="${H - 600}" width="${W}" height="600" fill="url(#b)"/>${t}
+    <rect x="0" y="${gradTop}" width="${W}" height="${H - gradTop}" fill="url(#b)"/>${t}
     <text x="146" y="1285" font-family="${FONT}" font-size="33" font-weight="800" fill="${C.g}">@hanubees</text></svg>`;
   const bee = await sharp(path.join(__dirname, "../assets/brand/bee.png")).resize(76, 76, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
   const comps = [{ input: Buffer.from(grad), top: 0, left: 0 }];
@@ -810,7 +860,7 @@ const CONCEPTS = [
         ["3", "The board blinked. Altman returned as CEO.", "The employees — not the board — held the real power. Talent > governance structure."],
       ], "The best founders build teams that fight for them. — Hanubees"],
     ] },
-  { id: "nvidia_2023", company: "Nvidia",
+  { id: "nvidia_2023", company: "Nvidia", hero: true, accent: "#76B900",
     kicker: "ONE STOCK GAINED $1 TRILLION IN 12 MONTHS", headline: "Nvidia added more value in 2023 than the entire GDP of the Netherlands.",
     question: "How does one chip company gain $1 trillion in a single year?",
     slides: [
@@ -822,7 +872,7 @@ const CONCEPTS = [
         ["3", "Nvidia has 92% market share in AI chips.", "AMD has the rest. Intel is trying. Neither has CUDA — the software moat that makes switching impossible."],
       ], "Build the infrastructure everyone else depends on. — Hanubees"],
     ] },
-  { id: "elon_twitter", company: "X",
+  { id: "elon_twitter", company: "X", hero: true, accent: "#1DA1F2",
     kicker: "HE PAID $44 BILLION FOR A COMPANY WORTH $20 BILLION", headline: "Elon Musk's Twitter takeover is the most chaotic acquisition in history.",
     question: "He fired 75% of staff. Advertisers fled. Value dropped to $12B. What happened?",
     slides: [
@@ -834,7 +884,7 @@ const CONCEPTS = [
         ["3", "Twitter/X is now worth ~$12B — a $32B loss on paper.", "But Musk is betting on payments, video, and X as a super-app. The story isn't over."],
       ], "Conviction moves fast. Chaos has a cost. — Hanubees"],
     ] },
-  { id: "crowdstrike_outage", company: "CrowdStrike",
+  { id: "crowdstrike_outage", company: "CrowdStrike", hero: true, accent: "#E01F3D",
     kicker: "ONE UPDATE CRASHED 8.5 MILLION COMPUTERS", headline: "CrowdStrike's July 2024 bug caused the largest IT outage in history.",
     question: "Airlines, hospitals, banks — all offline. How does one update do that?",
     slides: [
@@ -846,7 +896,7 @@ const CONCEPTS = [
         ["3", "CrowdStrike stock fell 30% in a week.", "The world runs on software no one sees. One bad line of code affects everyone everywhere. Fragility is invisible until it breaks."],
       ], "The invisible infrastructure is the most critical. — Hanubees"],
     ] },
-  { id: "airbnb_ipo", company: "Airbnb",
+  { id: "airbnb_ipo", company: "Airbnb", hero: true, accent: "#FF5A5F",
     kicker: "AIRBNB ALMOST DIED IN 2020. THEN IPO'D AT $100 BILLION.", headline: "Airbnb lost $1B in 8 weeks during COVID. Then doubled its valuation.",
     question: "From near-bankruptcy to the biggest hospitality IPO ever — in 9 months. How?",
     slides: [
@@ -858,7 +908,7 @@ const CONCEPTS = [
         ["3", "IPO'd at $68. Opened at $146. Closed at $144.", "A $100B valuation for a company that lost $697M that year. Investors bet on the recovery."],
       ], "Brand survives crisis better than ads ever built it. — Hanubees"],
     ] },
-  { id: "netflix_squid", company: "Netflix",
+  { id: "netflix_squid", company: "Netflix", hero: true, accent: "#E50914",
     kicker: "A $21 MILLION SHOW MADE $900 MILLION", headline: "Squid Game returned Netflix's investment 42× in 4 weeks.",
     question: "A Korean show nobody expected became the most-watched Netflix show ever. How?",
     slides: [
@@ -870,7 +920,7 @@ const CONCEPTS = [
         ["3", "Netflix now spends $500M/year on Korean content.", "Non-English content now drives 30% of Netflix viewing. The algorithm found what marketers missed."],
       ], "The algorithm finds hits your instincts miss. Trust the data. — Hanubees"],
     ] },
-  { id: "apple_trillion", company: "Apple",
+  { id: "apple_trillion", company: "Apple", hero: true, accent: "#e8e8ed",
     kicker: "THE FIRST $1 TRILLION COMPANY IN HISTORY", headline: "Apple hit $1 trillion market cap on August 2, 2018.",
     question: "A company started in a garage became worth more than entire stock markets. How?",
     slides: [
@@ -882,7 +932,7 @@ const CONCEPTS = [
         ["3", "Apple hit $3 trillion in January 2022.", "Three times the GDP of Saudi Arabia. One company. One ecosystem. One trillion at a time."],
       ], "Hardware gets you in the door. Services keep you forever. — Hanubees"],
     ] },
-  { id: "bitcoin_pizza", company: "Bitcoin",
+  { id: "bitcoin_pizza", company: "Bitcoin", hero: true, accent: "#F7931A",
     kicker: "HE SPENT $440 MILLION ON 2 PIZZAS", headline: "On May 22, 2010, Laszlo Hanyecz paid 10,000 BTC for 2 Papa John's pizzas.",
     question: "At Bitcoin's peak, those 2 pizzas cost $440 million. Was it a mistake?",
     slides: [
@@ -894,7 +944,7 @@ const CONCEPTS = [
         ["3", "May 22 is now 'Bitcoin Pizza Day' globally.", "The most expensive meal in history made Bitcoin legitimate. You pay the price of innovation."],
       ], "Every technology needs a first believer willing to lose. — Hanubees"],
     ] },
-  { id: "instagram_origin", company: "Instagram",
+  { id: "instagram_origin", company: "Instagram", hero: true, accent: "#E1306C",
     kicker: "INSTAGRAM ALMOST NEVER HAD PHOTOS", headline: "Instagram started as a location check-in app called Burbn.",
     question: "The $1 billion app was a failed product that pivoted in 2 weeks. How?",
     slides: [
@@ -906,7 +956,7 @@ const CONCEPTS = [
         ["3", "1 million users in 2 months. $1B acquisition in 18 months.", "Facebook bought it in 2012 — 13 employees, no revenue, $1 billion. The fastest pivot ROI ever."],
       ], "Find the one thing users actually do. Kill the rest. — Hanubees"],
     ] },
-  { id: "tiktok_algorithm", company: "TikTok",
+  { id: "tiktok_algorithm", company: "TikTok", hero: true, accent: "#FE2C55",
     kicker: "TIKTOK'S ALGORITHM IS WORTH MORE THAN $300 BILLION", headline: "ByteDance won't sell TikTok's algorithm. Even under US government pressure.",
     question: "Why is a recommendation engine the most valuable secret in tech?",
     slides: [
@@ -918,7 +968,7 @@ const CONCEPTS = [
         ["3", "US tried to force a sale in 2024. TikTok refused.", "ByteDance values the algorithm at more than the platform. The IP is the asset, not the app."],
       ], "The algorithm is the product. Protect it. — Hanubees"],
     ] },
-  { id: "uber_near_death", company: "Uber",
+  { id: "uber_near_death", company: "Uber", hero: true, accent: "#ffbe00",
     kicker: "UBER'S CEO WAS CAUGHT ON VIDEO ARGUING WITH A DRIVER", headline: "Travis Kalanick was forced to resign in 2017. Uber had $20B in the bank.",
     question: "How does a CEO of the world's most valuable startup get fired?",
     slides: [
@@ -930,7 +980,7 @@ const CONCEPTS = [
         ["3", "5 major investors hand-delivered a letter demanding he resign.", "Culture is not HR's problem — it's the CEO's product. When culture breaks, everything breaks."],
       ], "Culture is your most fragile asset. Guard it. — Hanubees"],
     ] },
-  { id: "openai_valuation", company: "OpenAI",
+  { id: "openai_valuation", company: "OpenAI", hero: true, accent: "#10C99A",
     kicker: "FROM $29 BILLION TO $157 BILLION IN 18 MONTHS", headline: "OpenAI is now worth more than Goldman Sachs.",
     question: "A non-profit AI lab became one of the world's most valuable companies. How?",
     slides: [
@@ -942,7 +992,7 @@ const CONCEPTS = [
         ["3", "GPT-4 API revenue: ~$3B ARR by end of 2024.", "Every startup, every enterprise, every developer is paying OpenAI. The picks-and-shovels play of the AI gold rush."],
       ], "Build the platform everyone else builds on. — Hanubees"],
     ] },
-  { id: "shopify_pandemic", company: "Shopify",
+  { id: "shopify_pandemic", company: "Shopify", hero: true, accent: "#95BF47",
     kicker: "COVID MADE SHOPIFY MORE VALUABLE THAN AMAZON CANADA", headline: "Shopify stock grew 500% in 6 months during COVID.",
     question: "A pandemic that killed retail made one e-commerce platform worth $180 billion. How?",
     slides: [
@@ -954,7 +1004,7 @@ const CONCEPTS = [
         ["3", "Shopify powers 10% of US e-commerce.", "It never touches inventory. Never owns a product. Just takes rent from every merchant on the internet."],
       ], "Infrastructure > inventory. Own the rails, not the trains. — Hanubees"],
     ] },
-  { id: "robinhood_gamestop", company: "Robinhood",
+  { id: "robinhood_gamestop", company: "Robinhood", hero: true, accent: "#18E07F",
     kicker: "ROBINHOOD STOPPED RETAIL FROM BUYING. WALL STREET KEPT GOING.", headline: "Robinhood halted GameStop trading. Its own users sued.",
     question: "An app that promised to 'democratize finance' protected the hedge funds instead. How?",
     slides: [
@@ -966,7 +1016,7 @@ const CONCEPTS = [
         ["3", "Congress held hearings. Class action lawsuits filed.", "Robinhood IPO'd at $38 in July 2021 — fell to $8 within months. Trust, once broken, is the brand."],
       ], "Your brand is what you do under pressure, not what you promise. — Hanubees"],
     ] },
-  { id: "microsoft_comeback", company: "Microsoft",
+  { id: "microsoft_comeback", company: "Microsoft", hero: true, accent: "#2EA7FF",
     kicker: "MICROSOFT STOCK GREW 10X IN 8 YEARS", headline: "Satya Nadella turned a dying company into a $3 trillion giant.",
     question: "In 2014 Microsoft was losing. In 2024 it's the world's most valuable company. What changed?",
     slides: [
@@ -978,7 +1028,7 @@ const CONCEPTS = [
         ["3", "Azure cloud: $0 in 2010 → $100B run rate in 2024.", "Nadella bet on cloud + AI. OpenAI partnership. GitHub Copilot. The company became the AI platform."],
       ], "The best turnarounds start with culture, not products. — Hanubees"],
     ] },
-  { id: "tesla_shorts", company: "Tesla",
+  { id: "tesla_shorts", company: "Tesla", hero: true, accent: "#E82127",
     kicker: "SHORT SELLERS LOST $38 BILLION BETTING AGAINST ELON", headline: "Tesla was the most shorted stock in history — and the shorts got crushed.",
     question: "Wall Street was certain Tesla would fail. It became the most valuable car company. How?",
     slides: [
@@ -990,7 +1040,7 @@ const CONCEPTS = [
         ["3", "Tesla stock went from $18 to $414 in 2020 (pre-split).", "Then lost 75% in 2022. Then recovered. Short-selling a visionary founder is a dangerous trade."],
       ], "Don't bet against a founder who controls the narrative. — Hanubees"],
     ] },
-  { id: "netflix_password", company: "Netflix",
+  { id: "netflix_password", company: "Netflix", hero: true, accent: "#E50914",
     kicker: "NETFLIX KILLED PASSWORD SHARING — AND GAINED 6 MILLION USERS", headline: "Every analyst said it would backfire. Netflix gained 29M subscribers in 6 months.",
     question: "The most controversial product decision of 2023 turned out to be genius. How?",
     slides: [
@@ -1002,7 +1052,7 @@ const CONCEPTS = [
         ["3", "Netflix added 13M subscribers in Q4 2023 alone.", "Record growth. Stock hit all-time high. The 'bad' decision was actually the best decision of the year."],
       ], "Sometimes the obvious move everyone avoids is the right one. — Hanubees"],
     ] },
-  { id: "clubhouse_rise", company: "Clubhouse",
+  { id: "clubhouse_rise", company: "Clubhouse", hero: true, accent: "#E8B45A",
     kicker: "VALUED AT $4 BILLION. THEN NOBODY SHOWED UP.", headline: "Clubhouse raised $100M at $4B with barely a product.",
     question: "The hottest app of 2021 was dead by 2022. What killed it?",
     slides: [
@@ -1014,7 +1064,7 @@ const CONCEPTS = [
         ["3", "Daily active users fell 80% in 6 months.", "Exclusivity drove the growth. Ubiquity killed it. When everyone can do what you do — you're done."],
       ], "Scarcity creates desire. Abundance destroys it. — Hanubees"],
     ] },
-  { id: "apple_m1", company: "Apple",
+  { id: "apple_m1", company: "Apple", hero: true, accent: "#e8e8ed",
     kicker: "APPLE FIRED INTEL WITH A CHIP MADE IN-HOUSE", headline: "Apple's M1 chip was 3.5× faster than the Intel MacBook it replaced.",
     question: "A phone chip designer beat the world's biggest processor company. How?",
     slides: [
@@ -1026,7 +1076,7 @@ const CONCEPTS = [
         ["1", "Apple controls chip + OS + hardware + software.", "No other company does all four. That integration is why M-series chips are untouchable."],
       ], "Control the stack. Control the performance. — Hanubees"],
     ] },
-  { id: "google_chrome", company: "Google",
+  { id: "google_chrome", company: "Google", hero: true, accent: "#4285F4",
     kicker: "GOOGLE BUILT A BROWSER TO SAVE ITS OWN BUSINESS", headline: "Chrome launched in 2008. Today it has 65% of all browser market share.",
     question: "Google didn't need a browser. So why did it build one?",
     slides: [
@@ -1038,7 +1088,7 @@ const CONCEPTS = [
         ["3", "Chrome is now the OS of the web.", "65% market share. It shapes every web standard. Every developer builds for Chrome first."],
       ], "When your ecosystem is blocked, build the gate yourself. — Hanubees"],
     ] },
-  { id: "facebook_cambridge", company: "Meta",
+  { id: "facebook_cambridge", company: "Meta", hero: true, accent: "#1877F2",
     kicker: "87 MILLION PEOPLE'S PRIVATE DATA WAS SOLD", headline: "Cambridge Analytica harvested Facebook data to influence elections.",
     question: "The scandal that forced Zuckerberg to Congress — and changed internet privacy forever.",
     slides: [
@@ -1050,7 +1100,7 @@ const CONCEPTS = [
         ["3", "Facebook was fined $5B by the FTC.", "The largest fine in FTC history. GDPR in Europe followed. The internet's relationship with data changed forever."],
       ], "Data you collect is a liability, not just an asset. — Hanubees"],
     ] },
-  { id: "amazon_prime_loss", company: "Amazon",
+  { id: "amazon_prime_loss", company: "Amazon", hero: true, accent: "#FF9F2E",
     kicker: "AMAZON PRIME LOST MONEY FOR A DECADE — ON PURPOSE", headline: "Amazon Prime was a financial disaster until it became a $35B business.",
     question: "Jeff Bezos subsidised shipping for years. Why?",
     slides: [
@@ -1062,7 +1112,7 @@ const CONCEPTS = [
         ["3", "Prime is now $139/year. 200M+ members. $35B in revenue.", "Video, music, pharmacy, groceries — all bundled. What started as a shipping bet became a loyalty empire."],
       ], "Lose money on the door. Win it on the relationship. — Hanubees"],
     ] },
-  { id: "roblox_kids", company: "Roblox",
+  { id: "roblox_kids", company: "Roblox", hero: true, accent: "#FF4A40",
     kicker: "60% OF US KIDS UNDER 16 PLAY ROBLOX MONTHLY", headline: "Roblox has more daily users than Twitter and Snapchat combined.",
     question: "A platform built by kids, for kids — worth $45 billion. How?",
     slides: [
@@ -1074,7 +1124,7 @@ const CONCEPTS = [
         ["3", "Average user spends 2.5 hours/day on Roblox.", "For context: TikTok = 95 min, YouTube = 70 min. When you own a child's play, you own their lifetime value."],
       ], "Build the playground. Let users fill it. — Hanubees"],
     ] },
-  { id: "stripe_private", company: "Stripe",
+  { id: "stripe_private", company: "Stripe", hero: true, accent: "#635BFF",
     kicker: "STRIPE REFUSED TO IPO AT $95 BILLION", headline: "The most valuable private company in Silicon Valley keeps saying no to Wall Street.",
     question: "Patrick Collison could be richer than Zuckerberg. Why does he stay private?",
     slides: [
@@ -1086,7 +1136,7 @@ const CONCEPTS = [
         ["3", "Stripe processes $1 trillion in payments annually.", "More than the GDP of the Netherlands. Built by 2 Irish brothers who cold-emailed their first customers."],
       ], "Don't let Wall Street's timeline replace your own. — Hanubees"],
     ] },
-  { id: "youtube_google", company: "YouTube",
+  { id: "youtube_google", company: "YouTube", hero: true, accent: "#FF4040",
     kicker: "GOOGLE BOUGHT YOUTUBE FOR $1.65B — IT'S NOW WORTH $300B", headline: "YouTube was 20 months old when Google paid $1.65B for it.",
     question: "The fastest 180× return in acquisition history. How did Google know?",
     slides: [
@@ -1098,7 +1148,7 @@ const CONCEPTS = [
         ["3", "YouTube revenue: $30B+/year.", "2 billion users. 500 hours of video uploaded every minute. The $1.65B became a $300B asset."],
       ], "Buy the behaviour, not the revenue. — Hanubees"],
     ] },
-  { id: "microsoft_github", company: "Microsoft",
+  { id: "microsoft_github", company: "Microsoft", hero: true, accent: "#B188F5",
     kicker: "MICROSOFT BOUGHT THE TOOL EVERY DEVELOPER USES", headline: "GitHub acquisition for $7.5B gave Microsoft access to 100 million developers.",
     question: "Developers hated Microsoft. Now they're all inside Microsoft's ecosystem. How?",
     slides: [
@@ -1110,7 +1160,7 @@ const CONCEPTS = [
         ["3", "Microsoft bought GitHub for $7.5B. Copilot makes it back every 7 years.", "The data inside GitHub was worth more than the platform. Buy the data. Build the product."],
       ], "The data in your acquisition is worth more than the revenue. — Hanubees"],
     ] },
-  { id: "amazon_alexa_failure", company: "Amazon",
+  { id: "amazon_alexa_failure", company: "Amazon", hero: true, accent: "#25C8FF",
     kicker: "AMAZON SPENT $20 BILLION ON ALEXA. IT LOSES $10B A YEAR.", headline: "500 million Alexa devices. Still can't make money.",
     question: "Amazon's biggest hardware bet might be its biggest failure. What went wrong?",
     slides: [

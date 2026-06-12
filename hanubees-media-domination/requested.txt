@@ -1,0 +1,1681 @@
+# REQUESTED LOG — Hanubees Media Domination
+# Every founder request is appended here automatically (UserPromptSubmit hook)
+# until the founder says "stop requested text". This is the source of truth for
+# "what was asked at each stage". Do NOT delete entries.
+
+---
+[2026-06-11 — SEED ENTRY: project kickoff request]
+
+Create a NEW project: "Hanubees Media Domination" (stored at
+/root/hanubees/hanubees-media-domination). Collect the API keys from the two
+existing projects (hanubees-marketing-team + "hanubees Media Army"). There are
+8 accounts total right now. YouTube sometimes hits API limits — that's fine,
+let it be.
+
+CONTENT CONCEPT:
+- Every post is about a "TOP 10 of <niche> THIS YEAR" — e.g. top 10 wealthiest
+  companies, top 10 wealthiest people, top 10 footballers, top 10 cars, top 10
+  female influencers, top 10 music artists, top 10 influencers, top 10 business
+  creators, etc. Always "each year" / current year framing.
+- Content FORMAT TYPES: questions & answers, lots of numbers, comparisons,
+  DIFFERENCES. → FOCUS ONLY ON DIFFERENCES right now — differences get the most
+  views.
+- METHOD (hard-code this so it survives revisits): pick a TOP 10 of a niche and
+  COMPARE it with something relevant → frame as a QUESTION → show the
+  COMPARISON / DIFFERENCE → give the SOLUTION/answer. Remember this content type.
+
+REQUEST LOGGING:
+- Save every single request into requested.txt. Keep recording every request
+  until I say "stop requested text". This lets us revisit what was said at each
+  stage. Also create a plan.txt with a detailed explanation, and a program file
+  that makes this work repeatable.
+- PLAN FIRST. Take your time. Don't build yet — plan now.
+
+MEDIA — IMAGE POSTS:
+- 4 slides per post. Image posts go ONLY to Threads (carousels). No other
+  platform gets the image post. The OTHER platforms get VIDEOS made from the
+  same assets inside the post.
+- Before making posters, first find the HOOKS and the CONTENT (the Q&A).
+- 3 of the slides explain "what it is"; the story continues as you swipe (Q&A).
+
+UNIQUENESS:
+- Every post must be 100% unique. A post made for one account CANNOT be copied
+  to another account. Each unique piece of content is made for exactly one
+  account/platform.
+
+MEDIA SCRAPING:
+- Scrape the internet for relevant images. Use AT LEAST 5 different sources
+  (Wikimedia, etc.). These are top-10 famous subjects so images are everywhere.
+- Images must be from the LAST 4 YEARS only — older media looks dated/funny.
+  Get FRESH media.
+- For a subject (e.g. Elon Musk + Tesla/SpaceX): collect as many assets as
+  possible. Each slide uses a DIFFERENT image of the subject.
+- Make a background-REMOVED PNG of the subject's LOGO.
+- COMPOSITION per slide: subject PERSON photo in FRONT, bg-removed LOGO BEHIND,
+  and a BLACK GRADIENT over the BOTTOM 30% of the post. Text sits ONLY inside
+  that bottom-30% gradient band — perfectly aligned, clearly visible.
+- Swiping continues the story (question → answer).
+
+BRANDING:
+- Use the Hanubees bee PNG (from the existing Hanubees project) on EVERY slide
+  as a logo, and show "hanubees.com" as a watermark.
+
+[Assistant defaults locked this turn — pending founder override:]
+- Slide structure: S1 = difference QUESTION over subject poster; S2–S4 = the
+  answer in real numbers, each its own subject image; resolves on S4.
+- Facts engine: LLM draft (Gemini/OpenAI/Cerebras) + truth-check verification
+  pass (truth-only is a hard rule).
+- Cutouts: local rembg (free/unlimited) + prefer already-transparent Wikimedia
+  logos.
+
+---
+[2026-06-11 — REQUEST 2: branding, hooks PDF, slide-4 card, cleanup, variations]
+
+- FONT and COLORS are our branding — pull them from Hanubees (existing project).
+  Use ONLY the given font and ONLY the given color patterns. Nothing else.
+- After collecting content + media, and BEFORE aligning: PLAN the layout so it
+  looks super good with better alignment. EVERY single image goes through
+  planning -> creation. Non-negotiable: every piece is carefully crafted.
+- There is a "1000 HOOKS" file (a PDF I shared before). Check the previous
+  projects for it. If it's not there, ASK me and I'll provide it. Hooks come
+  ONLY from that PDF, and the hooks are created IN THAT FORMAT.
+- SLIDE 4 (every post): place the Hanubees PNG BIGGER + text ~ "We are a
+  marketing agency producing a high/mass volume of posts and videos to dominate
+  social media." This slide-4 agency card must be in EVERY post.
+- Each image is created ONCE. After the post is posted via the scheduler, DELETE
+  the PNG after edit (programmed cleanup). [Do this later — focus on posters first.]
+- I will give theme/inspiration images to take inspiration from. Try DIFFERENT
+  VARIATIONS. NAME each template. When I say "this looks good/great", FIX (lock)
+  that template and store the pictures in PHONE STORAGE so I can see them.
+
+[Status note from assistant:] 1000-hooks PDF NOT found in any project or
+/sdcard — founder action needed: provide the file/path.
+
+---
+[2026-06-11T18:28:09.141Z]
+jDetails
+
+Name
+
+1,000 Viral Hooks (PBL).pdf
+
+Date modified
+
+31 July 2025 17:25
+
+Size
+
+2.1 MB
+
+Location
+
+All files/Download, save this it was in my phone storage 11 June 2026 at 23:55
+
+ef30bd77ed0eca5b5f177476c997057e.JPG
+
+No location information
+
+No camera information
+
+677KP 736 × 920 | 130 KB | JPEG
+
+Synced with cloud
+
+Phone/Pictures/100PINT/Pins/ phone storage
+
+---
+[2026-06-12 — REQUEST 3: provided the hooks PDF + first inspiration image]
+
+- 1000 hooks file = "1,000 Viral Hooks (PBL).pdf" (2.1MB, from phone Download).
+  SAVED -> docs/hooks/1000-viral-hooks.pdf. Format captured in HOOK_FORMAT.md.
+- Inspiration image: Phone/Pictures/100PINT/Pins/ef30bd77...JPG ("Estilos
+  Tipograficos" poster). SAVED -> assets/inspiration/inspo-01.jpg. Design system
+  captured in DESIGN_DIRECTION.md (giant yellow type behind, subject cut-out in
+  front, corner metadata + ruler, single yellow accent, bottom-30% text band).
+
+---
+[2026-06-11T18:40:48.517Z]
+did you save it on phome storage ?
+
+---
+[2026-06-11T18:42:06.748Z]
+yeah built it
+
+---
+[2026-06-12 — BUILT: first sample template "template-tipo"]
+Subject: Top 10 biggest companies — NVIDIA difference (Jensen Huang).
+Real media scraped from Wikimedia (2024 portrait, last-4-yrs), rembg cutout,
+NVIDIA logo pulled. 4 slides rendered (s1 hook / s2 number / s3 answer / s4
+agency card) via scripts/render-tipo.js. Brand font+colors only. Saved to phone:
+/sdcard/Documents/Hanubees/media-domination/template-tipo/. Awaiting founder
+verdict to LOCK this template (or iterate).
+
+---
+[2026-06-11T23:18:56.578Z]
+there is lot of things are wrong here we need the ratio at 3:4 i need different images of the person in each pictures i dont want the word behind the peraon i need the companirs real logo behind png of it with background removed do you know circled crop like masking a image in circle lets try that both tge image of the person and Nvidio logo find the subjects face and the logos center and place it at the right spot so a human eye can see it clealy
+
+---
+[2026-06-12 — REVISION v2 of template-tipo per founder feedback]
+Changes: ratio -> 3:4 (1080x1440). DIFFERENT person photo per slide (3 distinct
+Jensen Huang shots, all last-4-yrs). Removed giant word behind person. Real
+NVIDIA logo (bg-removed, from SVG) placed BEHIND as a circular badge. CIRCLE-CROP
+masking on BOTH person + logo. Face auto-detected (OpenCV Haar) to center the
+person circle on the face; logo centered on its bbox. New pipeline:
+scripts/prep_circles.py (cv2+PIL) -> scripts/render-tipo2.js. Saved to phone.
+Awaiting founder verdict.
+
+---
+[2026-06-11T23:51:51.610Z]
+yeah this is exactly what im talking about make the Tect little bigger Bold in the bottom more visible the images where on point perfect
+
+---
+[2026-06-11T23:54:45.189Z]
+did you save it on mobile storage ?
+
+---
+[2026-06-12T00:04:53.859Z]
+not i want you to create a perefect system like super hard coded system in the media domination project it need to produce these kind of posts consistent every single detail clearly the only changes the media and the content create a pefect template like a perefect guidence of what it is and how to create it make phases like a sequesntial pipeline and a quality checker talk hard code about the logo hlw the desighn was and also the persons media detecting face of the person and alighning it perfect and also the text alighnment check clearly visible for to create content what type of content how to adjust the text if it was too big how to adjust it perfecyly so the human eyes can see it clearly and i mist have left some things not mentioned find those and also see the same thing same design in multiple angles to make a perefectly replicable template now show me the plan before building it think catefully twice
+
+---
+[2026-06-12 — REQUEST: build a perfect hard-coded production system]
+Founder wants a super hard-coded, consistently-replicable system in
+media-domination that produces these posts where ONLY media+content change.
+Must hard-code: logo treatment, design, person media + face-detect + alignment,
+text alignment + auto-fit (shrink if too big, clearly visible), content type +
+rules, a QUALITY CHECKER, sequential pipeline phases, and document the template
+from multiple angles for replicability. Asked to PLAN first, think twice.
+-> Full plan written to SYSTEM_PLAN.md. Locked decisions: comparison=MIX (ranking
+1 hero / A-vs-B 2 bubbles); niches=PEOPLE-LED first; variety=3 layout angles.
+Awaiting GREEN LIGHT before building the pipeline.
+
+---
+[2026-06-12T00:12:38.564Z]
+i want you to male sure hard code it there is no work around but each one need to be hard coded to make sure it doesnt change anything in the design
+
+---
+[2026-06-12 — BUILT: locked design core of the production system]
+Founder: hard-code everything, no workarounds, design must never drift.
+Built: config.js (deep-frozen single source of truth — every design constant) +
+lib/render.js (pure, config-driven; 3-angle rotation right/left/center; locked
+text auto-fit) + lib/quality.js (P7 checker) + build-sample.js (proves the NVIDIA
+post reproduces from config alone). Verified: config immutable (mutation rejected);
+quality PASS on design checks; facts_verified + uniqueness_claimed correctly flagged
+pending (P3/P9 not built yet). TEMPLATE_SPEC.md written. Saved to phone.
+Remaining phases to build: P1 topic, P2 hook-bank (extract PDF->json), P3 facts+
+truth-check, P4 scraper, P5 prep (generalize prep_circles), P8 export(reel), P9
+post+claim, P10 cleanup, P11 learn, run-post.js orchestrator.
+
+---
+[2026-06-12T00:25:47.306Z]
+create 10 of these posts and post 6 of them in threads now in this minute each account gets 2 post total 6 each one is unique and different type of content post now after you create rest of the posts schedule it
+
+---
+[2026-06-12T01:06:51.187Z]
+<task-notification>
+<task-id>b6y85a4bf</task-id>
+<tool-use-id>toolu_01X57eovLLGKW1Q835z9zN6S</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/b6y85a4bf.output</output-file>
+<status>completed</status>
+<summary>Background command "Re-run full build for all 10 with improved pipeline" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12T01:17:52.793Z]
+<task-notification>
+<task-id>bu0r4njy8</task-id>
+<tool-use-id>toolu_01UJVrVqq9RpU991ERAnDJEf</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/bu0r4njy8.output</output-file>
+<status>completed</status>
+<summary>Background command "Rebuild all 10 with stricter quality gates" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12T01:24:02.032Z]
+<task-notification>
+<task-id>bipseec91</task-id>
+<tool-use-id>toolu_01UgXRsaczbJZgq75DwBVhi3</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/bipseec91.output</output-file>
+<status>completed</status>
+<summary>Background command "Rebuild all with full-name filter" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12T01:31:01.781Z]
+done?
+
+---
+[2026-06-12T01:49:14.242Z]
+so what you neeed guide me
+
+---
+[2026-06-12T01:57:47.759Z]
+check now
+
+---
+[2026-06-12T02:31:56.587Z]
+done
+
+---
+[2026-06-12T02:53:42.109Z]
+<task-notification>
+<task-id>b5p6fpgvh</task-id>
+<tool-use-id>toolu_01KErUMeod3Pf6R4DqUUHfuT</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/b5p6fpgvh.output</output-file>
+<status>completed</status>
+<summary>Background command "Save to phone and post 6 to Threads live" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12 — POSTED 6 LIVE to Threads ✓]
+Founder dropped 6 correct logos + 3+ solo photos per person. Wired in, re-prepped
+(face-centered circle crops from user photos), rendered, quality PASS on all 6,
+visually verified (correct person+logo, no sunglasses). Published 2/account:
+@hanubees=nvidia,tesla · @hanubees.ai=apple,amazon · @hanubees.biz=microsoft,meta.
+Saved to phone FINAL/. REMAINING: schedule 4 (berkshire/Buffett, google/Pichai,
+lvmh/Arnault, oracle/Ellison) — BLOCKED: need their logos + solo photos dropped
+(google's auto-logo was wrong = Google+; others failed media). run-post via
+lib/post.js postCarousel({scheduledAt}) once assets dropped.
+
+---
+[2026-06-12T03:07:09.618Z]
+now lets create a video the same formet same everything we need to hard code it ? ready?
+
+---
+[2026-06-12T03:13:25.003Z]
+can you see now npx shadcn@latest add @react-bits/SideRays-JS-CSS
+
+---
+[2026-06-12T03:15:06.661Z]
+import SideRays from './SideRays';
+
+<div style={{ width: '100%', height: '600px', position: 'relative' }}>
+  <SideRays
+    speed={2.5}
+    rayColor1="#EAB308"
+    rayColor2="#96c8ff"
+    intensity={2}
+    spread={2}
+    origin="top-right"
+    tilt={0}
+    saturation={1.5}
+    blend={0.75}
+    falloff={1.6}
+    opacity={1}
+  />
+</div>import { useRef, useEffect, useState } from 'react';
+import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import './SideRays.css';
+
+const hexToRgb = hex => {
+  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
+};
+
+const originToFlip = origin => {
+  switch (origin) {
+    case 'top-left': return [1, 0];
+    case 'bottom-right': return [0, 1];
+    case 'bottom-left': return [1, 1];
+    default: return [0, 0];
+  }
+};
+
+const SideRays = ({
+  speed = 2.5,
+  rayColor1 = '#EAB308',
+  rayColor2 = '#96c8ff',
+  intensity = 2,
+  spread = 2,
+  origin = 'top-right',
+  tilt = 0,
+  saturation = 1.5,
+  blend = 0.75,
+  falloff = 1.6,
+  opacity = 1.0,
+  className = ''
+}) => {
+  const containerRef = useRef(null);
+  const uniformsRef = useRef(null);
+  const rendererRef = useRef(null);
+  const animationIdRef = useRef(null);
+  const meshRef = useRef(null);
+  const cleanupFunctionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    observerRef.current = new IntersectionObserver(
+      entries => {
+        const entry = entries[0];
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observerRef.current.observe(containerRef.current);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || !containerRef.current) return;
+
+    if (cleanupFunctionRef.current) {
+      cleanupFunctionRef.current();
+      cleanupFunctionRef.current = null;
+    }
+
+    const initializeWebGL = async () => {
+      if (!containerRef.current) return;
+
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      if (!containerRef.current) return;
+
+      const renderer = new Renderer({
+        dpr: Math.min(window.devicePixelRatio, 2),
+        alpha: true
+      });
+      rendererRef.current = renderer;
+
+      const gl = renderer.gl;
+      gl.canvas.style.width = '100%';
+      gl.canvas.style.height = '100%';
+
+      while (containerRef.current.firstChild) {
+        containerRef.current.removeChild(containerRef.current.firstChild);
+      }
+      containerRef.current.appendChild(gl.canvas);
+
+      const vert = `
+attribute vec2 position;
+void main() {
+  gl_Position = vec4(position, 0.0, 1.0);
+}`;
+
+      const frag = `precision highp float;
+
+uniform float iTime;
+uniform vec2 iResolution;
+uniform float iSpeed;
+uniform vec3 iRayColor1;
+uniform vec3 iRayColor2;
+uniform float iIntensity;
+uniform float iSpread;
+uniform float iFlipX;
+uniform float iFlipY;
+uniform float iTilt;
+uniform float iSaturation;
+uniform float iBlend;
+uniform float iFalloff;
+uniform float iOpacity;
+
+float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {
+  vec2 sourceToCoord = coord - raySource;
+  float cosAngle = dot(normalize(sourceToCoord), rayRefDirection);
+  return clamp(
+    (0.45 + 0.15 * sin(cosAngle * seedA + iTime * speed)) +
+    (0.3 + 0.2 * cos(-cosAngle * seedB + iTime * speed)),
+    0.0, 1.0) *
+    clamp((iResolution.x - length(sourceToCoord)) / iResolution.x, 0.5, 1.0);
+}
+
+void main() {
+  vec2 fragCoord = gl_FragCoord.xy;
+  if (iFlipX > 0.5) fragCoord.x = iResolution.x - fragCoord.x;
+  if (iFlipY > 0.5) fragCoord.y = iResolution.y - fragCoord.y;
+
+  vec2 coord = vec2(fragCoord.x, iResolution.y - fragCoord.y);
+  vec2 rayPos = vec2(iResolution.x * 1.1, -0.5 * iResolution.y);
+
+  float tiltRad = iTilt * 3.14159265 / 180.0;
+  float cs = cos(tiltRad);
+  float sn = sin(tiltRad);
+  vec2 rel = coord - rayPos;
+  vec2 tiltedCoord = vec2(rel.x * cs - rel.y * sn, rel.x * sn + rel.y * cs) + rayPos;
+
+  float halfSpread = iSpread * 0.275;
+  vec2 rayRefDir1 = normalize(vec2(cos(0.785398 + halfSpread), sin(0.785398 + halfSpread)));
+  vec2 rayRefDir2 = normalize(vec2(cos(0.785398 - halfSpread), sin(0.785398 - halfSpread)));
+
+  vec4 rays1 = vec4(iRayColor1, 1.0) * rayStrength(rayPos, rayRefDir1, tiltedCoord, 36.2214, 21.11349, iSpeed);
+  vec4 rays2 = vec4(iRayColor2, 1.0) * rayStrength(rayPos, rayRefDir2, tiltedCoord, 22.3991, 18.0234, iSpeed * 0.2);
+
+  vec4 color = rays1 * (1.0 - iBlend) * 0.9 + rays2 * iBlend * 0.9;
+
+  float distanceToLight = length(fragCoord.xy - vec2(rayPos.x, iResolution.y - rayPos.y)) / iResolution.y;
+  float brightness = iIntensity * 0.4 / pow(max(distanceToLight, 0.001), iFalloff);
+  color.rgb *= brightness;
+
+  float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+  color.rgb = mix(vec3(gray), color.rgb, iSaturation);
+
+  color.a = max(color.r, max(color.g, color.b)) * iOpacity;
+  gl_FragColor = color;
+}`;
+
+      const [flipX, flipY] = originToFlip(origin);
+      const uniforms = {
+        iTime: { value: 0 },
+        iResolution: { value: [1, 1] },
+        iSpeed: { value: speed },
+        iRayColor1: { value: hexToRgb(rayColor1) },
+        iRayColor2: { value: hexToRgb(rayColor2) },
+        iIntensity: { value: intensity },
+        iSpread: { value: spread },
+        iFlipX: { value: flipX },
+        iFlipY: { value: flipY },
+        iTilt: { value: tilt },
+        iSaturation: { value: saturation },
+        iBlend: { value: blend },
+        iFalloff: { value: falloff },
+        iOpacity: { value: opacity }
+      };
+      uniformsRef.current = uniforms;
+
+      const geometry = new Triangle(gl);
+      const program = new Program(gl, { vertex: vert, fragment: frag, uniforms });
+      const mesh = new Mesh(gl, { geometry, program });
+      meshRef.current = mesh;
+
+      const updateSize = () => {
+        if (!containerRef.current || !renderer) return;
+        renderer.dpr = Math.min(window.devicePixelRatio, 2);
+        const { clientWidth: w, clientHeight: h } = containerRef.current;
+        renderer.setSize(w, h);
+        uniforms.iResolution.value = [w * renderer.dpr, h * renderer.dpr];
+      };
+
+      const loop = t => {
+        if (!rendererRef.current || !uniformsRef.current || !meshRef.current) return;
+        uniforms.iTime.value = t * 0.001;
+        try {
+          renderer.render({ scene: mesh });
+          animationIdRef.current = requestAnimationFrame(loop);
+        } catch (e) {
+          return;
+        }
+      };
+
+      window.addEventListener('resize', updateSize);
+      updateSize();
+      animationIdRef.current = requestAnimationFrame(loop);
+
+      cleanupFunctionRef.current = () => {
+        if (animationIdRef.current) {
+          cancelAnimationFrame(animationIdRef.current);
+          animationIdRef.current = null;
+        }
+        window.removeEventListener('resize', updateSize);
+        if (renderer) {
+          try {
+            const loseCtx = renderer.gl.getExtension('WEBGL_lose_context');
+            if (loseCtx) loseCtx.loseContext();
+            const canvas = renderer.gl.canvas;
+            if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+          } catch (e) {}
+        }
+        rendererRef.current = null;
+        uniformsRef.current = null;
+        meshRef.current = null;
+      };
+    };
+
+    initializeWebGL();
+
+    return () => {
+      if (cleanupFunctionRef.current) {
+        cleanupFunctionRef.current();
+        cleanupFunctionRef.current = null;
+      }
+    };
+  }, [isVisible, speed, rayColor1, rayColor2, intensity, spread, origin, tilt, saturation, blend, falloff, opacity]);
+
+  useEffect(() => {
+    if (!uniformsRef.current) return;
+    const u = uniformsRef.current;
+    u.iSpeed.value = speed;
+    u.iRayColor1.value = hexToRgb(rayColor1);
+    u.iRayColor2.value = hexToRgb(rayColor2);
+    u.iIntensity.value = intensity;
+    u.iSpread.value = spread;
+    const [flipX, flipY] = originToFlip(origin);
+    u.iFlipX.value = flipX;
+    u.iFlipY.value = flipY;
+    u.iTilt.value = tilt;
+    u.iSaturation.value = saturation;
+    u.iBlend.value = blend;
+    u.iFalloff.value = falloff;
+    u.iOpacity.value = opacity;
+  }, [speed, rayColor1, rayColor2, intensity, spread, origin, tilt, saturation, blend, falloff, opacity]);
+
+  return <div ref={containerRef} className={`side-rays-container ${className}`.trim()} />;
+};
+
+export default SideRays;
+.side-rays-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+ use this as background for our video and tell me when you are done
+
+---
+[2026-06-12 — BUILT video/reel pipeline with SideRays background]
+Founder gave reactbits SideRays source. Ported GLSL fragment shader -> numpy
+(lib/rays.py) since pipeline is ffmpeg not browser. config.VIDEO locks
+1080x1920/30fps/3.2s-per-slide/music. lib/render.js gained transparent mode
+(no bg gradient + scrim) so rays show through. lib/make-video.js composites 4
+transparent slides over the rays bg + music via ffmpeg. Rays in brand #ffbe00.
+Sample nvidia_reel.mp4 built + saved to phone FINAL/nvidia/. Same design as image
+posts, vertical with motion. NEXT (if approved): route reels to video accounts
+(IG/TikTok/YT) with per-account unique content.
+
+---
+[2026-06-12T03:36:19.821Z]
+npx shadcn@latest add @react-bits/BlurText-JS-CSS , import BlurText from "./BlurText";
+
+const handleAnimationComplete = () => {
+  console.log('Animation completed!');
+};
+
+<BlurText
+  text="Isn't this so cool?!"
+  delay={200}
+  animateBy="words"
+  direction="top"
+  onAnimationComplete={handleAnimationComplete}
+  className="text-2xl mb-8"
+/> , import { motion } from 'motion/react';
+import { useEffect, useRef, useState, useMemo } from 'react';
+
+const buildKeyframes = (from, steps) => {
+  const keys = new Set([...Object.keys(from), ...steps.flatMap(s => Object.keys(s))]);
+
+  const keyframes = {};
+  keys.forEach(k => {
+    keyframes[k] = [from[k], ...steps.map(s => s[k])];
+  });
+  return keyframes;
+};
+
+const BlurText = ({
+  text = '',
+  delay = 200,
+  className = '',
+  animateBy = 'words',
+  direction = 'top',
+  threshold = 0.1,
+  rootMargin = '0px',
+  animationFrom,
+  animationTo,
+  easing = t => t,
+  onAnimationComplete,
+  stepDuration = 0.35
+}) => {
+  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const [inView, setInView] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.unobserve(ref.current);
+        }
+      },
+      { threshold, rootMargin }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
+
+  const defaultFrom = useMemo(
+    () =>
+      direction === 'top' ? { filter: 'blur(10px)', opacity: 0, y: -50 } : { filter: 'blur(10px)', opacity: 0, y: 50 },
+    [direction]
+  );
+
+  const defaultTo = useMemo(
+    () => [
+      {
+        filter: 'blur(5px)',
+        opacity: 0.5,
+        y: direction === 'top' ? 5 : -5
+      },
+      { filter: 'blur(0px)', opacity: 1, y: 0 }
+    ],
+    [direction]
+  );
+
+  const fromSnapshot = animationFrom ?? defaultFrom;
+  const toSnapshots = animationTo ?? defaultTo;
+
+  const stepCount = toSnapshots.length + 1;
+  const totalDuration = stepDuration * (stepCount - 1);
+  const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
+
+  return (
+    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
+      {elements.map((segment, index) => {
+        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
+
+        const spanTransition = {
+          duration: totalDuration,
+          times,
+          delay: (index * delay) / 1000
+        };
+        spanTransition.ease = easing;
+
+        return (
+          <motion.span
+            className="inline-block will-change-[transform,filter,opacity]"
+            key={index}
+            initial={fromSnapshot}
+            animate={inView ? animateKeyframes : fromSnapshot}
+            transition={spanTransition}
+            onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+          >
+            {segment === ' ' ? '\u00A0' : segment}
+            {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
+          </motion.span>
+        );
+      })}
+    </p>
+  );
+};
+
+export default BlurText;
+ , use this for text
+
+---
+[2026-06-12 — added BlurText headline animation to reels]
+Founder gave reactbits BlurText (motion) source. Ported to lib/blurtext.py: per-word
+blur 10->5->0 + opacity 0->0.5->1 + y slide, staggered by delay, matched to our exact
+headline layout (render.js now exports headlineLayout + noHeadline mode so the headline
+is NOT baked into the slide and animates as a transparent frame overlay). make-video.js
+composites rays bg + slides(noHeadline) + BlurText frames + music. nvidia_reel.mp4 updated
+on phone. Reels now = SideRays moving bg + static design + word-by-word blur-in headline.
+
+---
+[2026-06-12T03:50:47.773Z]
+npx shadcn@latest add @react-bits/Folder-JS-CSS , import Folder from './Folder'
+
+<div style={{ height: '600px', position: 'relative' }}>
+  <Folder size={2} color="#5227FF" className="custom-folder"
+  color="#5227FF"
+  size={1.8}
+/>
+</div> , import { useState } from 'react';
+import './Folder.css';
+
+const darkenColor = (hex, percent) => {
+  let color = hex.startsWith('#') ? hex.slice(1) : hex;
+  if (color.length === 3) {
+    color = color
+      .split('')
+      .map(c => c + c)
+      .join('');
+  }
+  const num = parseInt(color, 16);
+  let r = (num >> 16) & 0xff;
+  let g = (num >> 8) & 0xff;
+  let b = num & 0xff;
+  r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
+  g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
+  b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+};
+
+const Folder = ({ color = '#5227FF', size = 1, items = [], className = '' }) => {
+  const maxItems = 3;
+  const papers = items.slice(0, maxItems);
+  while (papers.length < maxItems) {
+    papers.push(null);
+  }
+
+  const [open, setOpen] = useState(false);
+  const [paperOffsets, setPaperOffsets] = useState(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+
+  const folderBackColor = darkenColor(color, 0.08);
+  const paper1 = darkenColor('#ffffff', 0.1);
+  const paper2 = darkenColor('#ffffff', 0.05);
+  const paper3 = '#ffffff';
+
+  const handleClick = () => {
+    setOpen(prev => !prev);
+    if (open) {
+      setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+    }
+  };
+
+  const handlePaperMouseMove = (e, index) => {
+    if (!open) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const offsetX = (e.clientX - centerX) * 0.15;
+    const offsetY = (e.clientY - centerY) * 0.15;
+    setPaperOffsets(prev => {
+      const newOffsets = [...prev];
+      newOffsets[index] = { x: offsetX, y: offsetY };
+      return newOffsets;
+    });
+  };
+
+  const handlePaperMouseLeave = (e, index) => {
+    setPaperOffsets(prev => {
+      const newOffsets = [...prev];
+      newOffsets[index] = { x: 0, y: 0 };
+      return newOffsets;
+    });
+  };
+
+  const folderStyle = {
+    '--folder-color': color,
+    '--folder-back-color': folderBackColor,
+    '--paper-1': paper1,
+    '--paper-2': paper2,
+    '--paper-3': paper3
+  };
+
+  const folderClassName = `folder ${open ? 'open' : ''}`.trim();
+  const scaleStyle = { transform: `scale(${size})` };
+
+  return (
+    <div style={scaleStyle} className={className}>
+      <div className={folderClassName} style={folderStyle} onClick={handleClick}>
+        <div className="folder__back">
+          {papers.map((item, i) => (
+            <div
+              key={i}
+              className={`paper paper-${i + 1}`}
+              onMouseMove={e => handlePaperMouseMove(e, i)}
+              onMouseLeave={e => handlePaperMouseLeave(e, i)}
+              style={
+                open
+                  ? {
+                      '--magnet-x': `${paperOffsets[i]?.x || 0}px`,
+                      '--magnet-y': `${paperOffsets[i]?.y || 0}px`
+                    }
+                  : {}
+              }
+            >
+              {item}
+            </div>
+          ))}
+          <div className="folder__front"></div>
+          <div className="folder__front right"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Folder;
+ , :root {
+  --folder-color: #70a1ff;
+  --folder-back-color: #4785ff;
+  --paper-1: #e6e6e6;
+  --paper-2: #f2f2f2;
+  --paper-3: #ffffff;
+}
+
+.folder {
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+.folder:not(.folder--click):hover {
+  transform: translateY(-8px);
+}
+
+.folder:not(.folder--click):hover .paper {
+  transform: translate(-50%, 0%);
+}
+
+.folder:not(.folder--click):hover .folder__front {
+  transform: skew(15deg) scaleY(0.6);
+}
+
+.folder:not(.folder--click):hover .right {
+  transform: skew(-15deg) scaleY(0.6);
+}
+
+.folder.open {
+  transform: translateY(-8px);
+}
+
+.folder.open .paper:nth-child(1) {
+  transform: translate(-120%, -70%) rotateZ(-15deg);
+}
+
+.folder.open .paper:nth-child(1):hover {
+  transform: translate(-120%, -70%) rotateZ(-15deg) scale(1.1);
+}
+
+.folder.open .paper:nth-child(2) {
+  transform: translate(10%, -70%) rotateZ(15deg);
+  height: 80%;
+}
+
+.folder.open .paper:nth-child(2):hover {
+  transform: translate(10%, -70%) rotateZ(15deg) scale(1.1);
+}
+
+.folder.open .paper:nth-child(3) {
+  transform: translate(-50%, -100%) rotateZ(5deg);
+  height: 80%;
+}
+
+.folder.open .paper:nth-child(3):hover {
+  transform: translate(-50%, -100%) rotateZ(5deg) scale(1.1);
+}
+
+.folder.open .folder__front {
+  transform: skew(15deg) scaleY(0.6);
+}
+
+.folder.open .right {
+  transform: skew(-15deg) scaleY(0.6);
+}
+
+.folder__back {
+  position: relative;
+  width: 100px;
+  height: 80px;
+  background: var(--folder-back-color);
+  border-radius: 0px 10px 10px 10px;
+}
+
+.folder__back::after {
+  position: absolute;
+  z-index: 0;
+  bottom: 98%;
+  left: 0;
+  content: '';
+  width: 30px;
+  height: 10px;
+  background: var(--folder-back-color);
+  border-radius: 5px 5px 0 0;
+}
+
+.paper {
+  position: absolute;
+  z-index: 2;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  width: 70%;
+  height: 80%;
+  background: var(--paper-1);
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.paper:nth-child(2) {
+  background: var(--paper-2);
+  width: 80%;
+  height: 70%;
+}
+
+.paper:nth-child(3) {
+  background: var(--paper-3);
+  width: 90%;
+  height: 60%;
+}
+
+.folder__front {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  background: var(--folder-color);
+  border-radius: 5px 10px 10px 10px;
+  transform-origin: bottom;
+  transition: all 0.3s ease-in-out;
+}
+ instead of file make our bee png there super small and only use this for intro seconds of the video
+
+---
+[2026-06-12T04:00:45.204Z]
+you can use remotion if you want to
+
+---
+[2026-06-12T04:03:46.642Z]
+<task-notification>
+<task-id>b0bp6nxmg</task-id>
+<tool-use-id>toolu_01WAzgEWMjsm16qduSEF6wpK</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/b0bp6nxmg.output</output-file>
+<status>completed</status>
+<summary>Background command "Rebuild reel with folder-bee intro" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12 — reel finalized: folder-bee intro + music; ported pipeline confirmed]
+Added Folder intro (reactbits) ported to lib/intro.py: yellow folder opens, front
+folds (skew+scaleY), 3 SMALL bee pngs pop out & rotate (instead of papers), wordmark
+"HANUBEES MEDIA ARMY" fades in. config.VIDEO.introSec=2.6; make-video shifts slides+
+text by introSec, rays+music span full 15.4s reel. Music: founder gave YT link
+0aHbyohe028 (copyright-free) -> yt-dlp -> assets/music/founder_track.mp3 -> config.
+Founder confirmed: stay on the LOCAL ported pipeline (ffmpeg+numpy+PIL), Remotion not
+needed (no local Chromium on aarch64; that path = cloud/GH-Actions only).
+Reel stack now: intro(folder+bees) -> SideRays bg -> static design -> BlurText headline -> music.
+
+---
+[2026-06-12T04:23:27.980Z]
+i want the images we overlayed of the people amd logo constantly rotate like a left to right like 3d pictures same everything but with a animatiom npx shadcn@latest add @react-bits/FlyingPosters-JS-CSS , import FlyingPosters from './FlyingPosters'
+
+const items = [
+  'https://picsum.photos/500/500?grayscale', 
+  'https://picsum.photos/600/600?grayscale', 
+  'https://picsum.photos/400/400?grayscale'
+];
+
+<div style={{ height: '600px', position: 'relative' }}>
+  <FlyingPosters items={items}
+  items={["https://picsum.photos/500/500?grayscale","https://picsum.photos/600/600?grayscale","https://picsum.photos/400/400?grayscale"]}
+  planeWidth={320}
+  planeHeight={320}
+  distortion={3}
+  scrollEase={0.01}
+  cameraFov={45}
+  cameraZ={20}
+/>
+</div> , import { useRef, useEffect } from 'react';
+import { Renderer, Camera, Transform, Plane, Program, Mesh, Texture } from 'ogl';
+
+import './FlyingPosters.css';
+
+const vertexShader = `
+precision highp float;
+
+attribute vec3 position;
+attribute vec2 uv;
+attribute vec3 normal;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat3 normalMatrix;
+
+uniform float uPosition;
+uniform float uTime;
+uniform float uSpeed;
+uniform vec3 distortionAxis;
+uniform vec3 rotationAxis;
+uniform float uDistortion;
+
+varying vec2 vUv;
+varying vec3 vNormal;
+
+float PI = 3.141592653589793238;
+mat4 rotationMatrix(vec3 axis, float angle) {
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    return mat4(
+      oc * axis.x * axis.x + c,         oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+      oc * axis.x * axis.y + axis.z * s,oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+      oc * axis.z * axis.x - axis.y * s,oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+      0.0,                              0.0,                                0.0,                                1.0
+    );
+}
+
+vec3 rotate(vec3 v, vec3 axis, float angle) {
+  mat4 m = rotationMatrix(axis, angle);
+  return (m * vec4(v, 1.0)).xyz;
+}
+
+float qinticInOut(float t) {
+  return t < 0.5
+    ? 16.0 * pow(t, 5.0)
+    : -0.5 * abs(pow(2.0 * t - 2.0, 5.0)) + 1.0;
+}
+
+void main() {
+  vUv = uv;
+  
+  float norm = 0.5;
+  vec3 newpos = position;
+  float offset = (dot(distortionAxis, position) + norm / 2.) / norm;
+  float localprogress = clamp(
+    (fract(uPosition * 5.0 * 0.01) - 0.01 * uDistortion * offset) / (1. - 0.01 * uDistortion),
+    0.,
+    2.
+  );
+  localprogress = qinticInOut(localprogress) * PI;
+  newpos = rotate(newpos, rotationAxis, localprogress);
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(newpos, 1.0);
+}
+`;
+
+const fragmentShader = `
+precision highp float;
+
+uniform vec2 uImageSize;
+uniform vec2 uPlaneSize;
+uniform sampler2D tMap;
+
+varying vec2 vUv;
+
+void main() {
+  vec2 imageSize = uImageSize;
+  vec2 planeSize = uPlaneSize;
+
+  float imageAspect = imageSize.x / imageSize.y;
+  float planeAspect = planeSize.x / planeSize.y;
+  vec2 scale = vec2(1.0, 1.0);
+
+  if (planeAspect > imageAspect) {
+      scale.x = imageAspect / planeAspect;
+  } else {
+      scale.y = planeAspect / imageAspect;
+  }
+
+  vec2 uv = vUv * scale + (1.0 - scale) * 0.5;
+
+  gl_FragColor = texture2D(tMap, uv);
+}
+`;
+
+function AutoBind(self, { include, exclude } = {}) {
+  const getAllProperties = object => {
+    const properties = new Set();
+    do {
+      for (const key of Reflect.ownKeys(object)) {
+        properties.add([object, key]);
+      }
+    } while ((object = Reflect.getPrototypeOf(object)) && object !== Object.prototype);
+    return properties;
+  };
+
+  const filter = key => {
+    const match = pattern => (typeof pattern === 'string' ? key === pattern : pattern.test(key));
+
+    if (include) return include.some(match);
+    if (exclude) return !exclude.some(match);
+    return true;
+  };
+
+  for (const [object, key] of getAllProperties(self.constructor.prototype)) {
+    if (key === 'constructor' || !filter(key)) continue;
+    const descriptor = Reflect.getOwnPropertyDescriptor(object, key);
+    if (descriptor && typeof descriptor.value === 'function') {
+      self[key] = self[key].bind(self);
+    }
+  }
+  return self;
+}
+
+function lerp(p1, p2, t) {
+  return p1 + (p2 - p1) * t;
+}
+
+function map(num, min1, max1, min2, max2, round = false) {
+  const num1 = (num - min1) / (max1 - min1);
+  const num2 = num1 * (max2 - min2) + min2;
+  return round ? Math.round(num2) : num2;
+}
+
+class Media {
+  constructor({ gl, geometry, scene, screen, viewport, image, length, index, planeWidth, planeHeight, distortion }) {
+    this.extra = 0;
+    this.gl = gl;
+    this.geometry = geometry;
+    this.scene = scene;
+    this.screen = screen;
+    this.viewport = viewport;
+    this.image = image;
+    this.length = length;
+    this.index = index;
+    this.planeWidth = planeWidth;
+    this.planeHeight = planeHeight;
+    this.distortion = distortion;
+
+    this.createShader();
+    this.createMesh();
+    this.onResize();
+  }
+
+  createShader() {
+    const texture = new Texture(this.gl, {
+      generateMipmaps: false
+    });
+
+    this.program = new Program(this.gl, {
+      depthTest: false,
+      depthWrite: false,
+      fragment: fragmentShader,
+      vertex: vertexShader,
+      uniforms: {
+        tMap: { value: texture },
+        uPosition: { value: 0 },
+        uPlaneSize: { value: [0, 0] },
+        uImageSize: { value: [0, 0] },
+        uSpeed: { value: 0 },
+        rotationAxis: { value: [0, 1, 0] },
+        distortionAxis: { value: [1, 1, 0] },
+        uDistortion: { value: this.distortion },
+        uViewportSize: { value: [this.viewport.width, this.viewport.height] },
+        uTime: { value: 0 }
+      },
+      cullFace: false
+    });
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = this.image;
+    img.onload = () => {
+      texture.image = img;
+      this.program.uniforms.uImageSize.value = [img.naturalWidth, img.naturalHeight];
+    };
+  }
+
+  createMesh() {
+    this.plane = new Mesh(this.gl, {
+      geometry: this.geometry,
+      program: this.program
+    });
+    this.plane.setParent(this.scene);
+  }
+
+  setScale() {
+    this.plane.scale.x = (this.viewport.width * this.planeWidth) / this.screen.width;
+    this.plane.scale.y = (this.viewport.height * this.planeHeight) / this.screen.height;
+
+    this.plane.position.x = 0;
+    this.plane.program.uniforms.uPlaneSize.value = [this.plane.scale.x, this.plane.scale.y];
+  }
+
+  onResize({ screen, viewport } = {}) {
+    if (screen) this.screen = screen;
+    if (viewport) {
+      this.viewport = viewport;
+      this.plane.program.uniforms.uViewportSize.value = [this.viewport.width, this.viewport.height];
+    }
+    this.setScale();
+
+    this.padding = 5;
+    this.height = this.plane.scale.y + this.padding;
+    this.heightTotal = this.height * this.length;
+
+    this.y = -this.heightTotal / 2 + (this.index + 0.5) * this.height;
+  }
+
+  update(scroll) {
+    this.plane.position.y = this.y - scroll.current - this.extra;
+
+    const position = map(this.plane.position.y, -this.viewport.height, this.viewport.height, 5, 15);
+
+    this.program.uniforms.uPosition.value = position;
+    this.program.uniforms.uTime.value += 0.04;
+    this.program.uniforms.uSpeed.value = scroll.current;
+
+    const planeHeight = this.plane.scale.y;
+    const viewportHeight = this.viewport.height;
+
+    const topEdge = this.plane.position.y + planeHeight / 2;
+    const bottomEdge = this.plane.position.y - planeHeight / 2;
+
+    if (topEdge < -viewportHeight / 2) {
+      this.extra -= this.heightTotal;
+    } else if (bottomEdge > viewportHeight / 2) {
+      this.extra += this.heightTotal;
+    }
+  }
+}
+
+class Canvas {
+  constructor({ container, canvas, items, planeWidth, planeHeight, distortion, scrollEase, cameraFov, cameraZ }) {
+    this.container = container;
+    this.canvas = canvas;
+    this.items = items;
+    this.planeWidth = planeWidth;
+    this.planeHeight = planeHeight;
+    this.distortion = distortion;
+    this.scroll = {
+      ease: scrollEase,
+      current: 0,
+      target: 0,
+      last: 0
+    };
+    this.cameraFov = cameraFov;
+    this.cameraZ = cameraZ;
+
+    AutoBind(this);
+
+    this.createRenderer();
+    this.createCamera();
+    this.createScene();
+    this.onResize();
+
+    this.createGeometry();
+    this.createMedias();
+    this.update();
+    this.addEventListeners();
+    this.createPreloader();
+  }
+
+  createRenderer() {
+    this.renderer = new Renderer({
+      canvas: this.canvas,
+      alpha: true,
+      antialias: true,
+      dpr: Math.min(window.devicePixelRatio, 2)
+    });
+    this.gl = this.renderer.gl;
+  }
+
+  createCamera() {
+    this.camera = new Camera(this.gl);
+    this.camera.fov = this.cameraFov;
+    this.camera.position.z = this.cameraZ;
+  }
+
+  createScene() {
+    this.scene = new Transform();
+  }
+
+  createGeometry() {
+    this.planeGeometry = new Plane(this.gl, {
+      heightSegments: 1,
+      widthSegments: 100
+    });
+  }
+
+  createMedias() {
+    this.medias = this.items.map((image, index) => {
+      return new Media({
+        gl: this.gl,
+        geometry: this.planeGeometry,
+        scene: this.scene,
+        screen: this.screen,
+        viewport: this.viewport,
+        image,
+        length: this.items.length,
+        index,
+        planeWidth: this.planeWidth,
+        planeHeight: this.planeHeight,
+        distortion: this.distortion
+      });
+    });
+  }
+
+  createPreloader() {
+    this.loaded = 0;
+    if (!this.items.length) return;
+
+    this.items.forEach(src => {
+      const image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.src = src;
+      image.onload = () => {
+        this.loaded += 1;
+        if (this.loaded === this.items.length) {
+          document.documentElement.classList.remove('loading');
+          document.documentElement.classList.add('loaded');
+        }
+      };
+    });
+  }
+
+  onResize() {
+    const rect = this.container.getBoundingClientRect();
+    this.screen = {
+      width: rect.width,
+      height: rect.height
+    };
+
+    this.renderer.setSize(this.screen.width, this.screen.height);
+
+    this.camera.perspective({
+      aspect: this.gl.canvas.width / this.gl.canvas.height
+    });
+
+    const fov = (this.camera.fov * Math.PI) / 180;
+    const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+    const width = height * this.camera.aspect;
+
+    this.viewport = { height, width };
+
+    if (this.medias) {
+      this.medias.forEach(media => media.onResize({ screen: this.screen, viewport: this.viewport }));
+    }
+  }
+
+  onTouchDown(e) {
+    this.isDown = true;
+    this.scroll.position = this.scroll.current;
+    this.start = e.touches ? e.touches[0].clientY : e.clientY;
+  }
+
+  onTouchMove(e) {
+    if (!this.isDown) return;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    const distance = (this.start - y) * 0.1;
+    this.scroll.target = this.scroll.position + distance;
+  }
+
+  onTouchUp() {
+    this.isDown = false;
+  }
+
+  onWheel(e) {
+    const speed = e.deltaY;
+    this.scroll.target += speed * 0.005;
+  }
+
+  update() {
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+
+    if (this.medias) {
+      this.medias.forEach(media => media.update(this.scroll));
+    }
+    this.renderer.render({ scene: this.scene, camera: this.camera });
+    this.scroll.last = this.scroll.current;
+    requestAnimationFrame(this.update);
+  }
+
+  addEventListeners() {
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('wheel', this.onWheel);
+    window.addEventListener('mousewheel', this.onWheel);
+
+    window.addEventListener('mousedown', this.onTouchDown);
+    window.addEventListener('mousemove', this.onTouchMove);
+    window.addEventListener('mouseup', this.onTouchUp);
+
+    window.addEventListener('touchstart', this.onTouchDown);
+    window.addEventListener('touchmove', this.onTouchMove);
+    window.addEventListener('touchend', this.onTouchUp);
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('wheel', this.onWheel);
+    window.removeEventListener('mousewheel', this.onWheel);
+
+    window.removeEventListener('mousedown', this.onTouchDown);
+    window.removeEventListener('mousemove', this.onTouchMove);
+    window.removeEventListener('mouseup', this.onTouchUp);
+
+    window.removeEventListener('touchstart', this.onTouchDown);
+    window.removeEventListener('touchmove', this.onTouchMove);
+    window.removeEventListener('touchend', this.onTouchUp);
+  }
+}
+
+export default function FlyingPosters({
+  items = [],
+  planeWidth = 320,
+  planeHeight = 320,
+  distortion = 3,
+  scrollEase = 0.01,
+  cameraFov = 45,
+  cameraZ = 20,
+  className,
+  ...props
+}) {
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
+  const instanceRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    instanceRef.current = new Canvas({
+      container: containerRef.current,
+      canvas: canvasRef.current,
+      items,
+      planeWidth,
+      planeHeight,
+      distortion,
+      scrollEase,
+      cameraFov,
+      cameraZ
+    });
+
+    return () => {
+      if (instanceRef.current) {
+        instanceRef.current.destroy();
+        instanceRef.current = null;
+      }
+    };
+  }, [items, planeWidth, planeHeight, distortion, scrollEase, cameraFov, cameraZ]);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const canvasEl = canvasRef.current;
+
+    const handleWheel = e => {
+      e.preventDefault();
+      if (instanceRef.current) {
+        instanceRef.current.onWheel(e);
+      }
+    };
+
+    const handleTouchMove = e => {
+      e.preventDefault();
+    };
+
+    canvasEl.addEventListener('wheel', handleWheel, { passive: false });
+    canvasEl.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      canvasEl.removeEventListener('wheel', handleWheel);
+      canvasEl.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className={`posters-container ${className}`} {...props}>
+      <canvas ref={canvasRef} className="posters-canvas" />
+    </div>
+  );
+}
+ , .posters-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.posters-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+ use this and the bee intro need to be faster and make the bees going through the content like it act like it flies it watches the text like consiously reading a post and when another poster comes in it sees that too but in the second picture 2 nd bee comes in from the left and joins the first bee and tbey see each other it acts like it and in the 3 slide 3 rd bee joins and in 4 slide all go in to the big bee one by one no expressions we need to convey this message only by making it hovering and wabbling actions like honey bee from the intro page to the end of the page
+
+---
+[2026-06-12T04:32:25.065Z]
+<task-notification>
+<task-id>bvq9w2xjx</task-id>
+<tool-use-id>toolu_01NPaqf6v7ZLSetFHgBBsF1g</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/bvq9w2xjx.output</output-file>
+<status>completed</status>
+<summary>Background command "Build reel with bee narrative + faster intro" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12 — bee NARRATIVE + faster intro (pass 1 of FlyingPosters request)]
+intro sped up (introSec 2.6->1.6, faster folder open, bees removed from intro).
+lib/beestory.py: bee1 emerges from folder -> reads slide1 (hover+wobble+tilt);
+bee2 enters from LEFT on slide2, faces bee1 (they see each other); bee3 from RIGHT
+on slide3 (3-bee cluster); slide4 all merge into big bee one-by-one. Conveyed only
+by hovering/wobbling/facing. make-video composites bee layer on TOP, whole reel.
+config.VIDEO.bee added. Verified beats correct. Saved phone.
+PASS 2 PENDING: FlyingPosters 3D left-right rotation of person/logo circles (will be
+2D card-turn approximation locally; true 3D = Remotion/cloud).
+
+---
+[2026-06-12T04:39:52.635Z]
+remove the intro completely remove the bee animation and the bees too
+
+---
+[2026-06-12T05:08:49.378Z]
+do you know the font okine and degular display
+
+---
+[2026-06-12T05:17:45.905Z]
+there in domination folder use those for content
+
+---
+[2026-06-12 — font change to MADE Okine Sans (the logo font)]
+Founder said logo font is NOT Fredoka, needs sharp edges; named Okine + Degular.
+Provided 2 zips in assets/. fonnts.com-3085=Degular Display Demo (double-story a,
+does NOT match logo); MADE-Okine-Sans=MADE Okine Sans PERSONAL USE (single-story a,
+sharp flat = MATCHES logo wordmark). Applied Okine as brand font: config.FONT.family
+"MADE Okine Sans PERSONAL USE", Black(900) for display (topic/headline/tag), dir-based
+fontconfig in render.js maps sans-serif->Okine, weight mapping via OTF weights. Bumped
+headline charW to 0.62 for wider font. Degular kept in assets/brand/degular as option.
+LICENSE NOTE: both are demo/personal-use versions — full license needed for commercial.
+Sample on phone FONT_PREVIEW/. NOT yet rolled to all posts/reels or re-posted.
+
+---
+[2026-06-12T05:37:11.765Z]
+is it im phone storage
+
+---
+[2026-06-12T05:43:44.441Z]
+yeah use it in the video too 6 videos use the existing asserts and post it on imstagram 2 posts on each account total 6 now in this minute
+
+---
+[2026-06-12T06:18:24.185Z]
+<task-notification>
+<task-id>bgl79yxcv</task-id>
+<tool-use-id>toolu_01Qydq5QaPxcCJyXUPmALiiy</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/bgl79yxcv.output</output-file>
+<status>completed</status>
+<summary>Background command "Render all 6 reels with Okine font" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-06-12 — 6 REELS posted to Instagram (Okine font)]
+Rendered 6 reels (existing assets, Okine font in slides + blurtext headline, rays bg,
+music, no intro/bees) via build-reels.js. Added lib/post.js postVideo (Zernio presign
+video/mp4 -> publishNow). Posted 2/IG-account: @hanubees=nvidia,tesla ·
+@hanubees.ai=apple,amazon · @hanubees.biz=microsoft,meta. All PUBLISHED ✓. Reels saved
+phone FINAL/. (IG = key1/key3/key4 instagram accounts.)
+
+---
+[2026-06-12T09:05:24.381Z]
+new system for domination The problem for us is media, like the photos and those things. And what is the problem is you can't see which needed to be where, which needed to be where. Like if you use some media type of things that you can't see in code, you are actually doing a lot of mistakes. And even if I try to create a template or correct you using rules and alignments, it's going to change regardless of what we are doing. So here is what we are going to do. What we are going to do is explain marketing using mathematics only, and for the visuals, we are going to provide a funny way to do it. So this is the formula. What is the formula is mathematics, super high value, marketing, or human persuasion psychology. This is the second thing, which is just marketing, teaching marketing. And the third thing is women, like anything that relates to women is actually getting a lot of views in social media because majority of the population in the social media are looking forward to connect with people. And anything that is related to women and lust is going to get a lot of views.So the main goal is to talk in human language, like target the person who is like around 25 to 30, and take any relationship questions that was like helping you and consider it like helping someone to get a girl, or you relate it with the marketing with that concept, and explain it using only math. And like it needed to be contained a lot of mathematical terms and real values, like numbers, and like a formula, and also a problem to solve it. Like if you take a mathematical problem, there is a question and a formula and how to apply it, requirements, equations, how to solve it, and there is an end file. Similar to that, we are going to do marketing, explaining marketing, but in the sense of how to get a girlfriend type of thing, but in a marketing terms. So for the visuals, we are completely using only text formats, meaning to get a very good visuals, you don't have to rely on media, you can create your own media. And try to set like... I will give you some of the, like we are just going to, from now on, we are going to provide one single page of information, like a three is to four ratio, and the same thing, and the same font, same theme, like the color palettes of our things, and the same logo, and we are going to use it for the entire thing. But I will give you some inspirations, like liquid metal or glass. These are the styles that you, chrome liquid or chrome metal. These are elements used in websites, right? Try to use that and pencil sketching, and these are those. I will tell you, you don't have to decide this. I will give you some of the inspirations and let's try what looks good, and just to create content to paste inside a three is to four single page image, and add audio to it, like the same Interstellar audio is going to be for every single post in Instagram, but on threads, that's where the real game is going on because image type of posts were valued in threads. Instagram also does that. So, what we're going to do is, on Instagram, we're going to post a single, like, there are three formats of, uh, actually two formats, where Carousels, where we say a story that goes like four slides or five slides to explain a concept. And there is for videos, we can't actually post a carousel in Instagram Reels, so that's why we either we have to animate it like a slideshow, or just a fixed image with a music in the background. But auto slideshow feels like not good enough. And that's why we need to create two types of content. One is a single page content, where everything contains inside that one single page, where it was a 9:16 post, like the area size is 9:16, and there is a 3:4 ratio, and that's where the carousel comes in. We post it on threads, post area, and give some comments to it. And also, in Instagram, we also post a carousel, post carousel, and also we are going to post the single post thing on Instagram Reels. But this is important, we are going to provide every single piece of a post as a unique concept. Like, nothing is... are repeated again and again, but I told you the niche site, mathematical way of explaining marketing, and to trigger the emotions, we need to, we are targeting about one single person which is how to get a girlfriend. That's it. How to get a girlfriend. That's the only thing. We are mixing these to create content, and I will give you some inspirations. Let's try different variations, which looks good, and let's try that variations. Just to share this, we are going to just change the designs. You understand the content, right, and what it is, right? We are going to, we need to do a lot of volume, like 130 pieces of content every single day, like 130 pieces of posts every single day in every single account we have. So, that's it.
+
+---
+[2026-06-12 — NEW SYSTEM: math-marketing-girlfriend (text-only), supersedes photo system]
+Reason: media unreliable in code -> go 100% text-based visuals. Formula = MATH +
+MARKETING/persuasion + "how to get a girlfriend" (target man 25-30). Each post = a
+marketing concept framed as a dating problem, explained as a worked MATH problem
+(question->given->formula->equations->solve->answer/lesson). Every post UNIQUE.
+Visuals: text-only, 3:4, Okine font, brand colors, logo; aesthetic from founder
+inspirations (liquid metal/glass/chrome/pencil) -> try variations -> lock. Two types:
+CAROUSEL (4-5 slides) -> Threads + IG carousel; SINGLE PAGE (3:4 in 9:16) -> IG Reel
++ Interstellar audio (Threads=image only). Volume 130/day/account. Spec +5 example
+concepts in MATH_MARKETING_SYSTEM.md. Carry over config/Okine/colors/quality/Zernio;
+drop photo scraper/face-prep/circles. AWAITING founder inspirations to build visual variations.
+
+---
+[2026-06-12T09:25:13.108Z]
+<task-notification>
+<task-id>b0uhn1bsq</task-id>
+<tool-use-id>toolu_019GDBrKAwby6CC7V7eXiRtb</tool-use-id>
+<output-file>/tmp/claude-0/-root/7e286f0d-6999-4456-a7ce-af57d64b0b8f/tasks/b0uhn1bsq.output</output-file>
+<status>killed</status>
+<summary>Background command "Wait for bee reel build" was stopped</summary>
+</task-notification>
+
+---
+[2026-06-12T10:52:49.317Z]
+can you see hsnubees media domination
+
+---
+[2026-06-12T10:54:18.326Z]
+i told it to do this The problem for us is media, like the photos and those things. And what is the problem is you can't see which needed to be where, which needed to be where. Like if you use some media type of things that you can't see in code, you are actually doing a lot of mistakes. And even if I try to create a template or correct you using rules and alignments, it's going to change regardless of what we are doing. So here is what we are going to do. What we are going to do is explain marketing using mathematics only, and for the visuals, we are going to provide a funny way to do it. So this is the formula. What is the formula is mathematics, super high value, marketing, or human persuasion psychology. This is the second thing, which is just marketing, teaching marketing. And the third thing is women, like anything that relates to women is actually getting a lot of views in social media because majority of the population in the social media are looking forward to connect with people. And anything that is related to women and lust is going to get a lot of views.So the main goal is to talk in human language, like target the person who is like around 25 to 30, and take any relationship questions that was like helping you and consider it like helping someone to get a girl, or you relate it with the marketing with that concept, and explain it using only math. And like it needed to be contained a lot of mathematical terms and real values, like numbers, and like a formula, and also a problem to solve it. Like if you take a mathematical problem, there is a question and a formula and how to apply it, requirements, equations, how to solve it, and there is an end file. Similar to that, we are going to do marketing, explaining marketing, but in the sense of how to get a girlfriend type of thing, but in a marketing terms. So for the visuals, we are completely using only text formats, meaning to get a very good visuals, you don't have to rely on media, you can create your own media. And try to set like... I will give you some of the, like we are just going to, from now on, we are going to provide one single page of information, like a three is to four ratio, and the same thing, and the same font, same theme, like the color palettes of our things, and the same logo, and we are going to use it for the entire thing. But I will give you some inspirations, like liquid metal or glass. These are the styles that you, chrome liquid or chrome metal. These are elements used in websites, right? Try to use that and pencil sketching, and these are those. I will tell you, you don't have to decide this. I will give you some of the inspirations and let's try what looks good, and just to create content to paste inside a three is to four single page image, and add audio to it, like the same Interstellar audio is going to be for every single post in Instagram, but on threads, that's where the real game is going on because image type of posts were valued in threads. Instagram also does that. So, what we're going to do is, on Instagram, we're going to post a single, like, there are three formats of, uh, actually two formats, where Carousels, where we say a story that goes like four slides or five slides to explain a concept. And there is for videos, we can't actually post a carousel in Instagram Reels, so that's why we either we have to animate it like a slideshow, or just a fixed image with a music in the background. But auto slideshow feels like not good enough. And that's why we need to create two types of content. One is a single page content, where everything contains inside that one single page, where it was a 9:16 post, like the area size is 9:16, and there is a 3:4 ratio, and that's where the carousel comes in. We post it on threads, post area, and give some comments to it. And also, in Instagram, we also post a carousel, post carousel, and also we are going to post the single post thing on Instagram Reels. But this is important, we are going to provide every single piece of a post as a unique concept. Like, nothing is... are repeated again and again, but I told you the niche site, mathematical way of explaining marketing, and to trigger the emotions, we need to, we are targeting about one single person which is how to get a girlfriend. That's it. How to get a girlfriend. That's the only thing. We are mixing these to create content, and I will give you some inspirations. Let's try different variations, which looks good, and let's try that variations. Just to share this, we are going to just change the designs. You understand the content, right, and what it is, right? We are going to, we need to do a lot of volume, like 130 pieces of content every single day, like 130 pieces of posts every single day in every single account we have. So, that's it.
+
+---
+[2026-06-12T11:14:32.618Z]
+https://youtu.be/0aHbyohe028?si=C4Cwi-Xrx8waCNRo , 12 June 2026 at 14:54
+
+5fae0f9ec219b1eeb7da08ddcb5b37e6.webp.JPG
+
+No location information
+
+No camera information
+
+541KP 736 × 736|78 KB |
+
+JPEG
+
+Synced with cloud
+
+Phone/Pictures/100PINT/Pins/
+
+---
+[2026-06-12T11:20:02.770Z]
+save it phone storage so i can see
+
+---
+[2026-06-12T11:28:54.272Z]
+i cant really understand what it is saying need more context give me contwnt in text 13 of them i will tell you which to use
+
+---
+[2026-06-12T11:59:50.603Z]
+is there any free ai image generater you can connect with ? go through git hub and more and we have chat gpt api key also which one works for you
+
+---
+[2026-06-12T12:06:58.630Z]
+but cloud flare takes long time to respond ia that okey to you ?
+
+---
+[2026-06-12T12:13:26.989Z]
+can it generates celebrities images ?
+
+---
+[2026-06-12T12:42:44.222Z]
+Is there any GitHub repositories that were helping Claude code to generate or create AI images in a certain way, like a a prebuilt version of a GitHub something, uh, that helps to generate, uh, viral videos? I mean, uh, viral images. We are completely focusing on images. So list me eight image generators, like, uh, extra skill for Claude code or a a GitHub repository that, uh, produces insane visual images, like some type of prebirth or something. adding that to skill to Claude Coder will generate great, crazy images for free, and it needed to be under, uh, the last four years.
+
+---
+[2026-06-12T12:50:48.338Z]
+lets say we use comfyui in colab how much imaged do you think we can create and how long it takes to generate 100 images and let say we gave it elon musk face and ask it to transform it like elon musk angry face csn it do like let say im asking it to generate ronaldos image can it do?
+
+---
+[2026-06-12T12:52:33.122Z]
+this device already has access to colab and drive push the code there and use it
+
+---
+[2026-06-12T12:55:17.673Z]
+we have open code and gemini cli here can those create images ?
+
+---
+[2026-06-12T13:11:29.665Z]
+what key you need anf what is the perday limit on a free key
+
+---
+[2026-06-12T13:15:33.853Z]
+you have remotion with you right create an amazing video in this is educational video the same content as previously but this time you can make video to explain the concept amaze me first right 400 lines of plan based vontent tell me when you are r3ady
+
+---
+[2026-06-12T13:22:56.530Z]
+yeah built it store in the phone storage so i can see it
+
+---
+[2026-06-12T17:03:56.262Z]
+There is an obligation called a healthify me in India. Why majority of people like studios it is? Why? Because it it contains Indian food in it. like, a doll lately, those phone girl, chutney, samba. A lot of things are there. I was trying to create an AI cal... caloric calculator, but you just take a picture of your food there. And it's going to calculate the calories inside it, the protein and the fiber in it, everything. Can we create something like that, like, uh, the specialty of, uh, Indian food is completely different than American food and, uh, it gets complex when, uh, greens are there, many other things are there. So Kanagir could be able to create a... for camera based AI color, we call it lighter. Uh-huh. Completely remove the existing huddle base or a theme. Create a completely new website, which is in a huddle base dot com. Clear clear out every single pages inside the... you can... you have the vessel and you the single credentials you are looking for. It contains ChatGPT API two. So use it to create a completely new site.
