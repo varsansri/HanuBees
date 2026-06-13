@@ -40,14 +40,17 @@ export default function Home() {
     fileRef.current?.click();
   }
 
-  function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setError(null);
     setResult(null);
-    const reader = new FileReader();
-    reader.onload = () => setImage(reader.result as string);
-    reader.readAsDataURL(file);
+    try {
+      const shrunk = await downscale(file);
+      setImage(shrunk);
+    } catch {
+      setError("Couldn't read that photo. Try another one.");
+    }
   }
 
   async function analyze() {
@@ -61,7 +64,17 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image }),
       });
-      const data = await res.json();
+      const text = await res.text();
+      let data: Analysis & { error?: string };
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(
+          res.status === 413
+            ? "That photo is too large. Try a smaller one."
+            : "The server had a problem. Please try again.",
+        );
+      }
       if (!res.ok) throw new Error(data.error || "Could not analyze the photo.");
       setResult(data as Analysis);
     } catch (err) {
@@ -235,4 +248,31 @@ function Result({ data }: { data: Analysis }) {
 
 function round(n: number) {
   return Math.round((n ?? 0) * 10) / 10;
+}
+
+// Resize big phone photos in the browser so the request stays well under
+// the server's body limit (and uploads/analyses faster).
+function downscale(file: File, maxDim = 1280, quality = 0.82): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("no canvas"));
+      ctx.drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("bad image"));
+    };
+    img.src = url;
+  });
 }
