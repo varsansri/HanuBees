@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
 
-// Makes Annam installable ("Add to Home Screen") — snap food, get calories, no app store.
+// Makes Hanubees installable ("Add to Home Screen") — snap food, get calories, no app store.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Annam — AI calorie counter for Indian food",
-    short_name: "Annam",
+    name: "Hanubees — AI calorie counter for Indian food",
+    short_name: "Hanubees",
     description: "Snap your Indian plate and instantly get calories, protein, carbs, fiber and fat.",
     start_url: "/",
     scope: "/",

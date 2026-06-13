@@ -9,24 +9,24 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Annam — AI calorie counter for Indian food",
+  title: "Hanubees — AI calorie counter for Indian food",
   description:
     "Snap a photo of your Indian plate — idli, poha, sambar, chutney, dal, sabzi — and instantly get calories, protein, carbs, fiber and fat. Built for Indian food.",
   metadataBase: new URL("https://www.hanubees.com"),
-  applicationName: "Annam",
-  appleWebApp: { capable: true, statusBarStyle: "default", title: "Annam" },
+  applicationName: "Hanubees",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Hanubees" },
   icons: { icon: "/icon.png", apple: "/apple-icon.png" },
   openGraph: {
-    title: "Annam — Snap your plate, know your macros",
+    title: "Hanubees — Snap your plate, know your macros",
     description:
       "AI calorie counter built for Indian food. Photo in, full nutrition out.",
     url: "https://www.hanubees.com",
-    siteName: "Annam",
+    siteName: "Hanubees",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Annam — AI calorie counter for Indian food",
+    title: "Hanubees — AI calorie counter for Indian food",
     description: "Snap your plate, know your macros. Built for Indian food.",
   },
 };

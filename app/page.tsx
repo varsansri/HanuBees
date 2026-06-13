@@ -83,7 +83,7 @@ export default function Home() {
       <div className="topbar">
         <div className="brand">
           <span className="dot">🍛</span>
-          Annam <small>by Hanubees</small>
+          Hanubees <small>calorie cam</small>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export default function Home() {
       {result && <Result data={result} />}
 
       <div className="foot">
-        <b>Annam</b> · AI nutrition for Indian food · by Hanubees
+        <b>Hanubees</b> · AI nutrition for Indian food
       </div>
     </div>
   );
