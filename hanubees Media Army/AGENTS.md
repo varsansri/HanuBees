@@ -90,6 +90,18 @@ node scripts/army.js help
   `subjects.js` → `build-library.js` scrapes their media. Then write fresh Q&A concepts.
 - `run-day.js` will tell you exactly how short you are ("SUPPLY LOW: N available, need 104").
 
+## SCRAPLING MEDIA SCRAPER (replaces build-library.js for new subjects)
+A Python-based scraper using Scrapling (adaptive web scraping framework) with multi-source fallback:
+```
+pip install "scrapling[fetchers]"
+python scripts/scrapling-scraper.py              # scrape all subjects
+python scripts/scrapling-scraper.py --force       # re-scrape existing
+python scripts/scrapling-scraper.py --id nvidia   # single subject
+```
+Sources tried in order: Wikipedia pageimages → Wikidata P18/Commons → Google Images (via Scrapling stealth).
+Logos: Simple Icons CDN → company website favicon/logo fallback.
+Output goes to the same `assets/library/<id>/{photo.jpg,logo.png}` as build-library.js.
+
 ---
 
 ## ANTI-BURST SCHEDULING (config.VOLUME — already automated by run-day.js)

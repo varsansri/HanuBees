@@ -158,7 +158,7 @@ async function cmdNext(n, live) {
       const res = await fetch(`${ZB}/posts`, {
         method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify({ content: captions(p.c, p.acc.media === "video" ? p.track : null), mediaItems,
-          platforms: [{ platform: p.acc.platform, accountId: idc[ck] }], scheduledFor: p.when.toISOString(), timezone: "Etc/UTC" }),
+          platforms: [{ platform: p.acc.platform, accountId: idc[ck] }], publishNow: true }),
       });
       if (res.ok) {
         ok++;

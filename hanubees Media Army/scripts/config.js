@@ -23,6 +23,8 @@ const ACCOUNTS = [
   { keyEnv: "ZERNIO_API_KEY_3", platform: "threads",   username: "fxabsolute.com_",    media: "image" },
   { keyEnv: "ZERNIO_API_KEY_4", platform: "instagram", username: "hanubees.biz",       media: "video" },
   { keyEnv: "ZERNIO_API_KEY_4", platform: "threads",   username: "hanubees.biz",        media: "image" },
+  // Pinterest — needs account connected in Zernio dashboard first
+  // { keyEnv: "ZERNIO_API_KEY",   platform: "pinterest", username: "hanubees",          media: "image" },
 ];
 // → 5 VIDEO slots (3x IG, 1x TikTok, 1x YouTube) + 3 IMAGE slots (Threads). 8 total.
 

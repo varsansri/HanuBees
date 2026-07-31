@@ -1438,6 +1438,571 @@ const CONCEPTS = [
         ["3", "Once you're in iCloud, switching to Android costs everything.", "Your photos, messages, contacts, subscriptions — all Apple. Services created the ecosystem trap."],
       ], "The hardware gets people in. Services never let them leave. — Hanubees"],
     ] },
+  // ── BATCH 12 — 47 new concept entries ────────────────────────────────────
+  { id: "spacex_reusability", face: "/tmp/founders/musk2.jpg", company: "SpaceX", logo: "/tmp/logo_spacex.png",
+    kicker: "ROCKETS THAT FLY HOME — FOR 10× CHEAPER", headline: "SpaceX reusable rockets cut launch costs 10-fold.",
+    question: "Falcon 9 boosters have been reused 20+ times. How did landing a rocket change space?",
+    slides: [
+      ["THE COST REVOLUTION", [
+        ["1", "A Falcon 9 launch used to cost $62M with a new booster.", "Reusing the same booster drops the cost to $50M or less. Satellite operators save millions per launch."],
+        ["2", "The first booster landing was in December 2015.", "Engineers called it 'impossible.' Now SpaceX lands boosters on drone ships at sea and on land. Routine magic."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Reusability slashed launch costs ~10×.", "Before SpaceX, the average orbital launch cost $10K-$18K per kg. Falcon Heavy drops it to $1,500/kg. An industry transformed."],
+      ], "Solve the biggest cost in your industry. Make the impossible routine. — Hanubees"],
+    ] },
+  { id: "paypal_ebay_spinoff", face: "/tmp/founders/f0.jpg", company: "PayPal",
+    kicker: "SPUN OFF FROM EBAY. NOW WORTH $80B+.", headline: "PayPal split from eBay in 2015 and became bigger than the parent.",
+    question: "eBay let go of its payments arm — and it grew into an $80B+ giant. How?",
+    slides: [
+      ["THE SPIN-OFF THAT WON", [
+        ["1", "eBay acquired PayPal for $1.5B in 2002. In 2015, eBay spun it off under shareholder pressure.", "Activist investor Carl Icahn pushed for the split. The argument: PayPal was being held back inside eBay."],
+        ["2", "Post-split, PayPal grew from 173M to 430M+ active accounts.", "Free from eBay's restrictions, PayPal partnered with everyone — including eBay's competitors. Amazon, Google Pay, Shopify."],
+      ]],
+      ["THE LESSON", [
+        ["3", "PayPal revenue: $32B+ in 2024. eBay market cap: ~$37B.", "The spin-off became more valuable than the parent. Sometimes the business you're hiding inside is the real crown jewel."],
+      ], "What you're holding back might be your most valuable asset. — Hanubees"],
+    ] },
+  { id: "shopify_army", face: "/tmp/founders/f1.jpg", company: "Shopify", logo: "/tmp/logo_shopify.png",
+    kicker: "4 MILLION ONLINE STORES — ONE PLATFORM", headline: "Shopify powers 4M+ online stores. More than all mall stores combined.",
+    question: "A platform that gives small merchants the tools to compete with Amazon. How big is it really?",
+    slides: [
+      ["THE REBEL ARMY", [
+        ["1", "Shopify launched in 2006 after Tobi Lütke couldn't find good e-commerce software for his snowboard store.", "Today 4M+ stores run on Shopify. From solo artisans to Kylie Cosmetics and Tesla. It powers 10%+ of US e-commerce."],
+        ["2", "Shopify merchants generated $235B+ in GMV in 2024.", "It pays out billions via Shopify Payments, Capital, and Shipping. Every piece of the ecosystem adds revenue."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Shopify's market cap: $100B+. Revenue: $8.2B+ in 2024.", "It arms millions of independent stores against Amazon. The rebel army never stops growing. More merchants join every day."],
+      ], "Arm the rebels. The network IS the moat. — Hanubees"],
+    ] },
+  { id: "uber_superapp", face: "/tmp/founders/f2.jpg", company: "Uber", logo: "/tmp/logo_uber.png",
+    kicker: "IT STARTED WITH BLACK CARS. NOW FOOD IS BIGGER.", headline: "Uber began as a black car service. Now delivery beats ride-hailing.",
+    question: "The world's biggest taxi company doesn't own cars. And its food business is bigger than rides. How?",
+    slides: [
+      ["FROM RIDES TO EVERYTHING", [
+        ["1", "Uber launched in 2011 with black cars at a premium price. Now UberX covers 70+ countries.", "Revenue: $45B+ in 2024. Ride-hailing = $19B. Delivery (Uber Eats) = $15B. Freight = $6B. Diversification works."],
+        ["2", "Uber Eats overtook ride-hailing in gross bookings in 2020 — and has never looked back.", "The same driver network, the same app infrastructure, the same payment system — now delivering food, groceries, and packages."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Uber has 7M+ drivers and couriers earning on the platform.", "It owns no cars, no restaurants, no warehouses. It owns the software layer that connects supply and demand. Asset-light at massive scale."],
+      ], "Once you build the network, sell everything the network can deliver. — Hanubees"],
+    ] },
+  { id: "airbnb_experiences", face: "/tmp/founders/f3.jpg", company: "Airbnb",
+    kicker: "$250 BILLION PAID TO HOSTS — THE SIDE HUSTLE THAT WON", headline: "Airbnb hosts have earned $250B+ total. The side hustle became a $100B company.",
+    question: "A platform that pays regular people to share their homes. How did it generate a quarter trillion for hosts?",
+    slides: [
+      ["THE HOST ECONOMY", [
+        ["1", "Airbnb launched in 2008 with 3 air mattresses on a San Francisco floor.", "Today: 7M+ listings in 220+ countries. 1.5B+ guest arrivals since launch. Hosts keep the profit. Airbnb takes 15% per booking."],
+        ["2", "The average US host earns $14,000/year — enough to cover a mortgage.", "For many, Airbnb income is the difference between keeping their home and losing it. A side hustle platform became an economic lifeline."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Airbnb went from $0 to $100B+ valuation. It disrupted the $1.5T hospitality industry without building a single hotel.", "Hosts supply the rooms. Guests supply the demand. Airbnb supplies the trust, the payment processing, and the brand."],
+      ], "Turn your users' spare capacity into your business model. — Hanubees"],
+    ] },
+  { id: "spotify_podcast", face: "/tmp/founders/f4.jpg", company: "Spotify", logo: "/tmp/logo_spotify.png",
+    kicker: "$1 BILLION BET ON PODCASTS — JOE ROGAN COST $250M", headline: "Spotify spent $1B+ on podcasts. Joe Rogan's deal was $250M for 3 years.",
+    question: "A music streaming company went all-in on talk shows. Is the bet paying off?",
+    slides: [
+      ["FROM MUSIC TO VOICE", [
+        ["1", "Spotify launched podcasts in 2015. By 2024, it has 6M+ podcasts on the platform.", "Music margins are thin (70% goes to labels). Podcast margins are fatter — Spotify owns the content or pays creators directly."],
+        ["2", "The Joe Rogan Experience deal: $250M for 3 years (renewed in 2024 for another cycle).", "Rogan consistently ranks #1 globally. At his listenership, Spotify recoups the cost through advertising. The exclusivity brings new users to the app."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Spotify's revenue: $16B+ in 2024. Podcast ad revenue crossed $2B.", "Podcasts increase listening time, which increases ad inventory. Exclusive podcast deals are Spotify's moat against Apple and Amazon Music."],
+      ], "Audio is a platform war. Exclusives are the ammunition. — Hanubees"],
+    ] },
+  { id: "stripe_infrastructure", face: "/tmp/founders/f5.jpg", company: "Stripe", logo: "/tmp/logo_stripe.png",
+    kicker: "90% OF AMERICAN ADULTS HAVE PAID VIA STRIPE", headline: "More than 90% of US adults have bought from a Stripe-powered business.",
+    question: "The most valuable private fintech company on earth. You use it constantly and never see it. How?",
+    slides: [
+      ["THE INVISIBLE PIPE", [
+        ["1", "Stripe launched in 2011 with 7 lines of code to accept payments. Today it processes $1T+ annually.", "Amazon, Google, Shopify, Lyft, Uber — all route payments through Stripe. It's the payment OS for the internet."],
+        ["2", "90%+ of American adults have bought from a Stripe merchant — often without knowing it.", "Stripe is a white-label experience. You see the merchant's brand. Stripe handles the payment, fraud detection, and compliance in the background."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Stripe's valuation: $70B+ as of 2024. Revenue: $14B+ with 1M+ paying businesses.", "It solves the most painful part of the internet — getting paid — and makes it invisible. Invisible infrastructure is the most durable business."],
+      ], "Make the hardest part of your industry invisible. Charge for the relief. — Hanubees"],
+    ] },
+  { id: "apple_vision_pro", face: "/tmp/founders/jobs1.jpg", company: "Apple", logo: "/tmp/logo_apple.png",
+    kicker: "$3,500 HEADSET. 400K SOLD. NOT A FLOP.", headline: "Apple Vision Pro cost $3,500 and sold 400K units. Critics called it a flop. They're wrong.",
+    question: "A spatial computer that costs more than most people's monthly salary sold 400K units. Platform seed or failure?",
+    slides: [
+      ["THE PLATFORM SEED", [
+        ["1", "Vision Pro launched in February 2024 at $3,499. It sold ~400K units in year one.", "At that price, that's $1.4B in revenue. For comparison: iPhone sold 1.4M units in year one at $499. Different scale, same strategy."],
+        ["2", "Apple's spatial computing platform has 2,000+ native apps and runs 1.5M+ compatible iPad apps.", "Developers are building for the future. Every new app is a bet that Vision Pro is the iPhone of 2025 — not the Newton of 1993."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Apple spent $30B+ on R&D leading up to Vision Pro. The first-gen isn't the mass-market product.", "The M1 MacBook Air started the chip transition. The Vision Pro starts the spatial computing transition. Version 3 is where the magic hits."],
+      ], "First-gen seeds the platform. Third-gen wins the market. — Hanubees"],
+    ] },
+  { id: "google_deepmind", face: "/tmp/founders/page1.jpg", company: "Google DeepMind", logo: "/tmp/logo_google.png",
+    kicker: "ALPHAFOLD SOLVED BIOLOGY'S HARDEST PROBLEM", headline: "DeepMind's AlphaFold predicted 200M protein structures. Biology changed forever.",
+    question: "A London AI lab bought by Google for $500M cracked a 50-year-old grand challenge in science. How?",
+    slides: [
+      ["THE PROTEIN BREAKTHROUGH", [
+        ["1", "For 50 years, predicting how a protein folds was biology's hardest problem.", "In 2020, AlphaFold solved it — predicting protein structures with atomic accuracy. The database now holds 200M+ structures, freely available to all."],
+        ["2", "The impact: drug discovery, disease understanding, enzyme design — all accelerated by 10×.", "What used to take a PhD 5 years per protein now takes AlphaFold seconds. Every biologist on earth has access."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Google bought DeepMind for ~$500M in 2014. Its discoveries are now worth multiples of that in scientific value alone.", "DeepMind's mission is 'solve intelligence, then use it to solve everything else.' AlphaFold was step one. Drug discovery and climate modeling are next."],
+      ], "Fund foundational science. The returns change the world — not just the balance sheet. — Hanubees"],
+    ] },
+  { id: "microsoft_openai", face: "/tmp/founders/gates1.jpg", company: "Microsoft", logo: "/tmp/logo_microsoft.png",
+    kicker: "$13 BILLION INVESTED. BEST TECH BET EVER.", headline: "Microsoft invested $13B in OpenAI at a 50% profit share. The best bet in tech history.",
+    question: "Satya Nadella wrote a $13B check to a non-profit AI lab. It might be the greatest corporate investment ever. How?",
+    slides: [
+      ["THE DEAL OF THE CENTURY", [
+        ["1", "Microsoft invested $1B in OpenAI in 2019. Then $12B more through 2024.", "The structure: Microsoft gets 49% of OpenAI's profits until its investment is repaid, then a diminishing share. Not equity — profit participation."],
+        ["2", "OpenAI's revenue: $0 in 2022 → $3.7B in 2024 → projected $11B+ in 2025.", "The fastest revenue ramp in history. Microsoft's profit share could return $5B+/year for decades — on a $13B investment."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Microsoft embedded OpenAI's models into everything: Azure, Office, Bing, Copilot.", "The $13B bought exclusive API access and a massive competitive moat. Azure AI is now the fastest-growing cloud service in Microsoft's history."],
+      ], "Bet on the team that can build something 10× better. Give them your distribution. — Hanubees"],
+    ] },
+  { id: "amazon_pharmacy", face: "/tmp/founders/bezos1.jpg", company: "Amazon", logo: "/tmp/logo_amazon.png",
+    kicker: "BOUGHT PILLPACK FOR $1B. NOW DELIVERS MEDS SAME-DAY.", headline: "Amazon bought PillPack for $1B in 2018. Now Amazon Pharmacy delivers prescriptions same-day.",
+    question: "The everything store entered the $500B pharmacy market. How far has it gotten?",
+    slides: [
+      ["THE PHARMACY DISRUPTION", [
+        ["1", "Amazon acquired PillPack for $753M in 2018. PillPack sorted meds by dose into timed packets.", "Amazon took that model and built Amazon Pharmacy: same-day delivery, transparent pricing, Prime member discounts. No waiting in line at CVS."],
+        ["2", "The US pharmacy market is $500B+. Amazon's share is growing fast.", "Amazon Pharmacy is available in all 50 states. It accepts most insurance plans. Prime members get up to 80% off generic meds. The competitive moat: logistics."],
+      ]],
+      ["THE LESSON", [
+        ["3", "CVS stock fell 30%+ since Amazon's pharmacy push. Walgreens is closing stores.", "Healthcare is one of the last large sectors Amazon hasn't dominated. Pharmacy is the beachhead. Telehealth, diagnostics, and insurance are next."],
+      ], "Enter an old, expensive, frustrating industry. Make it simple, cheap, and fast. — Hanubees"],
+    ] },
+  { id: "meta_rayban", face: "/tmp/founders/zuck1.jpg", company: "Meta", logo: "/tmp/logo_meta.png",
+    kicker: "2 MILLION+ SMART GLASSES SOLD. THE iPHONE MOMENT?", headline: "Meta's Ray-Ban smart glasses sold 2M+ units. The iPhone moment for smart glasses.",
+    question: "Google Glass failed. Snap Spectacles flopped. Meta's Ray-Ban glasses are actually working. Why?",
+    slides: [
+      ["THE STEALTHY HIT", [
+        ["1", "Meta partnered with Ray-Ban in 2021. The 2nd-gen glasses (2023) added Meta AI, live streaming, and a 12MP camera.", "They look like normal Ray-Bans. No one knows you're wearing a computer. That's the product insight Google Glass missed."],
+        ["2", "2M+ units sold. Demand exceeds supply. Meta sold more smart glasses in 2024 than all previous smart glasses COMBINED.", "At $299, they're affordable. At $329 for the transition lens version, they're a daily-wear device. The price floor dropped from $1,500 (Google Glass) to $299."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Meta's AR bet: build the platform starting with something people already wear.", "The Ray-Ban glasses are a trojan horse for full augmented reality. Every user is training Meta's AI on real-world data. The hardware is the data play."],
+      ], "Make the technology invisible inside something people already use. — Hanubees"],
+    ] },
+  { id: "tesla_optimus", face: "/tmp/founders/musk1.jpg", company: "Tesla", logo: "/tmp/logo_tesla.png",
+    kicker: "$20,000 HUMANOID ROBOT. BIGGER THAN CARS?", headline: "Tesla's Optimus robot targets a $20K price. Musk says it'll be bigger than the car business.",
+    question: "A humanoid robot that folds laundry and carries boxes. Is Tesla betting $1T+ on Optimus?",
+    slides: [
+      ["THE ROBOT PLAY", [
+        ["1", "Tesla unveiled Optimus in 2022. Gen 2 (2024) has 22 degrees of freedom in each hand and walks 30% faster.", "It's designed for factory work first: moving parts, loading machines, doing tasks humans find repetitive or dangerous."],
+        ["2", "Musk: 'Optimus will be more valuable than everything else Tesla makes combined.'", "The global labor market is $50T+. If robots capture even 1%, that's a $500B market. Tesla is betting its AI and manufacturing skills transfer from cars to robots."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Tesla plans to deploy Optimus in its own factories first — eating its own dogfood.", "The same cameras, neural nets, and AI that power FSD (Full Self-Driving) are being adapted for Optimus. Autonomy isn't just for cars — it's for everything that moves."],
+      ], "Apply your core technology to the biggest adjacent market. Repeat. — Hanubees"],
+    ] },
+  { id: "nvidia_blackwell", face: "/tmp/founders/huang1.jpg", company: "Nvidia", logo: "/tmp/logo_nvidia.png",
+    kicker: "$40,000 PER GPU. SOLD OUT FOR 12 MONTHS.", headline: "Nvidia's Blackwell GPU costs $40K each. Sold out for 12 months. Demand 3× supply.",
+    question: "The most powerful AI chip ever built. Why does every tech giant beg for allocation?",
+    slides: [
+      ["THE BLACKWELL JUGGERNAUT", [
+        ["1", "Blackwell (B200) launched in 2024: 208 billion transistors, 20 petaflops of AI performance.", "It's 4× faster than the previous H100. For training GPT-5-scale models, Blackwell is the only chip that makes timelines feasible."],
+        ["2", "Orders from Microsoft, Meta, Google, Amazon, Oracle — combined demand exceeds Nvidia's production 3×.", "Nvidia controls supply allocation. Companies are effectively bidding for access. Order today, get delivery in 2026."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Nvidia's data center revenue hit $47B in 2024, projected $100B+ in 2025.", "Every AI company pays the Blackwell tax. Nvidia's margin per GPU: 70%+. When your product is a bottleneck for the next trillion-dollar industry, you can charge anything."],
+      ], "Be the bottleneck for an industry that can't exist without you. — Hanubees"],
+    ] },
+  { id: "openai_revenue", face: "/tmp/founders/f6.jpg", company: "OpenAI",
+    kicker: "$0 TO $11 BILLION — FASTEST REVENUE RAMP EVER", headline: "OpenAI went from $0 revenue in 2022 to $3.7B in 2024 to $11B projected in 2025.",
+    question: "The fastest revenue ramp in the history of business. How did an AI lab print billions?",
+    slides: [
+      ["THE REVENUE ROCKET", [
+        ["1", "ChatGPT launched Nov 30, 2022. 100M users in 2 months. $1B ARR by mid-2023.", "No company — not Google, not Facebook, not TikTok — had ever reached $1B revenue this quickly. ChatGPT became the fastest-growing consumer app in history."],
+        ["2", "Revenue drivers: ChatGPT Plus ($20/month), API access (developers pay per token), and enterprise deals.", "Enterprise customers pay $60/user/month for ChatGPT Enterprise. Morgan Stanley, Canva, PwC — Fortune 500 companies are standardizing on OpenAI."],
+      ]],
+      ["THE LESSON", [
+        ["3", "OpenAI's margin: 40%+ and improving. $11B in 2025 revenue would make it the fastest company to $10B+ in history.", "The model is: build the best AI, release it to consumers, prove it in the wild, then sell it to enterprises. Bottom-up adoption at light speed."],
+      ], "Magic sells itself. Let users discover it, then charge enterprises for the proven product. — Hanubees"],
+    ] },
+  { id: "disney_streaming_war", face: "/tmp/founders/page2.jpg", company: "Disney",
+    kicker: "160 MILLION SUBSCRIBERS IN 5 YEARS. BEAT NETFLIX'S PACE.", headline: "Disney+ launched in 2019. 160M subscribers. Beat Netflix's growth rate.",
+    question: "A 100-year-old company entered streaming late and grew faster than the category creator. How?",
+    slides: [
+      ["THE CONTENT ARSENAL", [
+        ["1", "Disney+ launched with Marvel, Star Wars, Pixar, Disney classics, and Nat Geo — all on day one.", "No other streaming service could match the depth of IP. 100 years of the world's most beloved content, instantly available. Netflix spent $17B/year trying to match it."],
+        ["2", "160M subscribers in 5 years. Netflix took 12 years to reach 160M.", "Disney+ grew by 1M+ subscribers per month on average. The bundle with Hulu and ESPN+ pushed the total Disney streaming base to 225M+."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Disney's streaming division is narrowing losses toward profitability by 2025.", "The strategy: IP is the moat. Distribution is direct. Owning the content AND the platform means no licensing fees to anyone else."],
+      ], "100 years of content is a launch asset nobody can replicate. — Hanubees"],
+    ] },
+  { id: "nike_direct", face: "/tmp/founders/jobs0.jpg", company: "Nike", logo: "/tmp/logo_nike.png",
+    kicker: "CUT 50% OF RETAIL PARTNERS. MARGIN WENT UP 5%.", headline: "Nike cut half its retail partners to sell direct-to-consumer. DTC is now 42% of revenue.",
+    question: "A brand that was sold in every Foot Locker stopped selling to them. Bold move. Smart?",
+    slides: [
+      ["THE DTC REVOLUTION", [
+        ["1", "In 2020, Nike terminated contracts with half of its wholesale retail partners — including major chains.", "The goal: sell through Nike.com, the Nike app, and Nike-owned stores. Control the experience. Keep the full retail margin (60%+ instead of 40%)."],
+        ["2", "Nike's DTC revenue hit 42% of total sales ($21B+) in 2024, up from 30% in 2020.", "The cost: lost shelf space at retailers. The benefit: higher margins, richer customer data, and direct relationships with the buyer."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Nike's gross margin improved 5% during the DTC shift, adding billions to the bottom line.", "Own the customer. Own the data. Own the margin. Retail partners distribute product; DTC builds a relationship. The relationship is the asset."],
+      ], "Cut the middleman and own the customer — even if it hurts short-term scale. — Hanubees"],
+    ] },
+  { id: "walmart_amazon_fight", face: "/tmp/founders/bezos20.jpg", company: "Walmart",
+    kicker: "4,600 STORES. 90% OF AMERICANS LIVE WITHIN 10 MILES.", headline: "Walmart's 4,600 US stores are within 10 miles of 90% of Americans. The last-mile advantage.",
+    question: "Amazon has the technology. Walmart has the geography. Who wins the retail war?",
+    slides: [
+      ["THE PHYSICAL ADVANTAGE", [
+        ["1", "Walmart has 4,600+ US stores. 90% of the US population lives within 10 miles of one.", "That's 4,600 ready-made distribution centers. Amazon has 100+ fulfillment centers. Walmart's physical footprint is Amazon's biggest challenge."],
+        ["2", "Walmart's e-commerce revenue hit $100B+ in 2024, growing 20%+ annually.", "Buy Online, Pick Up In Store (BOPIS) + delivery from store = cheaper than shipping from a distant warehouse. Same-day delivery in thousands of zip codes."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Walmart revenue: $648B+ in 2024. Amazon's US e-commerce: roughly $450B.", "Walmart's secret weapon isn't technology — it's geography. Every store is a warehouse. Every parking lot is a pickup point. Proximity beats speed in retail."],
+      ], "Your biggest weakness can become your biggest strength. Physical stores became the last-mile solution. — Hanubees"],
+    ] },
+  { id: "microsoft_github_copilot", face: "/tmp/founders/gates0.jpg", company: "Microsoft", logo: "/tmp/logo_microsoft.png",
+    kicker: "1.8 MILLION DEVELOPERS PAY $10/MONTH FOR AI AUTOCOMPLETE", headline: "GitHub Copilot has 1.8M+ paying users. $100M+ ARR. Developers pay $10/month for AI autocomplete.",
+    question: "An AI that writes your code for you. It's the fastest-growing developer tool in history. How big can it get?",
+    slides: [
+      ["THE CODING REVOLUTION", [
+        ["1", "GitHub Copilot launched in 2021, trained on billions of lines of public code. It suggests entire functions as you type.", "1.8M+ paying individual users at $10/month. Enterprise plans at $39/user/month. Revenue run rate: $200-300M+ in 2024."],
+        ["2", "Copilot writes 46% of all code on GitHub in files where it's enabled.", "That's up from 27% in 2022. Developers are increasingly 'reviewing' code rather than writing it from scratch. AI is becoming the junior developer on every team."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Microsoft bought GitHub for $7.5B in 2018. Copilot monetizes the 100M+ developers on the platform.", "The acquisition gave Microsoft the data to train Copilot AND the distribution to sell it. Buy the platform. Train the AI. Sell the productivity."],
+      ], "Own the platform where your customers already live. Then sell them the AI that makes them better. — Hanubees"],
+    ] },
+  { id: "apple_m2_m3_chips", face: "/tmp/founders/jobs0.jpg", company: "Apple", logo: "/tmp/logo_apple.png",
+    kicker: "TSMC 3NM. 40% FASTER. 30% LESS POWER.", headline: "Apple's M-series chips have a 5-year lead on Intel. M4 is coming.",
+    question: "A phone chip designer beat the world's biggest processor company. The lead is now 5 years. How?",
+    slides: [
+      ["THE SILICON SUPREMACY", [
+        ["1", "Apple launched M1 in 2020: 3.5× faster CPU than the Intel MacBook Air it replaced. Double the battery life.", "Built on TSMC's 5nm process, the M1 shocked the industry. Intel's response chips were still on 14nm. The gap was generational."],
+        ["2", "M3 (2023) moved to TSMC 3nm — 40% faster CPU, 30% less power than M2.", "Apple refreshes chips annually now. Intel's roadmap couldn't catch TSMC. The foundry lead + Apple's chip design talent = an untouchable moat."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Apple's chip investment: $10B+/year in R&D, 15 years of learning from iPhone chips.", "The M-series is the culmination of a decade of A-series mobile chips. Vertical integration lets Apple optimize chip + OS + app — something Intel, AMD, and Qualcomm can't do."],
+      ], "Build your own chips. Control the stack. Leave competitors stuck on old manufacturing. — Hanubees"],
+    ] },
+  { id: "google_waymo", face: "/tmp/founders/page0.jpg", company: "Waymo", logo: "/tmp/logo_google.png",
+    kicker: "150,000 ROBOTAXI RIDES PER WEEK. 5 CITIES.", headline: "Waymo serves 150K+ paid robotaxi rides weekly across 5 cities. The first real self-driving business.",
+    question: "After 15 years and $10B+ in investment, Google's self-driving bet is finally a real business. What changed?",
+    slides: [
+      ["THE AUTONOMOUS ROLLOUT", [
+        ["1", "Waymo launched as a Google project in 2009. It now operates paid robotaxis in Phoenix, San Francisco, LA, and Austin.", "150K+ paid rides per week — no human driver behind the wheel. Passengers pay for rides via the Waymo One app, just like Uber."],
+        ["2", "Waymo's fleet has driven 20M+ autonomous miles on public roads with zero fatalities caused by the system.", "The safety record is the selling point. No distracted driving. No drunk driving. No fatigue. The robot never blinks."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Waymo raised $5.6B in 2024 (led by Alphabet). Valuation: $45B+.", "After 15 years of patience, Waymo is the clear leader in autonomy. Tesla's FSD is in beta. Cruise (GM) was grounded. Waymo is the only large-scale commercial robotaxi service."],
+      ], "Patience wins in autonomy. 15 years of hard engineering beats faster marketing. — Hanubees"],
+    ] },
+  { id: "amazon_kuiper", face: "/tmp/founders/bezos21.jpg", company: "Amazon", logo: "/tmp/logo_amazon.png",
+    kicker: "3,236 SATELLITES. $10 BILLION. TAKING ON STARLINK.", headline: "Amazon's Project Kuiper: 3,236 satellites. A $10B bet to connect the planet.",
+    question: "Amazon is building a satellite internet network to rival Starlink. Why does a retailer need a space division?",
+    slides: [
+      ["THE ORBIT BET", [
+        ["1", "Project Kuiper was announced in 2019: 3,236 satellites in low Earth orbit for global broadband.", "First prototype satellites launched in 2023. Production ramp through 2025. Amazon plans to offer broadband to 200M+ people in underserved areas."],
+        ["2", "Amazon is investing $10B+ — building satellites, ground stations, and customer terminals costing under $400 each.", "The project employs 1,400+ people across Redmond, WA. Blue Origin (Bezos' rocket company) will launch many of the satellites."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Kuiper is an AWS play. Satellite internet feeds data into AWS, AWS processes and sells it.", "More connected people = more Amazon customers. More Kuiper users = more AWS data. Every Bezos bet connects back to the core businesses."],
+      ], "Connect the unconnected. Your other businesses grow with every new user online. — Hanubees"],
+    ] },
+  { id: "meta_llama", face: "/tmp/founders/zuck0.jpg", company: "Meta", logo: "/tmp/logo_meta.png",
+    kicker: "OPEN-SOURCE AI. 500 MILLION DOWNLOADS.", headline: "Meta's Llama AI models: open source, 500M+ downloads. Facebook doesn't sell the model — it sells the platform.",
+    question: "Why would Meta give away its most powerful AI models for free? The answer is pure Zuckerberg strategy.",
+    slides: [
+      ["THE OPEN-SOURCE GAMBIT", [
+        ["1", "Llama launched in 2023 as an open-source LLM. Llama 3 (2024) rivals GPT-4 on key benchmarks.", "500M+ downloads across Hugging Face and cloud platforms. It's the most-used open-source AI model family in the world."],
+        ["2", "Meta gives Llama away free. Developers build with it. Enterprises fine-tune it. The ecosystem grows.", "Every startup that uses Llama is building on Meta's technology. Every developer who learns Llama is investing in Meta's ecosystem. OpenAI charges; Meta collects."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Zuckerberg: 'Open-source AI is good for Meta in the long run.' Here's why.", "If Llama becomes the standard, Meta owns the platform that dictates AI safety, tooling, and infrastructure. The model is free. The cloud, ads, and ecosystem are where the money is."],
+      ], "Give away the tool. Own the platform everyone builds with it. — Hanubees"],
+    ] },
+  { id: "tesla_4680_battery", face: "/tmp/founders/musk0.jpg", company: "Tesla", logo: "/tmp/logo_tesla.png",
+    kicker: "5× ENERGY. 16% MORE RANGE. ONE BATTERY CELL.", headline: "Tesla's 4680 battery cell: 5× energy, 16% more range. The dry cathode process is the secret.",
+    question: "Batteries are 40% of an EV's cost. Tesla's 4680 cell could change the entire industry. What's so special?",
+    slides: [
+      ["THE BATTERY REVOLUTION", [
+        ["1", "The 4680 cell (46mm × 80mm) holds 5× the energy of Tesla's previous 2170 cell.", "Larger cells mean fewer connections, simpler manufacturing, and lower cost per kWh. Tesla's target: under $100/kWh at the pack level."],
+        ["2", "The dry cathode process eliminates the toxic solvent step — cutting factory footprint by 90% and energy use by 70%.", "If this works at scale, Tesla's battery cost advantage over every competitor becomes structural. Gigafactories will pump cells faster and cheaper than anyone else."],
+      ]],
+      ["THE LESSON", [
+        ["3", "4680 cells power the Cybertruck and will scale to the Semi and Model Y.", "Battery cost is the EV bottleneck. Whoever wins the battery cost race wins the EV market. Tesla's betting $5B+ on 4680 capacity by 2026."],
+      ], "Solve the costliest part of your product. Make it a moat no one can match. — Hanubees"],
+    ] },
+  { id: "nvidia_omniverse", face: "/tmp/founders/huang0.jpg", company: "Nvidia", logo: "/tmp/logo_nvidia.png",
+    kicker: "DIGITAL TWINS BEFORE ANYTHING IS BUILT", headline: "Nvidia Omniverse: the platform where factories build digital twins before building anything real.",
+    question: "BMW, Mercedes, and Lockheed Martin all built digital twins. Why is this the future of manufacturing?",
+    slides: [
+      ["THE DIGITAL TWIN REVOLUTION", [
+        ["1", "Omniverse is Nvidia's real-time 3D collaboration platform for building digital twins.", "A factory is designed, tested, and optimized in Omniverse before a single brick is laid. Errors cost pennies in simulation. Errors in real life cost millions."],
+        ["2", "BMW built a digital twin of its entire Regensburg factory. Workers train in VR before touching real equipment.", "The factory runs 30% more efficiently because layouts, workflows, and bottlenecks were optimized in simulation first."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Omniverse revenue is small today — but it sells Nvidia GPUs by the rack.", "Every Omniverse deployment requires Nvidia RTX or data center GPUs. The platform locks enterprises into Nvidia hardware + software. It's the long-term moat."],
+      ], "Sell the simulation platform. The hardware sales follow automatically. — Hanubees"],
+    ] },
+  { id: "microsoft_xbox_gamepass", face: "/tmp/founders/gates0.jpg", company: "Microsoft", logo: "/tmp/logo_microsoft.png",
+    kicker: "35 MILLION SUBSCRIBERS AT $15/MONTH. $6B+ IN REVENUE.", headline: "Xbox Game Pass: 35M+ subscribers at $15/month. Netflix for games is a $6B+/year business.",
+    question: "The Netflix of gaming: pay monthly, play everything. How big is Microsoft's gaming subscription empire?",
+    slides: [
+      ["THE NETFLIX OF GAMES", [
+        ["1", "Game Pass launched in 2017 with 100+ games for $9.99/month. It now has 35M+ subscribers across console, PC, and cloud.", "New Microsoft first-party titles launch day-one on Game Pass. Starfield, Call of Duty, all Halo, all Gears. Instant access. No $70 purchase."],
+        ["2", "At 35M subscribers × $15/month average = $6.3B+ in annual subscription revenue.", "That's recurring, predictable revenue — the holy grail of software. Console sales fluctuate. Game Pass subscriptions compound."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Microsoft's Activision acquisition ($69B) was a Game Pass play.", "Put Call of Duty, Candy Crush, and World of Warcraft into Game Pass = millions of new subscribers. The acquisition pays for itself through subscription growth."],
+      ], "Sell subscriptions, not units. Recurring revenue beats every other model. — Hanubees"],
+    ] },
+  { id: "apple_fitness", face: "/tmp/founders/jobs1.jpg", company: "Apple", logo: "/tmp/logo_apple.png",
+    kicker: "$10/MONTH. 100 MILLION+ APPLE WATCH USERS.", headline: "Apple Fitness+: $10/month. 100M+ Apple Watch users. A subscription business inside a hardware business.",
+    question: "Apple took on Peloton and the entire gym industry — with an app. How did it win?",
+    slides: [
+      ["THE FITNESS ECOSYSTEM", [
+        ["1", "Apple Fitness+ launched in 2020. 12 workout types, 3,000+ episodes, all at $9.99/month.", "It syncs with Apple Watch: heart rate and calories burned appear on screen in real time. No other fitness app has this level of hardware integration."],
+        ["2", "100M+ active Apple Watch users worldwide. That's 100M potential Fitness+ subscribers.", "Peloton has 6M+ subscribers. Apple's addressable market is 15× larger — and Fitness+ costs half of Peloton All Access."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Apple bundles Fitness+ into Apple One ($19.95/month for Music, TV+, Arcade, iCloud, Fitness+).", "Once bundled, the marginal cost of adding Fitness+ is near zero. The hardware + subscription lock-in makes switching to Android cost everything."],
+      ], "Sell the hardware once. Rent the service forever. Bundle to make leaving impossible. — Hanubees"],
+    ] },
+  { id: "google_pixel_tensor", face: "/tmp/founders/page1.jpg", company: "Google", logo: "/tmp/logo_google.png",
+    kicker: "CUSTOM AI CHIP. 7 YEARS OF UPDATES. FULL STACK.", headline: "Google's Tensor chip powers Pixel phones with custom AI silicon. 7 years of updates. Google now owns the whole stack.",
+    question: "Like Apple's M-series for MacBooks — Google's Tensor is its own chip for its own phones. Does it matter?",
+    slides: [
+      ["THE FULL STACK PLAY", [
+        ["1", "Tensor launched in 2021 in the Pixel 6. Tensor G4 (2024) powers the Pixel 9.", "Custom AI accelerators. Features like Call Screening, Live Translate, and Magic Eraser run on-device — secured by Google's own silicon."],
+        ["2", "Google promised 7 years of OS, security, and feature updates for Pixel 8 and later.", "That's longer than Samsung (4 years), matching Apple (~7 years). The custom chip makes long-term support economical — Google controls the silicon roadmap."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Pixel market share in the US: ~5%. Small. But the strategy matters.", "Google owning the chip + OS + AI + services stack is Apple's playbook applied to Android. The Pixel isn't about volume — it's about owning the flagship Android experience."],
+      ], "Control the chip. Control the OS. Control the AI. Then nobody can limit what you ship. — Hanubees"],
+    ] },
+  { id: "amazon_alexa_skills", face: "/tmp/founders/bezos0.jpg", company: "Amazon", logo: "/tmp/logo_amazon.png",
+    kicker: "130,000 VOICE SKILLS. 500 MILLION DEVICES SOLD.", headline: "Alexa has 130K+ skills and 500M+ devices in homes. Voice commerce is still waiting for its moment.",
+    question: "Amazon invested $20B+ in Alexa. It's everywhere — but where's the revenue?",
+    slides: [
+      ["THE VOICE PLATFORM", [
+        ["1", "Alexa launched in 2014. By 2024, 500M+ Alexa-compatible devices have been sold.", "Echo speakers, Fire TV, Ring doorbells, third-party smart home devices — Alexa is embedded in everything. It's the most-used voice assistant on the planet."],
+        ["2", "130K+ third-party skills: games, meditation, news, smart home controls — all voice-activated.", "Developers built an ecosystem around Alexa. But the monetization never followed. Voice commerce was supposed to be the revenue model. It hasn't materialized."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Amazon's Alexa division has never turned a profit — losing ~$5-10B/year.", "The voice-first future arrived — but it turned out people use voice for timers and music, not shopping. Amazon bet on the wrong revenue model but won the platform war."],
+      ], "Win the platform. Figure out the monetization later. But don't wait forever. — Hanubees"],
+    ] },
+  { id: "netflix_ads", face: "/tmp/founders/f0.jpg", company: "Netflix", logo: "/tmp/logo_netflix.png",
+    kicker: "$7/MONTH AD TIER. 40 MILLION SUBSCRIBERS CHOOSE IT.", headline: "Netflix's ad-supported tier at $7/month has 40M+ subscribers. Ads now drive $3B+ annually.",
+    question: "Netflix swore it would NEVER run ads. Now its ad business is growing faster than subscriptions. What changed?",
+    slides: [
+      ["THE AD PIVOT", [
+        ["1", "Netflix launched its ad-supported tier in November 2022: $6.99/month (now $7.99) with 4-5 minutes of ads per hour.", "Analysts said it would cannibalize premium subscriptions. Instead, it expanded the total addressable market. 40%+ of new sign-ups choose the ad tier."],
+        ["2", "Ad revenue reached $3B+ in 2024 and is the fastest-growing segment of Netflix's business.", "More users on the ad tier = more ad inventory = higher CPMs. The ad business has higher margins than content licensing."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Netflix's stock climbed to all-time highs after the ad tier launch.", "Never having ads was a core part of Netflix's identity for 15 years. The market didn't punish the pivot — it rewarded the growth. Identity matters less than growth."],
+      ], "Don't let your past identity block your future revenue stream. — Hanubees"],
+    ] },
+  { id: "uber_freight", face: "/tmp/founders/f1.jpg", company: "Uber", logo: "/tmp/logo_uber.png",
+    kicker: "THE UBER FOR TRUCKS. $5 BILLION IN FREIGHT BOOKINGS.", headline: "Uber Freight does $5B+ in freight bookings. Logistics is a $1T market. Uber wants a piece.",
+    question: "The same app that finds you a car now matches trucks with cargo. How big is the freight bet?",
+    slides: [
+      ["THE TRUCKING PLATFORM", [
+        ["1", "Uber Freight launched in 2017. It matches shippers with truckers — a digital broker for the physical economy.", "$5B+ in freight under management in 2024. Shippers get real-time quotes. Truckers get loads without calling brokers. Both sides save time and money."],
+        ["2", "The US trucking market is $800B+. Most of it runs on phone calls, faxes, and spreadsheets.", "Uber brought software to a pre-internet industry. The playbook is identical to ride-hailing: digitize the dispatch, route the capacity, take a cut."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Uber Freight is the fastest-growing division in Uber's portfolio (30%+ CAGR).", "Once the network of carriers is built, Uber can layer on fuel cards, insurance, factoring, and fleet management. The freight platform becomes a financial services platform."],
+      ], "Digitize a massive, old-school industry. Then sell everything the network needs. — Hanubees"],
+    ] },
+  { id: "airbnb_longterm", face: "/tmp/founders/f2.jpg", company: "Airbnb",
+    kicker: "25% OF STAYS ARE 28+ DAYS. DIGITAL NOMADS CHANGED IT.", headline: "Airbnb monthly stays: 25% of nights booked are 28+ days. Digital nomads changed the business.",
+    question: "Airbnb was for weekend getaways. Now a quarter of its business is people living in Airbnbs for months. Why?",
+    slides: [
+      ["THE NOMAD ECONOMY", [
+        ["1", "Long-term stays (28+ days) now account for 25% of all nights booked on Airbnb.", "Remote workers, digital nomads, and traveling families are living in Airbnbs — not just vacationing. The platform became housing infrastructure."],
+        ["2", "Airbnb reports 44M+ digital nomads worldwide spending $15K+/year each on accommodations.", "Nomads typically book 3-6 months at a time. This creates predictable, long-duration bookings for hosts. Better economics than short weekend stays."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Work-from-anywhere policies permanently changed Airbnb's demand curve.", "A platform built for tourism absorbed the remote work revolution. Long-term stays are stickier (lower churn) and reduce the seasonality that once hurt Airbnb's revenue."],
+      ], "When the world changes, let your platform absorb the new behavior. — Hanubees"],
+    ] },
+  { id: "spotify_audiobooks", face: "/tmp/founders/f3.jpg", company: "Spotify", logo: "/tmp/logo_spotify.png",
+    kicker: "200,000 AUDIOBOOKS. TAKING ON AUDIBLE.", headline: "Spotify now has 200K+ audiobooks. Premium users get 15 hours free per month. Audible's reign is under attack.",
+    question: "A music app now streams books. Why is Spotify invading Audible's territory?",
+    slides: [
+      ["FROM MUSIC TO AUDIO", [
+        ["1", "Spotify entered audiobooks in 2022. By 2024, it has 200K+ titles and 15 free hours/month for Premium users.", "Audible charges $14.95/month for one credit. Spotify includes audiobook listening in your existing $11.99/month Premium subscription. Cheaper, more content."],
+        ["2", "Audiobooks are a $6B+ market growing at 25% annually. Amazon/Audible dominates with 60%+ share.", "Spotify brings 600M+ existing users to audiobooks. If even 10% of Premium users try audiobooks, Spotify instantly becomes the #2 audiobook platform."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Audiobooks increase user stickiness and time spent on Spotify. More listening = more ad inventory = higher revenue.", "The audio platform strategy: own music, podcasts, AND audiobooks. Be the single app for all audio. Audible can't compete on music."],
+      ], "Expand into adjacent audio. Use your user base as the battering ram. — Hanubees"],
+    ] },
+  { id: "microsoft_quantum", face: "/tmp/founders/gates1.jpg", company: "Microsoft", logo: "/tmp/logo_microsoft.png",
+    kicker: "17 YEARS OF RESEARCH. THE MAJORANA PARTICLE.", headline: "Microsoft's quantum computing breakthrough: 17 years chasing the Majorana particle — finally proven.",
+    question: "A breakthrough in quantum physics that took nearly two decades. What does it mean for computing?",
+    slides: [
+      ["THE LONG BET", [
+        ["1", "Microsoft has pursued topological quantum computing since 2005 — betting on a particle called the Majorana fermion.", "While Google and IBM built qubits with traditional methods, Microsoft chased a theoretical particle. Most physicists doubted it existed. A 17-year bet."],
+        ["2", "In 2024, Microsoft announced evidence of Majorana particles — the foundation for fault-tolerant quantum computers.", "Topological qubits are inherently more stable than other types. If Microsoft's approach works, its quantum computers will require dramatically fewer error-correction qubits."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Quantum computing is a $1T+ potential market (drug discovery, materials science, cryptography).", "Microsoft bet on a different physics approach — and may have leapfrogged Google and IBM. The lesson: fundamental science bets take decades but create unmatchable moats."],
+      ], "Take the long road others won't. When it works, nobody can catch up. — Hanubees"],
+    ] },
+  { id: "apple_car_canceled", face: "/tmp/founders/jobs0.jpg", company: "Apple", logo: "/tmp/logo_apple.png",
+    kicker: "10 YEARS. $10 BILLION. NOTHING TO SHOW.", headline: "Apple spent $10B on Project Titan over 10 years — then canceled it. The most expensive nothing in tech.",
+    question: "The world's richest company spent a decade building a car, then walked away. What did $10B buy?",
+    slides: [
+      ["THE DECADE OF NOTHING", [
+        ["1", "Project Titan started in 2014 with 1,000+ engineers. The goal: a fully autonomous Apple electric car.", "Over 10 years, the project burned $1B/year. Leadership changed 4 times. Scope moved from full car to just software to full car again. Internal chaos."],
+        ["2", "Apple canceled Titan in February 2024. Employees reassigned to AI.", "No concept. No prototype photos. No factory. A decade of work produced nothing the public ever saw. But the learnings fed Apple's AI and chip teams."],
+      ]],
+      ["THE LESSON", [
+        ["3", "$10B is 0.3% of Apple's market cap. The company can afford to fail.", "Apple's discipline: kill projects that don't have a clear path to 30%+ margins. Car margins are 7-10%. It wasn't worth it. Knowing when to quit is as valuable as knowing when to start."],
+      ], "Cancel what doesn't meet your standard — no matter how much you've already spent. — Hanubees"],
+    ] },
+  { id: "google_labs", face: "/tmp/founders/page2.jpg", company: "Google", logo: "/tmp/logo_google.png",
+    kicker: "280+ PRODUCTS KILLED. THE GRAVEYARD IS BIGGER THAN MOST COMPANIES.", headline: "Google killed 280+ products. Reader, Inbox, Stadia, Google+. The graveyard is bigger than most companies.",
+    question: "A company that kills more products than it keeps alive. Is this innovation or chaos?",
+    slides: [
+      ["THE KILLER INSTINCT", [
+        ["1", "Google has killed 280+ products and services since its founding.", "Google Reader (beloved RSS app). Inbox (loved email client). Google+ (the social network). Stadia (cloud gaming). All dead. All had passionate fans."],
+        ["2", "The 'Google Graveyard' is a meme — but it reflects a philosophy: ship fast, measure, kill what doesn't scale.", "Google keeps what works: Search, YouTube, Maps, Gmail, Android, Chrome. Everything else is experimental. If it grows, it stays. If not, it's gone in 18 months."],
+      ]],
+      ["THE LESSON", [
+        ["3", "The cost: developers and users no longer trust Google to maintain products outside its core.", "Startups avoid building on Google platforms. The graveyard hurts the brand. But Google's core businesses keep growing because they're ruthless about killing distractions."],
+      ], "Kill what doesn't scale. But remember: reliability IS a product feature. — Hanubees"],
+    ] },
+  { id: "meta_metaverse_spend", face: "/tmp/founders/zuck0.jpg", company: "Meta", logo: "/tmp/logo_meta.png",
+    kicker: "$50 BILLION SPENT. REVENUE UNDER $3 BILLION.", headline: "Meta spent $50B+ on the metaverse since 2021. Revenue: under $3B. The longest-term bet in tech.",
+    question: "Zuckerberg burned $50B on a vision nobody asked for. Is it the biggest gamble in corporate history?",
+    slides: [
+      ["THE MASSIVE BET", [
+        ["1", "Meta has spent $50B+ on Reality Labs (metaverse division) since 2021 — $15B/year, roughly.", "The Quest VR headset line is the market leader. But the metaverse platform (Horizon Worlds) has only ~300K monthly active users."],
+        ["2", "Reality Labs revenue: under $3B in 2024. Losses: $13B+.", "A ratio of $17 spent for every $1 earned. No other tech company loses this much money on a single division. Wall Street calls it a vanity project."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Zuckerberg: 'This is a bet on the next computing platform. I'm playing the 2030s.'", "If VR/AR becomes the dominant platform, Meta will own it. If it fails, Meta wasted $100B+ over a decade. The biggest asymmetry bet in corporate history."],
+      ], "Bets on entirely new platforms look insane until the moment they look inevitable. — Hanubees"],
+    ] },
+  { id: "amazon_fire_phone", face: "/tmp/founders/bezos20.jpg", company: "Amazon", logo: "/tmp/logo_amazon.png",
+    kicker: "THE $170 MILLION FLOP. AMAZON'S BIGGEST HARDWARE MISTAKE.", headline: "Amazon's Fire Phone: $170M write-down. The biggest hardware flop from the everything store.",
+    question: "Amazon succeeds at everything. Except phones. How did the Fire Phone fail so spectacularly?",
+    slides: [
+      ["THE FLOP", [
+        ["1", "Amazon launched the Fire Phone in July 2014 at $199 (with contract). It had 'Dynamic Perspective' — 4 front-facing cameras for a 3D-like effect.", "The feature was a gimmick nobody wanted. App selection was tiny. AT&T was the only carrier. Sales were disastrous."],
+        ["2", "Amazon took a $170M write-down on unsold Fire Phones within 3 months.", "The phone was discounted to $0.99 (with contract) to clear inventory. It was killed entirely within a year. The most visible Amazon failure."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Amazon learned from Fire Phone and poured the talent into Alexa and Fire TV — both of which succeeded.", "Failure is feedback. The same teams that built the Fire Phone built Alexa, which shipped in the Echo 4 months later. The hardware DNA came from the phone failure."],
+      ], "Your biggest flop funds your biggest win — IF you redirect the talent. — Hanubees"],
+    ] },
+  { id: "stripe_atlas", face: "/tmp/founders/f4.jpg", company: "Stripe", logo: "/tmp/logo_stripe.png",
+    kicker: "INCORPORATE IN 10 MINUTES. 30,000+ STARTUPS FORMED.", headline: "Stripe Atlas incorporates a US company in 10 minutes. 30K+ startups formed. A country inside a payment platform.",
+    question: "Stripe doesn't just process payments. It builds countries. How does company formation fit into a fintech strategy?",
+    slides: [
+      ["THE STARTUP FACTORY", [
+        ["1", "Stripe Atlas launched in 2016. Founders from anywhere in the world can incorporate a Delaware C-corp in 10 minutes.", "It handles EIN, bank account, Stripe payments, and legal docs. What used to cost $5K+ and take months of legal work now costs $500 and takes minutes."],
+        ["2", "30K+ startups have incorporated via Atlas from 140+ countries.", "These are future Stripe customers — built on Stripe from day zero. Every Atlas company is a lifetime revenue stream. Stripe takes 2.9% + $0.30 per transaction for the life of the company."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Atlas creates Stripe's own customer pipeline. Founders who incorporate on Stripe stay on Stripe.", "It's a country-building platform. Stripe doesn't market to existing companies — it creates new companies that are Stripe-native. The highest-leverage customer acquisition play in fintech."],
+      ], "Create your own future customers. Make them from scratch. — Hanubees"],
+    ] },
+  { id: "shopify_shop", face: "/tmp/founders/f5.jpg", company: "Shopify", logo: "/tmp/logo_shopify.png",
+    kicker: "100 MILLION INSTALLS. A MARKETPLACE WITHOUT BEING ONE.", headline: "Shopify Shop app: 100M+ installs. A marketplace that isn't a marketplace. Brilliant.",
+    question: "Shopify swore it would never be Amazon — a marketplace that competes with its own merchants. So what IS the Shop app?",
+    slides: [
+      ["THE ANTI-MARKETPLACE", [
+        ["1", "Shop launched in 2020 as a package tracker. It evolved into a shopping app with 100M+ installs.", "Users browse products from Shopify merchants, buy with Shop Pay (one tap), and track deliveries — all in one app. But Shopify doesn't take a cut on purchases."],
+        ["2", "Shopify doesn't charge merchants extra fees for Shop visibility. It's a free discovery layer.", "This keeps merchants independent. They own their brand and customer data. Unlike Amazon, Shopify doesn't compete with its own sellers."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Shop drives more payment volume to Shopify Payments — where Shopify DOES earn fees.", "The Shop app is a discovery funnel. More browsing = more sales = more payment processing revenue. The marketplace is the payment layer, not the product listing."],
+      ], "Build a marketplace where you charge on the transaction, not the listing. Sellers love it. — Hanubees"],
+    ] },
+  { id: "tesla_insurance", face: "/tmp/founders/musk2.jpg", company: "Tesla", logo: "/tmp/logo_tesla.png",
+    kicker: "40% CHEAPER THAN TRADITIONAL AUTO INSURANCE", headline: "Tesla Insurance uses real driving data to price premiums. 40% cheaper than traditional auto insurance.",
+    question: "Your car watches how you drive and sets your insurance rate in real time. Creepy or genius?",
+    slides: [
+      ["THE DATA-DRIVEN INSURANCE MODEL", [
+        ["1", "Tesla Insurance launched in 2019. It uses real-time driving data to determine your premium — not age, credit score, or zip code.", "Traditional insurers use proxies (age, gender, credit) that are often discriminatory. Tesla Insurance uses actual behavior: hard braking, aggressive turning, speed."],
+        ["2", "Average savings: 20-40% compared to traditional insurers like Geico or Progressive.", "Safe drivers pay less. Risky drivers pay more. The pricing is transparent and based on your actual driving — not statistical models of people like you."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Tesla Insurance is available in 12+ US states and expanding. It's the fastest-growing auto insurance product.", "Insurance is an $300B+ market in the US alone. Tesla's data advantage (billions of miles of real driving data) makes the pricing model more accurate than any incumbent's."],
+      ], "Use YOUR data to enter an adjacent market. The incumbents can't compete with precision. — Hanubees"],
+    ] },
+  { id: "nvidia_healthcare", face: "/tmp/founders/huang1.jpg", company: "Nvidia", logo: "/tmp/logo_nvidia.png",
+    kicker: "AI FOR DRUG DISCOVERY. MILLIONS PER DEAL.", headline: "Nvidia Clara: AI for drug discovery and medical imaging. Pharma companies pay millions for virtual screening.",
+    question: "Nvidia doesn't just sell chips. It sells AI that finds new medicines. How big is the healthcare bet?",
+    slides: [
+      ["THE CLARA PLATFORM", [
+        ["1", "Nvidia Clara is a healthcare AI platform: drug discovery, genomics, medical imaging, and smart hospital operations.", "Pharma companies use Clara to screen billions of molecular compounds virtually — finding drug candidates in weeks instead of years. Each partnership is worth millions."],
+        ["2", "Partners include AstraZeneca, GSK, and Recursion Pharmaceuticals — all using Nvidia's AI to accelerate drug pipelines.", "Traditional drug development: $2.6B and 10+ years per drug. AI-accelerated discovery targets: $1B and 3-5 years. The savings are existential for pharma."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Healthcare AI is a $20B+ TAM growing at 40%+ per year.", "Nvidia sells the GPU hardware for Clara deployments, the software platform, and the consulting. Every new drug discovered on Nvidia hardware entrenches Nvidia deeper in pharma."],
+      ], "Sell the hardware. Then sell the AI that runs on it. Then own the discovery pipeline. — Hanubees"],
+    ] },
+  { id: "apple_trade_in", face: "/tmp/founders/jobs1.jpg", company: "Apple", logo: "/tmp/logo_apple.png",
+    kicker: "$15 BILLION IN TRADE-IN CREDITS GIVEN", headline: "Apple Trade In: $15B+ in trade-in credits given. The circular economy that keeps you in the ecosystem.",
+    question: "Apple pays you for your old iPhone — then refurbishes and resells it. How does that make MORE money?",
+    slides: [
+      ["THE CIRCULAR LOCK-IN", [
+        ["1", "Apple Trade In accepts old iPhones, Macs, iPads, and Watches. Users get credit toward a new Apple product.", "$15B+ in trade-in credits issued. Every dollar of credit locks the customer into another Apple purchase. You can't use an Apple trade-in credit to buy a Samsung."],
+        ["2", "Refurbished iPhones are resold at 60-70% of original price — with a fresh warranty.", "Apple sells tens of millions of refurbished devices annually. It captures new customers at lower price points without diluting the premium brand."],
+      ]],
+      ["THE LESSON", [
+        ["3", "The trade-in program keeps used iPhones out of the secondary market (where Apple earns nothing).", "Every old iPhone Apple recycles or resells is one fewer used iPhone on eBay — and one more customer inside Apple's ecosystem buying apps and services."],
+      ], "Buy back your own products. Refurbish and resell. Keep customers in your universe forever. — Hanubees"],
+    ] },
+  { id: "google_photos_ai", face: "/tmp/founders/page0.jpg", company: "Google", logo: "/tmp/logo_google.png",
+    kicker: "4 TRILLION PHOTOS STORED. AI EDITING IS FREE.", headline: "Google Photos: 4 trillion+ photos stored. Magic Eraser, AI editing — all free. Data is the payment.",
+    question: "Google stores trillions of your photos for free. What's the catch? (You already know.)",
+    slides: [
+      ["THE PHOTO EMPIRE", [
+        ["1", "Google Photos launched in 2015. Today it stores 4 trillion+ photos from 1B+ users.", "Free, unlimited storage ended in 2021 (now capped at 15GB shared with Gmail and Drive). But AI features — Magic Eraser, Photo Unblur, editing — are still free."],
+        ["2", "Every photo Google stores trains its AI on real-world imagery. Faces, objects, locations.", "Google's AI gets smarter with every photo uploaded. The 'free' service is a data pipeline that improves Google Lens, Google Maps, and Google's ad targeting."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Google Photos charges for additional storage (Google One: $2/month for 100GB, $10/month for 2TB).", "100M+ Google One subscribers pay for storage. The data trains the AI. The AI improves the product. The improved product attracts more users. A data flywheel."],
+      ], "Free product + data training = better AI = more users staying = subscription revenue. — Hanubees"],
+    ] },
+  { id: "microsoft_linkedin_b2b", face: "/tmp/founders/gates0.jpg", company: "Microsoft", logo: "/tmp/logo_microsoft.png",
+    kicker: "BOUGHT FOR $26 BILLION. NOW EARNS $16 BILLION/YEAR.", headline: "Microsoft bought LinkedIn for $26B in 2016. LinkedIn revenue now: $16B/year — 50% return annually.",
+    question: "An acquisition that looked pricey in 2016 now delivers 50%+ annual returns on investment. How?",
+    slides: [
+      ["THE B2B POWERHOUSE", [
+        ["1", "Microsoft acquired LinkedIn in 2016 for $26.2B. Critics said Microsoft overpaid for a 'boring' social network.", "LinkedIn revenue in 2016: $3.7B. LinkedIn revenue in 2024: $16B+. The 'overpriced' acquisition grew 4.3× in 8 years."],
+        ["2", "Revenue sources: Talent Solutions ($7B+), Marketing Solutions ($6B+), Premium Subscriptions ($2B+).", "Recruiters pay $10K+/year for access. Advertisers pay because LinkedIn knows your job title, industry, and seniority. The most valuable B2B data on earth."],
+      ]],
+      ["THE LESSON", [
+        ["3", "LinkedIn's data is integrated into Dynamics 365, Outlook, and Microsoft 365 — making the entire Office suite smarter.", "Microsoft paid $26B for LinkedIn. Its current annual revenue ($16B) is 61% of the acquisition price. The deal was one of the best acquisitions in tech history."],
+      ], "Buy the data nobody else has. Integrate it into everything you already sell. — Hanubees"],
+    ] },
+  { id: "amazon_logistics_prime", face: "/tmp/founders/bezos21.jpg", company: "Amazon", logo: "/tmp/logo_amazon.png",
+    kicker: "400,000 DRIVERS. 100+ CARGO PLANES. A UPS COMPETITOR.", headline: "Amazon Logistics: 400K drivers, 100+ cargo planes. A UPS competitor born inside a retailer.",
+    question: "Amazon built its own delivery network bigger than FedEx — and now it sells delivery to OTHER businesses. What?",
+    slides: [
+      ["THE LOGISTICS GIANT", [
+        ["1", "Amazon Logistics delivers 70%+ of Amazon's own packages — more than 2 billion packages per quarter.", "400K+ delivery drivers (DSP network), 2,000+ delivery stations, 100+ cargo planes (Amazon Air). The third-largest delivery network in the US."],
+        ["2", "Amazon now offers its logistics network to third-party sellers and even non-Amazon businesses.", "Buy With Prime lets other websites use Amazon's checkout and delivery. Amazon Shipping competes directly with UPS and FedEx for non-Amazon packages."],
+      ]],
+      ["THE LESSON", [
+        ["3", "Every package Amazon delivers saves $3-5 compared to using UPS/FedEx. Across 8B+ packages/year, that's $30B+ in annual savings.", "The logistics division that was once a cost center is becoming a profit center. Insourcing delivery was the best infrastructure bet Amazon ever made."],
+      ], "Turn your biggest cost center into a product you sell to everyone else. — Hanubees"],
+    ] },
+  { id: "meta_whatsapp_business", face: "/tmp/founders/zuck1.jpg", company: "Meta", logo: "/tmp/logo_meta.png",
+    kicker: "200 MILLION BUSINESS ACCOUNTS. THE SILENT $10B+ ENGINE.", headline: "WhatsApp Business: 200M+ business accounts. Pay-per-conversation pricing. The silent $10B+ revenue engine.",
+    question: "You message a business on WhatsApp. You don't pay. The business pays. Meta just found its next $10B+ business. How?",
+    slides: [
+      ["THE BUSINESS MESSAGING REVOLUTION", [
+        ["1", "WhatsApp Business launched in 2018. By 2024: 200M+ business accounts across the platform.", "Businesses use it for customer support, order confirmations, appointment reminders, and marketing. It replaced email, SMS, and phone calls for millions of businesses."],
+        ["2", "Meta charges businesses per conversation: $0.02-0.09 per message depending on type (service, marketing, authentication).", "1,000 daily conversations × 200M businesses = billions of paid messages per day. Revenue run-rate: estimated $10B+ in 2024."],
+      ]],
+      ["THE LESSON", [
+        ["3", "WhatsApp Business revenue could surpass WhatsApp's entire $19B acquisition price within 2 years.", "Zuckerberg paid $19B for WhatsApp in 2014 — widely considered an overpay. The business messaging layer alone may return the investment. With 2B+ users, the monetization runway is enormous."],
+      ], "The most valuable revenue stream is the one hiding inside your free product. — Hanubees"],
+    ] },
 
 ];
 

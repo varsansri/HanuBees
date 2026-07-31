@@ -60,4 +60,63 @@ module.exports = [
   { id: "palantir", company: "Palantir", founder: "Peter Thiel", wiki: "Peter_Thiel", logo: "palantir", color: "ffffff" },
   { id: "lvmh", company: "LVMH", founder: "Bernard Arnault", wiki: "Bernard_Arnault", logo: null },
   { id: "bytedance", company: "ByteDance", founder: "Zhang Yiming", wiki: "Zhang_Yiming", logo: null },
+  // ── Semiconductors / networking ──
+  { id: "intel", company: "Intel", founder: "Gordon Moore", wiki: "Gordon_Moore", logo: "intel", color: "0071C5" },
+  { id: "amd", company: "AMD", founder: "Jerry Sanders", wiki: "Jerry_Sanders_(businessman)", logo: "amd", color: "ED1C24" },
+  { id: "tsmc", company: "TSMC", founder: "Morris Chang", wiki: "Morris_Chang", logo: null },
+  { id: "asml", company: "ASML", founder: "Peter Wennink", wiki: "Peter_Wennink", logo: "asml", color: "ffffff" },
+  { id: "cisco", company: "Cisco", founder: "Sandy Lerner", wiki: "Sandy_Lerner", logo: "cisco", color: "1BA0D7" },
+  { id: "qualcomm", company: "Qualcomm", founder: "Irwin Jacobs", wiki: "Irwin_M._Jacobs", logo: "qualcomm", color: "3253DC" },
+  { id: "broadcom", company: "Broadcom", founder: "Hock Tan", wiki: "Hock_E._Tan", logo: "broadcom", color: "CC092F" },
+  { id: "arm", company: "ARM Holdings", founder: "Robin Saxby", wiki: "Robin_Saxby", logo: "arm", color: "0091BD" },
+  // ── Enterprise SaaS ──
+  { id: "servicenow", company: "ServiceNow", founder: "Fred Luddy", wiki: "Fred_Luddy", logo: "servicenow", color: "62D84E" },
+  { id: "snowflake", company: "Snowflake", founder: "Benoit Dageville", wiki: "Benoit_Dageville", logo: "snowflake", color: "29B5E8" },
+  { id: "datadog", company: "Datadog", founder: "Olivier Pomel", wiki: "Olivier_Pomel", logo: "datadog", color: "632CA6" },
+  { id: "cloudflare", company: "Cloudflare", founder: "Matthew Prince", wiki: "Matthew_Prince", logo: "cloudflare", color: "F38020" },
+  { id: "twilio", company: "Twilio", founder: "Jeff Lawson", wiki: "Jeff_Lawson", logo: "twilio", color: "F22F46" },
+  { id: "square", company: "Square (Block)", founder: "Jack Dorsey", wiki: "Jack_Dorsey", logo: "square", color: "3A2C2C" },
+  // ── Consumer brands ──
+  { id: "cocacola", company: "Coca-Cola", founder: "Asa Candler", wiki: "Asa_Griggs_Candler", logo: "cocacola", color: "ED1B24" },
+  // ── Automotive ──
+  { id: "toyota", company: "Toyota", founder: "Kiichiro Toyoda", wiki: "Kiichiro_Toyoda", logo: "toyota", color: "EB0A1E" },
+  { id: "honda", company: "Honda", founder: "Soichiro Honda", wiki: "Soichiro_Honda", logo: "honda", color: "E40521" },
+  { id: "ferrari", company: "Ferrari", founder: "Enzo Ferrari", wiki: "Enzo_Ferrari", logo: "ferrari", color: "FF2800" },
+  { id: "mercedes", company: "Mercedes-Benz", founder: "Karl Benz", wiki: "Karl_Benz", logo: "mercedes", color: "242424" },
+  { id: "bmw", company: "BMW", founder: "Franz Josef Popp", wiki: "Franz_Josef_Popp", logo: "bmw", color: "0066B1" },
+  // ── Luxury ──
+  { id: "rolex", company: "Rolex", founder: "Hans Wilsdorf", wiki: "Hans_Wilsdorf", logo: "rolex", color: "A37E2C" },
+  { id: "louisvuitton", company: "Louis Vuitton", founder: "Louis Vuitton", wiki: "Louis_Vuitton_(designer)", logo: "louisvuitton", color: "FFFFFF" },
+  { id: "hermes", company: "Hermes", founder: "Thierry Hermes", wiki: "Thierry_Hermès", logo: "hermes", color: "F37021" },
+  { id: "chanel", company: "Chanel", founder: "Coco Chanel", wiki: "Coco_Chanel", logo: null },
+  { id: "gucci", company: "Gucci", founder: "Guccio Gucci", wiki: "Guccio_Gucci", logo: "gucci", color: "000000" },
+  { id: "adidas", company: "Adidas", founder: "Adi Dassler", wiki: "Adolf_Dassler", logo: "adidas", color: "000000" },
+  // ── Retail / finance ──
+  { id: "costco", company: "Costco", founder: "Jim Sinegal", wiki: "James_Sinegal", logo: "costco", color: "E31837" },
+  { id: "visa", company: "Visa", founder: "Dee Hock", wiki: "Dee_Hock", logo: "visa", color: "1A1F71" },
+  { id: "mastercard", company: "Mastercard", founder: "Mastercard founders", wiki: "Mastercard", logo: "mastercard", color: "EB001B" },
+  { id: "goldmansachs", company: "Goldman Sachs", founder: "Marcus Goldman", wiki: "Marcus_Goldman", logo: null },
+  { id: "morganstanley", company: "Morgan Stanley", founder: "J.P. Morgan", wiki: "J._P._Morgan", logo: null },
+  { id: "citadel", company: "Citadel", founder: "Ken Griffin", wiki: "Kenneth_C._Griffin", logo: null },
+  // ── Crypto / Asia tech ──
+  { id: "binance", company: "Binance", founder: "Changpeng Zhao", wiki: "Changpeng_Zhao", logo: "binance", color: "F0B90B" },
+  { id: "tencent", company: "Tencent", founder: "Pony Ma", wiki: "Ma_Huateng", logo: "tencentqq", color: "EB1923" },
+  { id: "xiaomi", company: "Xiaomi", founder: "Lei Jun", wiki: "Lei_Jun", logo: "xiaomi", color: "FF6900" },
+  // ── AI / platforms ──
+  { id: "anthropic", company: "Anthropic", founder: "Dario Amodei", wiki: "Dario_Amodei", logo: "anthropic", color: "191919" },
+  { id: "midjourney", company: "Midjourney", founder: "David Holz", wiki: "David_Holz", logo: null },
+  { id: "telegram", company: "Telegram", founder: "Pavel Durov", wiki: "Pavel_Durov", logo: "telegram", color: "26A5E4" },
+  // ── Gaming ──
+  { id: "epicgames", company: "Epic Games", founder: "Tim Sweeney", wiki: "Tim_Sweeney_(game_developer)", logo: "epicgames", color: "313131" },
+  { id: "riotgames", company: "Riot Games", founder: "Brandon Beck", wiki: "Brandon_Beck", logo: "riotgames", color: "D32936" },
+  { id: "unity", company: "Unity Technologies", founder: "David Helgason", wiki: "David_Helgason", logo: "unity", color: "FFFFFF" },
+  { id: "roblox", company: "Roblox", founder: "David Baszucki", wiki: "David_Baszucki", logo: "roblox", color: "000000" },
+  // ── Creator economy ──
+  { id: "onlyfans_founder", company: "OnlyFans", founder: "Tim Stokely", wiki: "Tim_Stokely", logo: "onlyfans", color: "008CCF" },
+  { id: "cameo_founder", company: "Cameo", founder: "Steven Galanis", wiki: "Steven_Galanis", logo: null },
+  { id: "patreon_founder", company: "Patreon", founder: "Jack Conte", wiki: "Jack_Conte", logo: "patreon", color: "000000" },
+  { id: "substack_founder", company: "Substack", founder: "Chris Best", wiki: "Chris_Best", logo: "substack", color: "FF6719" },
+  // ── Music / fashion ──
+  { id: "beats", company: "Beats by Dre", founder: "Dr. Dre", wiki: "Dr._Dre", logo: "beats", color: "ED1C24" },
+  { id: "yeezy", company: "Yeezy", founder: "Kanye West", wiki: "Kanye_West", logo: null },
 ];
