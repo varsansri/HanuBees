@@ -2871,3 +2871,1486 @@ check what is this https://github.com/varsansri/HanuBees
 ---
 [2026-07-31T18:51:48.919Z]
 We have Hannabys.com as a yeah, website profile right now, right? Uh, change that, uh, uh, title to Hanabie-commerce and the story as a separate project in Githa Boda also in Versal, um, because we are going to use that Hanabi.com. Domain to some other idea, uh, tell me when you are ready. Uh, just to keep uh uh change the name to HonabyCommerce and um, uh, save, save everything, every updates we done, everything, uh, don't lose any data, just to put it in GitHub and also store it as a a temporary, I mean, uh, uh, in the permanent storage of the phone storage, put it as a file inside the phone storage, and also uh uh put it on if possible, uh, and the most likely, uh, create Hanaby's e-commerce, uh, uh, hosted using Github, but because we don't need it inversal, uh, just to make sure uh whatever that is, um, uh, keep, keep it as it is, just to create a a host the previous site as a Hanabe e-commerce, uh, uh, using Github. We are going to host it using GitHub instead of Honabi.com because we are going to use that domain for a different plan. And when you're done it, ask for the idea for the new Hanabi.com plan.
+
+---
+[2026-07-31T19:21:10.227Z]
+we have already done a project like this but i font know were i saved it it was also in vercel i guess try to use the old project structure based on the idea im giving you you have to find which idea im talking about okey ? So this is the idea. Uh, Yeah. Is everything going to be... and people are actually asking, yeah, if our suggestion, undertaking decisions, and, uh, spending money. Like, is this product good enough, or is this the best product, uh, is there? Like, even before buying in any products in Flipkart or Amazon, they are asking the question, uh, to AI. Like, under this budget, what is the best? Because, uh, it doesn't favors any product, and it really checks different things and give a suggestion which is best. And people are also giving information about their businesses also. Like, you can search your business on a chat, GPT, and see what it says and what is the information it gives. But the thing is, everyone obviously going to get an AI for sure. My idea is to... it going to start with businesses to clients. Like, who needs an AI more than anyone else is And the future is going to be where, uh, no one is going to, uh, use websites because they are not going to take the decisions. Diary or, uh, some third party AI is going to take the decision. And, uh, that is coming for sure. So I want to create a application where there is a... where you create an account and just to give as much information as about possible... about your business, and it will record all the business. And it is your AI, and it was connected with with your particular mobile number, meaning you are going to verified using that mobile number. And people are going to identify using that mobile number, and your website is also linked with that. So how it works is, let's say, I want to, uh, talk to a business, uh, but I don't want to re... I was only available at the time of ten o'clock or eleven o'clock at the night. Most likely, the business is not going to be respond, and, uh, it was a a hassle for them. But, uh, we are already seeing a lot of proof that, uh, AI receptionist, AI cold call, like, AI calling is there. But, uh, it is not that much of efficient because not every... everything is not connected So how we going to connect the clients and the businesses is instead of giving only, uh, AI access to businesses, we are going to give access to, uh, AI to normal people also. You can register as business. You can register as normal human or even your freelancer.Yeah. Exactly something like that. And, uh, it was, like, uh, location based. Like, the Internet itself. Like, so far, uh, people wanted to talk about their business for a very long time, and they want to tell as much as they want, uh, in a website. But most likely, those things are not going to be noticed and, uh, not read by anyone. And, um, which it is a problem. Like, people are... like, if if you take any business out there, uh, are a service, they will talk about their story, how they possibly solve this very particular problem. The... these are very valuable information, but they can't put it in a website because we... they know that it is going to make the website messier and more... very highly possible that is no one is going to read it on the, uh, like, there is a big problem, which is an individual voice is not going to be reached to someone, uh, because, uh, people have less time and, uh, less, uh, connectivity and, uh, things like that. So at the... a smaller and minor details that we ignore and we doesn't share is something going to be useful by AI because you can talk in PDF or you can talk in pages. Like, you can write about yourself or about your business for three hundred or three thousand amount of pages. AI going to remember it all and going to represent it yourself. Let... let's say your customer is asking, I'm looking for a haircut, and this is the particular style, and this is the hard color I was looking for. And this is the budget, but I was looking for quality, uh, on the... at the price. Uh, some people going to ask, like, uh, I don't care about, uh, the pricing. I don't care about the... her rating. Uh, show me some of the some of the works of the particular person. Give me some idea about this, that. So it was going to be super flexible, and, uh, we know that, uh, people are go... not going to be able to fool anyone in the future because, uh, in the past, we are going to, uh, we need to, uh, let's say someone is giving proof, like, uh, we have this particular certificate for this material, and this is the higher quality. And this is the India's number one this, that. Uh, as a human, we don't have a... enough knowledge about it. And, uh, even if we want to authorize it, uh, we have very less visibility and, uh, quality checker in it. But, uh, with the help of AI, anyone can check right now and, uh, everything can be verified and authenticated. Meaning, um, that is a lot of things that going to be changed in the future. And, uh, I want to be a platform for that, uh, where, uh, every businesses is going to have their own AI, and every individual is also going to have their own AI. But, uh, it was like, uh, one single platform where you can discover and also put in your, uh, data. It can be useful for yourself, or, uh, it can be, uh, uh, helpful to put your data on the Internet. Like, uh, instead of discovering something, um, super general that is for, uh, that is what ChatGPT on the cloud is doing. They were specialized under, uh, very good at creating something, but we are going to create something where, uh, only helpful to represent. Are the majority of countries actually uses a email, WhatsApp, and, uh, many other different things to filter, uh, data? For example, uh, people use different connections and informations to filter out, uh, information. For example, they give private number to very few. They have business number, or, uh, they have to... if they want to change information, they give email, or, uh, they just want to do casual talk. They give WhatsApp, or, uh, they... if they want to check on something, personal life or something, they have to do it in Instagram. So there is multiple platforms people have to keep up. Uh, but now, uh, with your one AI, you can easily split out a spam under data. What is spam and, uh, what is really, uh, potential client or, uh, let's say, even if thousands of advertisements is put in front of your eye, you don't have to see it or watch it. Uh, your AI is going to collect all the information, hundreds just to keep it in the background. And when you ask for it to remember something or if you want to just... is there any person who has reached out for us for for for this particular usage or particular niche? It is going to be super helpful. So... and also, yeah, a lot of businesses were using WhatsApp communication for sales. Like, before, yeah, sale is happening, there are multiple steps. Yeah. There is direct contact. There is information sharing in WhatsApp and many other things. But now it is all simplified on the hot to one single place. And, uh, at any time, twenty four by seven. And, uh, majority of the information is going to be available in AI itself. Reviews and stories are going to be there. Um, this is the overall idea. Like, let's say, uh, how your business is going to be utilized. We are talking about the longer vision right now, but, uh, what is the step... first step I was thinking about. And the first step I was thinking about is, um, any any ecommerce sites that is any service based businesses out there using WhatsApp or any direct calls or something, they can upload it on the talk about their business as long as they want. inside our application, it had all been stored. And, uh, they can, uh, just go to the explore page and talk to their AI, uh, with the specific keywords and the specific notations. Uh, like, let's say, they uploaded information like, uh, what is the best... who is the best doctor in diabetes under, uh, this doctor is, uh, this is his name, and how much cases he he were he were done so far, and what are the special cases, and, uh, give me some of the exotic stories he's, uh, told about a particular diabetes person or a particular, uh, age per... people or, um, a person who is having these type of troubles and traumas, or, uh, they can customize as deep as they want. Uh, they they can pop out those stories and, uh, their images and everything. So by this way, uh, that is... people can connect and find very few stories that were not available previously in Google or from Instagram or even from YouTube. Uh, this or this can be highlighted and, uh, can be seen.
+
+---
+[2026-07-31T19:25:25.603Z]
+use hanubees.com domain for that and make it alive agaian
+
+---
+[2026-07-31T19:34:10.681Z]
+so is it live now
+
+---
+[2026-07-31T19:38:30.348Z]
+why is there a landing page? initially i didnt create it in that wsy ?
+
+---
+[2026-08-01T05:50:32.574Z]
+baaed on the idea what are the problems what we need for our idea
+
+---
+[2026-08-01T05:55:43.809Z]
+I want you to uh use Google's, um, Gemini CLI in the background, like um whenever someone answers or uh some type of uh asking some type of question, it automatically uh triggers, um, Geminis, uh, I mean anti-gravity CLI, uh, in this device and um it uses uh that thing as its brain. and we can do that. or else, um yeah, let's just do that, because it has image recognition in it and um how it works is let's say someone is giving some data, it is just completely need to forget about it is a coding agent, anti-gravity agent or something like that. It's uh we are doing this temporarily because uh uh we don't want to do it in uh using API key. Uh, so that's why we are doing it and uh temporarily. We just need to forget completely about it is an coding agent. and uh just uh uh remembers itself as an uh Honaby's AI. uh, so let's make it that, uh, planet, uh, give me some ideas about uh how we can do it and uh uh what we can do and uh I need, this is a best uh highly used for searching and discovering that's what we are focusing on, so what are the things that is necessary for a searching and I told, so think about it.
+
+---
+[2026-08-01T06:14:43.320Z]
+The problem here is, I want to do most of the work by yourself, ah, and uh we are handling data here, meaning, uh, you have to interact with the hard database a lot, meaning with the superba or something and uh you can't do it, uh, every time when I was giving uh data to it. Like, let's say some uh user is coming in, coming in and they want to, uh, they're given some data, and it was unique to them, and I wanted to remember it means, uh, every time we can't actually uh ask them or uh our side itself, so we can't uh actually uh do all of it by yourself, or any uh does it like uh super base allows you to put in query, but a running at creating table, some of it still needs a human interactions with it. So, which is a big problem for us. Uh, because the entire idea is about a storing data and providing it better and uh if it is everything, every time it if it needs my interaction means, uh, it is going to be harder and most likely we are going to give up. So this is the main problem and uh for the anti-gravity, um, CLI, it is not broken, you are not checking it, right? Uh, the keyword is AGY and uh I checked it yesterday and today it was still working, so think about it and give me a solution
+
+---
+[2026-08-01T06:15:40.247Z]
+you are in termux mobile app using ubuntu
+
+---
+[2026-08-01T06:15:41.939Z]
+you are in termux mobile app using ubuntu
+
+---
+[2026-08-01T07:49:57.901Z]
+do you remember hanubees commerse site
+
+---
+[2026-08-01T07:51:08.065Z]
+make hanubees.com domain and url goes to that site
+
+---
+[2026-08-01T08:45:36.329Z]
+do you remember the shopify site we working on
+
+---
+[2026-08-01T08:45:55.566Z]
+i connected quink with it installed and pluged in
+
+---
+[2026-08-01T09:01:15.322Z]
+1bde3f3bc394916857df542af367487137793a884005ec26374887e1ac6ec4a8
+
+---
+[2026-08-01T09:02:00.405Z]
+so what you can do nkw with the key i gave
+
+---
+[2026-08-01T09:03:25.053Z]
+923059195937684
+
+---
+[2026-08-01T09:08:02.645Z]
+do what you can do with what i gave u
+
+---
+[2026-08-01T09:19:44.321Z]
+so you can create a product if i told you to?
+
+---
+[2026-08-01T09:21:42.992Z]
+so can u create a product in shopify and connect it with qikink
+
+---
+[2026-08-01T09:36:32.817Z]
+in our shopify they asked for black, grey, white no other colors in our website change it
+
+---
+[2026-08-01T09:58:04.713Z]
+<task-notification>
+<task-id>b5ajl47xl</task-id>
+<tool-use-id>toolu_01PXcJjZe2DLmwWcLQMAk9Ba</tool-use-id>
+<output-file>/tmp/claude-0/-root/2d96f521-c2ce-4f14-b279-1db31af03556/tasks/b5ajl47xl.output</output-file>
+<status>completed</status>
+<summary>Background command "Swap out off-palette product images" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-01T10:00:25.535Z]
+the site itself need to be in the aesthetics of black ,grey , white only
+
+---
+[2026-08-01T13:23:04.321Z]
+there is lot of things that were missing in the store its not full fledged store it misses a lot of elements gill it up
+
+---
+[2026-08-03T05:05:14.550Z]
+what
+
+---
+[2026-08-03T05:20:49.445Z]
+why we already authenticated right on this device
+
+---
+[2026-08-03T05:26:52.328Z]
+check clearly and if u need it again ask for authedication.
+
+---
+[2026-08-03T05:37:06.148Z]
+done
+
+---
+[2026-08-03T05:53:20.591Z]
+what are the news things we done
+
+---
+[2026-08-03T05:53:56.434Z]
+give super short
+
+---
+[2026-08-03T05:57:42.952Z]
+what other things we need to work on
+
+---
+[2026-08-03T06:03:43.277Z]
+order tracking?
+
+---
+[2026-08-03T06:05:47.688Z]
+this is india only shop
+
+---
+[2026-08-03T06:16:04.760Z]
+the link does open any li k try again
+
+---
+[2026-08-03T06:21:29.996Z]
+check
+
+---
+[2026-08-03T06:36:59.060Z]
+what do you suggest for shipping in india how we going to connect qinkink is already there ecplain me this and also for payments explain
+
+---
+[2026-08-03T06:40:59.545Z]
+yeah what u need for implementing razor pay
+
+---
+[2026-08-03T07:10:15.883Z]
+what other things you suggest we can add
+
+---
+[2026-08-03T08:43:11.663Z]
+i added some collections to the store but im not seeing it in site why like i added them in qikink
+
+---
+[2026-08-03T08:47:49.080Z]
+use whay ever names you want make all the desighns come to site as live lroduct
+
+---
+[2026-08-03T09:00:12.698Z]
+<task-notification>
+<task-id>boqw5yj2e</task-id>
+<tool-use-id>toolu_01TTDTv1X37E7QYU3tgvpEvM</tool-use-id>
+<output-file>/tmp/claude-0/-root/2d96f521-c2ce-4f14-b279-1db31af03556/tasks/boqw5yj2e.output</output-file>
+<status>completed</status>
+<summary>Background command "Wait and verify remaining products" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-03T09:30:20.654Z]
+save everything we need to comback so improvise project memory
+
+---
+[2026-08-03T09:51:02.929Z]
+can you see fxabsolute.com site i want u to completely understand it we have all access so check all
+
+---
+[2026-08-03T10:27:09.276Z]
+can you see the project fxabsolute.com its our site we have all the access for it and we contantly updating so check it and understood it as much as possible
+
+---
+[2026-08-03T10:58:13.246Z]
+cimpelte remove ai chat and , solve 2 and 3
+
+---
+[2026-08-03T13:42:13.029Z]
+can you improvise the backtesting tool UI and more conventent i want prople stay and keep backtesting
+
+---
+[2026-08-03T14:05:57.658Z]
+the only use fukl thing yiu said is resume button and also when i reload it goes to home page i want you to think better take trafingview backtesting as example
+
+---
+[2026-08-03T14:12:58.119Z]
+do it
+
+---
+[2026-08-04T01:37:54.732Z]
+can u see oodu mi media labs project
+
+---
+[2026-08-04T01:43:56.825Z]
+in thst there is 2 iso seals are there in the bottom left ,exactly above the follow button right
+
+---
+[2026-08-04T01:59:08.266Z]
+do it by yourself
+
+---
+[2026-08-04T03:46:22.199Z]
+correct it
+
+---
+[2026-08-04T04:04:37.938Z]
+im not seeing the change yet
+
+---
+[2026-08-04T05:58:52.272Z]
+i need to add privacy policy in the footer of a site and i want you to do it we have word press access and also cpannel access what do you like to have to make it happen
+
+---
+[2026-08-04T06:00:02.664Z]
+i was talking about a new project
+
+---
+[2026-08-04T06:02:22.456Z]
+this is the site https://navratnajewellery.com/   , Wordpress - https://navratnajewellery.com/wp-admin - admin  , admin@2025 ,
+
+---
+[2026-08-04T06:31:21.924Z]
+dont loose any data this device has drive acces googke drive so first make sure the entire backup is there with max details as possible so that we dont loose everything and also make the backup is available in the wp too
+
+---
+[2026-08-04T07:02:00.566Z]
+so the backup is safe if so in which areas
+
+---
+[2026-08-04T07:04:22.680Z]
+let it run i given you the task of creating privacy policy and terms and condition button in the footer right do it  , dont  loose any data
+
+---
+[2026-08-04T07:20:22.939Z]
+give me the l8nk
+
+---
+[2026-08-04T07:22:22.161Z]
+but dont see any button text that says like those ?
+
+---
+[2026-08-04T08:03:51.887Z]
+is it there what u trying to say
+
+---
+[2026-08-04T09:15:02.162Z]
+we need to do a rework on oodu mi media labs thing so go to that project
+
+---
+[2026-08-04T09:18:45.200Z]
+Details
+
+Name
+
+Ol-Reference_Description_04-08-26.docx
+
+Date modified
+
+4 August 2026 14:22
+
+D
+
+Size
+
+260 KB
+
+Location
+
+All files/Download , this is the mail and file they gave me Midhun Raja
+
+To: me, Ganesh V, Danny F, Mohamed Ibrahim
+
+1:38 pm View details
+
+Dear Team,
+
+Greetings from Oodu Implementers Pvt. Ltd.!!!
+
+Please find the attached document containing the details of our customer success stories.
+
+Kindly update the Customer Success Stories section on our website by adding the company logo, company name, and the corresponding description for each customer as provided in the attached document.
+
+:
+
+The updates need to be made on the Customer Success Stories page of our website: Customer Success Stories.
+
+Kindly complete the updates at the earliest and let us know once they have been published , So this is the job which is like um they have a story section in that site and uh they were already having some of the, their previous customers under some of the stories. It was like a card section and uh they just wanted to give an update. Uh, so there are two things we have to do in that particular area where, uh, uh, we have to update on, uh, some of the stories just has to text in it. Uh, there is no image in it, so we have to update on the uh text of uh images for those cards that weren't available there, like there is already stories in there, uh, in the, you can check in the docks, uh, uh, do image recognition in it and to find out uh uh which card is for which image. Uh, they said only a few of them were um for the old gods and some majority of them for the new updates for new stories, so we have to, you have to think about those though, also, uh, add new cards and uh I do it as a uh as in the same design as possible, just add the text and uh uh in the same design and um add those logos perfectly. This is the uh recommend they give, and if you had any questions on, just ask me before, before you do anything.
+
+---
+[2026-08-04T09:29:30.902Z]
+1. grunexus update it 2 . keep onky one ,3. keep the text just put l as logo , 4. use the same info they gave , 5. use the same logo
+
+---
+[2026-08-04T09:44:20.486Z]
+thisbis the cpannel info save it too https://bom1plzcpnl494591.prod.bom1.secureserver.net:2083/   , login - wis9ciwt1ud3 , pass - sZ>wLn0{8OGkK
+
+---
+[2026-08-04T10:05:19.096Z]
+can you do mail ? i want you to write a mail to the person about the update with detailed corrwctions we found dont tell them how we done it just put it what necessary we have titan mail can you do it and also put the link in it
+
+---
+[2026-08-04T10:07:15.621Z]
+if i give you mail credentials can you do it
+
+---
+[2026-08-04T10:12:21.673Z]
+Email: SRIVARSAN@mimedialabs.net
+
+Password: Justdoit#26Hide Copy  , recepiant mail id - Midhun Raja <midhunraja@odooimplementers.com>   , my name is Sri Varshan ,
+
+---
+[2026-08-04T10:13:10.198Z]
+before you sent make the mail suoer short and more human like
+
+---
+[2026-08-04T10:14:25.360Z]
+yeah do it if possible add a screen shot of the particular desighns we done
+
+---
+[2026-08-04T10:17:38.005Z]
+dont take any risks be careful
+
+---
+[2026-08-04T10:19:24.137Z]
+store the image in phone storage so i can sent it manually
+
+---
+[2026-08-06T04:55:47.193Z]
+So the main goal of this application is like uh until July 13, 2027. with NATO run nonstop, it can't be stopped. It is a timer like it was going, uh, uh, it going to run for uh entire time of July 13, 2027. The purpose of this is uh I want to work uh work like every single minute as possible. It was an year of hustle and grind so it was a reminder and also I want to track off my working time and things like that. So uh that is an additional timer or something needed to be already going. which is like, I will record the times, uh, whenever I started to work I will earn it and it accumulates. So I, when I, when I start work, I started a recording and um when I pass her pass her at a rest stop it. it accumulated into another time, like what is the overall time going on, what is the time you have worked? and what is the total accumulation of that particular time. You have worked. and the other future I want to add is a calculator. type of thing where I can uh add or minus some uh other sub some time. , So it was like um I can add our subra to the time, so that even if I missed some of the recording accurately, I can manually adjust it on my own and accumulate uh hm do the changes in the time period I want to. And the another thing is this uh changes needed to be done only in between 2 hours, I mean a in in between two days, so that I can't fake it. or let's say, the previous day's time I want to change. The only time I was available to, I can able to do is either the same day or the another day. After that, I could not be able to do changes in the. um day before that, so that it can't be faked or changed. Ah, give me some ideas how to uh make this and um how to make it unakable, and also even much more better tool to use it.
+
+---
+[2026-08-06T04:57:16.211Z]
+built it host using guthub we bave github access
+
+---
+[2026-08-06T05:53:00.442Z]
+name this product into Raage_SriVarshan
+
+---
+[2026-08-06T06:09:22.446Z]
+make it even more better and look for function problems ,  use this to improvise the ui First. Emil Kowalski's skill. The biggest problem with vibe coding is that everything comes out flat and lifeless. This fixes it. One command and Claude starts adding real motion, proper easing, and animations that actually make sense.
+
+Second. Impeccable. It gives Claude a full design vocabulary, 20 commands covering typography, color, spacing, and layout. My favorite is /polish, run it before shipping anything and Claude goes through your entire Ul and tightens everything up.
+
+And the one I keep coming back to is Taste Skill. It literally teaches Claude what good design looks like. No more generic gradients, no more Inter font on everything, no more Al-looking output. You just get interfaces that look like a real designer touched them , + http://github.com/ruucm/shadergradient
+
+liquid-logo → http://github.com/paper-design/liquid-logo
+
+liquid-glass-js + http://github.com/dashersw/liquid-glass-js
+
+react-three-fiber + http://github.com/pmndrs/react-three-fiber
+
+---
+[2026-08-06T06:30:51.542Z]
+male it installable application like you know there in chrome were we go to the settings area and installable websites i want you make it do that
+
+---
+[2026-08-06T07:01:03.704Z]
+So this is a better idea, which is like, uh, let's keep the timer on and uh the better way I think it is. I'm treating I'm almost going to treat it as a um, journal or my personal notes are my personal diary, uh, but the better way is, uh, using AI to do all the stuff. So instead of me trying manually, doing a, uh, a workout at this particular time, and I'd done this, done that, and things like that. If I try it manually typing, it's going to be irritating and I'm uh probably not going to keep it as, you know, for a longer period of time. So the uh, we have GitHub and uh what we're going to do is I was using uh EI everyday for sure. Uh, like, uh, urgent coding agents like uh uh open code, cloud code, or codex, things like this. Uh, I'm uh almost certain I'm going to use it for the next upcoming years also, meaning, uh, I can update every single day these git hubs and uh it, it is both understand able and it stores those information on the site as a text and also um it can uh deliver me and a chart of uh what is the month is looking like and how many hours I worked and uh things like that. So it was a very best way to journal, where I can just record a rambling brain dump of my thoughts or what I've done, what are my actions are, and I just put it in the coding agents as a text. It will upload it into the memory of that website where it keeps that all the data and whenever after a year or even 6 months or after a year, I can uh make , Uh, I'm actually going to use a cloud, uh cloud code or any agent. So the thing is, uh, it can be managed or uh seen by anything, the data, uh, the thing that, as I said, instead of optimizing it or optimizing the thoughts I was saying, it need to record uh give the uh store the data as it is in the India textile texti format in the site, and it doesn't actually need to show it to me or uh I need to show it on the UI, but um it just need to store it somewhere, uh, in the site, and also make sure it doesn't lost, um, and it also stores the same data in um in the uh phone storage every single day because the data is the most important thing, so that's uh then only we can track of everything, every single day of what I done, uh, in which time I wake up and uh, uh, how many hours I have working, what is my thought process, what is the feelings I was facing and uh how can I improve this and uh how many hours I was sleeping and things like that. What I was saying is everything is a very important data. So that, uh, the data needed to be stored as it is, as I said, and um keep making a uh storing it. and uh make it available in the site. Instead of a me manually. trying to type or uh uh do, uh, change numbers in it. things like that. The site is a just a visual representation of a uh accumulative thoughts of accumulative things of what I have done and what is done so far, things like that. make a main fuction were it was like what ever the ai im using when ever i said , it just stores the data perfectly in this application
+
+---
+[2026-08-06T08:02:29.373Z]
+check the project ooduimplementors ,This is the change they want, uh, the thing is, um, they were using a forms in their site, right? It was, it can be only seen using. um getting into the admin and uh see how many people are logged in, things like that. Uh, they wanted to see Deny. a different way, much more easier and efficient way. Uh, same forms in the site, but uh uh from the recipients and they wanted to do it in a much more easy accessible way, like a Google Forms or some other things, uh, what other options are there? What is the best thing, uh, we can do for it and uh what is so far how it working, uh, give me a report about this. Let's talk about this particular function
+
+---
+[2026-08-06T08:33:14.315Z]
+if we use google forms do we need to use the ui form just tell me what users see what we see
+
+---
+[2026-08-06T08:33:30.873Z]
+and also explain about hubspot CRM
+
+---
+[2026-08-06T09:20:48.664Z]
+thank you lets go to the next project
+
+---
+[2026-08-06T10:15:25.529Z]
+can you rell ne first what u been doing?
+
+---
+[2026-08-06T10:17:49.436Z]
+we have vercel and all access remeber it continue
+
+---
+[2026-08-06T10:30:31.723Z]
+befire this how many of our pages were tracked
+
+---
+[2026-08-06T10:38:20.090Z]
+So this is what I want you to do, um. write a individual pages, each of them were a total of 44. Uh, the main goal is uh SEO here and I want to you to do one crazy as hevo that drives uh crazy traffic and uh we are highly focusing on uh India, Tamil Nadu only. So, uh do it and uh and do it for only Tamil Nadu, uh, because of we are uh uh specific uh focusing on specific location. I think we can be niche dents and even better. uh, so, let's do that. And uh I need 44 individual pages. Let's first decide the topics. uh that related to our needs. to rank upon uh Google or Bing or any other process. The trick is use other browsers because Google uh site map is not that much of a easy to rank up, so use being or any other browser that were uh uh users and especially I know Tamil Nadu itself doesn't use any other than Google, but just to try just to do it and all places as possible so that if we increases the chances, but I want you to think deeply about India and Tamil Nadu, so that uh uh each topic needs to be super strong and focus on the cities of Tamil Nadu and go for
+
+---
+[2026-08-06T11:44:14.302Z]
+can you see oodu implementer mi media labs - this is the request they have forms in their site right the problem is it was stored in the admin and they dont want to get into admin everythime so they asked can we make the form data automatically updated inside google sheet every time a visitors enter in it
+
+---
+[2026-08-06T13:11:46.095Z]
+i dont understand what do u wht frm me
+
+---
+[2026-08-06T13:30:18.463Z]
+can you see raage- srivarsahn project on github get in to jt
+
+---
+[2026-08-06T13:40:32.633Z]
+update this on the Journel , So this is the entire thing I want to record in the journal. So I woke up around 7.30 or something like that. And I talked to my grandmother, which is a normal conversation, not that much of a big deal, yeah, good enough conversation. And I talked to my mother, and it was not that much of disappointing or something, it was also a normal conversation. And the third thing is, after that I get into work, which I created this application, this journal application. This is the first thing I've done it for myself. And before that, I actually taken care of my skin, which I do glutathione, vitamin C tablets, two of them. I mean, a glutathione one tablet, and a vitamin C tablet is one. And two serums, niacinamide serum and vitamin C serum, and moisturizer, these are the things. And I shaved a little. And I don't think I washed my hair, I guess. I don't really remember it. Just keep it in mind. And after that, I had breakfast. And during breakfast, I watched some of productive YouTube videos, you could say, like Alex Hormozi and Sabri Suby, one of YouTubers, both of them in entrepreneur niche. And I watched those for the, like, spent around 20 minutes or something in that. After that, I worked in the application, which is this journaling app. Nothing is bigger. After that, I was also working in my job, which is, let's just keep it as a job work. And I done it for within 1.30 something. And after that, I had breakfast. During that time, I feel exhausted pretty much. And I just watched some good productive videos in that time also. The overall time is spent around 20 minutes or maybe 30 minutes or more in the entire day watching productive YouTube videos. And after that, I seen some SEO videos on YouTube, learned some keywords and things like that. And I wanted to get in sleep, but I just pushed through it because I wanted to work more. So what happened is, I tried to do SEO for my another site, which is Hanubish.com. Just process this, I will tell you more. , I wanted to do SEO for Hanubiz.com, but Claude Code actually takes a lot more time to do work. I don't know. Compared to, it was very good at working and also consumes a little more time to give an output. And I was using Antigravity also for a little job to my main business, I mean the main job, not the business for myself. Hanubiz.com and the journal was Claude Code, and pretty much I hasn't done anything on Hanubiz.com SEO. Claude Code said a little bit of bugs we fixed in it. I think actually hasn't done any pretty good SEO in it. Four or five websites has, it said, four or five websites we have updated, created for SEO, side links, but it wasn't actually that much big of an impact, I guess. Meaning, I wasn't fully finished with the job, the task I wanted to do. And because my job inquiry came in for a question about a particular job I needed to do. So I shifted into that, completely closed the Hanubiz.com and get into the job area, where I started to work on it. And in between this time period of afternoon, I just scrolled a lot of short-form videos, because I pretty much accessed and couldn't want to do anything super good or something like that. So it was like half work, half not concentrated work, something like that. After 3.30, I take a little bit of 30 minutes of a small nap. I don't know, it was 10 minutes or 15 minutes or even 5 minutes. I just slip on it and I just wake up again. Does it actually give me any brain boost or something? Actually, no. I just feel the same way as before. But it was good to get a very small nap. And this all happened in the time period of 3 to 6 o'clock. And after that, after 6 o'clock, I just try to figure out what to do, what to work on in the evening. And that's pretty much how the 6 o'clock period is going on. And yeah, that's it. I can't give you an accurate example of how many hours I was working on. And this is what I was pretty much doing. And most of the works were I was monitoring Claude Code and other agents to do certain tasks, pretty much tweaking here and there, here and there, and giving directions to the AI to build something. And this is what it is.
+
+---
+[2026-08-06T13:51:21.395Z]
+And I also think what is the rest of the day and what are the plans, I wanted to tell that also. Okay, when the day starts, I actually thought about, I actually talked to a friend for an eight minutes, and I just wanted to add that also for this day. And the plan for the day actually is to write scripts, because I planned to, because video editing is, I can't show my, there is two things, right, where you can put a video. Either you can film yourself or just put in stock images to create those videos. Both of them consume same type, or not actually same type of effort in it, because a video is, if I put, if I want to record my footage, it gives me a lot of disadvantages than advantages. One is video quality, and second one is filming timing. There is a lot of disturbance going on because I don't have a personal space. So let's just keep it in mind that I don't want to film videos right now because that's not suitable for me. So that I wanted to record videos using my voice over, voice as the main thing, and the second thing is the footages. And I just wanted to focus highly on script. So a very good script is very much important, and that's what I thought, but I couldn't able to write any. I was trying to do the productive work of, because while monitoring the AI do the work, I also wanted to write the scripts for the trading thing, but I don't have the mental energy to do it. So I just skipped it, and also I do wanted to... The thing is, I just know how to do it. How to do it is just to see some of the YouTube videos to get an idea about how to script a video. I wanted to record a long-form video and also a short-form video. Like the plan is, every month I need to at least make four long-form videos for YouTube, and every single day two videos for Instagram. This is the plan for the trading thing. And also I wanted to do comments and just make it an engaging thing. I need to build that habit. This is the plan I was thinking about, but what is the action I did in this area is nothing. And that's what I planned to do for the rest of the day until 12 o'clock of this particular day, because my job overs at the time of 7.30 today. And there is no updates right now, and I don't have to worry about anything because the next day only I need to give the report. So we don't have to worry about that. We have to only think about the trading right now. So the first thing I wanted to do is, it was noisy right now. It wasn't actually that much of a big deal to record a voiceover, but I need a script. I was thinking about two things right now. Just process this, I will tell you more. , record these too So, the thing is, if you focus on the script too much, you are going to think about perfection, and it is a very terrible way for being consistent. And also quality does matter. So what is the time window we have right now? Like, I think 7.15 right now. We have a time window of 7.30 to 8.30, 8.30 to 9.30, 9.30 to 10.30, 10.30 to 11.30, 11.30 to 12.30, or just 12, which is around 5 hours is there. Within the time period, what I need to focus on is, we are going to do just 4 minutes of voice recording, and also footage is there. The voice is the main thing. Based on that only we could be able to create the videos. So the voice is depending on the script. So I just need to work on the script first. We just need to equally split the 5 hours. We don't actually need to plan it right now. And also try to, there is two things we can do here. One is, at nights only it is very convenient for me to record audio. Either I can write 2-3 scripts right now, meaning 4 or 5 scripts right now, and within around 9.80 or 10.30, where I can just build the script and things like that, and record the voiceover for it for this entire day. No video editing right now, because we can utilize the night time, and in the next day morning, then only we can start thinking about videos, footages. By that way, we can create the videos for the next day, and also a stock of voiceover where I can work on the audio, which is, in the daytime I can easily able to work on the videos. So that's the plan for the day. And hopefully I need to at least create 4 scripts or 6 scripts within the time period of 9 or 9.30 to 10, and just record it in the rest of the time. And it needed to be a perfect voiceover record. Not that much, because we can clip it and things like that. That's the work for the entire day. And also I need to give instructions to AI about honeybees.com SEO. If possible, any time is left there, or if AI does it even faster, we can do also SEO for the another site, which is fxabsolute.com. And also I would like to, if I had any time left or just this, I don't want to push over here, just to do this particular work in a higher quality. That's the work I was wanted to give to myself.
+
+---
+[2026-08-06T13:55:15.158Z]
+This is very much important. I took a supplement. This is about my mental energy journal. Because I woke up in the 9, 7.30 or something. I worked through this all the day, right? I feel a little bit of fuzzy. So that's why I took a supplement which is L-theanine two tablets and caffeine one tablet and an alpha GPC two tablets and also a creatine scoop for the energy higher up. I just wanted to record my mental energy here. So we are going to do experiments on this about is it really helping me. Remind me, add a reminder to the visual area and also journal this. You have to process this also. And throughout this entire conversation, whatever related to journal, whatever you can think about visually represent, we have to just record this and also do a visual representation of this entire project and give a visual report to the main site which is Reshree version. And right now I feel a little energized and also I want to mention this. I don't like to, I can't do effective or super convenient talks while sitting. So I always wanted to walk while I was trying to do some work because it makes it more engaging. I don't know if that's the reason or if the tablets are doing the work. But I feel pretty much good enough right now to do work, meaning I don't feel any fatigue or tireds right now. And the time I took this tablet is around 6 o'clock or something, and the time right now is 6.30. I think there is very less chances that within a one hour the tablets doing the work for my mental energy. But I just don't know what's happening right now. I just wanted to record this and also do the work of visual representations.
+
+---
+[2026-08-06T14:18:30.869Z]
+<task-notification>
+<task-id>bk40sn15t</task-id>
+<tool-use-id>toolu_01CUUuup9Y4CdgTX4KHZLwUb</tool-use-id>
+<output-file>/tmp/claude-0/-root/790f1495-ceda-4695-87f5-9dd54b560258/tasks/bk40sn15t.output</output-file>
+<status>completed</status>
+<summary>Background command "Retry the Pages build and report result" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-06T14:35:41.716Z]
+<task-notification>
+<task-id>b2uhtrs1a</task-id>
+<tool-use-id>toolu_018Sin1dn7o72EEuFGi3V488</tool-use-id>
+<output-file>/tmp/claude-0/-root/790f1495-ceda-4695-87f5-9dd54b560258/tasks/b2uhtrs1a.output</output-file>
+<status>completed</status>
+<summary>Background command "Poll the Actions deploy and the live page" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-06T14:37:54.872Z]
+I think the best way to journal this is by creating sectors where you have to decide based on what I was giving in, giving the things into. And I also think about the thing is why we are failing is, why I was failing is, I'm just forgetting about a lot of things. And I was actually accumulating a lot of very useful information. And later on I was just forgetting. It could be ideas, it could be any progress or something that I was working on. So it's your, I just dump my everything, every conversation, everything in it. And you have to split it in sectors and make sure, just record it as I said. And also you have to process the thing, how I am going to represent it so it can be helpful to him to see everyday progress and what are the things that was going on inside of his lifestyle, okay. Why I was doing it is because every time I was starting a new day, I wasn't actually starting from the past day, right. Like the everyday I wasn't, I wanted to do a single stuff for an extended period of time. So there is two things I wanted to planning on. One is trading content and also another one is creating a software or a business page where I help businesses to, where I am hoping to give support to businesses out there. So the plan, let's say what is the grand plan and how we going to reach it. So for the sustainable money I have my main job, and the second thing is my software company. I wanted to grow it for sure. I don't want to skip anything in it because a little bit of good enough time is what we need. And the third thing is the trading thing, which is a very important thing, okay. The overall goal of this entire project is within July 17, 2027, I need to reach a point of making a crore rupees somehow. So the best option for me I was looking at right now is running ads is a very good option. But I was thinking about heavily working on the product and also the content, which is a free source. And I also think instead of bleeding on paying money for ads, organic content is much more valuable than paying content. But we also have to test, experiment because paying ads actually needs a lot of money to spend on it. So it is not a good option to find a highly converting thing. And the idea is just do this for next three, four months at least without spending anything on ads or anywhere else. Just build the product, be consistent about the product, and you have an idea about what people are thinking, how to reach it, what is the best campaign. You probably, if you are working for the next four months on both the product and also the service and also the content, you probably know a lot about this particular stuff. So you have to learn and also put it outside there how to accumulate the right amount of customers in the both niches, which is my own business, which is software support, which is hanubish.com. The second thing is fxabsolute.com, which is a trading thing. Both of these have to be having both of these, which is marketing and also a very good quality product. The idea here is do this for at least four months where you can discover a lot of things, and go heavy on the organic thing because you don't have high money to test on ads. Even though it was not that much of expensive thing to do ads, it is always better to find out which content is performing well and good enough followers in the background so that even if we run the ads on someone's page, which we can already know that what is the highly converted video and use it as an ad itself. So this is the idea, right? Just process this, and I will tell you more. , And I also had the fear of just talking, rambling and rambling, not doing any actions, because ideas are always a wonderful thing to just wonder about, but actions are that actually makes the difference. So, but I feel like if you are not wondering about ideas, based on my experience, if you are just trying to do stuff instead of thinking about it or speak about it, speaking about it actually makes a lot of difference. That is something I realized a lot, because if you are thinking inside of your brain, it goes away super fast and it wasn't recorded anywhere or used again somehow. So that we actually need this data to be recorded, and it is, the main purpose of this is, instead of finding something new or creating something new, you have to be reminded a lot about the ideas or about your thought process or about your figuring out thing, because when you are facing a wall, it is what that going to be helpful, but if everything is just experienced and stored in your mind, it is not going to be that much of a forceful enough thing to be reminded. But if it was really from a real world, which is from your voice, and it is not lost, not lost means both the thought process and also the real-time actions and real-time daily life of mine, so that I can figure out for an entire year where I was doing the mistakes and what I need to change. And I just wanted to work on a single project, which is Anubis.com for tech support, the second thing is trading, and the third thing is my main job. So these are the three things we have to work on, and creating sectors for this particular thing is actually useful enough. Just process this. I will tell you about my findings about content creation, so that we can consistently journal it and consistently move on in the direction to find out what works and what does not works. , Okay, let me tell you, we are working on the content for trading, right? I have six years of experience in trading, and I have already decided about what topic we need to talk about in that particular content area to create and put idea into it. So, reactive trading is the main topic because that's what my six years of experience told me. We are not changing that. But it also gives me a fear of, we are talking about students and building an academy, right? If we are completely focusing on one thing which is creating reactive trading means, it actually makes a lot of sense. But the people who needed guidance actually couldn't be able to understand it because that was six years of experience accumulated in a single area. So, the idea here is, you don't actually need to overwhelm the beginners because those are the people we are actually trying to help with. Meaning, your product needed to be reactive trading, but your content needed to be attracting the people who are super beginners. Meaning, you have to mix the content. Meaning, one is trying to cover the beginners, one of the content is trying to talk about your product. So, you are talking about your product, improvising it, and also the other thing is finding a very banger type of beginner information video. These are the two types we are going to create in the trading niche. And what I, the content format I was trying to do is, we don't have visuals, right? And I think AI is a very good option because editing by manually is actually going to overwhelm my device. And also, it is much more easier way to do it by that way using AI videos. So far I am using Google Studio V03 AI model and there is limitations to it. But I think it has good enough limitations to create at least one video using multiple accounts. Just remember it. And it has some daily usage credit limit there. So, you can create multiple things, free credits again and again. I have to check on it. Just remember it. Even if it wasn't, we have to figure out some other AI model. But it is the work for tomorrow, not for today. Okay, we have figured out what is the video format, right? Based on that only we can able to do the scripts. Why we are choosing these type of video AI creation is, I am going to get the best way to do it, the content is by just get some influencer who has a very unique style that you love. Maybe three or five people. Max go for this type of three or four people or five people. And take some of their highly performing videos. And just letter by letter, word by word, script their same script, get the same script, same visuals and everything. But change it, tune it to your own content and see what happens. And I think it is not going to get that much of views in it, but it is a very good point to start. Instead of just wondering about what to create or things, we are trying to reduce the frictions here. That's what really matters. So, it is very easy for us to get the script and also plan about the visuals from another niche person who is doing very well in the educational area. And we just replicate it and do it for ourselves and do it for an enough period of time. Even though if you couldn't able to get the same amount of reaches as them, there is a very high possibility this type of content could get some views on it. So, this is the plan for it. And this is the content I was trying to do. I also wanted to give an update about this. The time right now is 8 o'clock and I finished my dinner. Meaning, the rest of the time is going to be fully available for me to work on the product, work on the content creation I was thinking about. And that's it. And I also told you, right, honeybees.com SEO needed to be done. So, create a reminder section. This is for you, Claude. What you have to do is, in the main site, where I can visually see what are the points I have mentioned, just to reminder section and like if I told you to remind me something tomorrow or today, these are the tasks that needed to be done. So that I can just, instead of thinking about it or forgetting about it, I can just jump on to next upcoming tasks again and again. It was going to be like next 4 hours or next 5 hours what I am going to do and what is my mental energy and things like that. So, this is for you, Claude. You have to figure out things and you have to remind me somehow in the website. So think about it and create it visually on the site so that it can be helpful to me. , dont forget about july 17 2027 , one crore inr rupees thats the overall goal
+
+---
+[2026-08-06T14:59:09.745Z]
+i dont see any visual represenations on the site ?
+
+---
+[2026-08-06T15:07:09.914Z]
+<task-notification>
+<task-id>bb4hj0y4w</task-id>
+<tool-use-id>toolu_01PQrhrGSsBNb88iGJF5HdZv</tool-use-id>
+<output-file>/tmp/claude-0/-root/790f1495-ceda-4695-87f5-9dd54b560258/tasks/bb4hj0y4w.output</output-file>
+<status>completed</status>
+<summary>Background command "Wait for the deploy to publish the new cards" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-06T15:12:34.817Z]
+clone the project in vercel thats a better area i guess
+
+---
+[2026-08-06T15:25:54.025Z]
+update an 8 hours of solid work to day 2 hours on job , 3 hours on hanubeed.com , 3 hours on trading stuff , on trading all hours are spend on content creation not that too update visuals
+
+---
+[2026-08-06T15:41:05.878Z]
+update it on this too The remaining days
+0 of 1 day claimed
+
+unworked to 8h+
+
+---
+[2026-08-06T16:53:01.523Z]
+did you save the record data on mobile storage not on app storage but in mobile storage
+
+---
+[2026-08-06T16:56:46.160Z]
+we are doing seo for hanubees.com project you have all access to it
+
+---
+[2026-08-06T17:47:22.415Z]
+what are you doing on shopify ?
+
+---
+[2026-08-06T18:06:17.238Z]
+how many seo sites we done,?
+
+---
+[2026-08-06T18:08:34.128Z]
+do u done sitemap submission by yourself?
+
+---
+[2026-08-06T18:09:28.618Z]
+is our sitr crawled by those browser bots?
+
+---
+[2026-08-06T18:14:18.104Z]
+the domin is not just 30 days old u stupid
+
+---
+[2026-08-06T18:16:09.028Z]
+not noe just remember it about it lets do it tomarrow
+
+---
+[2026-08-06T18:17:28.184Z]
+remeber this we need to work on this tomarrow
+
+---
+[2026-08-07T02:26:13.253Z]
+you have remotion videl edit skill right
+
+---
+[2026-08-07T04:09:33.004Z]
+get into the project of raage-srivarshan i want to give you a record
+
+---
+[2026-08-07T04:21:21.857Z]
+This is what I wanted to record about yesterday's progress. So, some of the things I want to mention here. I wrote two scripts and recorded it within the time frame of 11 o'clock. After that, I got free. And before that also, I had 30 minutes of a break in between. This is one of the records about trading content creation. I told you, right? The past days, what I'm going to do in the night. And I was pretty much satisfied in it. And even though I had an entire hour, I just made sure Hanubis.com SEO is also done. And that's it for the entire night, based on work. And some of the things I want to mention is, I was pretty much super active at the night time also. I think I don't usually feel like it when I was not that much of active. That much of active means cognitively, I didn't feel anything fuzzy or any fatigue or something. Meaning, I could actually even work even more if I give enough break in between things. But because I wanted to wake up in 6 or 6.30 or something in the morning, so that's why I gone to bed earlier. And even in the sleep cycle of 6 hours, I actually, I had a lot of wake, in between wake-ups. Like, I was conscious for 3 to 4 times in between the cycle. I don't know if it is because of my mental issues or some traumas or something. But it was high, super high, meaning I wasn't fully sleeping at all. I was conscious and also getting sleep at the same time. Even after that, when I wake up in the morning, it wasn't actually bothering me because I wasn't fully get into full sleeping slate. It is okay to be like that. And I started to do video editing for the script I will have recorded from 6.30 to 9 o'clock. In between that, I brushed my teeth and a little fresh up and completed almost 40 seconds. And the first script length is 1 minute and I edited 43 seconds of the video. Still, there is not completely 43 seconds are completed in the video section. We still needed to do a lot of adjustments in it. It needed to be continued either any of the free time today or tomorrow. And I had my lunch, skincare is done. And I also bathed at the same time in between the time interval of 9 to 10 o'clock in the morning. This is the record I want to give. And mentally, I was highly energized and also not feeling bad to do a work. My body moves without any resistance. I like it. And I don't know how long it is going to be like this. But I think I need to do the same supplement thing for today's afternoon also. I didn't take the glutathione tablet and vitamin C tablet yet because I had a breakfast right now. I'm going to take it after 3 hours. This is the journal so far. I will update you more.
+
+---
+[2026-08-07T04:24:24.899Z]
+do the visual changes too go through what i said and also never forget to update the journal data in phone storage too
+
+---
+[2026-08-07T04:26:14.952Z]
+okey os the website reflecting all the data i said to you vercel site ?
+
+---
+[2026-08-07T04:28:38.966Z]
+what about the update i just gave you
+
+---
+[2026-08-07T04:29:50.000Z]
+i mean i just now pasted one and it is not yesterday
+
+---
+[2026-08-07T04:30:41.547Z]
+you can check this record in this same session 
+❯ This is what I wanted to record about yesterday's progress. So, some of the things
+  I want to mention here. I wrote two scripts and recorded it within the time frame
+  of 11 o'clock. After that, I got free. And before that also, I had 30 minutes of
+  a break in between. This is one of the records about trading content creation. I
+  told you, right? The past days, what I'm going to do in the night. And I was
+  pretty much satisfied in it. And even though I had an entire hour, I just made
+  sure Hanubis.com SEO is also done. And that's it for the entire night, based on
+  work. And some of the things I want to mention is, I was pretty much super active
+  at the night time also. I think I don't usually feel like it when I was not that
+  much of active. That much of active means cognitively, I didn't feel anything
+  fuzzy or any fatigue or something. Meaning, I could actually even work even more
+  if I give enough break in between things. But because I wanted to wake up in 6 or
+  6.30 or something in the morning, so that's why I gone to bed earlier. And even in
+  the sleep cycle of 6 hours, I actually, I had a lot of wake, in between wake-ups.
+  Like, I was conscious for 3 to 4 times in between the cycle. I don't know if it
+  is because of my mental issues or some traumas or something. But it was high,
+  super high, meaning I wasn't fully sleeping at all. I was conscious and also
+  getting sleep at the same time. Even after that, when I wake up in the morning, it
+  wasn't actually bothering me because I wasn't fully get into full sleeping slate.
+  It is okay to be like that. And I started to do video editing for the script I
+  will have recorded from 6.30 to 9 o'clock. In between that, I brushed my teeth and
+  a little fresh up and completed almost 40 seconds. And the first script length is
+  1 minute and I edited 43 seconds of the video. Still, there is not completely 43
+  seconds are completed in the video section. We still needed to do a lot of
+  adjustments in it. It needed to be continued either any of the free time today or
+  tomorrow. And I had my lunch, skincare is done. And I also bathed at the same time
+  in between the time interval of 9 to 10 o'clock in the morning. This is the
+  record I want to give. And Jump to bottom (ctrl+End) ↓ ized and also not feeling
+
+---
+[2026-08-07T04:47:24.889Z]
+get into oodu implementors mi media labs project
+
+---
+[2026-08-07T04:48:09.207Z]
+we have done google sheet form update right do u remember what we did ?
+
+---
+[2026-08-07T04:48:47.753Z]
+i have the mail id and password now what you want me to do how we going to connect it
+
+---
+[2026-08-07T05:00:51.959Z]
+do you need otp verification for this ?
+
+---
+[2026-08-07T05:33:27.350Z]
+i approved it
+
+---
+[2026-08-07T05:34:41.541Z]
+now check
+
+---
+[2026-08-07T06:13:32.194Z]
+continue
+
+---
+[2026-08-07T06:19:11.792Z]
+let me do it manually guide me
+
+---
+[2026-08-07T06:26:20.444Z]
+in deployment this is what is asks for New deployment
+
+Code.gs
+
+Manage deployments
+
+Libraries
+
++
+
+Access:
+
+Services
+
++
+
+11
+
+Oodu Implementers website lead capture Built by Mi Media Labs. Deploy this as a Anyone).
+
+Test deployments 3 options are there inside it no ready deploy is there there is only create deploy inside it configure
+
+---
+[2026-08-07T06:27:49.633Z]
+select type - web app , API EXCUTable, add on , library
+
+---
+[2026-08-07T06:37:40.109Z]
+deployed ?
+
+---
+[2026-08-07T07:28:58.947Z]
+explain me how it works i just doesnt know what you did how you did it thing like that
+
+---
+[2026-08-07T07:33:57.090Z]
+so if i enter somthing on the sites form it automatically lands on the sheet right ?
+
+---
+[2026-08-07T07:34:45.140Z]
+give me the sheet link
+
+---
+[2026-08-07T07:37:56.950Z]
+i just filled the form now innpartner us page is it updated in the sheet
+
+---
+[2026-08-07T07:40:36.160Z]
+how many form are inside the main site that people comes in and fill and in what pages
+
+---
+[2026-08-07T07:42:45.061Z]
+they said this I don’t have access to view.. give access to mi@mimedialabs.com
+
+---
+[2026-08-07T07:47:18.607Z]
+<task-notification>
+<task-id>bawmiq2u7</task-id>
+<tool-use-id>toolu_01Vyt61LgGGUxDs8H3WwpXHg</tool-use-id>
+<output-file>/tmp/claude-0/-root/21ae9ff6-7bf4-4fc4-842e-853a413087b4/tasks/bawmiq2u7.output</output-file>
+<status>completed</status>
+<summary>Background command "Share sheet with mi@mimedialabs.com and verify" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-07T07:49:42.102Z]
+is the contact form and partner form differs in the same sheet or how give me quick answer
+
+---
+[2026-08-07T07:54:11.191Z]
+keep things updated and work on saving the credentials i gave you so far in the same project name keep everything accesable and updatable make sure it was perfect i have another task ready for you tell me when you are finshed work on here
+
+---
+[2026-08-07T08:07:10.185Z]
+can you see this drive link https://docs.google.com/spreadsheets/d/1Oct2SRNFEj0wQyrUoydjlXwzaq36qCoZsu8DwFY4N8c/edit?usp=sharing
+
+---
+[2026-08-07T08:09:44.218Z]
+take all the credetials and store in on this device as navaratna mi media labs , for the navaratna site
+
+---
+[2026-08-07T08:10:36.116Z]
+did you store the cpannel?
+
+---
+[2026-08-07T08:12:23.526Z]
+this is cpannel https://navratnajewellery.com:2083/ , username - navratna , password - Justdoit#2025
+
+---
+[2026-08-07T08:14:54.747Z]
+the issue is the first talk to me when you find what is happening The issue was, I think the elementar is failing, uh, because, uh there is no CSS or designs they have done uh in the site, uh, somehow got failed, the images like a basic HTML site is what visible right now. Uh, in that.com of their Navarat nothing. um, the designs and uh some other elements uh and uh unwanted things are popping up on the site. Uh, give me what is the reason and also fix it.
+
+---
+[2026-08-07T08:43:28.978Z]
+make sure you completely made the original site came back no data last it was need to be as same as in the past
+
+---
+[2026-08-07T08:58:15.140Z]
+it is loading super slow what could be tge reason just talk to me after you check
+
+---
+[2026-08-07T09:02:39.170Z]
+i dont see any images in gallery im telling you search deep the site is not as usually it is some problem going on lot of things are missing
+
+---
+[2026-08-07T09:05:04.335Z]
+do u need rest api key from me ?
+
+---
+[2026-08-07T09:05:56.392Z]
+continue do clear look at it
+
+---
+[2026-08-07T09:15:03.863Z]
+do it
+
+---
+[2026-08-07T11:23:44.103Z]
+i have one request for you check for any backups available of the entire site because still no images on gallery and also tell me what triggered these issues and lot of problem how it happened
+
+---
+[2026-08-07T12:30:06.569Z]
+get into raage-sriVarshan project i want to give a record update now
+
+---
+[2026-08-07T13:23:57.400Z]
+So this is a record of what I done in the entire day. So, I don't know where I stopped. I think I washed my body and had a breakfast. These are the things I have updated, right? And after around 10 o'clock, I started working on my main job, which is the freelancing thing. And what happened to that is, it was completely occupying to me today. I can't actually get into anything else. And I also gathered all leads and done some stuff related to the Hanabiz.com job thing. Because we have to, I told you, right? Minimum 20 cold calls or 25 cold calls today. That's the target I was fixing for myself for the business perspective of Hanabiz.com. But what happened is, I couldn't able to switch to different tasks. Like, I could able to, but I was completely occupied in the, not like, let's say, in a percentage basics, I have 65 to almost 75 percentage occupied by the main job I was doing. They told me a lot of issues and I was also waiting for some informations from the company side. And this was around 1 o'clock, this entire time period that was I was doing. And I thought I fixed myself a goal of from 10 to 1 o'clock, I should need to do cold calls of minimum of 25 calls. And what happened is, I couldn't able to allocate myself to do cold calls. And after in the afternoon time period, I just remembered I have to take the glutathione tablet and vitamin C tablet. I took it in the timing of 1.30 to 2.30. And I genuinely felt a lot of energy drain. And these are the things I was lose the entire day. But the things I was doing unnecessary were a little bit of rest, where I wasn't doing anything consciously. It could be around 20 minutes or something in the entire time cycle of 6.30 to, what is the time now, 6 o'clock. That's the unnecessary time I was spending, the 20 minutes. Other than that, I was fully conscious or half conscious about taking decisions how to make it. Meaning I wasn't actually moving any needle on my business, but I was actually moving the needles in my job's perspective. And done some of the jobs. So in the time period of 1.30 to 3.30, I had my lunch and some other. In the time period of that, I seen some of the videos about marketing and mindset type of videos. It gives me good enough knowledge and reinforcing the thoughts I need to have. And that is some productive videos. It was around a time period of one hour and 30 minutes. And in Instagram, I have a routine, engagement routine to boost up the trading thing we are planning for. So I done two sessions of comment and like. Only two sessions. Four comments. Yes, session contains four comments. I mean one comment and four likes for each account. Meaning four comments overall and each account contains four likes in it. I done two sessions of it. And yeah, pretty much that's it. After I had, I had a lunch around 2.45 to 3 o'clock. I didn't notice the time when I had finished my lunch and started working again. And after, sooner I took, I genuinely felt a lot of cognitive energy loss. We are already taking creatine, L-theanine, and alpha-GPC, and caffeine tablets, right? This is the energy, mental cognitive energy stack I was using. The previous day thing I took around the time period of 6 o'clock. And it was genuinely super lasting until 12 o'clock. And I can, I don't know if the supplement stack that helped me in the morning to work quicker and better. But also the sleep is also a thing. And highly conscious while I was also sleeping is something I already noticed you in the previous record. And just process this, I will tell you more., Okay, some other details I wanted to notice here is, I found a big breakthrough, the direction I want to move in. The thing is, I scraped the leads and I wanted to cold call. So, I just wanted to push through it. So, what I did is, no matter, I just wanted to do the cold call without even thinking about it. Like, the entire goal of the day is, just no matter the results are, you are not pushed to get any results out of it, the only goal for you is to just do 25 cold calls. So, what I did is, in the previous cold calls, I have figured it out that converting someone who doesn't have any idea to build a website is super tough because these people don't have any idea or what is the process to go through it. So, what I've done this time is, I targeted the companies who had already websites and just trying to cold call them. I just did two cold calls and the majority of the thing I was facing is, I wasn't talking to the owner or someone who is actually taking the decisions. And the companies who have already websites are the companies who already had ties with the startups or some other businesses who made them the site. Meaning, they don't actually wanted to jump to someone else because they don't fully understand the switching or their needs themselves. So, that's the tech stack they wanted. So, I pretty much quickly understand two things which is the receptionist blockage and the second thing that is actually blocking is, they don't actually wanted to jump to a different tech support provider. So, it is understandable. But the most important thing I had realized is when I was going through their sites that were already existing done by other companies, it was very pretty much well made and I can genuinely see there is a very high amount of efforts are going there like the designs, the perspective, the visuals, like the websites were representing their business itself. For each single business, each one of them were completely unique and I can genuinely see a lot of human work is inside that because I was very well experienced in seeing a lot of business websites and what is made by AI, what is made with the help of AI, and what is completely made only with the help of human hands. And I can pretty much easily differ between the sites that were completely made by AI and the sites that were completely made by humans. The life and unique tastes and unnecessary things and the unique perspective and what they wanted to talk to the customers and the people who are visiting the websites. There is a lot of elements going on in a human-made website and I very well realized that you can merge these things with AI but the problem is it's not, there is a lot of things going on. The things are the design, like they pretty much a minimum of four to five human-made UI is there. That is something super important like the UI section under the design, graphic elements, drawings, vectorial, vector representation of drawings, icons, symbols, directives, and many other things are there. And even the design itself, like some of them had different type of animations are there which is super specific and not generic. I genuinely realized that these type of, that is what expected from big brands. So these are the things I noticed. Just process this, I will tell you more about what is the conclusion I come up to. , So, the biggest conclusion I come up to is, I couldn't able to really do it all by myself. I just asked myself one question, which is, could I able to do a site which is my competitor made, right? Could I able to provide the same value as them within the time frame they were expecting? And could I just have the capabilities and knowledge and experience? Because someone who, I can see in the competitor sites, I can see someone is pretty very good at understanding customers' perspective on designs and UI. Like, it represents the brand, it represents the visual, a lot of things in the visuals itself. Like, the designer work is something I noticed super high. Like, you can do a lot of designer stuff. Majority of startups or companies actually doesn't value it that much. But it is something I don't have yet, and each single section has a lot of work in it. Like, the graphical elements, the functions. The functions can be easily made. The hardest part is getting the visualization and getting the satisfaction of the customers without disturbing them a lot. That's the main important thing I realized. Like, if I could able to, if I want to do the same thing, I would like to torture the customer about their visuals, their understanding, a lot of questionings. If I want to do the same thing as my competitor, I should have to probe a lot, a lot of revisions are going to be there, to complete the same site my competitors were doing. And the difference is not too much big. I was also telling you that the difference was not too much big. The thing is, there is a lot of human work and the timeline of the project is also big. So, getting one single project at a price point of, let's say, 50,000 or even a lakh rupees is harder, harder for me right now, because I don't have actually had the good enough stack and good enough visual representation. And I don't want to give a half-assed product also. Even though I was good at the tech area, the main important thing I realized is the UI and getting the visuals and satisfaction out of the customer, what they want, how can we make their site unique. Being clean and giving the job to AI, yeah, is that. But the more you are tweaking AI, the more confused it gets. And AI still says some of the things I can't do. You can direct it, you can get outcome out of it, whatever the thing you want to make it do. But the thing is, the more specific the request is, the more unique the request is, the more guidance the AI needs. So, these are the things I have realized. So, can I build something similar to them? Yeah. The time period, the probing, and the feedback from customers is something I need higher, because I need more guidance. Like, it was a job that needed to be done minimum of three to four people or even five people who are well experienced in this particular area to produce the same results my competitors were producing. If the customer asks for a very basic site, I mean, yeah, a good site. Like, I wasn't saying a basic site. I know how to make a 10 out of 10 AI-made website or even a very 3D or something unique thing. I wasn't saying I couldn't able to find these brands. But let me tell you this, it is something must not be done by a single person with an AI help. There are some jobs that can be done with the help of AI and a single person. So, this is something I wanted to notice it. And the conclusion and the thing I come up to, what is the next step based on this, what I learned from, is that's what I wanted to tell you. Just process this. , Yeah, so the time constraint, a lot of things were inside of a big project to get the visualization and things like that. Even if I could be able to get the, produce the result, it is not a right thing to do by myself because the things I can do by myself is actually small jobs, not a big project. And I realized that big projects are where the big money is. And I don't actually need a big team to produce the same thing. There is a client to customer communicators needed to be there, and many other things are needed to be there to make it happen. So the conclusion I came up to was, I was doing cold calls, I was trying to convince them, there is follow-ups, relationship building, understanding client's requirements, with less stress to them to produce a brand level convenience. Like, if I was trying to do it all by myself, the client most likely going to think, I should not have given this job to this person, and they are probably going to be satisfied in the outcome, but the amount of work. Like, the client have to do a lot of work for me to get this job done, which is something they are not willing to do because they expect for the money they were paying, they don't have to work a lot, have I need to do the work for themselves. So, why I was continuing in the same topic again and again is, no matter how I think, I wasn't convinced that this is not going to be done by a single person. Even if it was done by a single person, I can maximum do one or two projects, and even that is going to be fully occupied by myself. So the conclusion I came up to was, for the money you are getting, is it worth it to do it? Actually, no. Actually, super no. Highly a no. Because what is the project I could able to get? Let's say it was a 40,000 project or 50,000 rupees project. The amount of stress it going to put on me, and the time limit, let's say for me to do a 50,000 project or a 40,000 project, it going to take me around two months at least. For every single day I am going to prompt them, or going to put in a lot of time, and a lot of work is going to be there. Let's say instead of getting a 50,000 project, why not a 5,000 rupees project or 10,000 rupees project? And it going to take the same amount of time. Like I have to go through the problem of refusals, and I was also doing cold calling. I was at the best job to do myself is actually running ads and making sure what I can do. So the final solution I came up to was, cold calling but to businesses who are already doing that. Like do the freelancing thing, which is already I was doing, but you have secured a job, right? You have to be selective with who you are going to work. So you can cold call a lot of small businesses, I can fix your bugs, I can fix issues that you couldn't able to do it before. You could, if you want, you can pay me based on the project price and based on the issue based. Because you probably not going to have issues all the time, right? Even if you had it, it some of the days are like, I am more trustworthy, and I could able to solve the problem. If I was confident in it, I could able to tell you that I could solve this problem. So you could just occur me based on when you have the problems or issues or whatever the thing you want to do. And I will tell you what are the requirements I need, what is the time limit I need. These companies probably going to have two people or even three more people who are like me with them, and also a designer with them, and also a communicator with the client with them. At least three or four more people who are not with me is going to be with them. The best thing I can do is, get into these type of businesses, try to get high paying jobs or acquire money by this way, so that in a long enough time period, I can even go to abroad type of, not only India, because of my communication. If I was good or something, whatever, if I could able to do it, I can go to do freelancing for other country people also. By that way, I can make a lot more money than usual. And the target is simple. Just do cold calls for Indian companies right now, get some jobs. When you had enough traction and paid based on the work you are doing, you can gain experience and also know how they were doing. And it was very less stressful job because you can do a very particular thing at the best level as possible. And when you had enough traction, the more you are getting traction, the more selective you can be when time goes on. So do cold calls to businesses, ask for them a freelancing job, and tell them I could able to finish this particular job if you want me. And you can give me very specific job if you couldn't able to, like you probably had an already working team or employee there. But if you need any urgency or deadline is getting in the end of the day, you don't have to get another customer, I mean another employee. You just can call me and I will share the work with them. And if I was available, I will give you a promise within the time you were expecting me by checking myself, the calendar or the things I was available. Just building relationship with these companies. By that way, I can occasionally get into them to do a job and also generating an extra income. And if I could able to build this relationship, make this thing at the sides, and also trying to do foreign clients by reaching out them with emails or WhatsApp exchange, or even if I put a recharge to a cold call way, I just genuinely little by little try to move myself to foreign-based companies so that I get paid even $1,000 or $2,000, which is a very good pay. After that, if I was getting that much amount of money, I just genuinely easily can acquire more. There is two ways for me in that area. Just process this, I will tell you more.
+
+---
+[2026-08-07T13:26:28.327Z]
+For the money I was getting paid, I can choose. I have to just reach out to different companies and what I can do my best and just checking myself if I could able to get paid more for the same work I was doing. That's the main goal here. And is there any possibilities here? Just check it by that way. And based on the things they were expecting or if they're willing to pay me more, I could just drop the job I was doing already and jump to that company even faster. Or if I was doing freelancing based, I could get paid even more because I wasn't signing any contract to the company. I'm going to work for this company for an entire year. And they are also not going to feel bad because I'm just a freelancer, they can just get me in, get me out, whatever the time they were willing to do it. And do it in foreign clients. End of the year, within the next six months or eight months, getting a foreign client who is willing to pay me, like let's say, it's not paying for a single project thousand dollars. It is about being a part of, like generating more income, do the same work, get highly paid for it, and also gain the experience, check the availability of the market by constantly probing with different companies and many other things. So this is the goal of it. And consistently doing, by doing this, end of the year, per month, two thousand dollars or thousand dollars is the goal. If I was consistently making it, either I can acquire more people to work the same thing I was doing, and trying to get the jobs and drive it to the people who could be willing to do it for the money, like a salaried person or someone, or even a freelancer. If it was going above the, like there is a ceiling for how much a freelancer could make, and also amount of jobs they could handle. If it was exceeding both of it, like I reached the ceiling and also I just wanted to make it, I'm getting good enough clients means, I just need to drive that traffic by employing someone or getting a freelancer also. So first get the jobs by yourself, do it, understand it well enough, and when you are getting enough traffic and also high paying, just find out where you can outsource this for a very lower, good enough price money, because acquiring a employee, the same thing, just outsource it. I'm just diverting the traffic to somewhere else, that's how you build a company. And if it's possible, you can just make your own team in the future if you want to, or else you can just drive, get the high paying clients, drive a small job to some other who could able to do the same job conveniently and good enough. And that's it. That's the very best plan for hanibiz.com, which makes more sense than trying to get a low paying client and getting a lot of stress in it., And this is what I realized. So, I, within two calls, I just, I ignored the thing of calling 25 businesses. Instead of that, because just, let's compare this. For the next upcoming six months, let's say you are cold calling businesses and you are trying to provide a service as a solo person, where you don't have money. And could you be able to acquire knowledge and direct them to do a particular job? Let's say even if you're getting a website order or some tech services, there is two ways you can complete this job, either by yourself or getting help from somewhere else. Both, the only thing that doesn't needs for money is, myself, and doesn't need, you can select what the job you are doing and things like that. So, instead of doing a worst job and damaging your reputation, you can learn and also earn. Let's say in the next six months time period, which is going to get you more money and which is much more guaranteed way without a lot of failing is being a part of some other's job, and which is a very better way. That's the important thing. So, do it by that way. When you had enough money, either you can run ads by yourself or acquire some other people who can do the jobs for you. And while you are, either you have to have the experience to do the job that you are trying to promising, or if you are not having that, you can acquire someone who has the knowledge by spending money. So, that's the only way. And if you are just persistent trying to do the job by yourself, it is also going to reduce your growth and also it's going to stress you more, where you couldn't, you are going to break sooner. That's the important thing, like which is going to break you faster, like making a promise with the business and not going to get a good enough clients and many other things are there. Or just to get a freelancing job which starts small, learn from it, where it is a good guaranteed money and based on what is the job you are going to do, even if you couldn't able to do it or couldn't able to do is not an option because it is going to make a problematic thing. But for a business to handle that risk is easier because they have to reach out to someone same as me. And every businesses are not going to take risks depending on a complete freelancer because they know how important the job is and based on the importance of the job, the money is also going to be bigger. So, it makes a lot of sense by going this way. That's the main thing. And building relationship with the companies who are willing to give me jobs and freelancing, who knows me well, what jobs I can do, they're going to give me small jobs and see if I could be able to complete it or not. And then only they're going to give me the same type of job or ask me about some other jobs what you could be able to do. And that's it. , So, these are the things I realized, and also while I was talking to you, I was also figuring out some of the points and clearing out this thought. So, let it be, and this is around the time period of 4.30 to 5.30 or something. And after that, I was genuinely just don't want to jump into any actions. And I also almost completed the work for my company, and for the rest of the day, I'm most likely not going to do any jobs for the company. I'm going to do it most likely tomorrow. And it is no problem with me. And the time right now is 6.40, and right on 6.15 or 6.20, I started to do the journaling thing. I was doing it for around 20 minutes, about my thought process, coming to conclusions, what I need to do, things like that. So, let me tell you what is the rest of the day is going to be. From, I have the time period of 6.30 to 12 o'clock. Let's consider just 7 o'clock to 12 o'clock today's night. And I think I just need to complete, I was visual doing visual edits on the already recorded video, which can be done in this time period. So, from 7 to 8 o'clock or 8.30, I'm going to do the video editing thing. I don't know if I could be able to complete it or not, because I wanted to put in a lot of effort in these videos. I'm focusing on shorts videos because it has more lifetime on the platform than Instagram, because Instagram pushes your video for a maximum one or two days. After that, the value is most likely not valuable at all. But in shorts, it has more shelf time and shorts rewards value of a content. So, that is something I'm going to do. I'm focusing on short-form content for YouTube shorts. And it also could be able to work on Instagram. And this is something I wanted to tell to you, which is I am calculating everything. I'm going to calculate everything based on two days, because if I was trying to cram everything, I was already doing most of the stuffs inside a day. And in my experience, what I realized is if you are trying to do all the stuff that you wanted to inside of a day, you are most likely going to fail. And it gives you more stress inside of the time and not a breathing space. The better way to do it is by doing it for two days. So, that's why every single, every night, I'm just going to try to script and also record. If I got any disturbance, if I couldn't able to do it, that's fine. I will do some other stuff I could able to do for the day, and I complete the work in the next day. So, one day task is combined into two days. So, even if unfortunate times or unfortunate things happen, I'm counting in two days into one days, right? So, the tasks can be done inside that time period. It doesn't mean I will plan the entire thing. It's just switching the schedule from instead of today's 10 o'clock at this time, this task needed to be done. Instead of that, I just reschedule the thing to the next day and borrow that tomorrow's tasks, put into today's task. So that the work also done, and I'm not skipping it. And even if I skip it, like, I feel like this process is much more better way to do everyday stuffs and entrepreneur stuff and many other things. And I just wanted to try it. I don't know if it's going to be a problem or a progressive problem or things like that. But based on my years of experience, this is something I needed to try, and I'm going to try. Just remember this. This is one of the record. And as I told you, today is 8.30 or 9 o'clock. Until then, I'm just going to do the video editing stuff. After that, I will try to write scripts. And if possible, I will record it today's night, two of them minimum. If I couldn't able to do it, because the sound and many other things are problematic or there's a situation, I'm going to do it, do the visual editing in the time period. So that's the biggest benefit of this. If I do the visual editing, if I couldn't able to do the audio thing, I could just do the visual thing. So that's the main goal. I can swap out today's work to some other day or things like that. , And the final thing I want to say is, why I didn't take the cognitive supplements earlier today is, because I can easily feel the energy up and cognitive thing because of the supplements, or I don't know, I was excited too much. I can feel in the time period of even after 12 o'clock, when I was taking the supplement thing on 6.30. So that I decided to take it even before, so that's why I took it on 4.30 something, so that it will most likely start to work on 5 o'clock or 6 o'clock. I can already see that now time is 6.50, and I can feel I'm energized, and I could able to do a lot of hard stuff. My eyes are tired, but my brain is fully energized, and my body is also not, doesn't feel weaker or fatigued, which is a very good important thing, which is what we are expecting also. Yeah, which is a very good improvement. And the same stack as yesterday, creating a scoop of creatine, which is 5 grams I guess, and two tablets of L-theanine, two tablets of Alpha-GPC, one tablet of caffeine. This is the supplement stack I took. It genuinely feels better when I was taking it. Why I was just, doesn't know why I was saying this again and again is because I don't know how effective it is. Like, it definitely plays a very big role, I can easily sense it. But the thing I don't know why it is, like how much effective it is. Like, in the afternoons, I wasn't, in the, like, after 1 o'clock, I can, from 1.30 to 5 o'clock, I wasn't super active or highly productive. I was doing shallow work and doing it a lighter way. But after 6.30 or 6.15, when I started to journal, I don't know if it is because of I like this stuff. I genuinely do this stuff of journaling and talking to AI and collecting my thoughts, brain dump here. But even before I was taking this consistently, this supplement thing, if I wasn't working, like, even before I was taking the same stack of cognitive supplements, what happened that is, I can clearly feel it, but it doesn't actually promote me to do the stuff. It just makes me not feeling depressed. The one thing I wanted to say is, I'm not feeling depressed while I was taking this cognitive supplement. And this is what previously happened and I wanted to tell you. I can genuinely just feel good enough refreshment, good enough energy, and everything is there. But I was now only using it for work also, which gives me a very great boost. I don't know if I wasn't taking the tablet, if I tried to do the same stuff as now and the previous day, without the supplement, how effective I'm going to be. I just need to test it someday. And I also don't want to test it because I don't want to reduce the outputs. I'm just confused here how to get the feedback so that I can decide, do I need to take this supplement stack every single day or I will do it based on my energy level or something. But it is something I like so much. And this is the last journal thing I wanted to do right now. I will give an update around the time period of 10.30 or 11 o'clock or even 11.30. And I also think about while I was doing video editing, I will do Cloud Code to improvise the SEO and other things. And I also wanted to ask a lot of questions to AI about SEO traffic and many other things. That's it.
+
+---
+[2026-08-07T13:31:19.995Z]
+change the visuals based on the journal record go through it and give me reflection of it the site
+
+---
+[2026-08-07T14:16:35.818Z]
+give me the link for it
+
+---
+[2026-08-07T14:22:00.422Z]
+i want you to do it full visual and graphical representation all you do is text updates on the site i need entirely based the info visual graphical elements , create sectors full productive works   judgements , you can do a lot of things vecause im providing that much information but you are not even updating the hours i was mentioning inside the records what you are reading what you are updating ?
+
+---
+[2026-08-07T14:55:21.195Z]
+i want you to edit a vidoe this the solution you come up with So I want you to and everything I have done it. Um, like, I created the footage myself. Voice is there. There is no need to be for, um, uh, I added a very mild background music also. Uh, I'm planning to edit it with the, um, antigravity, Google's, uh, coding agency, AI. And, um, the thing, uh, what I wanted to know about is, um, I try to make a video or animate a video completely using coding agent like Claude code. What happened as a problem that is it done in a single video, each single frame, each single second, taken each of it as an image and recognize it each frame and compile each second and made it into a recordable compiled video of animation. And what happened is there is too much footage of like, let's say, for a one minute, there is tons of frames are there. Right? And a lot of problems occurred, and I don't like the way it does it. So... but at this time, we had the footage, basic footage. All I wanted to add is the graphical element, some animation, and the sound effects. And I'm going to tweak it a lot until what the graphics I needed. So it need to... with... in each second, it need to determine what are the elements it was using, and I will talk to it no problem with it. But I wanted to know about what is the stack it is going to use and, like, a FFmpeg, hyperframes. These are the things that people are saying it it would use. And, um, whisper flow flow or something to, uh, based on the text, it can figure out which one to use. And most importantly, we have... we already had the footage of me talking to it, meaning it need to detect each frame or each second, whilst this person is standing and the wireless the empty space is there and what is he he is talking about and and what timing we need to, uh, make this vision or graphics and, uh, which is the empty spaces there, and how long is it is there? And is the person is moving his hands held, or is the entire person is moving? And, uh, some other things it need to deduct, and, uh, it still needs to, uh, it can't actually read the entire video. Uh, so help me here. Uh, antigravity has v e v three, uh, model is there, and, uh, like, Google has it, but the dot doesn't... antigravity doesn't had it. So what we can do here? I , Your instinct to stop the frame-by-frame approach is correct — that's the wrong tool for this job. Full frame-by-frame generation/recognition is why it broke (way too much data, no temporal consistency). What you actually need is **programmatic compositing on existing footage**, not frame-by-frame generation or recognition.
+
+**The stack that actually fits this:**
+
+1. **Transcription with timestamps** — WhisperX (not plain Whisper). It gives word-level timing, not just sentence-level, so the agent knows *exactly* which second corresponds to which word. This is your backbone — audio/text is cheap and information-dense compared to video.
+
+2. **Body/hand tracking** — MediaPipe Pose (or Holistic, which adds hands + face). This runs per-frame cheaply using classical CV, not an LLM — it outputs coordinates (hand position, body bounding box) as numbers, not images. This answers "is he moving his hands or his whole body" without ever asking a vision model to look at every frame.
+
+3. **Empty-space detection** — this is the one place you actually want a vision model, but only sparsely: sample 1 frame per second (or per scene-cut), send *those* to Claude or GPT-4V with a prompt like "where's the unoccupied space in this frame, describe as region." 60 frames for a 1-minute video instead of 1,500+.
+
+4. **Combine into an Edit Decision List (EDL)** — have the coding agent produce a JSON timeline like:
+
+```json
+{ "t": 12.4, "word": "growth", "hand_pos": [...], "empty_zone": "right-third", "suggested": "graph animation", "sfx": "whoosh" }
+```
+This EDL is the actual artifact you tweak with the agent — much easier to iterate on than raw video.
+
+5. **Rendering** — this is where **Remotion** fits better than raw FFmpeg for you specifically. It's React/TypeScript, so Claude Code can write and edit the animations as normal code (not video), and it renders out through FFmpeg under the hood. You get git-diffable, re-runnable edits instead of re-generating video blind. Use FFmpeg directly only for final muxing/audio mixing or simpler overlay jobs.
+
+**On Antigravity and Veo3** — don't chase that. Veo3 is a *generative* model (text/image → new video clips); Antigravity is just an agentic coding IDE that happens to support Gemini/Claude/GPT for writing code. You already have your footage — you don't need generation, you need compositing. Antigravity not shipping Veo3 by default isn't actually blocking you; you could call Veo3's API separately if you ever wanted a generated B-roll clip, but it's not part of this pipeline.
+
+Want me to sketch the actual EDL schema and a minimal Remotion project structure so you can hand it straight to Claude Code? but i think you can edit it too
+
+---
+[2026-08-07T15:14:13.703Z]
+what are even editing im fidnt given you any video to start editing in it ?
+
+---
+[2026-08-07T15:15:14.937Z]
+<task-notification>
+<task-id>bg5lzqnm0</task-id>
+<tool-use-id>toolu_01EWT6w1EbaNnXBNzr5F6wSf</tool-use-id>
+<output-file>/tmp/claude-0/-root/0a60c3b8-86a5-4cab-9025-7361a4cd6cc5/tasks/bg5lzqnm0.output</output-file>
+<status>completed</status>
+<summary>Background command "Transcribe with word-level timestamps" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-07T15:20:07.686Z]
+i want you to use antigravity on this device access it to generate image elements you want use it atleast 50% of the overall grapbic thing it can generate image make the picture with it and check is it background remkved image or not check it visually by your self and use it
+
+---
+[2026-08-07T18:11:07.805Z]
+is it stored in mobile storage
+
+---
+[2026-08-07T18:29:14.500Z]
+i want you to use this desighn and i also want you to use a modern text font and also better creative image and animations + http://github.com/ruucm/shadergradient
+
+liquid-logo → http://github.com/paper-design/liquid-logo
+
+liquid-glass-js + http://github.com/dashersw/liquid-glass-js
+
+react-three-fiber + http://github.com/pmndrs/react-three-fiber , First. Emil Kowalski's skill. The biggest problem with vibe coding is that everything comes out flat and lifeless. This fixes it. One command and Claude starts adding real motion, proper easing, and animations that actually make sense.
+
+Second. Impeccable. It gives Claude a full design vocabulary, 20 commands covering typography, color, spacing, and layout. My favorite is /polish, run it before shipping anything and Claude goes through your entire Ul and tightens everything up.
+
+And the one I keep coming back to is Taste Skill. It literally teaches Claude what good design looks like. No more generic gradients, no more Inter font on everything, no more Al-looking output. You just get interfaces that look like a real designer touched them first plan deeply how you planning it to use it in our video
+
+---
+[2026-08-08T01:07:32.964Z]
+continue
+
+---
+[2026-08-08T01:43:50.820Z]
+so did you finshed it ?
+
+---
+[2026-08-08T02:06:15.819Z]
+llis it in phone storage
+
+---
+[2026-08-08T02:17:58.732Z]
+<task-notification>
+<task-id>biz5pensk</task-id>
+<tool-use-id>toolu_01E5GxFEcZP7seypdtLrRNFg</tool-use-id>
+<output-file>/tmp/claude-0/-root/0a60c3b8-86a5-4cab-9025-7361a4cd6cc5/tasks/biz5pensk.output</output-file>
+<status>completed</status>
+<summary>Background command "Wait for final render" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-08T03:29:37.529Z]
+what is the login im using what email id lovim ctedetials u r using
+
+---
+[2026-08-08T03:30:58.150Z]
+im talking about claude code this tbing im using right now which account ur logged in
+
+---
+[2026-08-08T06:19:15.970Z]
+get into oodu implementors project i want u to track the whatsapp button who is seeing it and more tell me what u can see
+
+---
+[2026-08-08T06:42:27.681Z]
+what you need for this ? first
+
+---
+[2026-08-08T06:46:55.934Z]
+do it
+
+---
+[2026-08-08T07:13:43.075Z]
+is it written and working i still dont understand it clearly help me understand what it is how it works and also need report this to office so guve that version were i can report it too
+
+---
+[2026-08-08T07:32:07.084Z]
+how long it takes to update on the sheets
+
+---
+[2026-08-08T07:39:48.627Z]
+i just clicked thewhatsapl button but its nkt registered in the sheet ?
+
+---
+[2026-08-08T07:45:49.125Z]
+how accurate it is
+
+---
+[2026-08-09T16:04:40.030Z]
+install codex in tgis device u r in termux inside ubuntu
+
+---
+[2026-08-09T16:05:09.663Z]
+codex cli frm open ai
+
+---
+[2026-08-09T16:07:03.054Z]
+i was talking about openai codex cli here in terminal
+
+---
+[2026-08-10T05:29:45.260Z]
+we have oodu implementors Right project and all its credentials mi medianlabs im going to use codex cli to do changes in it so make the project visible to that ai like in pbone Storage may be
+
+---
+[2026-08-10T06:47:37.266Z]
+same for fxabsolute.com
+
+---
+[2026-08-10T16:51:31.399Z]
+get into project raage srivarshan , i want to give you an record update
+
+---
+[2026-08-10T16:54:54.317Z]
+I just wanted to record the journal for the yesterday. Yesterday is Sunday, right? So, actually for three days I didn't do any journals. So, let me tell you what happened. So, in Sunday I mostly wasted all of the time. Yeah, two hours or maybe three hours of a productive work maybe happened, I don't know. I didn't take took the skincare routine or that thing for like my cognitive daily supply, which is creatine and L-theanine, those tablets. And I done nothing related to skincare also. And no productive work also. So, it was almost a zero day, anything perfectly working. And I also wanted to, I already told you, right, about the, I want to run one or two days without the cognitive supply to check it if any improvement happening or I'm just feeling regularly as it is. Like the question is, whenever I took the thing for cognitive supply, I feel active and zero depressed, or zero sad. I was super highly motivated and active, which is a very good sign. And I had the question of, is this because of the supplement or because of my own? But I soon realized that for the past two days I didn't take it, right, Saturday and Sunday. I feel genuinely exhausted and for real, I feel depressed and sad because not because of not taking the supplement. It genuinely allows me to, if I want to be sad or depressed, it genuinely allows me to be depressed and sad for sure without the supplements. But when I had these supplements, for sure it makes me feeling good and doesn't demotivated at all. I had a lot of fuel in the tank. I was also hyperactive and it doesn't like clear thoughts. No amount of stress or no amount of anxiety, things are there. But I definitely feel a great improvement in my cognitive performance overall. I take Alpha-GPC two tablets and caffeine one tablet and L-theanine two tablets and creatine, five grams of creatine, which supplies my energy. Now I clearly know that after taking the supplement, it helps me a lot of improvement. I genuinely couldn't able to feel depressed at all or sad or demotivated or just I have genuinely good enough fuel to move on. So, which is a great experiment and a very helpful thing. But I also had the fear of this could change in future because I need to take a little more extra supplement to extra dosage to get the same thing. But I don't know how it works. But so far I didn't feel any side effects like a headache or anything, not even in my skin. It doesn't affect my skin or anything. So far it goes good. But if I feel anything minute, I will mention it to you. So this is for the past Sunday. In Saturday, almost a shallow work. Like I should probably worked around four hours, productive work towards the improvement I needed to do. And that's it for Saturday. For today, and also I wanted to mention Saturday and Sunday, I didn't wake up on time. Like 6.30 is my daily time to wake up. I didn't wake up at that time. And also today Monday, I didn't wake up on time like 6.30. I just slept for around 9.30 or 10 o'clock I guess. After that only I started to work on. I didn't do the office job that much. Yeah, shallow, super shallow, maybe 30 minutes of work in the office thing. And that's all. I didn't even touch it at all. And I bought a Claude code subscription, which is we already have. I just bought a Codex subscription also because I was exceeding the limits. And now I have to exhaust two pro subscriptions in Codex and also Claude. Meaning I need to work even more to make exhausting that two accounts. Just process this, I will tell you more.
+
+---
+[2026-08-10T17:06:12.845Z]
+The things that happened today are, I didn't take care of skin, skincare today also because I wake up late and I don't have good enough time for bathing. And it is also not a good time to take that tablet of skincare tablets because if I took it, it most likely going to waste. The absorption when you are taking the tablet along with the food is going to ruin the absorption in my skin and body. So I didn't took it. And the skincare is not done today. And after 10 o'clock something, I started to work on a video. I was, I told you, right, trading content video, that is something I was doing, right. For two days I didn't post anything. And so I thought I need to work on it. So I just used Codex to create this video. And what happened is, it took me the entire day like from 10.30 to 8.30, 9 o'clock night. I just edited it, guided the AI bit by bit, bit by bit, bit by bit for an entire day. Is it possible by manual editing for an entire day to editing a video? Most likely no. Because you have to adjust it, correct it, like when you are doing it by your hands. And you have to also think about the speed and many other things are there. So it is absolutely possible, not possible at all. So I would obviously say that it is all because of AI I could able to made a high-quality video like that. It's not high quality. The photos are not that much quality. And the audio is also not that much of quality. But the visuals, the amount of edit I put in is absolutely crazy, which is very good progress. And I think two days once of posting is good enough because it took me an entire day to make a video like this. I still need to get a lot more footages like images and stock images too for the next video. And I already had the audio for the next video. It is just guidance to AI, meaning I can do it for an entire day. Whenever it finishes, it finishes. So what I was trying to say here is, I can do it consistently. It isn't that much exhausting, which is something I wanted to tell here. Because it was all just giving ideas, giving corrections, and just AI is the thing that does this all. It actually doesn't frustrate me at all. Because it's just, I watch it and give it the timeline and what time you need to adjust, what is the thing I was talking about, and in which section, in which place I was telling it to it. So it is not exhausting at all. And while I was editing, if I was doing it in my mobile phone, it is obviously exhausting. My fingertips were hurt a lot when I was dragging and dropping things most of the time. But because of it was just typing, it was absolutely doable for an entire day. I wasn't feeling exhausted or anything bad at all. But I created a banger video with it. So what I was trying to say here is, it is possible to create consistently with the help of AI. And I had two subscriptions, which is pretty costlier because I spent 4,000 plus like 4,200 something in AI subscription alone, which is something a little bit of too expensive for me. So I could manage, like not too much of expense is that, but I could able to manage it. And I'm not worrying. It was absolutely worth that money because I need to content create and I need to manage two websites. And today I also done the FX absolute trading site improvement. And I was seeing a lot of progress in the reach to people. And I also seeing people are using it for longer period of time, like seven minutes or five minutes, even more than that. It still needs a lot of improvement to go. But I'm glad to see people are willing to check on it, just click on button, someone spending five minutes or even seven minutes in my site is a very big thing and a highly valuable thing, even in a broken site. Not that much of broken, it needs a little bit of more correction and more efficient ways to draw and it misses a lot of tools in it. But I can still see that a lot of people are using it, which is a very good progress. And I also wanted to notice that Codex sees a site different and Cloud sees a thing different. And it is a very good thing to do because each one, each AI sees the same site in different angles, and I like it. I done a little bit of improvement in the sitemap and a little bit of improvement in Cloud code. And the next thing I done is, that's all overall day is consist of like that. And I took that cognitive supplement today and it has a very good improvement in it, like super good improvement because I took it in the evening around 6.30 or something. And it feels, it makes me feel amazing. I didn't feel depressed at all or sad at all. I genuinely, it feels like nothing makes me depressed or like previously if I wasn't, if I was putting in effort and if I wasn't getting any output out of it, I pretty much feeling bad about it or something like that. But today I got a very banger video posted. I didn't reach it at all, but it doesn't affect me at all. Nothing happens. So just record this, I will tell you more.
+
+---
+[2026-08-10T17:15:13.144Z]
+And those tablets given me a very good improvement, right? And on Saturday, a productive for solid four hours is there for sure. I worked that much. And Sunday, not even one hour I could say. Like, probably one and a half hour or two hours of productive work. And today it was six hours. Six solid hours of work, which is great, right? And what other thing I wanted to do, provide is, that's it I guess. This is the journal. And I think I need to work a little bit hard from tomorrow onwards because I need to wake up earlier in 6.30. From tomorrow on, I need to do at least two more or three more consistent days of working around eight plus hours like Friday and Thursday. And see what happens. And the tomorrow's tasks would be, I need to work on company's work a little more because I didn't done a lot more improvement on company side today. I need to compensate it tomorrow. Meaning, at least four hours of work needed to be given to the company side, which is my job. And at least two hours or three hours, solid three hours working on the freelancing thing, connecting with other businesses. And I think I told you about reaching out to clients. Clients are not the best way. But reaching out to businesses and some other freelancers is a little more better way to do jobs. Because if you are doing cold calls, you can't do big projects on my own. It is going to exhaust me super soon. But if I was doing it combining with the company or some freelancers, a little more income. And let's see how it works. Because compared to getting my own clients and doing all the things by my own as a beginner, a little bit of going to be harder, right? Because I have to work more to provide a great result. But if I was doing it as a freelancer, I'm going to get a very small portion of a big project. And the income also increases. And it seems like a little bit of guaranteed and much more better way to approach for now. And let's test this way for the next two months or three months. And consistently, let's do it for consistently. If I could able to get some involved in some foreign projects or foreign freelancers or foreign companies, it could be a very great thing to do. So because I could able to get paid more, I need to at least work on this particular thing for the next tomorrow's two hours at least. I already got some leads like phone call leads. I at least need to do 25 calls tomorrow. I don't, I'm going to start it with whatever thing I can have, I already have. And just I will show them some of the works I done and try to build a relationship with them. The only goal for tomorrow is not getting any outputs or anything progress in the thing. The only goal for tomorrow is do these 25 calls. And if you had more time on the same thing, you probably need to work on the leads and improving the 100biz.com thing. And at least another two hours guiding the AI on video editing also or creating the content thing. So these three things are the things I need to work on tomorrow. And that's it. Four hours of work on a main job, two hours of work in the freelancing thing, and two hours of work in content creation minimum. And I also need to mainly focus on at least needed to get a voiceover for two more contents because that was the main thing that needed to be done. So either I need to most likely need it to do it in tomorrow night at any time possible. If it takes me just very lower time, I like within 10 minutes, I'm getting good scripts. For now, I just need to focus on recording it and keep producing the same quality videos. And if I had enough time in future, two days once at least I need to post a single video. And I also thinking about posting a single image type of video so it counts as every single day I'm posting something. And also I wanted to notice this, I'm doing a commenting also like engagement thing for content creation, which is highly important. I was doing it today and I done two sessions yesterday. Today I done three sessions I guess. And I'm also planning to do it today's night time and another session. That's it for the, that's all for the four sessions, probably four sessions for today. And I also needed to do everything perfectly for tomorrow like skincare routine, cleaning up myself, cognitive supplements, eight hours of work. This is the plan. And I will try to do everything possible within this time period. If anything gets disturbed in that particular area, I will notice you. This is the journal. And I done a lot of entertainment stuff also like I mean minimum of three to four hours I probably spent on entertainment today. I need to reduce it tomorrow. Probably four and a half hours or even five hours today spending on entertainment, meaning non-productive works, which is the thing I need to avoid at all. I need to also reduce it to minimum of two hours or three hours tomorrow. Hopefully it happens. That's the journal.
+
+---
+[2026-08-11T04:18:51.771Z]
+make the shopify project reaching dreams credetials and details store in phone memory so that another ai can access it and start editing in it all the details
+
+---
+[2026-08-11T04:27:25.852Z]
+Right—this Ubuntu session doesn’t currently have Termux shared storage
+  mounted into it. That’s why /sdcard/reachingdreams is unavailable here.
+
+  In Termux (outside Ubuntu), run:
+
+  termux-setup-storage
+
+  Then copy it into Ubuntu’s accessible home, for example:
+
+  cp -a /sdcard/reachingdreams /data/data/com.termux/files/home/
+
+  Or bind/mount that path into the Ubuntu environment. Once it appears
+  under /root (or another mounted directory), I can read the handover
+  files.
+
+---
+[2026-08-11T05:30:10.023Z]
+i pushed a lot of new products from quink to shopify make it all go live
+
+---
+[2026-08-11T05:53:08.593Z]
+do design improvemnta to the site
+
+---
+[2026-08-11T08:49:27.044Z]
+<task-notification>
+<task-id>bb9mo0gbw</task-id>
+<summary>Monitor event: "theme push result"</summary>
+<event>[Monitor timed out — re-arm if needed.]</event>
+</task-notification>
+
+---
+[2026-08-11T09:01:39.960Z]
+get into fxabsolute.com project i have a task for you
+
+---
+[2026-08-11T09:02:44.126Z]
+So this is the idea I get into. We have FXAbsolute.com, right? The idea I get into is, we have a competition section, right? Completely remove it. Instead of that, what we're going to do is, you have, we have Remotion, right? Remotion video editing tool. Similar to that, what I'm going to do is, connecting your coding agent with some already existing site. That is what going bigger right now in the tech industry, right? Like Hicksfield or Remotion or something. Same as that, what you can do now is, you can connect your CLI with our existing FXAbsolute.com, where you can directly communicate it while, when you connected it once. Whenever the session is open, and you can establish a connection between the site and your CLI, terminal, or even your cloud code, normal application or something. You get into the project, say to your agent, connect yourself with our site, and you can directly chat with the AI directly there. So this is one of the FXAbsolute's thing I wanted to do. And the another thing I wanted to do was, instead of making AI take picture, so far how AI detects your technical marking things you have done so far is, like let's say you have drawn a trendline or you drawn a rectangle or something. You mentioned it as, inside that rectangle, you mentioned it as a breakout structure or whatever it is. The AI so far sees it as an image first, and the pricing, and it gets a lot of data from a visual point of view, which is harder for it. But what I was planning is, we already have highs and lows of each and every candle in each timeframe, right? And the price point of each section from X-axis and Y-axis also there, and which timeframe it is, and everything, right? I want this cloud or any agent who is using our site and discussing the site as digital codes. For example, the axis areas and higher low, and let's say I was moving my cursor, it can able to make it like, it can able to see where I was pointing and which trendline I was talking about in real time, and I can just talk to it using a mic, or I just point my mouse on a point in a trendline or a particular candle, and the AI sees it, it tracks that, and everything as a code. Like even the drawing trendline, how distance it were drawn, everything as a code, so that AI can process it much more faster, and it can use the candle data also. For example, let's say mark all the New York session and its first five-minute candle, and tell me how much volume it has been gone in this particular stock for the past six months or something. It can, we had the data in our site, by connecting to our site, it can access every single data as possible, which is a great idea, I guess.
+
+---
+[2026-08-11T09:34:18.727Z]
+did you pushed it in the live sight ?
+
+---
+[2026-08-11T10:21:13.242Z]
+did you updated the Ui ? in the backtesting area there is trade and another one is journel right make that area as connectable to ai were it contans chat area and mic on it so people can tyoe and also talk to the ai through mic
+
+---
+[2026-08-12T01:51:09.144Z]
+how other coding ai knows this website can do this ?
+
+---
+[2026-08-12T04:58:18.274Z]
+we have navarathna details right put it in phone storage about it so tgat other ai can see it this is a seoerate task
+
+---
+[2026-08-12T05:49:37.366Z]
+i want you to get into navaratna In the Navaratna page, the site is not loading as it needed to be. I already corrected it, and it somehow turned back into the same thing again. It was transferred from a different site, I guess. Last thing, last time what we did, the design, CSS, and unwanted stock images, everything was not good, like messed up in it. Every page works differently, and don't lose data. That's one of the important things. And I want the site back as it is. Do that quick as possible, and find the reason why it was turning back to a not good-looking site, why it is, and how it happens. Give me a thorough research in it. And when we do, when we make it back as it is, the last time, you lost a lot of designs and page details and many other things. And don't do that mistakes again. Like, there is a backup also about this site from a previous months or something like that. So check on it. We are already faced with this problem, which is the site turning into something else. The designs changes, and alignment, CSS, HTML, everything changes in it. So change on it and give me a report fast first. After that, you can edit in it, and why it happens. And we need to do it quicker too, after the edit. So work on it.
+
+---
+[2026-08-12T06:00:07.024Z]
+give it in a consumable easy way
+
+---
+[2026-08-12T06:02:48.266Z]
+do it
+
+---
+[2026-08-12T06:40:09.647Z]
+fff
+
+---
+[2026-08-12T06:40:37.920Z]
+get into navratna project mi media labs
+
+---
+[2026-08-12T06:59:52.041Z]
+i just notived that it was working properly on a pc but not in a mobil3 view r a browser is that true im confused talk to me
+
+---
+[2026-08-12T07:38:12.975Z]
+<task-notification>
+<task-id>bpfp0c5jh</task-id>
+<tool-use-id>toolu_013PrWHUYbWSekKZxJXrrGCm</tool-use-id>
+<output-file>/tmp/claude-0/-root/9621db3a-c034-445a-a19d-8817d8d85cab/tasks/bpfp0c5jh.output</output-file>
+<status>completed</status>
+<summary>Background command "Upload mobile hero and apply CSS" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-12T07:42:23.562Z]
+<task-notification>
+<task-id>b84sskxy4</task-id>
+<tool-use-id>toolu_017AUHAhPRXhgjzynqFeZar3</tool-use-id>
+<output-file>/tmp/claude-0/-root/9621db3a-c034-445a-a19d-8817d8d85cab/tasks/b84sskxy4.output</output-file>
+<status>completed</status>
+<summary>Background command "Apply mobile hero CSS via Customizer" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-12T07:46:57.972Z]
+the contact form is it working which is already present ?
+
+---
+[2026-08-12T07:57:54.362Z]
+<task-notification>
+<task-id>bm0boaaj2</task-id>
+<tool-use-id>toolu_012ic8CwNr7ZCh5vibjwhcwt</tool-use-id>
+<output-file>/tmp/claude-0/-root/9621db3a-c034-445a-a19d-8817d8d85cab/tasks/bm0boaaj2.output</output-file>
+<status>completed</status>
+<summary>Background command "Sample bounce messages" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-12T07:59:55.263Z]
+so is it storing info or what ? just answer
+
+---
+[2026-08-12T08:01:22.956Z]
+so what do you suggest
+
+---
+[2026-08-12T08:04:26.659Z]
+<task-notification>
+<task-id>b3pbyybn1</task-id>
+<tool-use-id>toolu_013fEJrsCdcoeNyQxA4hniDg</tool-use-id>
+<output-file>/tmp/claude-0/-root/9621db3a-c034-445a-a19d-8817d8d85cab/tasks/b3pbyybn1.output</output-file>
+<status>completed</status>
+<summary>Background command "Wait for deploy process to exit" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-12T08:04:36.426Z]
+<task-notification>
+<task-id>b0k9p7ktd</task-id>
+<tool-use-id>toolu_018bUZLmjYjn1sR9PCiJspcQ</tool-use-id>
+<output-file>/tmp/claude-0/-root/9621db3a-c034-445a-a19d-8817d8d85cab/tasks/b0k9p7ktd.output</output-file>
+<status>completed</status>
+<summary>Background command "Block until deploy exits then show output" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-12T08:36:56.411Z]
+skip email, 2 is okey skip make the contact us page store the data in the wp itself , in the contact us page make tick box for terms and conditions only after checking that out people can contact us thing works
+
+---
+[2026-08-12T09:13:54.214Z]
+whatvis email progress so far going ?
+
+---
+[2026-08-13T06:39:34.759Z]
+in contact page we added a terms and condition check box right the actually need this exact sentence need to be in there- I agree to the T&C and Privacy Policy and I am Giving my consent to receive updates through RCS/SMS/eMail.
+
+---
+[2026-08-13T08:16:51.022Z]
+do you know soul store a clothing brand ? i want to create a exact brand like it
+
+---
+[2026-08-13T08:41:43.696Z]
+this is how the home page need to look and it need to be T shirts - 13 August 2026 at 14:10
+
+Screenshot_2026-08-13-14-10-12-23.JPG
+
+No location information
+
+Screenshot
+
+3MP 1280 × 2800 | 809 KB | JPEG
+
+Phone/Pictures/Screenshots/
+
+>
+
+From "Screenshots" album like background removed png of our own brand T shirts
+
+---
+[2026-08-14T09:57:48.584Z]
+get the details of mi media labs credetials i want you to do a work for me https://docs.google.com/spreadsheets/d/1Oct2SRNFEj0wQyrUoydjlXwzaq36qCoZsu8DwFY4N8c/edit?usp=sharing
+
+---
+[2026-08-14T10:01:09.914Z]
+do you need c pannel for it or is this good enough
+
+---
+[2026-08-14T10:02:51.741Z]
+in the site they want to change the mobile number everywhere what is the previous mobile number given check all the pages whatsapp everything can you change that and mame it go live with this credentials.
+
+---
+[2026-08-14T10:46:14.921Z]
+what the hell is yiur oroblem
+
+---
+[2026-08-14T10:49:33.990Z]
+https://www.mimedialabs.com/cpanel     , mimedu2a  , MiMeDiA@2023#!  use this too im talking about main site and the number visible in it
+
+---
+[2026-08-14T11:02:20.054Z]
+did you done it ? is it live ?
+
+---
+[2026-08-14T12:02:42.223Z]
+https://docs.google.com/spreadsheets/d/1Oct2SRNFEj0wQyrUoydjlXwzaq36qCoZsu8DwFY4N8c/edit?usp=sharing   ,  mi media labs - Uh, we've been, uh, we've been editing, um, uh mobile number on um The CMA media website and I don't know, we cut off in the middle of the working process, uh, because of context, I don't know what happened. I'd uh I'm most likely think you didn't deserve anything. Uh, so that's why I'm giving you the Google. uh, all the credentials you need. Uh get both uh open cart and also sea panel login and uh a links the and you already had done some of it, so uh, just to do it, and don't lose its credentials save it uh both in a device storage and uh in our storage, give yourself context, and um uh we changed the mobile number from uh everywhere like um 3060 is the number, uh, the ending last four numbers. That's the mobile number we are trying to give everywhere, and uh in uh in one of the page, there is a mobile Dubai number is there. uh, Dubai mobile number is there and keep it as it is, and so just to show me whereravara wherever these mobile numbers are coming up. And uh what are the places? How much like count it and tell me where are uh uh wherever the numbers are present, and is. uh, the entire site is every single thing on our site to shows uh 3060 as the, the last ending number as the main uh sources are, uh, something else. Check on it.
+
+---
+[2026-08-17T05:27:28.149Z]
+Can you see MI Media Labs, uh, credentials for, um, open cut and sea panel. I think I gave it given it to you. And uh what they were asking for is um we done something similar, exactly similar to Hoodoo implementers, where, uh, what have we done is, um, in the contact form, not in the partner's form, but in the contact form, like, uh, we done for everything for uh everything can be seen inside a Google Sheet for uh U implementers. Um similar to that. So what happens there is um uh when someone fills a form or wanted to contact it somewhere else. Previously it was uh uh get into into the WordPress, uh, but, uh, we've created an active Google sheet that constantly. uh get updated uh while uh someone filling a form or whatever the thing it was inside the website. Same as that uh using the same credentials, we're going to create and separate uh uh Google chat for the MA Media Labs, and they do it for, I do it for them. Uh, that's what we are looking at. and uh uh tell me uh what you can see and what uh what can we do? And uh in uh MA Media Labs, we are only doing it for contact form area, not a partner as farm area. Uh, so check on it and uh tell me what you can see.
+
+---
+[2026-08-17T05:36:14.491Z]
+https://www.mimedialabs.com/cpanel   ,name - mimedu2a , password - MiMeDiA@2023#!
+
+---
+[2026-08-17T05:44:34.364Z]
+yeah build what ever you can save the project i will tell you what to do about the cpannel
+
+---
+[2026-08-17T06:20:44.431Z]
+try the user name mimed8e2
+
+---
+[2026-08-17T06:30:42.841Z]
+guide me step by step here
+
+---
+[2026-08-17T06:41:22.341Z]
+in this last line closing bracket } there is r3d line error sheet.getRange(1, 1, 1, cols).setFontWeight('bold').setBackground('#f1f3f4');
+      sheet.hideColumns(1);
+    }
+  }
+
+  function json(obj) {
+    return ContentService.createTextOutput(JSON.stringify(obj))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+---
+[2026-08-17T06:43:02.811Z]
+in the app script area there is already a function something code already in there i remived it completely and pastef this code is that the problem?
+
+---
+[2026-08-17T06:46:27.658Z]
+can u identify the problem using this screenshot 17 August 2026 at 12:15
+
+Screenshot_2026-08-17-12-15-30-54.JPG
+
+No location information
+
+Screenshot
+
+1MP 1280 x 857 | 230 KB | JPEG
+
+Phone/Pictures/Screenshots/
+
+---
+[2026-08-17T06:54:56.273Z]
+AKfycbx5o4AtKKMsP9k_vUPlDhCed_vAqtevTTV8vyA2AZxizFRMe23-k5QHZvRQN9k-FMmQHQ    , https://script.google.com/macros/s/AKfycbx5o4AtKKMsP9k_vUPlDhCed_vAqtevTTV8vyA2AZxizFRMe23-k5QHZvRQN9k-FMmQHQ/exec
+
+---
+[2026-08-17T06:57:12.178Z]
+i previoisly gave the same anyone you have access to the mail too i guess
+
+---
+[2026-08-17T06:59:05.517Z]
+it still says anyone https://script.google.com/macros/library/d/1tkmqlkLWe1kyvMTiBaCe2fzjsnZlgSm9BSu1FFvRFvhQBFqx-Ywd-xcd/1
+
+---
+[2026-08-17T07:02:07.527Z]
+i redeplyed it check this AKfycbzGliBa1Go-atXxTtyf4qi0Ie-Bvmb7cGm6uyKWY8dOHy3uJGjOJGtcsOJIkZMe1XgC9g      , https://script.google.com/macros/s/AKfycbzGliBa1Go-atXxTtyf4qi0Ie-Bvmb7cGm6uyKWY8dOHy3uJGjOJGtcsOJIkZMe1XgC9g/exec
+
+---
+[2026-08-17T07:21:10.088Z]
+i will grant you permission
+
+---
+[2026-08-17T07:30:56.652Z]
+done
+
+---
+[2026-08-17T07:35:01.624Z]
+check im sure thats what i did
+
+---
+[2026-08-17T07:51:27.963Z]
+so is it storing data live without any problems? were is the past leads
+
+---
+[2026-08-17T07:53:04.743Z]
+gather past data
+
+---
+[2026-08-17T08:30:29.824Z]
+<task-notification>
+<task-id>b7592zyb4</task-id>
+<tool-use-id>361caa69-f414-4588-8b62-050208eb48ba:inner</tool-use-id>
+<output-file>/tmp/claude-0/-root/c1568078-5de4-44f9-b57c-8b80b1f0bce8/tasks/b7592zyb4.output</output-file>
+<status>completed</status>
+<summary>Background command " bash /root/mimedialabs-mi-media-labs/sheets-sync/run_backfill.sh" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-17T08:36:00.120Z]
+give me the sheet link
+
+---
+[2026-08-17T08:38:44.429Z]
+does it autofills by iyself when someone fills the contact form in the main site ?
+
+---
+[2026-08-17T08:54:05.690Z]
+give access to this mail Mohamed Ibrahim (mi@mimedialabs.com) asked to be an editor on Mi Media Labs Site Leads
+
+---
+[2026-08-17T08:54:25.514Z]
+editor access
+
+---
+[2026-08-17T08:57:43.976Z]
+they asked this question from client sife how to answer this How did you get the old data all?
+
+---
+[2026-08-17T08:58:04.345Z]
+what is brevo
+
+---
+[2026-08-17T08:59:32.546Z]
+is it a plugin?
+
+---
+[2026-08-17T10:13:59.327Z]
+can you see reaching dreams mi media project?
+
+---
+[2026-08-17T10:44:59.104Z]
+can you see our project fxabsolute.com on github and we stored lot of things go through it i was thinking about login page for it but dont go there yet just check on it and give me a test case thing
+
+---
+[2026-08-17T10:51:17.202Z]
+The only reason we are doing a login is not to disturb. The login is going to be still an optional thing, but um, uh, when people are uh like um let's say they're using, I don't know how to put it, but I don't want the main traffic is coming from free resources. I don't want to disturb the flow so that um I also wanted to get to the login details, their email, or even the mobile, mobile number of theirs because that is going to be very much helpful, so, and I don't want to push it like a um a stress them to log in to get access or something like that, and I the other thing is we don't actually need a database, uh, not a, uh, right now, um. like a superba or something. The main reason for that is it brokes superfast and clot code yourself couldn't be able to access it. If you could be able to run all by yourself, uh, in your database. It could be very much helpful, but uh uh we already tried a super base, but the thing is it uh broke super fast. We don't need a Google sign in yet, uh, because we need the data for a future engagement with the clients and users, so that's why I was doing it. So give me an option about uh what what this is about and uh based on whatever I said, uh, give me what, what are the possibilities are
+
+---
+[2026-08-17T11:07:58.033Z]
+recheck it give me best options
+
+---
+[2026-08-17T11:23:57.189Z]
+yeah guide me step by step im using a different email
+
+---
+[2026-08-17T11:38:50.058Z]
+done - https://script.google.com/macros/s/AKfycbziCbRfG1UQFWwOuOluGen40L2ZzTtYRlzmV3Yq5vqCUjzOQ2iY7c5jrSPjauHOolAo2A/exec    , AKfycbziCbRfG1UQFWwOuOluGen40L2ZzTtYRlzmV3Yq5vqCUjzOQ2iY7c5jrSPjauHOolAo2A
+
+---
+[2026-08-17T11:48:29.858Z]
+dont confuse me talk in a way so that easy to understand ?
+
+---
+[2026-08-17T11:49:15.842Z]
+i have a question when is this going to be asked give me idea here ?
+
+---
+[2026-08-17T11:56:00.269Z]
+i want it to say a message like login to 2x your Learning Cycle we qurentee it something like a message and it need shine so that it goes good and also login could be verygood thing the thing we build so for is it works like real login or just a data collection other then dara base is there anything that mostly you can do work and create things much easier and effecient thing
+
+---
+[2026-08-17T11:58:18.402Z]
+talk to me about options first other then super base
+
+---
+[2026-08-17T12:07:15.733Z]
+there is 2 things why i need login im planning to use credit system like tokens so that people willing to get tokens and these data is valuable so we can see a lot of things how many of them coming repeatedly is our brand registered is reoccuring customers or there like that these are the reasons
+
+---
+[2026-08-17T12:23:03.904Z]
+yeah b4 that what about login? how you did it is there anything pending things yet in it
+
+---
+[2026-08-17T12:25:13.219Z]
+yeah do it
+
+---
+[2026-08-17T12:29:20.322Z]
+<task-notification>
+<task-id>bm4dxuvqe</task-id>
+<tool-use-id>toolu_01Ljt8eiEFjXPeMM2e4TkKsP</tool-use-id>
+<output-file>/tmp/claude-0/-root/c1568078-5de4-44f9-b57c-8b80b1f0bce8/tasks/bm4dxuvqe.output</output-file>
+<status>completed</status>
+<summary>Background command "timeout 550 vercel --prod --yes 2&gt;&amp;1 | tail -8" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-17T12:35:06.815Z]
+<task-notification>
+<task-id>bkjjhyg2z</task-id>
+<tool-use-id>toolu_016S97CR6iW7QsbThW3CXdeJ</tool-use-id>
+<output-file>/tmp/claude-0/-root/c1568078-5de4-44f9-b57c-8b80b1f0bce8/tasks/bkjjhyg2z.output</output-file>
+<status>completed</status>
+<summary>Background command "git add -A &amp;&amp; git commit -q -m "$(cat &lt;&lt;'EOF'
+Answer in the shape Vercel's Node runtime expects
+
+The endpoint 504'd in production on a payload that should have failed
+validation instantly. Cause: the handler built a Web Response and returned
+it, but these functions run Vercel's Node runtime, which waits for
+res.end() and never sees a returned value — so every request hung until
+the gateway gave up. api/backtest.js has the same signature, which is
+worth a look separately.
+
+Co-Authored-By: Claude Opus 5 &lt;noreply@anthropic.com&gt;
+EOF
+)" &amp;&amp; git push -q origin lead-capture &amp;&amp; echo pushed &amp;&amp; timeout 550 vercel --prod --yes 2&gt;&amp;1 | tail -4" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-17T12:38:12.726Z]
+lets write Ai llm seo plus google ranking seo i need super high quality seo articles artifacts deeply though insights atleast 20% of the content in each piece need to be super unique and new ( write 44 more seo pages ) split this task in to phases complete each with deep thinking seo ranking getting more visibility use these key points too - 
+i want yiu to think about these words ( best, a vs b , top , reviews, alternative
+) and also think about questions that Ai mostlikely use external links and
+external search to answer a question
+─────────────────────────────────────────────
+most importantly i want you to write a
+article plus turn that article into a artifact both need to be present
+
+Content optimization, keyword research, back linking,
+
+Keyword research is were you need to spend most of ur time and try to write about our sites CLI support so that ai crawlers and other bots can clearly see it and undertood it
+
+---
+[2026-08-17T12:46:39.031Z]
+only focus on seo right now , give your self memory about other things so we keep doing the changes
+
+---
+[2026-08-17T13:02:54.688Z]
+continue
+
+---
+[2026-08-17T13:12:08.530Z]
+continuee
+
+---
+[2026-08-17T13:20:11.517Z]
+continuee
+
+---
+[2026-08-17T13:25:55.705Z]
+continue
+
+---
+[2026-08-17T13:35:05.015Z]
+save everything dont loose the progress guve yourself memory and deploy
+
+---
+[2026-08-17T13:40:05.904Z]
+<task-notification>
+<task-id>b94u1zqhb</task-id>
+<tool-use-id>toolu_01UHTYvpwmueTLc5UkfFMSkR</tool-use-id>
+<output-file>/tmp/claude-0/-root/c1568078-5de4-44f9-b57c-8b80b1f0bce8/tasks/b94u1zqhb.output</output-file>
+<status>completed</status>
+<summary>Background command "timeout 550 vercel --prod --yes 2&gt;&amp;1 | tail -4" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-17T13:48:38.181Z]
+continu3
+
+---
+[2026-08-17T13:55:14.124Z]
+continue
+
+---
+[2026-08-17T14:12:48.122Z]
+deploy
+
+---
+[2026-08-17T14:17:03.164Z]
+<task-notification>
+<task-id>bg2blfd48</task-id>
+<tool-use-id>toolu_01UB9VvxamwLEre1q1mWov8B</tool-use-id>
+<output-file>/tmp/claude-0/-root/c1568078-5de4-44f9-b57c-8b80b1f0bce8/tasks/bg2blfd48.output</output-file>
+<status>completed</status>
+<summary>Background command "git push -q origin lead-capture &amp;&amp; echo pushed &amp;&amp; timeout 550 vercel --prod --yes 2&gt;&amp;1 | tail -3" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-17T14:34:33.859Z]
+get into fxabsolute.com project you had some memory about it check deeply
+
+---
+[2026-08-17T17:06:09.939Z]
+did w3 done tge 44 page seo all perfect ?
+
+---
+[2026-08-17T17:08:36.733Z]
+do rest of it some of it we done but u didnt pushed it
+
+---
+[2026-08-17T18:10:37.515Z]
+is sitemqp ai llm seo all done
+
+---
+[2026-08-17T18:17:49.084Z]
+<task-notification>
+<task-id>bn69iwwo7</task-id>
+<tool-use-id>toolu_01PsVLYPNtCARughHf6w8FA1</tool-use-id>
+<output-file>/tmp/claude-0/-root/3f6e538f-1a3b-47f9-be82-1f8ae96991d6/tasks/bn69iwwo7.output</output-file>
+<status>completed</status>
+<summary>Background command "Poll until fixed page serves correct title" completed (exit code 0)</summary>
+</task-notification>
+
+---
+[2026-08-18T00:36:04.403Z]
+fix it
+
+---
+[2026-08-18T01:04:10.054Z]
+get into fxabsolute.com we have unfinished worka on it on 44 seos
+
+---
+[2026-08-18T01:59:54.956Z]
+you know reachibg dreams project right from mi media labs get into it i hv a questuon
+
+---
+[2026-08-18T02:54:43.063Z]
+they want to track orders
+
+---
+[2026-08-18T03:25:23.414Z]
+so what is your suggestion
+
+---
+[2026-08-18T03:30:34.919Z]
+first do customer accounts
+
+---
+[2026-08-18T03:40:18.755Z]
+dont confuse me talk simple
+
+---
+[2026-08-18T03:42:31.027Z]
+is there any animations for tracking like each stages shown like that ?
+
+---
+[2026-08-18T03:45:35.328Z]
+do custom built
+
+---
+[2026-08-18T07:07:34.448Z]
+can you see fxabsolute.com and done 44 seo pages and deployed even updated sitemap too but umami tracking each peice are we doing it ?
+
+---
+[2026-08-18T08:52:25.299Z]
+what im logged in like what google accout i logged in ,in this claude code ?
+
+---
+[2026-08-18T09:13:48.276Z]
+Can you connect to my PC like the issue is I was using plot code in my mobile phone and uh I recently installed the same clot code uh in my PC. Um, there is a lot of projects that were present in my mobile phone, but uh not in my PC. So I don't want to manually transfer to each of those projects where um by myself. Is there any way you can, uh, uh, able to connect yourself with um. the PC version of yourself so that you can uh share the data in my mobile phone and also in the PC about the project details and some other things.
+
+---
+[2026-08-18T09:16:49.595Z]
+i connected devices using data cable
+
+---
+[2026-08-18T09:22:39.664Z]
+i want all the data about fxabsolute.com project - hanubees.com - mimedeia labs , oodu implementors - reaching dreams
+
+---
+[2026-08-18T09:40:11.498Z]
+yes and also in the pc storage too
