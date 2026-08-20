@@ -1,0 +1,246 @@
+.themeSection {
+  padding: 126px 0 132px;
+}
+
+.themeHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
+  align-items: end;
+  gap: 70px;
+  margin-bottom: 58px;
+}
+
+.themeHeading h2 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(48px, 6.8vw, 96px);
+  font-weight: 620;
+  line-height: .92;
+  letter-spacing: -.07em;
+}
+
+.themeHeading > div:last-child p {
+  margin: 0;
+  color: #716f68;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.themeGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(360px, .75fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.themeCard {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 23, 19, .14);
+  border-radius: 28px;
+  background: #ebe8df;
+}
+
+.themeCard:first-child {
+  color: #f5f3ec;
+  border-color: #24241f;
+  background: #171714;
+}
+
+.previewLink {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.previewLink::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 65%, rgba(0, 0, 0, .44));
+  pointer-events: none;
+}
+
+.previewLink :global(.design-preview) {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.themeCardSmall .previewLink :global(.theme-preview__viewport) {
+  --s: .34;
+}
+
+.livePill {
+  position: absolute;
+  z-index: 3;
+  right: 16px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #171713;
+  background: #c8ff62;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.livePill::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  content: "";
+  background: #171713;
+  animation: libraryPulse 1.7s ease-in-out infinite;
+}
+
+.themeBody {
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.themeMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 22px;
+  color: #8d8b83;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.themeMeta span {
+  padding: 6px 9px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+
+.themeBody h3 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 70px);
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.themeCardSmall .themeBody h3 {
+  font-size: clamp(36px, 4vw, 54px);
+}
+
+.tagline {
+  margin: 11px 0 0;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.description {
+  max-width: 650px;
+  margin: 16px 0 25px;
+  color: #aaa89f;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.themeCardSmall .description,
+.themeCardSmall .themeMeta {
+  color: #716f68;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.chips span {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
+  color: #b9b7ae;
+  font-size: 10px;
+}
+
+.themeCardSmall .chips span {
+  color: #5f5d56;
+  border-color: rgba(23, 23, 19, .14);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.primary,
+.secondary {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: transform 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.primary {
+  color: #171713;
+  border-color: #c8ff62;
+  background: #c8ff62;
+}
+
+.secondary {
+  color: #f5f3ec;
+}
+
+.themeCardSmall .primary {
+  color: #fff;
+  border-color: #171713;
+  background: #171713;
+}
+
+.themeCardSmall .secondary {
+  color: #171713;
+  border-color: rgba(23, 23, 19, .18);
+}
+
+.primary:hover,
+.secondary:hover {
+  transform: translateY(-2px);
+}
+
+.primary svg,
+.secondary svg {
+  width: 16px;
+}
+
+@keyframes libraryPulse {
+  50% { opacity: .35; transform: scale(.7); }
+}
+
+@media (max-width: 1080px) {
+  .themeGrid { grid-template-columns: 1fr; }
+  .themeCardSmall .previewLink :global(.theme-preview__viewport) { --s: .46; }
+}
+
+@media (max-width: 760px) {
+  .themeSection { padding: 88px 0 94px; }
+  .themeHeading { grid-template-columns: 1fr; gap: 24px; margin-bottom: 38px; }
+  .themeHeading h2 { font-size: 51px; }
+  .themeBody { padding: 26px 20px 30px; }
+  .themeCardSmall .previewLink :global(.theme-preview__viewport) { --s: .28; }
+  .actions { align-items: stretch; flex-direction: column; }
+  .primary, .secondary { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .livePill::before { animation: none; }
+}

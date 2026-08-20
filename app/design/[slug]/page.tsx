@@ -76,7 +76,7 @@ export default async function DesignDetailPage({
         <header className="detail-hero shell">
           <Breadcrumbs
             items={[
-              { label: "Design lab", href: "/design" },
+              { label: "Design Library", href: "/design" },
               { label: "Liquid Glass for Shopify", href: "/design/liquid-glass-shopify" },
               { label: design.shortTitle },
             ]}

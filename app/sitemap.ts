@@ -3,7 +3,7 @@ import { liquidGlassDesigns } from "@/lib/design-library";
 import { themes } from "@/lib/theme-library";
 
 const baseUrl = "https://www.hanubees.com";
-const lastModified = new Date("2026-08-19");
+const lastModified = new Date("2026-08-20");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const corePages: MetadataRoute.Sitemap = [
@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/design/liquid-glass-shopify`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/design/unruled-streetwear-storefront`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.9,

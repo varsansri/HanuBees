@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Hanubees — Websites worth remembering",
     description:
-      "Websites, Shopify experiences, and a free interface design lab.",
+      "Websites, Shopify experiences, and a free interface design library.",
   },
 };
 

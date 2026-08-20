@@ -95,7 +95,7 @@ export default function Home() {
               Start a project <ArrowUpRight />
             </a>
             <Link href="/design" className="button button--ghost">
-              Explore the design lab <ArrowRight />
+              Explore the Design Library <ArrowRight />
             </Link>
           </div>
         </div>
@@ -202,7 +202,7 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading section-heading--split">
             <div>
-              <p className="eyebrow">The Hanubees Design Lab</p>
+              <p className="eyebrow">The Hanubees Design Library</p>
               <h2>See it. Understand it. Put it to work.</h2>
             </div>
             <div>

@@ -1,0 +1,187 @@
+.frame {
+  overflow: hidden;
+  border: 1px solid rgba(23, 23, 19, .18);
+  border-radius: 24px;
+  background: #d9d6ce;
+  box-shadow: 0 30px 90px rgba(29, 27, 22, .16);
+}
+
+.toolbar {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(23, 23, 19, .13);
+  background: #f7f5ef;
+}
+
+.lights {
+  display: flex;
+  gap: 6px;
+}
+
+.lights span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d2d0c9;
+}
+
+.lights span:first-child { background: #ee756c; }
+.lights span:nth-child(2) { background: #efbd56; }
+.lights span:last-child { background: #73c878; }
+
+.devices {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(23, 23, 19, .11);
+  border-radius: 999px;
+  background: #ebe8df;
+}
+
+.devices button {
+  min-width: 72px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  color: #716f68;
+  background: transparent;
+  font: 650 10px/1 Inter, sans-serif;
+  cursor: pointer;
+}
+
+.devices button.active {
+  color: #fff;
+  background: #171713;
+}
+
+.actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.actions button,
+.actions a {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 9px;
+  border: 1px solid rgba(23, 23, 19, .13);
+  border-radius: 50%;
+  color: #171713;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.actions button:hover,
+.actions a:hover { transform: translateY(-2px); background: #c8ff62; }
+.actions svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; }
+
+.stage {
+  position: relative;
+  min-height: 780px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  padding: 18px;
+  background:
+    linear-gradient(45deg, rgba(255,255,255,.18) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.18) 75%),
+    linear-gradient(45deg, rgba(255,255,255,.18) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.18) 75%),
+    #cbc8c0;
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+}
+
+.viewport {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 780px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #090909;
+  box-shadow: 0 18px 50px rgba(23,23,19,.22);
+  transition: width 500ms cubic-bezier(.2,.75,.2,1);
+}
+
+.viewport[data-device="tablet"] { width: 820px; }
+.viewport[data-device="mobile"] { width: 390px; }
+
+.viewport iframe {
+  width: 100%;
+  height: 780px;
+  display: block;
+  border: 0;
+  background: #090909;
+}
+
+.loading {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #171713;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transition: opacity 280ms ease;
+}
+
+.loading::after {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  margin-top: 58px;
+  border: 2px solid rgba(255,255,255,.18);
+  border-top-color: #c8ff62;
+  border-radius: 50%;
+  content: "";
+  animation: spin 800ms linear infinite;
+}
+
+.loading.ready { opacity: 0; pointer-events: none; }
+
+.hint {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  color: #5e5c55;
+  background: #f7f5ef;
+  font-size: 11px;
+}
+
+.hint span { width: 6px; height: 6px; border-radius: 50%; background: #78c92d; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 760px) {
+  .toolbar { grid-template-columns: 1fr auto; }
+  .lights { display: none; }
+  .devices { justify-self: start; }
+  .devices button { min-width: 58px; }
+  .stage { min-height: 680px; padding: 8px; }
+  .viewport,
+  .viewport iframe { min-height: 680px; height: 680px; }
+  .viewport[data-device="mobile"] { width: 100%; }
+  .hint { padding: 10px 16px; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport { transition: none; }
+  .loading::after { animation: none; }
+}

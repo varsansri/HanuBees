@@ -38,6 +38,31 @@ export const themes: ThemeItem[] = [
     ],
     accent: "amber",
   },
+  {
+    slug: "unruled",
+    number: "02",
+    name: "Unruled",
+    tagline: "Kinetic monochrome streetwear storefront",
+    category: "Fashion theme",
+    description:
+      "A cinematic, image-led storefront for independent fashion labels: oversized kinetic type, a four-piece drop, product quick-view, editorial story blocks, and motion that remains smooth and accessible across screen sizes.",
+    stack: "Next.js · React · CSS",
+    sections: [
+      "Campaign ticker + masthead",
+      "Kinetic image hero",
+      "Limited-drop product rail",
+      "Interactive product drawer",
+      "Motion-safe marquee",
+      "Alternating story panels",
+      "Newsletter + editorial footer",
+    ],
+    highlights: [
+      "Seven original campaign assets generated specifically for this theme",
+      "CSS-first animation with reduced-motion and no-JavaScript fallbacks",
+      "Desktop, tablet, and touch-friendly horizontal mobile merchandising",
+    ],
+    accent: "acid",
+  },
 ];
 
 export const themesInProgress = [

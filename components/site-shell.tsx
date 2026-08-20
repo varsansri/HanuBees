@@ -52,7 +52,7 @@ export function SiteHeader() {
           <Link href="/#services">Services</Link>
           <Link href="/#themes">Themes</Link>
           <Link href="/design">
-            Design lab <span className="nav-live">10</span>
+            Design Library <span className="nav-live">12</span>
           </Link>
         </nav>
 
@@ -87,7 +87,7 @@ export function SiteFooter() {
             keeping.
           </p>
           <div className="site-footer__links">
-            <Link href="/design">Design lab</Link>
+            <Link href="/design">Design Library</Link>
             <a href="mailto:hello@hanubees.com">Email</a>
             <span>© {new Date().getFullYear()}</span>
           </div>

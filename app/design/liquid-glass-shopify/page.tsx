@@ -78,7 +78,7 @@ export default function LiquidGlassCollectionPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="collection-hero shell">
-        <Breadcrumbs items={[{ label: "Design lab", href: "/design" }, { label: "Liquid Glass for Shopify" }]} />
+        <Breadcrumbs items={[{ label: "Design Library", href: "/design" }, { label: "Liquid Glass for Shopify" }]} />
         <div className="collection-hero__grid">
           <div>
             <p className="eyebrow"><span className="status-dot" /> Collection 001 · 10 free builds</p>

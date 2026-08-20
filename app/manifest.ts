@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "Hanubees — Web Studio & Design Lab",
+    name: "Hanubees — Web Studio & Design Library",
     short_name: "Hanubees",
     description:
       "Distinct websites, Shopify experiences, and a free library of production-ready interface ideas.",
