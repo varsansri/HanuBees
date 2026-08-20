@@ -1,12 +1,45 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { liquidGlassDesigns } from "@/lib/design-library";
+import { themes } from "@/lib/theme-library";
+
+const baseUrl = "https://www.hanubees.com";
+const lastModified = new Date("2026-08-19");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const corePages: MetadataRoute.Sitemap = [
     {
-      url: "https://www.hanubees.com",
-      lastModified: new Date(),
+      url: baseUrl,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/design`,
+      lastModified,
       changeFrequency: "weekly",
-      priority: 1.0,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/design/liquid-glass-shopify`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
   ];
+
+  const themePages: MetadataRoute.Sitemap = themes.map((theme) => ({
+    url: `${baseUrl}/theme/${theme.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const designPages: MetadataRoute.Sitemap = liquidGlassDesigns.map((design) => ({
+    url: `${baseUrl}/design/${design.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...corePages, ...themePages, ...designPages];
 }

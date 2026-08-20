@@ -1,278 +1,363 @@
-"use client";
+import Link from "next/link";
+import { DesignPreview } from "@/components/design-preview";
+import { ArrowRight, ArrowUpRight } from "@/components/site-shell";
+import { ThemePreview } from "@/components/theme-preview";
+import { liquidGlassDesigns } from "@/lib/design-library";
+import { themes, themesInProgress } from "@/lib/theme-library";
 
-import { useRef, useState } from "react";
+const capabilities = [
+  {
+    number: "01",
+    title: "Websites with a point of view",
+    description:
+      "Strategy, art direction, UX, and development shaped into one clear digital presence.",
+    tags: ["Brand sites", "Editorial", "Launches"],
+  },
+  {
+    number: "02",
+    title: "Shopify beyond the theme",
+    description:
+      "Custom storefront systems that make products easier to understand, want, and buy.",
+    tags: ["Shopify", "Conversion", "Theme systems"],
+  },
+  {
+    number: "03",
+    title: "Useful digital products",
+    description:
+      "Focused interfaces for tools, platforms, and applications where clarity earns trust.",
+    tags: ["Web apps", "UI systems", "Prototypes"],
+  },
+];
 
-type Item = {
-  name: string;
-  quantity: string;
-  calories: number;
-  protein_g: number;
-  carbs_g: number;
-  fiber_g: number;
-  fat_g: number;
-};
-
-type Analysis = {
-  dish: string;
-  cuisine: string;
-  confidence: "high" | "medium" | "low";
-  items: Item[];
-  total: {
-    calories: number;
-    protein_g: number;
-    carbs_g: number;
-    fiber_g: number;
-    fat_g: number;
-  };
-  notes: string;
-};
-
-const EXAMPLES = ["Idli & sambar", "Poha", "Masala dosa", "Dal & rice", "Chutney", "Paneer sabzi", "Roti"];
+const directions = [
+  {
+    index: "A/01",
+    title: "A high-touch launch for a small-batch object brand.",
+    type: "Commerce direction",
+    tone: "amber",
+  },
+  {
+    index: "A/02",
+    title: "Turning a complex service into one obvious next step.",
+    type: "Service direction",
+    tone: "blue",
+  },
+  {
+    index: "A/03",
+    title: "A product interface that teaches itself in one screen.",
+    type: "Product direction",
+    tone: "green",
+  },
+];
 
 export default function Home() {
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Analysis | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  function pick() {
-    fileRef.current?.click();
-  }
-
-  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setError(null);
-    setResult(null);
-    try {
-      const shrunk = await downscale(file);
-      setImage(shrunk);
-    } catch {
-      setError("Couldn't read that photo. Try another one.");
-    }
-  }
-
-  async function analyze() {
-    if (!image) return;
-    setLoading(true);
-    setError(null);
-    setResult(null);
-    try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image }),
-      });
-      const text = await res.text();
-      let data: Analysis & { error?: string };
-      try {
-        data = JSON.parse(text);
-      } catch {
-        throw new Error(
-          res.status === 413
-            ? "That photo is too large. Try a smaller one."
-            : "The server had a problem. Please try again.",
-        );
-      }
-      if (!res.ok) throw new Error(data.error || "Could not analyze the photo.");
-      setResult(data as Analysis);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function reset() {
-    setImage(null);
-    setResult(null);
-    setError(null);
-    if (fileRef.current) fileRef.current.value = "";
-  }
+  const featuredTheme = themes[0];
+  const studioSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Hanubees",
+    url: "https://www.hanubees.com",
+    description:
+      "Web design and development studio specializing in websites, Shopify experiences, and interface systems.",
+    email: "hello@hanubees.com",
+    areaServed: "Worldwide",
+    knowsAbout: [
+      "Web design",
+      "Web development",
+      "Shopify development",
+      "User interface design",
+    ],
+  };
 
   return (
-    <div className="wrap">
-      <div className="topbar">
-        <div className="brand">
-          <span className="dot">🍛</span>
-          Hanubees <small>calorie cam</small>
-        </div>
-      </div>
+    <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(studioSchema) }}
+      />
 
-      {!result && (
-        <div className="hero">
-          <h1>
-            Snap your plate.<br />
-            <b>Know every calorie.</b>
-          </h1>
-          <p>
-            An AI calorie counter built for <b>Indian food</b> — idli, poha,
-            sambar, chutney, dal, sabzi and the rest. Photo in, full nutrition out.
+      <section className="home-hero shell">
+        <div className="home-hero__copy">
+          <p className="eyebrow">
+            <span className="status-dot" /> Independent digital studio
           </p>
-          <div className="chips">
-            {EXAMPLES.map((e) => (
-              <span className="chip" key={e}>{e}</span>
-            ))}
+          <h1>
+            Websites worth
+            <span>remembering.</span>
+          </h1>
+          <p className="home-hero__intro">
+            Hanubees designs and builds expressive websites, focused commerce,
+            and useful digital products—then shares the best interface ideas in
+            our public lab.
+          </p>
+          <div className="button-row">
+            <a href="mailto:hello@hanubees.com" className="button button--dark">
+              Start a project <ArrowUpRight />
+            </a>
+            <Link href="/design" className="button button--ghost">
+              Explore the design lab <ArrowRight />
+            </Link>
           </div>
         </div>
-      )}
 
-      <div className="capture">
-        {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="preview" src={image} alt="Your food" />
-        ) : (
-          <div className="dropzone" onClick={pick}>
-            <div>
-              <div className="ic">📸</div>
-              <h3>Take or upload a photo</h3>
-              <span>Point at your meal — works best top-down</span>
-            </div>
+        <div className="home-hero__visual">
+          <div className="hero-note hero-note--top">
+            <span>Currently collecting</span>
+            <strong>Liquid interfaces</strong>
           </div>
-        )}
+          <DesignPreview kind="product-card" compact label="Lab build / 01" />
+          <div className="hero-note hero-note--bottom">
+            <strong>10</strong>
+            <span>free Shopify builds, live now</span>
+          </div>
+        </div>
+      </section>
 
-        <input
-          ref={fileRef}
-          type="file"
-          accept="image/*"
-          capture="environment"
-          className="hidden-input"
-          onChange={onFile}
-        />
-
-        <div className="cap-actions">
-          {image ? (
-            <>
-              <button className="btn btn-ghost" onClick={reset} disabled={loading}>
-                Retake
-              </button>
-              <button className="btn btn-primary" onClick={analyze} disabled={loading}>
-                {loading ? "Analyzing…" : "Analyze calories"}
-              </button>
-            </>
-          ) : (
-            <button className="btn btn-primary" onClick={pick}>
-              Choose a photo
-            </button>
-          )}
+      <div className="signal-strip" aria-hidden="true">
+        <div>
+          <span>Strategy</span><i />
+          <span>Design</span><i />
+          <span>Development</span><i />
+          <span>Shopify</span><i />
+          <span>Useful experiments</span><i />
+          <span>Strategy</span><i />
+          <span>Design</span><i />
+          <span>Development</span><i />
         </div>
       </div>
 
-      {loading && (
-        <div className="loading">
-          <div className="spinner" />
-          <p>Reading your plate… identifying each item</p>
+      <section className="section shell" id="work">
+        <div className="section-heading section-heading--split">
+          <div>
+            <p className="eyebrow">Selected directions</p>
+            <h2>Distinct by design. Useful on purpose.</h2>
+          </div>
+          <p>
+            Early-stage concepts showing the kind of commercial problems we
+            like to solve. No borrowed client logos. No pretend case studies.
+          </p>
         </div>
-      )}
 
-      {error && <div className="err">{error}</div>}
-
-      {result && <Result data={result} />}
-
-      <div className="foot">
-        <b>Hanubees</b> · AI nutrition for Indian food
-      </div>
-    </div>
-  );
-}
-
-function Result({ data }: { data: Analysis }) {
-  const t = data.total;
-  const macroTotal = Math.max(1, t.protein_g + t.carbs_g + t.fat_g);
-  const pct = (g: number) => `${Math.round((g / macroTotal) * 100)}%`;
-
-  return (
-    <div className="result">
-      <div className="dish-name">{data.dish}</div>
-      <div className="dish-sub">
-        {data.cuisine && <span>{data.cuisine}</span>}
-        <span className={`conf ${data.confidence}`}>{data.confidence} confidence</span>
-      </div>
-
-      <div className="macros">
-        <div className="macro cal">
-          <div className="v">{Math.round(t.calories)}<span>kcal</span></div>
-          <div className="k">Total calories</div>
-        </div>
-        <div className="macro">
-          <div className="v">{round(t.protein_g)}<span>g</span></div>
-          <div className="k">Protein</div>
-          <div className="bar"><i style={{ width: pct(t.protein_g), background: "var(--green)" }} /></div>
-        </div>
-        <div className="macro">
-          <div className="v">{round(t.carbs_g)}<span>g</span></div>
-          <div className="k">Carbs</div>
-          <div className="bar"><i style={{ width: pct(t.carbs_g), background: "var(--saffron)" }} /></div>
-        </div>
-        <div className="macro">
-          <div className="v">{round(t.fiber_g)}<span>g</span></div>
-          <div className="k">Fiber</div>
-          <div className="bar"><i style={{ width: pct(t.fiber_g), background: "var(--green2)" }} /></div>
-        </div>
-        <div className="macro">
-          <div className="v">{round(t.fat_g)}<span>g</span></div>
-          <div className="k">Fat</div>
-          <div className="bar"><i style={{ width: pct(t.fat_g), background: "#e0a800" }} /></div>
-        </div>
-      </div>
-
-      {data.items?.length > 0 && (
-        <>
-          <div className="section-t">On your plate</div>
-          <div className="items">
-            {data.items.map((it, i) => (
-              <div className="item" key={i}>
-                <div>
-                  <div className="nm">{it.name}</div>
-                  <div className="qt">
-                    {it.quantity} · P {round(it.protein_g)}g · C {round(it.carbs_g)}g · Fb {round(it.fiber_g)}g
+        <div className="direction-grid">
+          {directions.map((direction) => (
+            <article className="direction-card" key={direction.index}>
+              <div className={`direction-art direction-art--${direction.tone}`}>
+                <span className="direction-art__label">{direction.index}</span>
+                <div className="direction-window">
+                  <div className="direction-window__bar"><i /><i /><i /></div>
+                  <div className="direction-window__body">
+                    <span />
+                    <strong>
+                      {direction.index === "A/01"
+                        ? "FORM"
+                        : direction.index === "A/02"
+                          ? "CLEAR"
+                          : "FLOW"}
+                    </strong>
+                    <small>Hanubees direction study</small>
                   </div>
                 </div>
-                <div className="cal">{Math.round(it.calories)} <small>kcal</small></div>
               </div>
+              <div className="direction-card__body">
+                <p>{direction.type}</p>
+                <h3>{direction.title}</h3>
+                <span className="round-arrow"><ArrowUpRight /></span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section section--dark" id="services">
+        <div className="shell">
+          <div className="section-heading section-heading--split section-heading--light">
+            <div>
+              <p className="eyebrow eyebrow--light">What we build</p>
+              <h2>One partner from first thought to final pixel.</h2>
+            </div>
+            <p>
+              Small, senior, and direct. We connect the idea, the interface,
+              and the code so the finished experience feels like one thing.
+            </p>
+          </div>
+
+          <div className="capability-list">
+            {capabilities.map((capability) => (
+              <article key={capability.number}>
+                <span>{capability.number}</span>
+                <div>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                </div>
+                <ul>
+                  {capability.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                </ul>
+              </article>
             ))}
           </div>
-        </>
-      )}
+        </div>
+      </section>
 
-      {data.notes && <div className="note">{data.notes}</div>}
+      <section className="section lab-feature">
+        <div className="shell">
+          <div className="section-heading section-heading--split">
+            <div>
+              <p className="eyebrow">The Hanubees Design Lab</p>
+              <h2>See it. Understand it. Put it to work.</h2>
+            </div>
+            <div>
+              <p>
+                A growing collection of live interface ideas, rebuilt for real
+                websites—not a screenshot dump and not another inspiration
+                search engine.
+              </p>
+              <Link href="/design" className="text-link text-link--large">
+                Enter the lab <ArrowRight />
+              </Link>
+            </div>
+          </div>
 
-      <div className="disclaimer">
-        Estimates are AI-generated from a single photo and can vary with portion
-        size, oil and ingredients. Use as a guide, not medical advice.
-      </div>
-    </div>
+          <div className="lab-shelf">
+            {liquidGlassDesigns.slice(0, 3).map((design) => (
+              <article key={design.slug}>
+                <div>
+                  <DesignPreview kind={design.preview} compact label={`${design.number} / Live build`} />
+                </div>
+                <div>
+                  <span>{design.component}</span>
+                  <h3>{design.shortTitle}</h3>
+                  <Link href={`/design/${design.slug}`} aria-label={`Open ${design.title}`}>
+                    <ArrowUpRight />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="lab-index">
+            <div><strong>01</strong><span>Visual idea</span></div>
+            <i />
+            <div><strong>02</strong><span>Working preview</span></div>
+            <i />
+            <div><strong>03</strong><span>Shopify adaptation</span></div>
+            <i />
+            <div><strong>04</strong><span>Free starter code</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section theme-section" id="themes">
+        <div className="shell">
+          <div className="section-heading section-heading--split">
+            <div>
+              <p className="eyebrow">
+                <span className="status-dot" /> Hanubees Themes
+              </p>
+              <h2>Explore our themes.</h2>
+            </div>
+            <div>
+              <p>
+                Not screenshots and not a starter kit—complete, working
+                storefronts you can open right now, read the code of, and put
+                your own products into.
+              </p>
+              {featuredTheme && (
+                <Link
+                  href={`/theme/${featuredTheme.slug}`}
+                  className="text-link text-link--large"
+                >
+                  Open the {featuredTheme.name} theme <ArrowRight />
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {themes.map((theme) => (
+            <article className="theme-feature" key={theme.slug}>
+              <Link
+                href={`/theme/${theme.slug}`}
+                className="theme-feature__preview"
+                aria-label={`Open the ${theme.name} theme`}
+              >
+                <ThemePreview
+                  path={`/theme/${theme.slug}`}
+                  label={`Theme ${theme.number} / ${theme.name}`}
+                />
+                <span className="theme-feature__open">
+                  Open live theme <ArrowUpRight />
+                </span>
+              </Link>
+
+              <div className="theme-feature__body">
+                <p className="theme-feature__meta">
+                  <span>{theme.number}</span>
+                  {theme.category}
+                  <i />
+                  {theme.stack}
+                </p>
+                <h3>{theme.name}</h3>
+                <p className="theme-feature__tagline">{theme.tagline}</p>
+                <p className="theme-feature__desc">{theme.description}</p>
+
+                <ul className="theme-feature__points">
+                  {theme.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+
+                <div className="theme-chips">
+                  {theme.sections.map((section) => (
+                    <span key={section}>{section}</span>
+                  ))}
+                </div>
+
+                <div className="button-row">
+                  <Link href={`/theme/${theme.slug}`} className="button button--dark">
+                    View the theme <ArrowUpRight />
+                  </Link>
+                  <a
+                    className="button button--ghost"
+                    href={`mailto:hello@hanubees.com?subject=${encodeURIComponent(
+                      `${theme.name} theme`,
+                    )}`}
+                  >
+                    Build on this <ArrowRight />
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+
+          <div className="theme-queue">
+            {themesInProgress.map((theme) => (
+              <article key={theme.title}>
+                <p className={`theme-queue__status theme-queue__status--${theme.tone}`}>
+                  <i />
+                  {theme.status}
+                </p>
+                <h3>{theme.title}</h3>
+                <p>{theme.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section shell home-principle">
+        <p className="eyebrow">Our working principle</p>
+        <blockquote>
+          “Trend” gets attention. <em>Judgment</em> makes it useful.
+        </blockquote>
+        <div>
+          <p>
+            We study what people are saving and sharing, then rebuild the idea
+            with clearer behavior, original code, and a real commercial use.
+          </p>
+          <a className="button button--dark" href="mailto:hello@hanubees.com">
+            Build something together <ArrowUpRight />
+          </a>
+        </div>
+      </section>
+    </main>
   );
-}
-
-function round(n: number) {
-  return Math.round((n ?? 0) * 10) / 10;
-}
-
-// Resize big phone photos in the browser so the request stays well under
-// the server's body limit (and uploads/analyses faster).
-function downscale(file: File, maxDim = 1280, quality = 0.82): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
-      const w = Math.round(img.width * scale);
-      const h = Math.round(img.height * scale);
-      const canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return reject(new Error("no canvas"));
-      ctx.drawImage(img, 0, 0, w, h);
-      resolve(canvas.toDataURL("image/jpeg", quality));
-    };
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      reject(new Error("bad image"));
-    };
-    img.src = url;
-  });
 }

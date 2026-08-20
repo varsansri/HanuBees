@@ -1,40 +1,59 @@
 import type { Metadata, Viewport } from "next";
+import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#ff7a18",
+  themeColor: "#f5f3ec",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
-  title: "Hanubees — AI calorie counter for Indian food",
+  title: {
+    default: "Hanubees — Websites worth remembering",
+    template: "%s | Hanubees",
+  },
   description:
-    "Snap a photo of your Indian plate — idli, poha, sambar, chutney, dal, sabzi — and instantly get calories, protein, carbs, fiber and fat. Built for Indian food.",
+    "Hanubees is a web design and development studio building distinct websites, Shopify experiences, and a free library of production-ready interface ideas.",
   metadataBase: new URL("https://www.hanubees.com"),
   applicationName: "Hanubees",
-  appleWebApp: { capable: true, statusBarStyle: "default", title: "Hanubees" },
-  icons: { icon: "/icon.png", apple: "/apple-icon.png" },
+  alternates: { canonical: "/" },
+  keywords: [
+    "web design studio",
+    "Shopify development",
+    "website development company",
+    "Shopify design inspiration",
+    "web design components",
+  ],
+  icons: { icon: "/icon-192.png", apple: "/icon-192.png" },
   openGraph: {
-    title: "Hanubees — Snap your plate, know your macros",
+    title: "Hanubees — Websites worth remembering",
     description:
-      "AI calorie counter built for Indian food. Photo in, full nutrition out.",
+      "A web design and development studio with a public lab of production-ready interface ideas.",
     url: "https://www.hanubees.com",
     siteName: "Hanubees",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Hanubees — AI calorie counter for Indian food",
-    description: "Snap your plate, know your macros. Built for Indian food.",
+    card: "summary",
+    title: "Hanubees — Websites worth remembering",
+    description:
+      "Websites, Shopify experiences, and a free interface design lab.",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

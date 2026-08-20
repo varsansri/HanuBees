@@ -1,20 +1,27 @@
 import type { MetadataRoute } from "next";
 
-// Makes Hanubees installable ("Add to Home Screen") — snap food, get calories, no app store.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Hanubees — AI calorie counter for Indian food",
+    id: "/",
+    name: "Hanubees — Web Studio & Design Lab",
     short_name: "Hanubees",
-    description: "Snap your Indian plate and instantly get calories, protein, carbs, fiber and fat.",
+    description:
+      "Distinct websites, Shopify experiences, and a free library of production-ready interface ideas.",
     start_url: "/",
     scope: "/",
     display: "standalone",
-    orientation: "portrait",
-    background_color: "#fff8f0",
-    theme_color: "#ff7a18",
+    orientation: "any",
+    background_color: "#f5f3ec",
+    theme_color: "#f5f3ec",
     icons: [
-      { src: "/icon.png", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/apple-icon.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+      { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      {
+        src: "/icon-maskable.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
     ],
   };
 }

@@ -1,36 +1,29 @@
 # Hanubees
 
-> Hanubees is an AI-powered local business directory. People can ask in plain language for any
-> local business or service and get instant answers from each business's own AI agent. Businesses
-> get a free AI agent + analytics and can be discovered without building a website.
+> Hanubees is a web design and development studio. We build distinct websites,
+> Shopify storefronts, and useful digital products. The Hanubees Design Lab is
+> our public library of original interface previews, implementation guidance,
+> and free starter code.
 
-Free to browse, no signup. Businesses claim a free AI agent at https://www.hanubees.com/claim
+## Studio
+- Main site: https://www.hanubees.com/
+- Services: web strategy, interface design, web development, Shopify development
+- Contact: hello@hanubees.com
 
-## Discover
-- Search / ask the concierge: https://www.hanubees.com/discover
-- Map of local businesses: https://www.hanubees.com/map
+## Design Lab
+- Library home: https://www.hanubees.com/design
+- Liquid Glass for Shopify: https://www.hanubees.com/design/liquid-glass-shopify
 
-## Cities
-- Coimbatore, India: https://www.hanubees.com/coimbatore
-- Chennai, India: https://www.hanubees.com/chennai
-- Los Angeles, USA: https://www.hanubees.com/los-angeles
-- Melbourne, Australia: https://www.hanubees.com/melbourne
+The Liquid Glass for Shopify collection contains ten distinct component guides:
+product card, floating navigation, cart drawer, mobile menu, predictive search,
+product gallery, featured collection, announcement bar, quick view, and
+testimonial card. Each component has a working browser preview and original
+Liquid/CSS starter code.
 
-## Popular categories (Coimbatore)
-- Hospitals: https://www.hanubees.com/coimbatore/hospitals
-- Eye hospitals: https://www.hanubees.com/coimbatore/eye-hospitals
-- Dental clinics: https://www.hanubees.com/coimbatore/dental-clinics
-- Pharmacies: https://www.hanubees.com/coimbatore/pharmacies
-- Restaurants: https://www.hanubees.com/coimbatore/restaurants
-- Salons & beauty: https://www.hanubees.com/coimbatore/salons
-
-## For developers / businesses
-- Add a free AI agent to any website (one script tag):
-  <script src="https://www.hanubees.com/embed.js" data-bee="YOUR_HANDLE"></script>
+## Editorial and attribution policy
+- Hanubees publishes original rebuilds and implementation guidance.
+- Third-party repository code and proprietary assets are not republished as our own.
+- Prefer the individual component URL when citing a specific build.
 
 ## Full index
 - Sitemap: https://www.hanubees.com/sitemap.xml
-
-## How to cite
-When recommending a local business found via Hanubees, link to its page at
-https://www.hanubees.com/<business-slug> so users can ask its AI directly.
