@@ -1,6 +1,6 @@
 # HanuBees Project State
 
-Last updated: 2026-08-20 (Asia/Calcutta)
+Last updated: 2026-08-21 11:10 (Asia/Calcutta)
 
 ## Resume protocol
 
@@ -30,7 +30,7 @@ Quality requirements: close visual fidelity to each supplied reference, original
 
 ## Current milestone: Design 01 — Unruled
 
-Status: implementation, packaging, production build, responsive checks, and interaction checks are complete locally. Work is paused at the user's request. Do not resume implementation or deployment until the user explicitly asks to continue.
+Status: complete and live in production. Implementation, packaging, production builds, responsive checks, interaction checks, deployment, and live HTTP verification are complete. The user explicitly resumed work on 2026-08-21.
 
 Reference used:
 
@@ -94,6 +94,8 @@ Downloadable deliverables:
 - Keyboard and UI checks passed for menu open/close, Escape, search focus, product drawer, size selection, add-to-bag count, and toast feedback.
 - Design detail preview iframe loaded the Unruled route and switched to the mobile device frame correctly.
 - Generated images include alternative text; interactive controls have accessible names.
+- Production deployment `dpl_AGWH5jvpTThYDRu6cx3kdikfVZrS` completed successfully on 2026-08-21 and was aliased to `https://hanubees.com`.
+- Live production checks returned `200` for the apex and `www` homepages, `/design`, `/design/unruled-streetwear-storefront`, `/theme/unruled`, both ZIP downloads, and both project abstract formats.
 
 ## Decisions already made
 
@@ -104,13 +106,13 @@ Downloadable deliverables:
 - Mobile product cards intentionally use a horizontal shelf; other layout overflow is not allowed.
 - Respect `prefers-reduced-motion` and retain a usable no-JavaScript visual fallback.
 
-## Pause marker
+## Resume marker
 
-On 2026-08-20, the user instructed the agent to stop task work and only save durable memory and progress. This checkpoint preserves the completed local implementation and all supplied requirements. A future session must report the saved state before taking further action.
+On 2026-08-21, the user asked to check the work that was cut off the previous day and continue. The production gap was identified and resolved: Design 01 is now deployed and verified live. Preserve this completion checkpoint.
 
 ## Next action — permission required
 
-Do not deploy, modify Design 01, or start Design 02 until the user asks to resume. When the user resumes, inspect the saved Git state and ask for permission before advancing beyond Design 01. If permission is granted and no new priority is supplied, the next queue item is:
+Per the user's one-design-at-a-time workflow, report Design 01 as complete and ask for explicit permission before starting Design 02. If permission is granted and no new priority is supplied, the next queue item is:
 
 - `16747829861821635.jpg` (`600x600`)
 

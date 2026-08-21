@@ -36,6 +36,16 @@ This file preserves the user's instructions so future sessions do not depend on 
 
 > dont do the taask just save and give your self memory and so for progress and tell me when you finished it
 
+## 2026-08-21 — Resume after cutoff
+
+> we done alot of work on hanubees.com and it got cu of yesterday check on it and continue working
+
+### Resume outcome
+
+- The saved checkpoint was recovered without loss.
+- The production deployment that had not happened before the pause was completed and verified live.
+- Design 01 is complete; permission is still required before Design 02 begins, per the master request.
+
 ## Operational interpretation
 
 - The repository is `C:\Users\varsa\HanuBees`; its canonical production metadata uses `https://www.hanubees.com`.
