@@ -1,6 +1,6 @@
 # HanuBees Project State
 
-Last updated: 2026-08-21 11:10 (Asia/Calcutta)
+Last updated: 2026-08-21 21:39 (Asia/Calcutta)
 
 ## Resume protocol
 
@@ -105,6 +105,21 @@ Downloadable deliverables:
 - Theme previews use real routes inside an interactive iframe rather than static screenshots.
 - Mobile product cards intentionally use a horizontal shelf; other layout overflow is not allowed.
 - Respect `prefers-reduced-motion` and retain a usable no-JavaScript visual fallback.
+- The original AI calorie-camera homepage at `/` is protected and must remain unchanged except for one **Design Library** button linking to `/design`.
+- Design Library navigation and presentation chrome are nested under `/design`; full theme previews remain isolated under `/theme`.
+- Future Design Library work must not alter the homepage, calorie-camera behavior, API, or unrelated Hanubees functionality without new explicit permission.
+
+## Homepage preservation update — 2026-08-21
+
+Status: implemented and verified locally; production deployment is the next action.
+
+- Restored the original calorie-camera homepage implementation, metadata, theme color, icons, and web-app manifest.
+- Added one compact **Design Library** button to the existing homepage top bar.
+- Moved the Design Library header and footer from the root layout into a nested `/design` layout.
+- Confirmed `/theme/unruled` remains a full-screen preview without the Design Library header or footer.
+- Root `npm run build` passed with all 25 routes.
+- Targeted ESLint passed for the changed TypeScript files.
+- Local production HTML checks confirmed the original calorie-camera content and button at `/`, Design Library chrome only at `/design`, and no global chrome at `/theme/unruled`.
 
 ## Resume marker
 

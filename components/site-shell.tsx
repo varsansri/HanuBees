@@ -48,9 +48,8 @@ export function SiteHeader() {
         </Link>
 
         <nav className="site-header__nav" aria-label="Primary navigation">
-          <Link href="/#work">Work</Link>
-          <Link href="/#services">Services</Link>
-          <Link href="/#themes">Themes</Link>
+          <Link href="/">Home</Link>
+          <Link href="/design#site-themes">Themes</Link>
           <Link href="/design">
             Design Library <span className="nav-live">12</span>
           </Link>

@@ -13,3 +13,10 @@ Before doing any work on the HanuBees Design Library, read these files in full:
 - `docs/DESIGN_LIBRARY_REFERENCE_QUEUE.md`
 
 Treat them as the durable handoff between sessions. Update `PROJECT_STATE.md` after every meaningful implementation, verification, packaging, deployment, or decision. Preserve the user's requests in the request log. Work through the reference queue one design at a time, and do not begin the next design until the user explicitly gives permission.
+
+## Homepage scope boundary
+
+- Preserve the original Hanubees AI calorie-camera homepage at `/`.
+- The only Design Library change permitted on the homepage is a button labeled **Design Library** linking to `/design`.
+- Keep Design Library pages, theme previews, assets, packages, styling, and navigation isolated to `/design`, `/theme`, and their supporting files.
+- Do not redesign or otherwise modify the homepage, calorie-camera flow, API, or unrelated Hanubees functionality without new explicit permission from the user.

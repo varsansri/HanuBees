@@ -46,6 +46,17 @@ This file preserves the user's instructions so future sessions do not depend on 
 - The production deployment that had not happened before the pause was completed and verified live.
 - Design 01 is complete; permission is still required before Design 02 begins, per the master request.
 
+## 2026-08-21 — Homepage scope restriction
+
+> keep the old hanubees.com as it is i need another button on the home page called desighn library you are allowed to do changes in that section only
+
+### Binding interpretation
+
+- Preserve the original AI calorie-camera homepage at `/`.
+- Add only one homepage entry point labeled **Design Library**, linking to `/design`.
+- Confine future Design Library changes to `/design`, `/theme`, and their supporting assets, packages, components, and documentation.
+- Do not modify the calorie-camera experience, API, or unrelated site areas without new explicit permission.
+
 ## Operational interpretation
 
 - The repository is `C:\Users\varsa\HanuBees`; its canonical production metadata uses `https://www.hanubees.com`.
